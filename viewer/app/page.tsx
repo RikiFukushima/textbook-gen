@@ -38,14 +38,14 @@ export default function Home() {
                 )}
                 <div className="mt-3 flex flex-wrap gap-2">
                   {tb.estimatedHours != null && (
-                    <span className="rounded-full bg-[var(--bg)] px-2.5 py-1 text-xs text-[var(--muted)]">
+                    <span className="rounded-full bg-[var(--code-bg)] px-2.5 py-1 text-xs text-[var(--muted)]">
                       約 {tb.estimatedHours} 時間
                     </span>
                   )}
                   {tb.meta.tags?.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-[var(--bg)] px-2.5 py-1 text-xs text-[var(--muted)]"
+                      className="rounded-full bg-[var(--code-bg)] px-2.5 py-1 text-xs text-[var(--muted)]"
                     >
                       #{tag}
                     </span>

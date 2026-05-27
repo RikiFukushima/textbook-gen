@@ -33,7 +33,7 @@ export default function ChapterProgress({
 
   return (
     <div className="mt-2">
-      <div className="h-2 w-full overflow-hidden rounded-full bg-[var(--bg)]">
+      <div className="h-2 w-full overflow-hidden rounded-full bg-[var(--border)]">
         <div
           className="h-full rounded-full bg-[var(--accent)] transition-all"
           style={{ width: `${pct}%` }}

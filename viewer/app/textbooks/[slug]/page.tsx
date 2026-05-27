@@ -53,7 +53,7 @@ export default async function TextbookPage({
                   </p>
                 )}
                 {cur.meta.estimated_hours != null && (
-                  <span className="mt-3 inline-block rounded-full bg-[var(--bg)] px-2.5 py-1 text-xs text-[var(--muted)]">
+                  <span className="mt-3 inline-block rounded-full bg-[var(--code-bg)] px-2.5 py-1 text-xs text-[var(--muted)]">
                     約 {cur.meta.estimated_hours} 時間
                   </span>
                 )}

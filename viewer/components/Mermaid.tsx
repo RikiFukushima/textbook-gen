@@ -7,7 +7,7 @@ function ensureInit() {
   if (initialized) return;
   mermaid.initialize({
     startOnLoad: false,
-    theme: "dark",
+    theme: "default",
     securityLevel: "strict",
     themeVariables: {
       fontSize: "14px",

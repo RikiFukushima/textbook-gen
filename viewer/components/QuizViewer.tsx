@@ -81,7 +81,7 @@ export default function QuizViewer({
   }
 
   return (
-    <main className="flex min-h-[100dvh] flex-col bg-[#12151c]">
+    <main className="flex min-h-[100dvh] flex-col bg-[var(--accent-weak)]">
       <header className="flex items-center justify-between border-b border-[var(--border)] px-4 py-3">
         <Link
           href={curriculumHref}

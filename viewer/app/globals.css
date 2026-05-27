@@ -3,12 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --bg: #0f1115;
-  --fg: #e7e9ee;
-  --muted: #9aa3b2;
-  --card: #171a21;
-  --border: #262b36;
-  --accent: #5b8cff;
+  --bg: #f6f8fb;
+  --fg: #1f2733;
+  --muted: #5b6b7f;
+  --card: #ffffff;
+  --border: #e3e8ef;
+  --accent: #2563eb;
+  --accent-weak: #eef3fb;
+  --code-bg: #f1f4f9;
+  --success: #16a34a;
+  --danger: #dc2626;
 }
 
 html,
@@ -51,14 +55,14 @@ body {
   list-style: decimal;
 }
 .prose-tg code {
-  background: #0b0d12;
+  background: var(--code-bg);
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 0.1rem 0.35rem;
   font-size: 0.875em;
 }
 .prose-tg pre {
-  background: #0b0d12;
+  background: var(--code-bg);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 1rem;
@@ -71,7 +75,7 @@ body {
   padding: 0;
 }
 .prose-tg strong {
-  color: #fff;
+  color: #0f1722;
   font-weight: 700;
 }
 
