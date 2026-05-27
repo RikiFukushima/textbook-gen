@@ -1,0 +1,18 @@
+slug: git-basics
+title: Git の基礎
+description: バージョン管理システム Git の仕組みと基本操作を、手を動かしながら理解するための入門教材
+version: 1.0.0
+created_at: 2026-05-27
+updated_at: 2026-05-27
+authors:
+  - リキ
+visibility: private # private | shared | unlisted | public
+shared_with: []
+unlisted_token: null
+search_indexable: false
+allow_fork: false
+tags:
+  - git
+  - version-control
+  - beginner
+contains_local_sources: false

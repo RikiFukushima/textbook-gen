@@ -1,0 +1,89 @@
+title: Git の基礎
+target_audience:
+  level: 初級
+  prerequisites:
+    - ターミナル(コマンドライン)で基本的なコマンドを実行できる
+    - ファイルとディレクトリの概念を理解している
+  estimated_hours: 1
+style:
+  tone: ですます調・実務寄り
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: バージョン管理と Git の基礎
+    estimated_minutes: 15
+    learning_objectives:
+      - バージョン管理がなぜ必要かを説明できる
+      - 集中型と分散型の違いを説明できる
+      - リポジトリ・コミット・ワークツリーの関係を説明できる
+    sections:
+      - id: "01-01"
+        title: バージョン管理とは
+        estimated_minutes: 3
+      - id: "01-02"
+        title: 集中型と分散型、そして Git
+        estimated_minutes: 4
+      - id: "01-03"
+        title: リポジトリ・コミット・ワークツリー
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 集中型と分散型のリポジトリ構成の違い
+        type: mermaid
+        section: "01-02"
+      - purpose: ワークツリー・ステージ・リポジトリの状態遷移
+        type: mermaid
+        section: "01-03"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "02"
+    title: Git の基本操作
+    estimated_minutes: 18
+    learning_objectives:
+      - リポジトリを作成し、変更をステージング・コミットできる
+      - コミット履歴を確認できる
+      - 作業状態と差分を確認できる
+    sections:
+      - id: "02-01"
+        title: リポジトリの作成とステージング
+        estimated_minutes: 5
+      - id: "02-02"
+        title: コミットと履歴の確認
+        estimated_minutes: 5
+      - id: "02-03"
+        title: 状態と差分を読む
+        estimated_minutes: 5
+    diagrams:
+      - purpose: add から commit までのファイルの流れ
+        type: mermaid
+        section: "02-01"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "03"
+    title: ブランチとリモート連携
+    estimated_minutes: 20
+    learning_objectives:
+      - ブランチの目的と作成・切り替えを説明できる
+      - マージとコンフリクトの基本を理解する
+      - リモートリポジトリと push/pull で連携できる
+    sections:
+      - id: "03-01"
+        title: ブランチという考え方
+        estimated_minutes: 5
+      - id: "03-02"
+        title: マージとコンフリクト
+        estimated_minutes: 6
+      - id: "03-03"
+        title: リモートリポジトリとの連携
+        estimated_minutes: 6
+    diagrams:
+      - purpose: ブランチの分岐とマージの履歴グラフ
+        type: mermaid
+        section: "03-01"
+    quiz:
+      count: 8
+      difficulty: medium
