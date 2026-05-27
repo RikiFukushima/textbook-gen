@@ -4,7 +4,7 @@ chapter_id: "01"
 title: リポジトリ・コミット・ワークツリー
 order: 3
 estimated_minutes: 5
-estimated_chars: 1400
+estimated_chars: 900
 learning_points:
   - リポジトリとコミットの関係
   - ワークツリー・ステージ・リポジトリの 3 つの領域

@@ -4,7 +4,7 @@ chapter_id: "01"
 title: 集中型と分散型、そして Git
 order: 2
 estimated_minutes: 4
-estimated_chars: 1300
+estimated_chars: 1000
 learning_points:
   - 集中型バージョン管理の仕組みと弱点
   - 分散型バージョン管理の特徴

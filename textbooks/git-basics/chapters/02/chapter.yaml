@@ -1,0 +1,11 @@
+id: "02"
+title: Git の基本操作
+estimated_minutes: 18
+learning_objectives:
+  - リポジトリを作成し、変更をステージング・コミットできる
+  - コミット履歴を確認できる
+  - 作業状態と差分を確認できる
+section_order:
+  - "02-01"
+  - "02-02"
+  - "02-03"

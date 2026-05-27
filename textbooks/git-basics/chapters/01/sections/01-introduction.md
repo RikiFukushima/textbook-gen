@@ -4,7 +4,7 @@ chapter_id: "01"
 title: バージョン管理とは
 order: 1
 estimated_minutes: 3
-estimated_chars: 800
+estimated_chars: 650
 learning_points:
   - バージョン管理が解決する課題
   - 手作業のファイル管理との違い

@@ -1,0 +1,11 @@
+id: "03"
+title: ブランチとリモート連携
+estimated_minutes: 20
+learning_objectives:
+  - ブランチの目的と作成・切り替えを説明できる
+  - マージとコンフリクトの基本を理解する
+  - リモートリポジトリと push/pull で連携できる
+section_order:
+  - "03-01"
+  - "03-02"
+  - "03-03"
