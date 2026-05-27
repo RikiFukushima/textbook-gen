@@ -101,9 +101,9 @@ export default function SectionViewer({
           </article>
         ))}
 
-        <article className="swipe-page">
+        <article className="swipe-page surface-grad">
           <div className="flex h-full items-center justify-center px-5">
-            <div className="w-full max-w-md rounded-2xl border border-[var(--border)] bg-[var(--card)] p-8 text-center">
+            <div className="w-full max-w-md rounded-2xl border border-[var(--border)] bg-[var(--card)] p-8 text-center shadow-md">
               <div className="text-5xl">📖</div>
               <h2 className="mt-4 text-xl font-bold">
                 第{chapterNumber}章 読了！
@@ -122,21 +122,21 @@ export default function SectionViewer({
               <div className="mt-8 flex justify-center gap-3">
                 <button
                   onClick={() => goTo(0)}
-                  className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm font-medium hover:border-[var(--accent)]"
+                  className="btn-ghost rounded-lg px-4 py-2 text-sm font-medium"
                 >
                   最初から振り返る
                 </button>
                 {hasQuiz ? (
                   <Link
                     href={quizHref}
-                    className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white"
+                    className="btn-accent rounded-lg px-4 py-2 text-sm font-medium"
                   >
                     クイズに挑戦 →
                   </Link>
                 ) : (
                   <Link
                     href={curriculumHref}
-                    className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white"
+                    className="btn-accent rounded-lg px-4 py-2 text-sm font-medium"
                   >
                     章一覧へ →
                   </Link>
@@ -184,14 +184,14 @@ export default function SectionViewer({
             hasQuiz ? (
               <Link
                 href={quizHref}
-                className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white"
+                className="btn-accent rounded-lg px-4 py-2 text-sm font-medium"
               >
                 クイズへ →
               </Link>
             ) : (
               <Link
                 href={curriculumHref}
-                className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm font-medium"
+                className="btn-ghost rounded-lg px-4 py-2 text-sm font-medium"
               >
                 章一覧へ →
               </Link>
@@ -199,7 +199,7 @@ export default function SectionViewer({
           ) : (
             <button
               onClick={() => goTo(index + 1)}
-              className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white"
+              className="btn-accent rounded-lg px-4 py-2 text-sm font-medium"
             >
               {index === sectionCount - 1 ? "読了画面へ →" : "次へ →"}
             </button>

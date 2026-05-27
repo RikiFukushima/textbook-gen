@@ -17,9 +17,83 @@
 
 html,
 body {
-  background: var(--bg);
   color: var(--fg);
   -webkit-font-smoothing: antialiased;
+}
+body {
+  background: linear-gradient(180deg, #f4f9ff 0%, #fdfdff 42%, #f8f5ff 100%);
+  background-attachment: fixed;
+  min-height: 100dvh;
+}
+
+/* グラデーション部品 */
+.btn-accent {
+  background-image: linear-gradient(120deg, #6366f1 0%, #2563eb 45%, #06b6d4 100%);
+  background-size: 180% 100%;
+  background-position: 0% 50%;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.32);
+  transition:
+    background-position 0.45s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.btn-accent:hover {
+  background-position: 100% 50%;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.42);
+}
+.btn-accent:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3);
+}
+
+/* セカンダリ(ゴースト)ボタン */
+.btn-ghost {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--fg);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(37, 99, 235, 0.14);
+}
+.text-grad {
+  background: linear-gradient(120deg, #4f46e5 0%, #2563eb 45%, #0891b2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.progress-grad {
+  background-image: linear-gradient(90deg, #6366f1, #2563eb 50%, #06b6d4);
+}
+/* 左端にグラデーションのアクセントバーを持つカード */
+.card-accent {
+  position: relative;
+  overflow: hidden;
+}
+.card-accent::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-image: linear-gradient(180deg, #6366f1, #2563eb 50%, #06b6d4);
+}
+.card-accent:hover::before {
+  width: 6px;
+}
+/* ヒーロー/章ブレイク用の淡いグラデーション面 */
+.surface-grad {
+  background-image: linear-gradient(135deg, #eef3fb 0%, #f0eefb 50%, #e9f6fb 100%);
 }
 
 /* セクション本文の体裁 */

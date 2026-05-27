@@ -43,7 +43,7 @@ export default async function CurriculumPage({
       </Link>
 
       <header className="mb-6 mt-4">
-        <h1 className="text-2xl font-bold">{cur.meta.title}</h1>
+        <h1 className="text-grad inline-block text-3xl font-bold">{cur.meta.title}</h1>
         {cur.meta.description && (
           <p className="mt-2 text-sm text-[var(--muted)]">{cur.meta.description}</p>
         )}
@@ -59,7 +59,7 @@ export default async function CurriculumPage({
         {cur.chapters.map((ch) => (
           <li
             key={ch.meta.id}
-            className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-5"
+            className="card-accent rounded-xl border border-[var(--border)] bg-[var(--card)] p-5 pl-6 shadow-sm"
           >
             <div className="flex items-baseline justify-between gap-3">
               <h2 className="text-lg font-bold">
@@ -85,14 +85,14 @@ export default async function CurriculumPage({
             <div className="mt-4 flex gap-3">
               <Link
                 href={`/textbooks/${slug}/${cur.meta.id}/${ch.meta.id}`}
-                className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white"
+                className="btn-accent rounded-lg px-4 py-2 text-sm font-medium"
               >
                 読む（{ch.sections.length} セクション）
               </Link>
               {ch.quiz && ch.quiz.questions.length > 0 && (
                 <Link
                   href={`/textbooks/${slug}/${cur.meta.id}/${ch.meta.id}/quiz`}
-                  className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm font-medium hover:border-[var(--accent)]"
+                  className="btn-ghost rounded-lg px-4 py-2 text-sm font-medium"
                 >
                   クイズ（{ch.quiz.questions.length} 問）
                 </Link>

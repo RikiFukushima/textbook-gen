@@ -22,7 +22,7 @@ export default async function TextbookPage({
       </Link>
 
       <header className="mb-6 mt-4">
-        <h1 className="text-2xl font-bold">{tb.meta.title}</h1>
+        <h1 className="text-grad inline-block text-3xl font-bold">{tb.meta.title}</h1>
         {tb.meta.description && (
           <p className="mt-2 text-sm text-[var(--muted)]">{tb.meta.description}</p>
         )}
@@ -39,7 +39,7 @@ export default async function TextbookPage({
             <li key={cur.meta.id}>
               <Link
                 href={`/textbooks/${slug}/${cur.meta.id}`}
-                className="block rounded-xl border border-[var(--border)] bg-[var(--card)] p-5 transition-colors hover:border-[var(--accent)]"
+                className="card-accent block rounded-xl border border-[var(--border)] bg-[var(--card)] p-5 pl-6 shadow-sm transition-all hover:border-[var(--accent)] hover:shadow-md"
               >
                 <div className="flex items-baseline justify-between gap-3">
                   <h3 className="text-lg font-bold">{cur.meta.title}</h3>

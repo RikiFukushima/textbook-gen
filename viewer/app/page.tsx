@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-3xl px-5 py-10">
       <header className="mb-8">
-        <h1 className="text-2xl font-bold">教材一覧</h1>
+        <h1 className="text-grad inline-block text-3xl font-bold">教材一覧</h1>
         <p className="mt-1 text-sm text-[var(--muted)]">
           自動生成された教材を選んで学習を始めましょう。
         </p>
@@ -23,7 +23,7 @@ export default function Home() {
             <li key={tb.meta.slug}>
               <Link
                 href={`/textbooks/${tb.meta.slug}`}
-                className="block rounded-xl border border-[var(--border)] bg-[var(--card)] p-5 transition-colors hover:border-[var(--accent)]"
+                className="card-accent block rounded-xl border border-[var(--border)] bg-[var(--card)] p-5 pl-6 shadow-sm transition-all hover:border-[var(--accent)] hover:shadow-md"
               >
                 <div className="flex items-baseline justify-between gap-3">
                   <h2 className="text-lg font-bold">{tb.meta.title}</h2>
