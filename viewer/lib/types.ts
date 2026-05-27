@@ -8,6 +8,20 @@ export interface Meta {
   authors?: string[];
   visibility?: Visibility;
   tags?: string[];
+  curriculum_order?: string[];
+}
+
+export interface CurriculumMeta {
+  id: string;
+  title: string;
+  description?: string;
+  order?: number;
+  estimated_hours?: number;
+  target_audience?: {
+    level?: string;
+    prerequisites?: string[];
+  };
+  chapter_order: string[];
 }
 
 export interface OutlineSection {
@@ -93,14 +107,19 @@ export interface Chapter {
   quiz: Quiz | null;
 }
 
+export interface Curriculum {
+  meta: CurriculumMeta;
+  chapters: Chapter[];
+}
+
 export interface Textbook {
   meta: Meta;
-  outline: Outline;
-  chapters: Chapter[];
+  curriculums: Curriculum[];
 }
 
 export interface TextbookSummary {
   meta: Meta;
+  curriculumCount: number;
   chapterCount: number;
   sectionCount: number;
   estimatedHours?: number;

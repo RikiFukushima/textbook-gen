@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTextbook, getVisibleSlugs } from "@/lib/content";
-import ChapterProgress from "@/components/ChapterProgress";
 
 export function generateStaticParams() {
   return getVisibleSlugs().map((slug) => ({ slug }));
@@ -16,14 +15,6 @@ export default async function TextbookPage({
   const tb = getTextbook(slug);
   if (!tb) notFound();
 
-  const allSectionIds = tb.chapters.flatMap((c) =>
-    c.sections.map((s) => s.frontmatter.section_id)
-  );
-  const totalQuiz = tb.chapters.reduce(
-    (n, c) => n + (c.quiz?.questions.length ?? 0),
-    0
-  );
-
   return (
     <main className="mx-auto max-w-3xl px-5 py-10">
       <Link href="/" className="text-sm text-[var(--muted)] hover:text-[var(--fg)]">
@@ -35,59 +26,42 @@ export default async function TextbookPage({
         {tb.meta.description && (
           <p className="mt-2 text-sm text-[var(--muted)]">{tb.meta.description}</p>
         )}
-        <ChapterProgress
-          slug={slug}
-          sectionIds={allSectionIds}
-          totalQuiz={totalQuiz}
-        />
       </header>
 
-      <ol className="space-y-3">
-        {tb.chapters.map((ch) => (
-          <li
-            key={ch.meta.id}
-            className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-5"
-          >
-            <div className="flex items-baseline justify-between gap-3">
-              <h2 className="text-lg font-bold">
-                第{Number(ch.meta.id)}章 {ch.meta.title}
-              </h2>
-              <span className="shrink-0 text-xs text-[var(--muted)]">
-                {ch.meta.estimated_minutes != null
-                  ? `約 ${ch.meta.estimated_minutes} 分`
-                  : ""}
-              </span>
-            </div>
-
-            {ch.meta.learning_objectives && (
-              <ul className="mt-2 space-y-1 text-sm text-[var(--muted)]">
-                {ch.meta.learning_objectives.map((o, i) => (
-                  <li key={i} className="list-disc list-inside">
-                    {o}
-                  </li>
-                ))}
-              </ul>
-            )}
-
-            <div className="mt-4 flex gap-3">
+      <h2 className="mb-3 text-sm font-bold text-[var(--muted)]">カリキュラム</h2>
+      <ul className="space-y-3">
+        {tb.curriculums.map((cur) => {
+          const sectionCount = cur.chapters.reduce(
+            (n, c) => n + c.sections.length,
+            0
+          );
+          return (
+            <li key={cur.meta.id}>
               <Link
-                href={`/textbooks/${slug}/${ch.meta.id}`}
-                className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white"
+                href={`/textbooks/${slug}/${cur.meta.id}`}
+                className="block rounded-xl border border-[var(--border)] bg-[var(--card)] p-5 transition-colors hover:border-[var(--accent)]"
               >
-                読む（{ch.sections.length} セクション）
+                <div className="flex items-baseline justify-between gap-3">
+                  <h3 className="text-lg font-bold">{cur.meta.title}</h3>
+                  <span className="shrink-0 text-xs text-[var(--muted)]">
+                    {cur.chapters.length} 章 / {sectionCount} セクション
+                  </span>
+                </div>
+                {cur.meta.description && (
+                  <p className="mt-2 text-sm text-[var(--muted)]">
+                    {cur.meta.description}
+                  </p>
+                )}
+                {cur.meta.estimated_hours != null && (
+                  <span className="mt-3 inline-block rounded-full bg-[var(--bg)] px-2.5 py-1 text-xs text-[var(--muted)]">
+                    約 {cur.meta.estimated_hours} 時間
+                  </span>
+                )}
               </Link>
-              {ch.quiz && ch.quiz.questions.length > 0 && (
-                <Link
-                  href={`/textbooks/${slug}/${ch.meta.id}/quiz`}
-                  className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm font-medium hover:border-[var(--accent)]"
-                >
-                  クイズ（{ch.quiz.questions.length} 問）
-                </Link>
-              )}
-            </div>
-          </li>
-        ))}
-      </ol>
+            </li>
+          );
+        })}
+      </ul>
     </main>
   );
 }

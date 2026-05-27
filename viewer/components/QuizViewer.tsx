@@ -6,6 +6,7 @@ import { useProgress } from "@/lib/progress";
 
 interface Props {
   slug: string;
+  curriculumId: string;
   chapterId: string;
   chapterTitle: string;
   quiz: Quiz;
@@ -13,11 +14,14 @@ interface Props {
 
 export default function QuizViewer({
   slug,
+  curriculumId,
   chapterId,
   chapterTitle,
   quiz,
 }: Props) {
   const { recordAnswer } = useProgress(slug);
+  const curriculumHref = `/textbooks/${slug}/${curriculumId}`;
+  const chapterHref = `/textbooks/${slug}/${curriculumId}/${chapterId}`;
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
@@ -33,7 +37,7 @@ export default function QuizViewer({
     setRevealed(true);
     const correct = optionId === q.answer;
     if (correct) setCorrectCount((c) => c + 1);
-    recordAnswer(q.id, optionId, correct);
+    recordAnswer(`${curriculumId}:${q.id}`, optionId, correct);
   }
 
   function next() {
@@ -59,13 +63,13 @@ export default function QuizViewer({
           </p>
           <div className="mt-8 flex justify-center gap-3">
             <Link
-              href={`/textbooks/${slug}/${chapterId}`}
+              href={chapterHref}
               className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm font-medium"
             >
               復習する
             </Link>
             <Link
-              href={`/textbooks/${slug}`}
+              href={curriculumHref}
               className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white"
             >
               章一覧へ →
@@ -80,7 +84,7 @@ export default function QuizViewer({
     <main className="flex min-h-[100dvh] flex-col bg-[#12151c]">
       <header className="flex items-center justify-between border-b border-[var(--border)] px-4 py-3">
         <Link
-          href={`/textbooks/${slug}`}
+          href={curriculumHref}
           className="text-sm text-[var(--muted)] hover:text-[var(--fg)]"
         >
           ← {chapterTitle}

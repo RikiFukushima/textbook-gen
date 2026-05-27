@@ -3,21 +3,27 @@ import { useProgress } from "@/lib/progress";
 
 export default function ChapterProgress({
   slug,
+  curriculumId,
   sectionIds,
   totalQuiz,
 }: {
   slug: string;
+  curriculumId: string;
   sectionIds: string[];
   totalQuiz: number;
 }) {
   const { progress } = useProgress(slug);
 
-  const doneSections = sectionIds.filter((id) =>
+  const qualified = sectionIds.map((id) => `${curriculumId}:${id}`);
+  const doneSections = qualified.filter((id) =>
     progress.completedSections.includes(id)
   ).length;
-  const answered = Object.keys(progress.quizAnswers).length;
-  const correct = Object.values(progress.quizAnswers).filter(
-    (a) => a.correct
+
+  const answered = Object.keys(progress.quizAnswers).filter((k) =>
+    k.startsWith(`${curriculumId}:`)
+  ).length;
+  const correct = Object.entries(progress.quizAnswers).filter(
+    ([k, v]) => k.startsWith(`${curriculumId}:`) && v.correct
   ).length;
 
   const pct =

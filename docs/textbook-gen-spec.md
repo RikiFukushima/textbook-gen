@@ -32,17 +32,20 @@ Claude Code
   ├─ .claude/skills/quiz/(4 択問題生成)
   └─ .claude/agents/reviewer.md(章レビュー)
         ↓ 生成物
-  textbooks/{slug}/
-    ├─ outline.yaml
+  textbooks/{slug}/                 # textbook(最上位の保管単位)
     ├─ meta.yaml
-    ├─ chapters/
-    │   └── {chapter-id}/
-    │       ├─ chapter.yaml(章メタ)
-    │       └─ sections/
-    │           ├─ 01-{slug}.md(セクション = 1 ページ)
-    │           └─ 02-{slug}.md
-    └─ quizzes/
-        └─ {chapter-id}.json
+    └─ curriculums/
+        └─ {curriculum-id}/         # curriculum(学習コース。textbook:curriculum = 1:多)
+            ├─ curriculum.yaml(カリキュラムメタ)
+            ├─ outline.yaml
+            ├─ chapters/
+            │   └── {chapter-id}/
+            │       ├─ chapter.yaml(章メタ)
+            │       └─ sections/
+            │           ├─ 01-{slug}.md(セクション = 1 ページ)
+            │           └─ 02-{slug}.md
+            └─ quizzes/
+                └─ {chapter-id}.json
         ↓ push
 [ストレージ]
 Supabase(Postgres + Storage)
@@ -71,19 +74,22 @@ textbook-gen/
 │   └── agents/
 │       └── reviewer.md
 ├── textbooks/
-│   └── {topic-slug}/
+│   └── {topic-slug}/                 # textbook
 │       ├── meta.yaml
-│       ├── outline.yaml
-│       ├── chapters/
-│       │   └── {chapter-id}/
-│       │       ├─ chapter.yaml
-│       │       └─ sections/
-│       │           ├─ 01-{section-slug}.md
-│       │           └─ 02-{section-slug}.md
-│       ├── quizzes/
-│       │   ├── 01.json
-│       │   └── 02.json
-│       └── sources/       # ローカルディレクトリ参照時のメモ等
+│       └── curriculums/
+│           └── {curriculum-id}/      # curriculum(1 textbook に複数可)
+│               ├── curriculum.yaml
+│               ├── outline.yaml
+│               ├── chapters/
+│               │   └── {chapter-id}/
+│               │       ├─ chapter.yaml
+│               │       └─ sections/
+│               │           ├─ 01-{section-slug}.md
+│               │           └─ 02-{section-slug}.md
+│               ├── quizzes/
+│               │   ├── 01.json
+│               │   └── 02.json
+│               └── sources/          # ローカルディレクトリ参照時のメモ等
 ├── viewer/                # Next.js プロジェクト
 │   ├── app/
 │   ├── components/
@@ -105,11 +111,15 @@ textbook-gen/
 ### 4.1 単位の階層
 
 ```
-教科書(Textbook)         5-10 時間
-  └─ 章(Chapter)         12-25 分(目安 15 分)
-      ├─ セクション × N    3-5 分 / 1200-3000 字
-      └─ クイズ            5 分
+教材(Textbook)                  最上位の保管単位(例:「Git」)
+  └─ カリキュラム(Curriculum)    学習コース(例:「Git の基礎」)。1 textbook に複数可
+      └─ 章(Chapter)            12-25 分(目安 15 分)
+          ├─ セクション × N       3-5 分 / 1200-3000 字
+          └─ クイズ               5 分
 ```
+
+- **textbook : curriculum = 1 : 多**。1 つの教材の中に複数のカリキュラム(入門/応用など)を束ねられる。
+- LMS 対応: curriculum(例: HTML/CSS) > chapter(例: HTML) > section(例: 箇条書きリスト)。textbook はその上位の保管・公開単位。
 
 ### 4.2 セクション設計の根拠
 
@@ -240,12 +250,13 @@ textbook-gen/
 
 | 情報                                  | 正本                       | 役割                                                        |
 | ------------------------------------- | -------------------------- | ----------------------------------------------------------- |
-| 教材全体メタ(title, visibility 等)  | `meta.yaml`                | 教材の最終的なメタ                                          |
-| 章立ての構想(章・節の分解案)        | `outline.yaml`             | **生成の入力(骨子)のみ**。生成後は本文の正本ではない      |
+| 教材全体メタ(title, visibility 等)  | `meta.yaml`                | textbook の最終的なメタ。`curriculum_order` で並びを管理    |
+| カリキュラムメタ(title, 章の順序 等) | `curriculum.yaml`          | curriculum レベルの正本。`chapter_order` で章の並びを管理   |
+| 章立ての構想(章・節の分解案)        | `outline.yaml`             | **生成の入力(骨子)のみ**。生成後は本文の正本ではない(curriculum 配下) |
 | 章メタ(title, objectives, 節の順序) | `chapter.yaml`             | 章レベルの正本。`section_order` で節の並びを管理            |
 | 節メタ(title, estimated_minutes 等) | section `.md` frontmatter  | **節レベルの正本**。outline と食い違う場合は frontmatter 優先 |
 
-`sync.ts` は frontmatter / chapter.yaml / meta.yaml を DB に反映し、outline.yaml は `textbooks.outline`(構想の記録)としてのみ保存する。outline の節 title/estimated_minutes は参考値であり、DB の sections には書き込まない。
+`sync.ts` は frontmatter / chapter.yaml / curriculum.yaml / meta.yaml を DB に反映し、outline.yaml は `curriculums.outline`(構想の記録)としてのみ保存する。outline の節 title/estimated_minutes は参考値であり、DB の sections には書き込まない。
 
 ### 6.1 meta.yaml(教材メタ情報)
 
@@ -268,9 +279,33 @@ tags:
   - aws
   - certification
 contains_local_sources: false # ローカルディレクトリ参照を含む場合 true(公開禁止フラグ)
+curriculum_order: # curriculum の表示順
+  - foundations
+  - advanced
+```
+
+### 6.1.1 curriculum.yaml(カリキュラムメタ)
+
+`textbooks/{slug}/curriculums/{curriculum-id}/curriculum.yaml`。1 つの textbook に複数置ける。
+
+```yaml
+id: foundations
+title: AWS 基礎
+description: AWS の中核サービスを一通り押さえる入門カリキュラム
+order: 1
+estimated_hours: 8
+target_audience:
+  level: 中級 # 初級 | 中級 | 上級
+  prerequisites:
+    - AWS の基本サービス(EC2, S3, VPC)を触ったことがある
+chapter_order:
+  - "01"
+  - "02"
 ```
 
 ### 6.2 outline.yaml(骨子)
+
+`curriculums/{curriculum-id}/outline.yaml`。カリキュラム単位の生成入力(骨子)。
 
 ```yaml
 title: AWS SAA-C03 試験対策
@@ -424,7 +459,7 @@ graph LR
 ### 6.6 Supabase テーブル定義(概要)
 
 ```sql
--- textbooks: 教材メタ
+-- textbooks: 教材メタ(最上位)
 create table textbooks (
   id uuid primary key default gen_random_uuid(),
   slug text unique not null,
@@ -435,29 +470,41 @@ create table textbooks (
   search_indexable boolean default false,
   allow_fork boolean default false,
   meta jsonb not null,
-  outline jsonb not null,
   owner_id uuid references auth.users(id),
   contains_local_sources boolean default false,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
 
+-- curriculums: カリキュラム(textbook : curriculum = 1 : 多)
+create table curriculums (
+  id uuid primary key default gen_random_uuid(),
+  textbook_id uuid references textbooks(id) on delete cascade,
+  curriculum_id text not null,        -- ローカルの {curriculum-id}
+  title text not null,
+  description text,
+  meta jsonb,                          -- target_audience 等
+  outline jsonb,                       -- 骨子(構想の記録)
+  order_index int not null,
+  unique (textbook_id, curriculum_id)
+);
+
 -- chapters: 章メタ
 create table chapters (
   id uuid primary key default gen_random_uuid(),
-  textbook_id uuid references textbooks(id) on delete cascade,
+  curriculum_id uuid references curriculums(id) on delete cascade,
   chapter_id text not null,
   title text not null,
   estimated_minutes int,
   meta jsonb,
   order_index int not null,
-  unique (textbook_id, chapter_id)
+  unique (curriculum_id, chapter_id)
 );
 
 -- sections: セクション本文(1 ページ単位)
 create table sections (
   id uuid primary key default gen_random_uuid(),
-  textbook_id uuid references textbooks(id) on delete cascade,
+  curriculum_id uuid references curriculums(id) on delete cascade,
   chapter_id text not null,
   section_id text not null,
   title text not null,
@@ -466,38 +513,38 @@ create table sections (
   order_index int not null,
   estimated_chars int,
   estimated_minutes int,
-  unique (textbook_id, section_id)
+  unique (curriculum_id, section_id)
 );
 
 -- quizzes: 章末問題
 create table quizzes (
   id uuid primary key default gen_random_uuid(),
-  textbook_id uuid references textbooks(id) on delete cascade,
+  curriculum_id uuid references curriculums(id) on delete cascade,
   chapter_id text not null,
   questions jsonb not null,
-  unique (textbook_id, chapter_id)
+  unique (curriculum_id, chapter_id)
 );
 
 -- section_progress: セクション完了記録(最新のみ保持)
 create table section_progress (
   id uuid primary key default gen_random_uuid(),
   user_id uuid references auth.users(id),
-  textbook_id uuid references textbooks(id) on delete cascade,
+  curriculum_id uuid references curriculums(id) on delete cascade,
   section_id text not null,
   completed_at timestamptz default now(),
-  unique (user_id, textbook_id, section_id)
+  unique (user_id, curriculum_id, section_id)
 );
 
 -- quiz_progress: クイズ回答記録(最新のみ保持)
 create table quiz_progress (
   id uuid primary key default gen_random_uuid(),
   user_id uuid references auth.users(id),
-  textbook_id uuid references textbooks(id) on delete cascade,
+  curriculum_id uuid references curriculums(id) on delete cascade,
   question_id text not null,
   selected text,
   is_correct boolean,
   answered_at timestamptz default now(),
-  unique (user_id, textbook_id, question_id)
+  unique (user_id, curriculum_id, question_id)
 );
 -- 進捗は「最新のみ保持」。再回答時は unique 制約キーで upsert(履歴は残さない)。
 
@@ -629,13 +676,13 @@ RLS は以下の方針:
 ### 8.3 ページ構成
 
 ```
-/                                  # ログイン
-/textbooks                         # 一覧
-/textbooks/[slug]                  # 章一覧 + 進捗
-/textbooks/[slug]/[chapter]        # 章本文(セクションスワイプ)
-/textbooks/[slug]/[chapter]/quiz   # 演習
-/textbooks/[slug]/settings         # 共有設定
-/discover                          # 公開教材一覧(将来)
+/                                              # 教材一覧(現状。Auth は Supabase 導入後)
+/textbooks/[slug]                              # カリキュラム一覧
+/textbooks/[slug]/[curriculum]                 # 章一覧 + 進捗
+/textbooks/[slug]/[curriculum]/[chapter]       # 章本文(セクションスワイプ + 読了画面)
+/textbooks/[slug]/[curriculum]/[chapter]/quiz  # 演習
+/textbooks/[slug]/settings                     # 共有設定(将来)
+/discover                                      # 公開教材一覧(将来)
 ```
 
 ### 8.4 スワイプ UI の実装方針
@@ -680,12 +727,12 @@ $ pnpm sync --dry-run           # 差分プレビューのみ
 
 1. meta.yaml 読み込み → textbooks テーブル upsert
 2. `contains_local_sources: true` の場合は公開不可フラグを警告
-3. outline.yaml 読み込み → textbooks.outline 更新
-4. chapters/{id}/chapter.yaml 読み込み → chapters テーブル upsert
-5. chapters/{id}/sections/\*.md 読み込み → sections テーブル upsert(frontmatter は jsonb として保存)
-6. quizzes/\*.json 読み込み → quizzes テーブル upsert
+3. curriculums/{id}/curriculum.yaml + outline.yaml 読み込み → curriculums テーブル upsert(outline は curriculums.outline へ)
+4. curriculums/{id}/chapters/{ch}/chapter.yaml 読み込み → chapters テーブル upsert
+5. curriculums/{id}/chapters/{ch}/sections/\*.md 読み込み → sections テーブル upsert(frontmatter は jsonb として保存)
+6. curriculums/{id}/quizzes/\*.json 読み込み → quizzes テーブル upsert
 7. shared_with の差分を shared_access に反映
-8. **orphan delete**: ローカルに存在しない chapter_id / section_id / quiz を当該 textbook 配下から削除し、DB をローカルの正本に一致させる(slug 上書き方針 = 同 slug は同教材として完全同期)
+8. **orphan delete**: ローカルに存在しない curriculum_id / chapter_id / section_id / quiz を当該 textbook 配下から削除し、DB をローカルの正本に一致させる(slug 上書き方針 = 同 slug は同教材として完全同期)
 
 **slug 上書きの安全策**: 既存 slug を更新する場合、`--dry-run` で削除対象(orphan)を含む差分を必ず提示し、削除を伴う同期は明示確認を挟む。
 

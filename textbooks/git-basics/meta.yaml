@@ -1,6 +1,6 @@
 slug: git-basics
-title: Git の基礎
-description: バージョン管理システム Git の仕組みと基本操作を、手を動かしながら理解するための入門教材
+title: Git
+description: バージョン管理システム Git を、手を動かしながら理解するための教材
 version: 1.0.0
 created_at: 2026-05-27
 updated_at: 2026-05-27
@@ -16,3 +16,5 @@ tags:
   - version-control
   - beginner
 contains_local_sources: false
+curriculum_order:
+  - basics

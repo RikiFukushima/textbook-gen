@@ -15,15 +15,21 @@ Claude Code を生成エンジンに、任意の学習対象から教材(Markdow
   │   └─ quiz/    本文 → 4 択問題(JSON)
   └─ agents/
       └─ reviewer.md  生成物の品質レビュー(指摘のみ)
-textbooks/        生成物(教材ごとに {slug}/)
-viewer/           Next.js ビューワ(Phase 2)
+textbooks/        生成物(教材 > カリキュラム > 章 > 節)
+viewer/           Next.js ビューワ(静的エクスポート, Phase 2)
 scripts/          sync / init-textbook(Phase 2)
 docs/             スキーマ・UX 設計
 ```
 
-## 生成の基本単位
+## 学習単位の階層
 
-教材(5-10h) → 章(12-25 分 / 3-5 セクション) → セクション(3-5 分 / 1500-2000 字) → クイズ(4 択)
+```
+教材(textbook)              最上位の保管単位(例: Git)
+  └─ カリキュラム(curriculum) 学習コース(例: Git の基礎)。1 教材に複数可
+      └─ 章(chapter)         12-25 分 / 3-5 セクション
+          ├─ セクション        3-5 分 / 1500-2000 字
+          └─ クイズ            4 択
+```
 
 ## 使い方(生成パート)
 

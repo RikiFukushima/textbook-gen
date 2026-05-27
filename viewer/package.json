@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "BUILD_VISIBILITY=all next dev",
+    "dev": "BUILD_VISIBILITY=all next dev -p 4001",
     "build": "next build",
     "build:all": "BUILD_VISIBILITY=all next build",
     "start": "next start",

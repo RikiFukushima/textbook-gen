@@ -3,12 +3,14 @@ import { getTextbook, getVisibleSlugs } from "@/lib/content";
 import SectionViewer from "@/components/SectionViewer";
 
 export function generateStaticParams() {
-  const params: { slug: string; chapter: string }[] = [];
+  const params: { slug: string; curriculum: string; chapter: string }[] = [];
   for (const slug of getVisibleSlugs()) {
     const tb = getTextbook(slug);
     if (!tb) continue;
-    for (const ch of tb.chapters) {
-      params.push({ slug, chapter: ch.meta.id });
+    for (const cur of tb.curriculums) {
+      for (const ch of cur.chapters) {
+        params.push({ slug, curriculum: cur.meta.id, chapter: ch.meta.id });
+      }
     }
   }
   return params;
@@ -17,16 +19,18 @@ export function generateStaticParams() {
 export default async function ChapterPage({
   params,
 }: {
-  params: Promise<{ slug: string; chapter: string }>;
+  params: Promise<{ slug: string; curriculum: string; chapter: string }>;
 }) {
-  const { slug, chapter } = await params;
+  const { slug, curriculum, chapter } = await params;
   const tb = getTextbook(slug);
-  const ch = tb?.chapters.find((c) => c.meta.id === chapter);
-  if (!tb || !ch) notFound();
+  const cur = tb?.curriculums.find((c) => c.meta.id === curriculum);
+  const ch = cur?.chapters.find((c) => c.meta.id === chapter);
+  if (!tb || !cur || !ch) notFound();
 
   return (
     <SectionViewer
       slug={slug}
+      curriculumId={cur.meta.id}
       chapterId={ch.meta.id}
       chapterNumber={Number(ch.meta.id)}
       chapterTitle={ch.meta.title}

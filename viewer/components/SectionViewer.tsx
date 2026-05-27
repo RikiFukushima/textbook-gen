@@ -7,6 +7,7 @@ import Markdown from "./Markdown";
 
 interface Props {
   slug: string;
+  curriculumId: string;
   chapterId: string;
   chapterNumber: number;
   chapterTitle: string;
@@ -17,6 +18,7 @@ interface Props {
 
 export default function SectionViewer({
   slug,
+  curriculumId,
   chapterId,
   chapterNumber,
   chapterTitle,
@@ -28,10 +30,11 @@ export default function SectionViewer({
   const [index, setIndex] = useState(0);
   const { progress, markSectionComplete } = useProgress(slug);
 
+  const curriculumHref = `/textbooks/${slug}/${curriculumId}`;
+  const quizHref = `/textbooks/${slug}/${curriculumId}/${chapterId}/quiz`;
   const sectionCount = sections.length;
-  // セクション群の後ろに「章の読了」ページを 1 枚足す
-  const totalPages = sectionCount + 1;
   const onBreak = index >= sectionCount;
+  const qualify = (id: string) => `${curriculumId}:${id}`;
 
   const goTo = useCallback((i: number) => {
     const track = trackRef.current;
@@ -56,11 +59,11 @@ export default function SectionViewer({
     return () => track.removeEventListener("scroll", onScroll);
   }, []);
 
-  // 表示中セクションを完了として記録(読了ページでは記録しない)
   useEffect(() => {
     const sec = sections[index];
-    if (sec) markSectionComplete(sec.frontmatter.section_id);
-  }, [index, sections, markSectionComplete]);
+    if (sec) markSectionComplete(qualify(sec.frontmatter.section_id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index, sections, markSectionComplete, curriculumId]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -72,14 +75,14 @@ export default function SectionViewer({
   }, [index, goTo]);
 
   const readCount = sections.filter((s) =>
-    progress.completedSections.includes(s.frontmatter.section_id)
+    progress.completedSections.includes(qualify(s.frontmatter.section_id))
   ).length;
 
   return (
     <div className="flex h-[100dvh] flex-col">
       <header className="flex items-center justify-between border-b border-[var(--border)] px-4 py-3">
         <Link
-          href={`/textbooks/${slug}`}
+          href={curriculumHref}
           className="truncate text-sm text-[var(--muted)] hover:text-[var(--fg)]"
         >
           ← 第{chapterNumber}章 {chapterTitle}
@@ -98,7 +101,6 @@ export default function SectionViewer({
           </article>
         ))}
 
-        {/* 章の読了ページ(最後のセクションから 1 スワイプで到達) */}
         <article className="swipe-page">
           <div className="flex h-full items-center justify-center px-5">
             <div className="w-full max-w-md rounded-2xl border border-[var(--border)] bg-[var(--card)] p-8 text-center">
@@ -126,14 +128,14 @@ export default function SectionViewer({
                 </button>
                 {hasQuiz ? (
                   <Link
-                    href={`/textbooks/${slug}/${chapterId}/quiz`}
+                    href={quizHref}
                     className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white"
                   >
                     クイズに挑戦 →
                   </Link>
                 ) : (
                   <Link
-                    href={`/textbooks/${slug}`}
+                    href={curriculumHref}
                     className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white"
                   >
                     章一覧へ →
@@ -150,7 +152,7 @@ export default function SectionViewer({
           <div className="flex items-center gap-1.5">
             {sections.map((sec, i) => {
               const done = progress.completedSections.includes(
-                sec.frontmatter.section_id
+                qualify(sec.frontmatter.section_id)
               );
               return (
                 <button
@@ -181,14 +183,14 @@ export default function SectionViewer({
           {onBreak ? (
             hasQuiz ? (
               <Link
-                href={`/textbooks/${slug}/${chapterId}/quiz`}
+                href={quizHref}
                 className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white"
               >
                 クイズへ →
               </Link>
             ) : (
               <Link
-                href={`/textbooks/${slug}`}
+                href={curriculumHref}
                 className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm font-medium"
               >
                 章一覧へ →

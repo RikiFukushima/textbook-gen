@@ -28,7 +28,7 @@ export default function Home() {
                 <div className="flex items-baseline justify-between gap-3">
                   <h2 className="text-lg font-bold">{tb.meta.title}</h2>
                   <span className="shrink-0 text-xs text-[var(--muted)]">
-                    {tb.chapterCount} 章 / {tb.sectionCount} セクション
+                    {tb.curriculumCount} カリキュラム / {tb.chapterCount} 章
                   </span>
                 </div>
                 {tb.meta.description && (

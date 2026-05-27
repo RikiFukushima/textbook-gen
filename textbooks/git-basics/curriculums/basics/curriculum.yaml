@@ -1,0 +1,14 @@
+id: basics
+title: Git の基礎
+description: バージョン管理の概念から基本操作、ブランチとリモート連携までを学ぶ入門カリキュラム
+order: 1
+estimated_hours: 1
+target_audience:
+  level: 初級
+  prerequisites:
+    - ターミナル(コマンドライン)で基本的なコマンドを実行できる
+    - ファイルとディレクトリの概念を理解している
+chapter_order:
+  - "01"
+  - "02"
+  - "03"

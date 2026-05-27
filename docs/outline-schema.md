@@ -1,6 +1,6 @@
 # outline.yaml スキーマ
 
-教材の骨子。`outline` skill が生成し、本文生成の **入力** として使う(本文の正本ではない)。全体仕様は [`textbook-gen-spec.md`](./textbook-gen-spec.md) を参照。
+**カリキュラム**の骨子。`outline` skill が `textbooks/{slug}/curriculums/{curriculum-id}/outline.yaml` に生成し、本文生成の **入力** として使う(本文の正本ではない)。階層は 教材 > カリキュラム > 章 > 節。全体仕様は [`textbook-gen-spec.md`](./textbook-gen-spec.md) を参照。
 
 ## 全体構造
 

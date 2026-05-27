@@ -5,17 +5,19 @@ description: outline.yaml の 1 章分から、複数のセクション Markdown
 
 # chapter — 章本文生成
 
-`outline.yaml` の 1 章分を受け取り、`textbooks/{slug}/chapters/{chapter-id}/` 配下に `chapter.yaml` と複数の section `.md` を生成します。
+カリキュラムの `outline.yaml` の 1 章分を受け取り、`textbooks/{slug}/curriculums/{curriculum-id}/chapters/{chapter-id}/` 配下に `chapter.yaml` と複数の section `.md` を生成します。
 
 ## 出力
 
 ```
-chapters/{chapter-id}/
+textbooks/{slug}/curriculums/{curriculum-id}/chapters/{chapter-id}/
   ├─ chapter.yaml          # 章メタ(id, title, estimated_minutes, learning_objectives, section_order)
   └─ sections/
       ├─ 01-{section-slug}.md
       └─ 02-{section-slug}.md
 ```
+
+対象のカリキュラム(`curriculum-id`)が複数あり得るため、どのカリキュラムの章かを必ず確認すること。
 
 ## 各セクション Markdown のテンプレート
 

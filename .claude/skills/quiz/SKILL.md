@@ -5,7 +5,7 @@ description: 1 章分のセクション群から 4 択の理解度確認問題(J
 
 # quiz — 4 択問題生成
 
-ある章のセクション群(`chapters/{chapter-id}/sections/*.md`)を読み、`textbooks/{slug}/quizzes/{chapter-id}.json` を生成します。
+あるカリキュラムの 1 章分のセクション群(`textbooks/{slug}/curriculums/{curriculum-id}/chapters/{chapter-id}/sections/*.md`)を読み、`textbooks/{slug}/curriculums/{curriculum-id}/quizzes/{chapter-id}.json` を生成します。
 
 ## 出力スキーマ
 

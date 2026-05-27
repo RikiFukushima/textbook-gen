@@ -7,15 +7,18 @@
 ## 生成の基本単位
 
 ```
-教材(Textbook)      5-10 時間
-  └─ 章(Chapter)    12-25 分(目安 15 分 / 3-5 セクション)
-      ├─ セクション × N  3-5 分 / 1500-2000 字(下限 1200・上限 3000)
-      │                  ※字数は地の文+見出しで計測。コード2つ以上は下限 800 字に緩和
-      └─ クイズ          4 択 × N
+教材(Textbook)              最上位の保管単位(例:「Git」)
+  └─ カリキュラム(Curriculum) 学習コース(例:「Git の基礎」)。1 教材に複数可
+      └─ 章(Chapter)         12-25 分(目安 15 分 / 3-5 セクション)
+          ├─ セクション × N    3-5 分 / 1500-2000 字(下限 1200・上限 3000)
+          │                    ※字数は地の文+見出しで計測。コード2つ以上は下限 800 字に緩和
+          └─ クイズ            4 択 × N
 ```
 
+- **textbook : curriculum = 1 : 多**。生成・閲覧・進捗はすべて curriculum 配下で完結する。
 - **1 セクション = 1 ページ = 1 学習ユニット**。マイクロラーニング指向。
 - セクション本文は「概念 → 具体例 → 注意点」の 3 層構造を基本とする。
+- 生成物の配置: `textbooks/{slug}/curriculums/{curriculum-id}/{outline.yaml, chapters/, quizzes/}`。
 
 ## トーン
 
@@ -31,8 +34,9 @@
 
 | 情報 | 正本 |
 | --- | --- |
-| 教材全体メタ | `meta.yaml` |
-| 章立ての構想(骨子) | `outline.yaml`(生成の入力のみ。本文の正本ではない) |
+| 教材全体メタ・カリキュラムの順序 | `meta.yaml`(`curriculum_order`) |
+| カリキュラムメタ・章の順序 | `curriculums/{id}/curriculum.yaml`(`chapter_order`) |
+| 章立ての構想(骨子) | `curriculums/{id}/outline.yaml`(生成の入力のみ。本文の正本ではない) |
 | 章メタ・節の順序 | `chapters/{id}/chapter.yaml` |
 | 節メタ(title, estimated_minutes 等) | section `.md` の frontmatter(**最優先**) |
 
@@ -56,6 +60,7 @@ outline と frontmatter が食い違う場合は frontmatter を正とする。
 
 ## 命名規則
 
+- `curriculum-id`: 英小文字・数字・ハイフンの slug(`"basics"`, `"advanced"`)。
 - `chapter_id`: ゼロ埋め 2 桁(`"01"`)。
 - `section_id`: `{chapter_id}-{2桁節番号}`(`"01-02"`)。
 - セクションファイル名: `{2桁節番号}-{section-slug}.md`(`02-security-model.md`)。

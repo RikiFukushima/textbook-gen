@@ -5,8 +5,9 @@ import yaml from "js-yaml";
 import type {
   Chapter,
   ChapterMeta,
+  Curriculum,
+  CurriculumMeta,
   Meta,
-  Outline,
   Quiz,
   Section,
   SectionFrontmatter,
@@ -64,12 +65,8 @@ export function getListableSlugs(): string[] {
   );
 }
 
-function loadOutline(slug: string): Outline {
-  return readYaml<Outline>(path.join(TEXTBOOKS_ROOT, slug, "outline.yaml"));
-}
-
-function loadChapter(slug: string, chapterId: string): Chapter {
-  const chapterDir = path.join(TEXTBOOKS_ROOT, slug, "chapters", chapterId);
+function loadChapter(chaptersDir: string, quizzesDir: string, chapterId: string): Chapter {
+  const chapterDir = path.join(chaptersDir, chapterId);
   const meta = readYaml<ChapterMeta>(path.join(chapterDir, "chapter.yaml"));
 
   const sectionsDir = path.join(chapterDir, "sections");
@@ -87,7 +84,6 @@ function loadChapter(slug: string, chapterId: string): Chapter {
     })
     .sort((a, b) => (a.frontmatter.order ?? 0) - (b.frontmatter.order ?? 0));
 
-  // section_order があればそれに従って並べ替え
   if (meta.section_order?.length) {
     sections.sort(
       (a, b) =>
@@ -96,12 +92,51 @@ function loadChapter(slug: string, chapterId: string): Chapter {
     );
   }
 
-  const quizFile = path.join(TEXTBOOKS_ROOT, slug, "quizzes", `${chapterId}.json`);
+  const quizFile = path.join(quizzesDir, `${chapterId}.json`);
   const quiz: Quiz | null = fs.existsSync(quizFile)
     ? (JSON.parse(fs.readFileSync(quizFile, "utf-8")) as Quiz)
     : null;
 
   return { meta, sections, quiz };
+}
+
+function loadCurriculum(slug: string, curriculumId: string): Curriculum | null {
+  const curDir = path.join(TEXTBOOKS_ROOT, slug, "curriculums", curriculumId);
+  const metaFile = path.join(curDir, "curriculum.yaml");
+  if (!fs.existsSync(metaFile)) return null;
+
+  const meta = readYaml<CurriculumMeta>(metaFile);
+  const chaptersDir = path.join(curDir, "chapters");
+  const quizzesDir = path.join(curDir, "quizzes");
+
+  const ids =
+    meta.chapter_order?.length > 0
+      ? meta.chapter_order
+      : fs.existsSync(chaptersDir)
+        ? fs.readdirSync(chaptersDir).sort()
+        : [];
+
+  const chapters = ids
+    .map((id) => {
+      try {
+        return loadChapter(chaptersDir, quizzesDir, id);
+      } catch {
+        return null;
+      }
+    })
+    .filter((c): c is Chapter => c !== null);
+
+  return { meta, chapters };
+}
+
+function listCurriculumIds(slug: string, meta: Meta): string[] {
+  const curRoot = path.join(TEXTBOOKS_ROOT, slug, "curriculums");
+  if (meta.curriculum_order?.length) return meta.curriculum_order;
+  if (!fs.existsSync(curRoot)) return [];
+  return fs
+    .readdirSync(curRoot)
+    .filter((name) => fs.existsSync(path.join(curRoot, name, "curriculum.yaml")))
+    .sort();
 }
 
 /** 教材を完全な形で取得(非表示なら null) */
@@ -110,18 +145,12 @@ export function getTextbook(slug: string): Textbook | null {
   const meta = loadMeta(slug);
   if (!isVisible(meta)) return null;
 
-  const outline = loadOutline(slug);
-  const chapters = outline.chapters
-    .map((ch) => {
-      try {
-        return loadChapter(slug, ch.id);
-      } catch {
-        return null; // 未生成の章はスキップ
-      }
-    })
-    .filter((c): c is Chapter => c !== null);
+  const curriculums = listCurriculumIds(slug, meta)
+    .map((id) => loadCurriculum(slug, id))
+    .filter((c): c is Curriculum => c !== null)
+    .sort((a, b) => (a.meta.order ?? 0) - (b.meta.order ?? 0));
 
-  return { meta, outline, chapters };
+  return { meta, curriculums };
 }
 
 /** 一覧用サマリ */
@@ -129,12 +158,21 @@ export function getTextbookSummaries(): TextbookSummary[] {
   return getListableSlugs().flatMap((slug) => {
     const tb = getTextbook(slug);
     if (!tb) return [];
-    const sectionCount = tb.chapters.reduce((n, c) => n + c.sections.length, 0);
+    const chapterCount = tb.curriculums.reduce((n, c) => n + c.chapters.length, 0);
+    const sectionCount = tb.curriculums.reduce(
+      (n, c) => n + c.chapters.reduce((m, ch) => m + ch.sections.length, 0),
+      0
+    );
+    const estimatedHours = tb.curriculums.reduce(
+      (n, c) => n + (c.meta.estimated_hours ?? 0),
+      0
+    );
     const summary: TextbookSummary = {
       meta: tb.meta,
-      chapterCount: tb.chapters.length,
+      curriculumCount: tb.curriculums.length,
+      chapterCount,
       sectionCount,
-      estimatedHours: tb.outline.target_audience?.estimated_hours,
+      estimatedHours: estimatedHours || undefined,
     };
     return [summary];
   });
