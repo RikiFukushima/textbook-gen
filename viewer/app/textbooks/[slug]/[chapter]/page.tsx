@@ -28,8 +28,10 @@ export default async function ChapterPage({
     <SectionViewer
       slug={slug}
       chapterId={ch.meta.id}
-      chapterTitle={`第${Number(ch.meta.id)}章 ${ch.meta.title}`}
+      chapterNumber={Number(ch.meta.id)}
+      chapterTitle={ch.meta.title}
       sections={ch.sections}
+      estimatedMinutes={ch.meta.estimated_minutes}
       hasQuiz={!!ch.quiz && ch.quiz.questions.length > 0}
     />
   );
