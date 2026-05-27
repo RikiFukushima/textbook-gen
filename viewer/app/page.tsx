@@ -14,7 +14,9 @@ export default function Home() {
       </header>
 
       {textbooks.length === 0 ? (
-        <p className="text-[var(--muted)]">表示できる教材がありません。</p>
+        <p className="text-[var(--muted)]">
+          一覧に表示する教材はまだありません(unlisted の教材は直接リンクからアクセスできます)。
+        </p>
       ) : (
         <ul className="space-y-3">
           {textbooks.map((tb) => (

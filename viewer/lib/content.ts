@@ -52,9 +52,16 @@ function isVisible(meta: Meta): boolean {
   return allowedVisibilities().has((meta.visibility || "private").toLowerCase());
 }
 
-/** 表示可能な教材の slug 一覧 */
+/** ビルド対象の slug 一覧(直リンクで到達可能。generateStaticParams 用) */
 export function getVisibleSlugs(): string[] {
   return listAllSlugs().filter((slug) => isVisible(loadMeta(slug)));
+}
+
+/** 一覧(トップページ)に出す slug。unlisted は直リンク専用なので除外する */
+export function getListableSlugs(): string[] {
+  return getVisibleSlugs().filter(
+    (slug) => (loadMeta(slug).visibility || "private").toLowerCase() !== "unlisted"
+  );
 }
 
 function loadOutline(slug: string): Outline {
@@ -119,7 +126,7 @@ export function getTextbook(slug: string): Textbook | null {
 
 /** 一覧用サマリ */
 export function getTextbookSummaries(): TextbookSummary[] {
-  return getVisibleSlugs().flatMap((slug) => {
+  return getListableSlugs().flatMap((slug) => {
     const tb = getTextbook(slug);
     if (!tb) return [];
     const sectionCount = tb.chapters.reduce((n, c) => n + c.sections.length, 0);
