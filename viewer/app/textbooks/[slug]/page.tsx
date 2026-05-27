@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTextbook, getVisibleSlugs } from "@/lib/content";
+import BackLink from "@/components/BackLink";
 
 export function generateStaticParams() {
   return getVisibleSlugs().map((slug) => ({ slug }));
@@ -17,9 +18,7 @@ export default async function TextbookPage({
 
   return (
     <main className="mx-auto max-w-3xl px-5 py-10">
-      <Link href="/" className="text-sm text-[var(--muted)] hover:text-[var(--fg)]">
-        ← 教材一覧
-      </Link>
+      <BackLink href="/">教材一覧</BackLink>
 
       <header className="mb-6 mt-4">
         <h1 className="text-grad inline-block text-3xl font-bold">{tb.meta.title}</h1>

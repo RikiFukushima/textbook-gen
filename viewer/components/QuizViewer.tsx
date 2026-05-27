@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import type { Quiz } from "@/lib/types";
 import { useProgress } from "@/lib/progress";
+import BackLink from "./BackLink";
 
 interface Props {
   slug: string;
@@ -85,12 +86,7 @@ export default function QuizViewer({
   return (
     <main className="flex min-h-[100dvh] flex-col bg-[var(--accent-weak)]">
       <header className="flex items-center justify-between border-b border-[var(--border)] px-4 py-3">
-        <Link
-          href={curriculumHref}
-          className="text-sm text-[var(--muted)] hover:text-[var(--fg)]"
-        >
-          ← {chapterTitle}
-        </Link>
+        <BackLink href={curriculumHref}>{chapterTitle}</BackLink>
         <span className="text-xs text-[var(--muted)]">
           問 {index + 1} / {total}
         </span>

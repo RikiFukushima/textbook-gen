@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTextbook, getVisibleSlugs } from "@/lib/content";
 import ChapterProgress from "@/components/ChapterProgress";
+import BackLink from "@/components/BackLink";
 
 export function generateStaticParams() {
   const params: { slug: string; curriculum: string }[] = [];
@@ -35,12 +36,7 @@ export default async function CurriculumPage({
 
   return (
     <main className="mx-auto max-w-3xl px-5 py-10">
-      <Link
-        href={`/textbooks/${slug}`}
-        className="text-sm text-[var(--muted)] hover:text-[var(--fg)]"
-      >
-        ← {tb.meta.title}
-      </Link>
+      <BackLink href={`/textbooks/${slug}`}>{tb.meta.title}</BackLink>
 
       <header className="mb-6 mt-4">
         <h1 className="text-grad inline-block text-3xl font-bold">{cur.meta.title}</h1>

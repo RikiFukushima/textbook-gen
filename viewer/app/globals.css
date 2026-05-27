@@ -48,6 +48,65 @@ body {
   box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3);
 }
 
+/* 戻るリンク(ピル + シェブロン) */
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border-radius: 9999px;
+  padding: 0.32rem 0.85rem 0.32rem 0.65rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--muted);
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.btn-back:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.14);
+}
+.btn-back svg {
+  transition: transform 0.15s ease;
+}
+.btn-back:hover svg {
+  transform: translateX(-2px);
+}
+
+/* 円形アイコンボタン(戻る・ナビ用) */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  color: var(--muted);
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+.btn-icon:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.14);
+}
+.btn-icon:disabled,
+.btn-icon[aria-disabled="true"] {
+  color: var(--border);
+  border-color: var(--border);
+  box-shadow: none;
+  cursor: default;
+}
+
 /* セカンダリ(ゴースト)ボタン */
 .btn-ghost {
   background: var(--card);

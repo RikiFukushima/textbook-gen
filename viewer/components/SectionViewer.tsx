@@ -1,9 +1,17 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Section } from "@/lib/types";
 import { useProgress } from "@/lib/progress";
 import Markdown from "./Markdown";
+import { ChevronLeft, ChevronRight, ListIcon } from "./BackLink";
+
+interface ChapterRef {
+  id: string;
+  number: number;
+  title: string;
+}
 
 interface Props {
   slug: string;
@@ -14,6 +22,7 @@ interface Props {
   sections: Section[];
   estimatedMinutes?: number;
   hasQuiz: boolean;
+  chapterList: ChapterRef[];
 }
 
 export default function SectionViewer({
@@ -25,16 +34,24 @@ export default function SectionViewer({
   sections,
   estimatedMinutes,
   hasQuiz,
+  chapterList,
 }: Props) {
+  const router = useRouter();
   const trackRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
   const { progress, markSectionComplete } = useProgress(slug);
 
   const curriculumHref = `/textbooks/${slug}/${curriculumId}`;
   const quizHref = `/textbooks/${slug}/${curriculumId}/${chapterId}/quiz`;
+  const chapterHref = (id: string) => `/textbooks/${slug}/${curriculumId}/${id}`;
   const sectionCount = sections.length;
   const onBreak = index >= sectionCount;
   const qualify = (id: string) => `${curriculumId}:${id}`;
+
+  const curPos = chapterList.findIndex((c) => c.id === chapterId);
+  const prevChapter = curPos > 0 ? chapterList[curPos - 1] : null;
+  const nextChapter =
+    curPos >= 0 && curPos < chapterList.length - 1 ? chapterList[curPos + 1] : null;
 
   const goTo = useCallback((i: number) => {
     const track = trackRef.current;
@@ -51,7 +68,11 @@ export default function SectionViewer({
     const onScroll = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
-        const i = Math.round(track.scrollLeft / track.clientWidth);
+        // 見開き(50%幅)でも正しく判定するため、実際のページ幅で割る
+        const pageWidth =
+          (track.firstElementChild as HTMLElement | null)?.offsetWidth ||
+          track.clientWidth;
+        const i = Math.round(track.scrollLeft / pageWidth);
         setIndex(i);
       });
     };
@@ -80,14 +101,60 @@ export default function SectionViewer({
 
   return (
     <div className="flex h-[100dvh] flex-col">
-      <header className="flex items-center justify-between border-b border-[var(--border)] px-4 py-3">
+      <header className="flex items-center gap-2 border-b border-[var(--border)] bg-[var(--card)] px-3 py-2.5">
         <Link
           href={curriculumHref}
-          className="truncate text-sm text-[var(--muted)] hover:text-[var(--fg)]"
+          aria-label="章一覧へ戻る"
+          title="章一覧へ戻る"
+          className="btn-icon shrink-0"
         >
-          ← 第{chapterNumber}章 {chapterTitle}
+          <ListIcon />
         </Link>
-        <span className="shrink-0 pl-3 text-xs text-[var(--muted)]">
+
+        {prevChapter ? (
+          <Link
+            href={chapterHref(prevChapter.id)}
+            aria-label={`前の章: 第${prevChapter.number}章`}
+            title={`第${prevChapter.number}章 ${prevChapter.title}`}
+            className="btn-icon shrink-0"
+          >
+            <ChevronLeft />
+          </Link>
+        ) : (
+          <span className="btn-icon shrink-0" aria-disabled="true">
+            <ChevronLeft />
+          </span>
+        )}
+
+        <select
+          aria-label="章を選択"
+          value={chapterId}
+          onChange={(e) => router.push(chapterHref(e.target.value))}
+          className="min-w-0 flex-1 truncate rounded-md border border-[var(--border)] bg-[var(--card)] px-2 py-1 text-sm font-medium text-[var(--fg)]"
+        >
+          {chapterList.map((c) => (
+            <option key={c.id} value={c.id}>
+              第{c.number}章 {c.title}
+            </option>
+          ))}
+        </select>
+
+        {nextChapter ? (
+          <Link
+            href={chapterHref(nextChapter.id)}
+            aria-label={`次の章: 第${nextChapter.number}章`}
+            title={`第${nextChapter.number}章 ${nextChapter.title}`}
+            className="btn-icon shrink-0"
+          >
+            <ChevronRight />
+          </Link>
+        ) : (
+          <span className="btn-icon shrink-0" aria-disabled="true">
+            <ChevronRight />
+          </span>
+        )}
+
+        <span className="shrink-0 pl-1 text-xs text-[var(--muted)]">
           {onBreak ? "読了" : `${index + 1} / ${sectionCount}`}
         </span>
       </header>

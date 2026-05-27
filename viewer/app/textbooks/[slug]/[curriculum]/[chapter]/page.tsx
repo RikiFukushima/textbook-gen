@@ -27,6 +27,12 @@ export default async function ChapterPage({
   const ch = cur?.chapters.find((c) => c.meta.id === chapter);
   if (!tb || !cur || !ch) notFound();
 
+  const chapterList = cur.chapters.map((c) => ({
+    id: c.meta.id,
+    number: Number(c.meta.id),
+    title: c.meta.title,
+  }));
+
   return (
     <SectionViewer
       slug={slug}
@@ -37,6 +43,7 @@ export default async function ChapterPage({
       sections={ch.sections}
       estimatedMinutes={ch.meta.estimated_minutes}
       hasQuiz={!!ch.quiz && ch.quiz.questions.length > 0}
+      chapterList={chapterList}
     />
   );
 }
