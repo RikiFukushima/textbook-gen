@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0f1115;
+  --fg: #e7e9ee;
+  --muted: #9aa3b2;
+  --card: #171a21;
+  --border: #262b36;
+  --accent: #5b8cff;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* セクション本文の体裁 */
+.prose-tg {
+  line-height: 1.85;
+  font-size: 1rem;
+}
+.prose-tg h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+.prose-tg h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 1.8rem 0 0.8rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+}
+.prose-tg p {
+  margin: 0.9rem 0;
+}
+.prose-tg ul,
+.prose-tg ol {
+  margin: 0.8rem 0;
+  padding-left: 1.4rem;
+}
+.prose-tg li {
+  margin: 0.35rem 0;
+  list-style: disc;
+}
+.prose-tg ol li {
+  list-style: decimal;
+}
+.prose-tg code {
+  background: #0b0d12;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.1rem 0.35rem;
+  font-size: 0.875em;
+}
+.prose-tg pre {
+  background: #0b0d12;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1.1rem 0;
+}
+.prose-tg pre code {
+  background: none;
+  border: none;
+  padding: 0;
+}
+.prose-tg strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+/* Mermaid 図の中央寄せ */
+.mermaid-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 1.4rem 0;
+}
+.mermaid-wrap svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* セクション横スワイプ */
+.swipe-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  height: 100%;
+}
+.swipe-page {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  overflow-y: auto;
+  height: 100%;
+}
+.swipe-track::-webkit-scrollbar {
+  height: 0;
+}
