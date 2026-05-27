@@ -1,0 +1,218 @@
+title: 技術深化
+target_audience:
+  level: 中級
+  prerequisites:
+    - 基礎理解カリキュラムの内容を理解している
+    - Python の基本的な読み書きができる
+  estimated_hours: 3
+style:
+  tone: ですます調・実務寄り
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: LlamaIndex による RAG 構築
+    estimated_minutes: 24
+    learning_objectives:
+      - LlamaIndex のデータモデルを説明できる
+      - Retriever と Query Engine の構成を選べる
+    sections:
+      - id: "01-01"
+        title: LlamaIndex の設計思想 — なぜ Index 中心の抽象なのか
+        estimated_minutes: 4
+      - id: "01-02"
+        title: Document / Node / Index の関係 — データモデルを理解する
+        estimated_minutes: 4
+      - id: "01-03"
+        title: Node Parser とチャンキング戦略 — Sentence / Token / Semantic 分割
+        estimated_minutes: 4
+      - id: "01-04"
+        title: Retriever の種類と使い分け — Vector / Keyword / Hybrid
+        estimated_minutes: 4
+      - id: "01-05"
+        title: Query Engine の構造 — 検索から生成までの組み立て
+        estimated_minutes: 4
+      - id: "01-06"
+        title: Response Synthesizer — 検索結果を回答に統合する方式の選択
+        estimated_minutes: 4
+    quiz:
+      count: 8
+      difficulty: medium
+  - id: "02"
+    title: Advanced RAG 技法
+    estimated_minutes: 24
+    learning_objectives:
+      - 検索精度を上げる代表的な技法を説明できる
+      - 技法ごとの適用条件を判断できる
+    sections:
+      - id: "02-01"
+        title: Hybrid Search — ベクトル検索とキーワード検索を組み合わせる
+        estimated_minutes: 4
+      - id: "02-02"
+        title: Re-ranking — 取得後に並べ替える発想と実装
+        estimated_minutes: 4
+      - id: "02-03"
+        title: Query Rewriting — ユーザー質問の書き換え戦略
+        estimated_minutes: 4
+      - id: "02-04"
+        title: HyDE — 仮想回答による検索改善
+        estimated_minutes: 4
+      - id: "02-05"
+        title: Parent-Child Chunking — 検索単位と生成単位を分ける設計
+        estimated_minutes: 4
+      - id: "02-06"
+        title: Multi-Query と Fusion — 質問を複数化して取りこぼしを減らす
+        estimated_minutes: 4
+    quiz:
+      count: 8
+      difficulty: medium
+  - id: "03"
+    title: ベクトル DB の選定
+    estimated_minutes: 16
+    learning_objectives:
+      - ANN が解いている問題を説明できる
+      - 用途に応じてベクトル DB を選定できる
+    sections:
+      - id: "03-01"
+        title: ベクトル DB が解いている問題 — 近似最近傍探索 (ANN)
+        estimated_minutes: 4
+      - id: "03-02"
+        title: pgvector の特徴と適用範囲 — PostgreSQL でベクトルを扱う
+        estimated_minutes: 4
+      - id: "03-03"
+        title: Qdrant / Chroma / Pinecone の比較 — 設計思想と運用性
+        estimated_minutes: 4
+      - id: "03-04"
+        title: ベクトル DB 選定の判断軸 — データ量・更新頻度・既存基盤との親和性
+        estimated_minutes: 4
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "04"
+    title: LangChain と LangGraph の位置付け
+    estimated_minutes: 12
+    learning_objectives:
+      - LangChain の役割と現在地を説明できる
+      - LangGraph が必要になる理由を説明できる
+    sections:
+      - id: "04-01"
+        title: LangChain の歴史的役割と現在地 — 学習目的での使い方
+        estimated_minutes: 4
+      - id: "04-02"
+        title: なぜ LangGraph が生まれたか — Chain の限界とグラフ構造の必要性
+        estimated_minutes: 4
+      - id: "04-03"
+        title: LangChain Expression Language (LCEL) の最小限の理解
+        estimated_minutes: 4
+    quiz:
+      count: 5
+      difficulty: medium
+  - id: "05"
+    title: LangGraph による Agent 設計
+    estimated_minutes: 24
+    learning_objectives:
+      - Agent をステートマシンとして設計できる
+      - 条件分岐・永続化・人間介入を設計に組み込める
+    sections:
+      - id: "05-01"
+        title: StateGraph の設計思想 — Agent をステートマシンとして見る
+        estimated_minutes: 4
+      - id: "05-02"
+        title: State / Node / Edge の役割分担
+        estimated_minutes: 4
+      - id: "05-03"
+        title: Conditional Edge — 条件分岐をどう設計するか
+        estimated_minutes: 4
+      - id: "05-04"
+        title: Checkpointing と状態永続化 — 長時間タスクの中断・再開
+        estimated_minutes: 4
+      - id: "05-05"
+        title: Human-in-the-Loop — 人間の介入ポイントを設計する
+        estimated_minutes: 4
+      - id: "05-06"
+        title: Streaming とイベント設計 — UI に進捗を返す
+        estimated_minutes: 4
+    diagrams:
+      - purpose: State を中心とした Node/Edge のステートマシン
+        type: mermaid
+        section: "05-01"
+    quiz:
+      count: 8
+      difficulty: medium
+  - id: "06"
+    title: Multi-Agent パターン
+    estimated_minutes: 16
+    learning_objectives:
+      - Multi-Agent にすべき条件を見極められる
+      - 代表的な協調構造を説明できる
+    sections:
+      - id: "06-01"
+        title: いつ Multi-Agent にすべきか — 単一 Agent で足りる場合との見極め
+        estimated_minutes: 4
+      - id: "06-02"
+        title: Supervisor 型 — 親 Agent が子 Agent を指揮する構造
+        estimated_minutes: 4
+      - id: "06-03"
+        title: Swarm 型 — Agent 同士が動的に協調する構造
+        estimated_minutes: 4
+      - id: "06-04"
+        title: Multi-Agent のアンチパターン — 過剰な分割、責務の曖昧化
+        estimated_minutes: 4
+    diagrams:
+      - purpose: Supervisor 型と Swarm 型の構造比較
+        type: mermaid
+        section: "06-02"
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "07"
+    title: ファインチューニングの全体像
+    estimated_minutes: 20
+    learning_objectives:
+      - 学習段階の違いを説明できる
+      - LoRA/QLoRA の仕組みと実験の流れを説明できる
+    sections:
+      - id: "07-01"
+        title: 学習段階の整理 — 事前学習 / SFT / RLHF / DPO
+        estimated_minutes: 4
+      - id: "07-02"
+        title: LoRA と QLoRA の仕組み — なぜ少ないパラメータで適応できるのか
+        estimated_minutes: 4
+      - id: "07-03"
+        title: ファインチューニングの実験ワークフロー — Hugging Face + Unsloth
+        estimated_minutes: 4
+      - id: "07-04"
+        title: データ準備の重要性 — 質と量と多様性のトレードオフ
+        estimated_minutes: 4
+      - id: "07-05"
+        title: 評価と Overfitting — 学習成功をどう判定するか
+        estimated_minutes: 4
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "08"
+    title: FT vs RAG vs プロンプト改善の判断軸
+    estimated_minutes: 16
+    learning_objectives:
+      - 3 アプローチが解く問題の違いを説明できる
+      - 状況に応じた選択フローを描ける
+    sections:
+      - id: "08-01"
+        title: 3 つのアプローチが解く問題の違い — 知識 / 振る舞い / 文脈
+        estimated_minutes: 4
+      - id: "08-02"
+        title: コストと開発スピードの比較
+        estimated_minutes: 4
+      - id: "08-03"
+        title: 判断フローチャート — どの順に検討すべきか
+        estimated_minutes: 4
+      - id: "08-04"
+        title: ハイブリッド戦略 — 組み合わせて使う実践例
+        estimated_minutes: 4
+    diagrams:
+      - purpose: FT/RAG/プロンプト改善の選択フローチャート
+        type: mermaid
+        section: "08-03"
+    quiz:
+      count: 6
+      difficulty: medium

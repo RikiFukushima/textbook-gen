@@ -1,0 +1,18 @@
+id: integration
+title: 統合設計
+description: 評価・運用・セキュリティ・コストを実務文脈に統合し、設計書レベルまで落とす。LMS への適用と既存基盤との接続を設計する。
+order: 3
+estimated_hours: 2
+target_audience:
+  level: 上級
+  prerequisites:
+    - 技術深化カリキュラムの内容を理解している
+    - 実務でのシステム設計の基礎知識
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"
+  - "06"
+  - "07"

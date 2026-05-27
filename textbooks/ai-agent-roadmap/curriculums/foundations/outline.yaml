@@ -1,0 +1,151 @@
+title: 基礎理解
+target_audience:
+  level: 初級
+  prerequisites:
+    - プログラミングの基礎経験(言語不問)
+    - LLM をチャットとして使ったことがある
+  estimated_hours: 2
+style:
+  tone: ですます調・実務寄り
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: LLM の仕組みを言語化する
+    estimated_minutes: 20
+    learning_objectives:
+      - LLM が入力をどう表現し次トークンを選ぶかを説明できる
+      - 推論パラメータが出力に与える影響を説明できる
+      - コンテキストウィンドウの制約とその理由を説明できる
+    sections:
+      - id: "01-01"
+        title: トークン化と語彙 — なぜ LLM は文字でなくトークンで世界を見るのか
+        estimated_minutes: 4
+      - id: "01-02"
+        title: 埋め込みとベクトル空間 — 「意味の近さ」が計算できる理由
+        estimated_minutes: 4
+      - id: "01-03"
+        title: Transformer の直感的理解 — Attention が何を解いているのか(数式は最小限)
+        estimated_minutes: 5
+      - id: "01-04"
+        title: 推論パラメータの実践 — temperature / top_p / top_k の使い分け
+        estimated_minutes: 4
+      - id: "01-05"
+        title: コンテキストウィンドウとその制約 — なぜ長文処理が難しいのか
+        estimated_minutes: 4
+    diagrams:
+      - purpose: テキスト → トークン → 埋め込み → Transformer → 次トークン予測の流れ
+        type: mermaid
+        section: "01-03"
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "02"
+    title: プロンプトエンジニアリング体系
+    estimated_minutes: 24
+    learning_objectives:
+      - プロンプトの構成要素を分解して設計できる
+      - Few-shot / CoT / ReAct の効きどころを説明できる
+      - 確率的出力との付き合い方を理解する
+    sections:
+      - id: "02-01"
+        title: プロンプトの構造 — Instruction / Context / Input / Output の4要素
+        estimated_minutes: 4
+      - id: "02-02"
+        title: Zero-shot と Few-shot — 例示が効く理由と効かない理由
+        estimated_minutes: 4
+      - id: "02-03"
+        title: Chain-of-Thought (CoT) — 思考の外在化がなぜ精度を上げるのか
+        estimated_minutes: 4
+      - id: "02-04"
+        title: ReAct パターン入門 — 「考える」と「行動する」を交互に行う設計
+        estimated_minutes: 4
+      - id: "02-05"
+        title: Self-Consistency と多数決 — 確率的出力との付き合い方
+        estimated_minutes: 4
+      - id: "02-06"
+        title: プロンプト設計のアンチパターン集
+        estimated_minutes: 4
+    quiz:
+      count: 8
+      difficulty: medium
+  - id: "03"
+    title: RAG の基本原理
+    estimated_minutes: 20
+    learning_objectives:
+      - RAG が必要になる理由を説明できる
+      - ベクトル検索と生成のパイプラインを説明できる
+      - RAG が効かないケースを見分けられる
+    sections:
+      - id: "03-01"
+        title: なぜ RAG が必要か — LLM の知識の限界とハルシネーション
+        estimated_minutes: 4
+      - id: "03-02"
+        title: ベクトル検索の仕組み — コサイン類似度と意味検索
+        estimated_minutes: 4
+      - id: "03-03"
+        title: チャンキング戦略の基礎 — 文書をどう分割するか
+        estimated_minutes: 4
+      - id: "03-04"
+        title: Retrieval → Generation のパイプライン全体像
+        estimated_minutes: 4
+      - id: "03-05"
+        title: RAG が効かないケース — 検索失敗、文脈過多、生成迷走
+        estimated_minutes: 4
+    diagrams:
+      - purpose: Retrieval から Generation までのパイプライン
+        type: mermaid
+        section: "03-04"
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "04"
+    title: Agent の基本パラダイム
+    estimated_minutes: 20
+    learning_objectives:
+      - Agent と Chain の本質的な違いを説明できる
+      - Tool Use と Function Calling の仕組みを説明できる
+      - Agent が失敗する典型パターンを挙げられる
+    sections:
+      - id: "04-01"
+        title: Agent とは何か — Chain との本質的な違い
+        estimated_minutes: 4
+      - id: "04-02"
+        title: Tool Use の概念 — LLM が外部世界に手を伸ばす仕組み
+        estimated_minutes: 4
+      - id: "04-03"
+        title: ReAct ループの実体 — Thought / Action / Observation の循環
+        estimated_minutes: 4
+      - id: "04-04"
+        title: Function Calling の仕組み — モデルが構造化出力でツールを呼ぶ
+        estimated_minutes: 4
+      - id: "04-05"
+        title: Agent が失敗するパターン — 無限ループ、誤ったツール選択、計画破綻
+        estimated_minutes: 4
+    diagrams:
+      - purpose: Thought → Action → Observation の ReAct ループ
+        type: mermaid
+        section: "04-03"
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "05"
+    title: 評価とハルシネーション
+    estimated_minutes: 12
+    learning_objectives:
+      - LLM 評価が難しい理由を説明できる
+      - ハルシネーションを分類できる
+      - 評価手法の全体像を俯瞰できる
+    sections:
+      - id: "05-01"
+        title: なぜ LLM の評価は難しいのか — 正解が一意でない問題
+        estimated_minutes: 4
+      - id: "05-02"
+        title: ハルシネーションの分類 — 事実誤認 / 文脈逸脱 / 過信
+        estimated_minutes: 4
+      - id: "05-03"
+        title: 評価手法の地図 — 自動評価 / 人手評価 / LLM-as-a-Judge の概観
+        estimated_minutes: 4
+    quiz:
+      count: 5
+      difficulty: medium

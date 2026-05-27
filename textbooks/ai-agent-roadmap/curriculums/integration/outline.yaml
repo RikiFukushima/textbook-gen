@@ -1,0 +1,176 @@
+title: 統合設計
+target_audience:
+  level: 上級
+  prerequisites:
+    - 技術深化カリキュラムの内容を理解している
+    - 実務でのシステム設計の基礎知識
+  estimated_hours: 2
+style:
+  tone: ですます調・実務寄り
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: LLM 評価の体系
+    estimated_minutes: 20
+    learning_objectives:
+      - 評価設計の全体像を描ける
+      - RAG / Agent の評価手法を選べる
+    sections:
+      - id: "01-01"
+        title: 評価設計の全体像 — オフライン / オンライン / 継続的評価
+        estimated_minutes: 4
+      - id: "01-02"
+        title: LLM-as-a-Judge — LLM による LLM 評価の利点と落とし穴
+        estimated_minutes: 4
+      - id: "01-03"
+        title: Ragas による RAG 評価 — Faithfulness / Answer Relevancy / Context Precision
+        estimated_minutes: 4
+      - id: "01-04"
+        title: Agent 評価の難しさ — 軌跡 (Trajectory) 評価と最終出力評価
+        estimated_minutes: 4
+      - id: "01-05"
+        title: ゴールデンデータセットの作り方 — 小さく始めて育てる
+        estimated_minutes: 4
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "02"
+    title: 観測性とトレーシング
+    estimated_minutes: 16
+    learning_objectives:
+      - LLM アプリに観測性が必須な理由を説明できる
+      - トレースから何を読み取るかを理解する
+    sections:
+      - id: "02-01"
+        title: なぜ LLM アプリには観測性が必須か — 確率的システムのデバッグ
+        estimated_minutes: 4
+      - id: "02-02"
+        title: LangSmith の設計思想と機能
+        estimated_minutes: 4
+      - id: "02-03"
+        title: LangFuse との比較 — OSS とマネージドの選択
+        estimated_minutes: 4
+      - id: "02-04"
+        title: トレースから何を読み取るか — レイテンシ・トークン・分岐の分析
+        estimated_minutes: 4
+    quiz:
+      count: 5
+      difficulty: medium
+  - id: "03"
+    title: セキュリティとガバナンス
+    estimated_minutes: 16
+    learning_objectives:
+      - プロンプトインジェクションの対策を説明できる
+      - 社内データを扱う際の設計原則を挙げられる
+    sections:
+      - id: "03-01"
+        title: プロンプトインジェクションの仕組みと対策
+        estimated_minutes: 4
+      - id: "03-02"
+        title: データリークと PII 対策 — 学習データ・ログ・検索対象の3点
+        estimated_minutes: 4
+      - id: "03-03"
+        title: 出力フィルタリングとガードレール — Guardrails / NeMo Guardrails
+        estimated_minutes: 4
+      - id: "03-04"
+        title: 社内データを扱う際の設計原則
+        estimated_minutes: 4
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "04"
+    title: コストとパフォーマンス設計
+    estimated_minutes: 16
+    learning_objectives:
+      - トークン経済の基礎を説明できる
+      - コスト・レイテンシ最適化の手段を選べる
+    sections:
+      - id: "04-01"
+        title: トークン経済の基礎 — 入出力単価とコンテキスト膨張の罠
+        estimated_minutes: 4
+      - id: "04-02"
+        title: キャッシング戦略 — Prompt Cache / Semantic Cache
+        estimated_minutes: 4
+      - id: "04-03"
+        title: モデル選定戦略 — 大小モデルの使い分けとルーティング
+        estimated_minutes: 4
+      - id: "04-04"
+        title: レイテンシ最適化 — Streaming / 並列化 / 軽量モデルのフォールバック
+        estimated_minutes: 4
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "05"
+    title: LMS 文脈へのユースケース展開
+    estimated_minutes: 16
+    learning_objectives:
+      - LMS における AI 活用の地図を描ける
+      - ユースケースを評価し1つに絞り込める
+    sections:
+      - id: "05-01"
+        title: LMS における AI 活用の地図 — 学習者向け / コーチ向け / 運営者向け
+        estimated_minutes: 4
+      - id: "05-02"
+        title: ユースケース候補の棚卸し — 質問応答 / コーチ支援 / 学習履歴分析 など
+        estimated_minutes: 4
+      - id: "05-03"
+        title: ユースケース評価マトリクス — インパクト × 実現難度 × データ依存度
+        estimated_minutes: 4
+      - id: "05-04"
+        title: 1 ユースケースの選定とスコープ確定
+        estimated_minutes: 4
+    diagrams:
+      - purpose: ユースケース評価マトリクス(インパクト×実現難度)
+        type: mermaid
+        section: "05-03"
+    quiz:
+      count: 5
+      difficulty: medium
+  - id: "06"
+    title: 既存基盤との統合設計
+    estimated_minutes: 16
+    learning_objectives:
+      - データ基盤・業務システムとの接続パターンを説明できる
+      - 認証・認可と段階的リリースを設計できる
+    sections:
+      - id: "06-01"
+        title: データ基盤との接続 — BigQuery を RAG の検索対象にする設計
+        estimated_minutes: 4
+      - id: "06-02"
+        title: 業務システム連携 — HubSpot / Google Workspace との接続パターン
+        estimated_minutes: 4
+      - id: "06-03"
+        title: 認証・認可設計 — マルチテナント環境での Agent 設計
+        estimated_minutes: 4
+      - id: "06-04"
+        title: 段階的リリース戦略 — 内部利用 → 限定公開 → 本番投入
+        estimated_minutes: 4
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "07"
+    title: 設計書アウトプット
+    estimated_minutes: 20
+    learning_objectives:
+      - 要件定義からリリース計画まで設計書として書ける
+      - 自己レビューの観点を持つ
+    sections:
+      - id: "07-01"
+        title: 要件定義書の構成 — 解くべき問題と成功基準の明文化
+        estimated_minutes: 4
+      - id: "07-02"
+        title: アーキテクチャ図の描き方 — Agent / RAG / 既存基盤の関係を示す
+        estimated_minutes: 4
+      - id: "07-03"
+        title: 評価計画書 — どのメトリクスを、どのデータで、どの頻度で測るか
+        estimated_minutes: 4
+      - id: "07-04"
+        title: リリース計画とリスク管理 — 失敗パターンを先回りで明文化
+        estimated_minutes: 4
+      - id: "07-05"
+        title: 設計書レビューの観点 — 自己レビューチェックリスト
+        estimated_minutes: 4
+    quiz:
+      count: 6
+      difficulty: medium

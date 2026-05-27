@@ -1,0 +1,16 @@
+id: foundations
+title: 基礎理解
+description: LLM・RAG・Agent の「なぜ」を概念レベルで獲得する。仕組みの直感を言語化できる状態を目指す。
+order: 1
+estimated_hours: 2
+target_audience:
+  level: 初級
+  prerequisites:
+    - プログラミングの基礎経験(言語不問)
+    - LLM をチャットとして使ったことがある
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"

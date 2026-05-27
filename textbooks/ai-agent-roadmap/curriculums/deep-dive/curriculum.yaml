@@ -1,0 +1,19 @@
+id: deep-dive
+title: 技術深化
+description: 主要フレームワークを「使えるが盲信しない」レベルまで持つ。RAG・LangGraph・Multi-Agent・ファインチューニングの設計判断を獲得する。
+order: 2
+estimated_hours: 3
+target_audience:
+  level: 中級
+  prerequisites:
+    - 基礎理解カリキュラムの内容を理解している
+    - Python の基本的な読み書きができる
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"
+  - "06"
+  - "07"
+  - "08"
