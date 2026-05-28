@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run init-textbook:*)",
+      "Bash(npx tsx scripts/init-textbook.ts:*)"
+    ]
+  }
+}
