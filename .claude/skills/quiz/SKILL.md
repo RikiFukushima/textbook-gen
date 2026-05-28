@@ -1,51 +1,35 @@
 ---
 name: quiz
-description: 1 章分のセクション群から 4 択の理解度確認問題(JSON)を生成する。ユーザーが「第〇章のクイズを作って」「問題を生成して」「4 択問題を作成して」など、章本文から演習問題を作りたいときに使う。
+description: 指定された章(複数可)の本文から 4 択クイズを生成するオーケストレータ。ユーザーが「第〇章のクイズを作って」「第〇〜△章の問題をまとめて作って」など、章本文から演習問題を作りたいときに使う。実際の出題は quiz-writer agent に委譲し、複数章を並列で生成する。
 ---
 
-# quiz — 4 択問題生成
+# quiz — 4 択クイズ生成のオーケストレータ
 
-あるカリキュラムの 1 章分のセクション群(`textbooks/{slug}/curriculums/{curriculum-id}/chapters/{chapter-id}/sections/*.md`)を読み、`textbooks/{slug}/curriculums/{curriculum-id}/quizzes/{chapter-id}.json` を生成します。
+このスキルは **薄いラッパー** です。実際のクイズ生成は **`quiz-writer` agent** が独立コンテキストで行います。スキーマ・distractor 戦略・source_refs ルールは agent が preload する `textbook-style` skill に集約されているので、ここには **どう振り分けるか** だけを書きます。
 
-## 出力スキーマ
+## 役割の境界
 
-```json
-{
-  "chapter_id": "01",
-  "questions": [
-    {
-      "id": "q01-01",
-      "question": "...",
-      "options": [
-        { "id": "a", "text": "..." },
-        { "id": "b", "text": "..." },
-        { "id": "c", "text": "..." },
-        { "id": "d", "text": "..." }
-      ],
-      "answer": "d",
-      "explanation": "...",
-      "source_refs": [{ "section_id": "01-01", "anchor": "5 つの柱" }],
-      "difficulty": "easy",
-      "tags": ["waf", "basics"]
-    }
-  ]
-}
-```
+- **このスキル**: 入力の解釈 / 章リストの組み立て / `quiz-writer` の並列起動 / サマリの集約。
+- **quiz-writer**: 1 章分の `quizzes/{chapter-id}.json` の生成。
+- **textbook-style**: 出題規約の正本(agent が preload)。
+- **reviewer**: 生成後の品質点検(必要に応じて別途呼ぶ)。
 
-- 問題数・難易度は `outline.yaml` の章 `quiz`(count / difficulty)に従う。
-- `id` は `q{chapter_id}-{連番}`。
+## 入力の確認(対話)
 
-## Distractor 戦略
+1. `slug` / `curriculum-id` / 章 ID のリストを確認する。指定が無ければ AskUserQuestion で聞く。
+2. 対象章の **本文(sections)が既に生成済み** であることを確認する(無ければ `chapter` skill を先に走らせる)。
+3. すでに `quizzes/{chapter-id}.json` がある場合は、上書きしてよいかユーザーに確認する。
 
-- 初学者が混同しやすい概念を誤答に選ぶ。
-- 「**ほぼ正解だが部分的に違う**」選択肢を **1 つは入れる**。
-- 完全にランダム・無関係な誤答は不可。
-- 選択肢の長さ・粒度を揃え、正解だけ目立たないようにする。
+## 実行(並列起動)
 
-## source_refs
+要求された章を **1 メッセージで複数の Agent tool 呼び出しに分割** して起動する。1 章 = 1 agent。
 
-各問題に根拠セクションを `section_id` + anchor(本文見出しや語句)で必ず紐づける。将来の RAG 引用にも使う。
+- subagent_type は `quiz-writer`。
+- 各 agent の prompt には `slug` / `curriculum-id` / `chapter-id` を明示し、「自分の章だけ」を念押しする。
+- **推奨並列数は 3〜5**。多い場合は 5 章ずつバッチ。
+- 親(main)では各 agent のサマリ(出力パス / 問題数 / source_refs 照合結果 / distractor 自己評価)だけ受け取る。
 
-## 自己レビュー
+## 完了後
 
-生成後に reviewer agent で「**正解が本当に 1 つだけか**」「**根拠が本文にあるか**」を確認する。reviewer は指摘のみ返すため、問題があれば quiz skill を再実行して修正する。
+- サマリを集約してユーザーに提示する。
+- 必要なら **`reviewer` agent** を起動して「正解の一意性」「根拠の妥当性」「distractor 品質」を点検する。指摘が出たら該当章だけ quiz-writer を再起動。

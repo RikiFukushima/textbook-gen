@@ -1,69 +1,46 @@
 ---
 name: chapter
-description: outline.yaml の 1 章分から、複数のセクション Markdown 本文と章メタ(chapter.yaml)を生成する。ユーザーが「第〇章の本文を書いて」「この章を生成して」「セクションを書き起こして」など、骨子から教材本文を生成したいときに使う。
+description: outline.yaml から指定された章(複数可)の本文を生成するオーケストレータ。ユーザーが「第〇章の本文を書いて」「第〇〜△章を一気に書いて」など、骨子から教材本文を生成したいときに使う。実際の執筆は chapter-writer agent に委譲し、複数章を並列で生成する。
 ---
 
-# chapter — 章本文生成
+# chapter — 章本文生成のオーケストレータ
 
-カリキュラムの `outline.yaml` の 1 章分を受け取り、`textbooks/{slug}/curriculums/{curriculum-id}/chapters/{chapter-id}/` 配下に `chapter.yaml` と複数の section `.md` を生成します。
+このスキルは **薄いラッパー** です。実際の本文執筆は **`chapter-writer` agent** が独立コンテキストで行います。執筆規約・スキーマ・字数ルールは agent が preload する `textbook-style` skill に集約されているので、ここには **どう振り分けるか** だけを書きます。
 
-## 出力
+## 役割の境界
+
+- **このスキル**: 入力の解釈 / 章リストの組み立て / `chapter-writer` の並列起動 / サマリの集約。
+- **chapter-writer**: 1 章分の `chapter.yaml` と全セクション Markdown の執筆。
+- **textbook-style**: 執筆規約の正本(agent が preload)。
+- **reviewer**: 生成後の品質点検(必要に応じて別途呼ぶ)。
+
+## 入力の確認(対話)
+
+1. `slug`(教材)・`curriculum-id`(カリキュラム)・章 ID のリストを確認する。指定が無ければ AskUserQuestion で聞く。
+2. 対象 curriculum の `outline.yaml` を Read し、要求された章 ID が実在することを確認する。
+3. すでに `chapters/{chapter-id}/` がある場合は、上書きしてよいかユーザーに確認する。
+
+## 実行(並列起動)
+
+要求された章を **1 メッセージで複数の Agent tool 呼び出しに分割** して起動する。1 章 = 1 agent。
+
+- subagent_type は `chapter-writer`。
+- 各 agent の prompt には `slug` / `curriculum-id` / `chapter-id` を明示し、「他の章には触れない」ことを念押しする。
+- **推奨並列数は 3〜5**。多すぎる場合は 5 章ずつバッチで起動する。
+- 親(main)では各 agent のサマリ(生成ファイルパスと実測字数、加筆有無、懸念)だけ受け取り、章本文の中身を読み込まない(コンテキスト節約)。
+
+起動例(概念):
 
 ```
-textbooks/{slug}/curriculums/{curriculum-id}/chapters/{chapter-id}/
-  ├─ chapter.yaml          # 章メタ(id, title, estimated_minutes, learning_objectives, section_order)
-  └─ sections/
-      ├─ 01-{section-slug}.md
-      └─ 02-{section-slug}.md
+[Agent #1] chapter-writer  slug=ai-agent-roadmap curriculum-id=foundations chapter-id=02
+[Agent #2] chapter-writer  slug=ai-agent-roadmap curriculum-id=foundations chapter-id=03
+[Agent #3] chapter-writer  slug=ai-agent-roadmap curriculum-id=foundations chapter-id=04
 ```
 
-対象のカリキュラム(`curriculum-id`)が複数あり得るため、どのカリキュラムの章かを必ず確認すること。
-
-## 各セクション Markdown のテンプレート
-
-frontmatter(必須):
-
-```yaml
----
-section_id: "01-02"
-chapter_id: "01"
-title: ...
-order: 2
-estimated_minutes: 4
-estimated_chars: 1800
-learning_points: [...]
-tags: [...]
-related_sections: [...]   # 前提・関連セクション
-key_terms:                # 本文に登場する重要用語の定義
-  - term: ...
-    definition: ...
----
-```
-
-本文構成:
-
-1. `## このセクションで学ぶこと`(`learning_points` の箇条書き)
-2. 本文(**概念 → 具体例 → 注意点** の 3 層構造)
-3. 必要箇所に Mermaid 図解(関係=graph / 順序=sequence・flowchart / 状態=stateDiagram / データ=erDiagram)
-4. `## まとめ`(3 行以内の箇条書き)
-
-## 長さの自動調整
-
-- 目標 **1500-2000 字**。超過時は分割、不足時は隣接統合を提案する。
-- 下限 1200 字・上限 3000 字。**2500 字超は reviewer に警告フラグ**を立てる。
-- 例外:
-  - 概念導入は 500-1000 字でも可。
-  - **コード多め(fenced コードブロックを 2 つ以上含む)セクションは下限 800 字に緩和**(目標 1000-1500 字)。コード例が主役のため地の文を水増ししない。Mermaid 図のみのセクションには適用しない。
-  - 図解中心セクションは図の質を優先。
-
-**字数カウントの基準**: `estimated_chars` は **本文の地の文 + 見出し**を数える(frontmatter・コードブロック・Mermaid 図は除外)。実測と乖離した値を申告しないこと。書き終えたら本文の概算字数を数え、下限 1200 字(導入例外を除く)を満たすか確認してから frontmatter に記入する。
-
-## ルール
-
-- frontmatter の `key_terms` は本文に実際に登場する語のみ。
-- `related_sections` で前提・後続の伏線を貼る(RAG・回遊のため)。
-- トーンは `meta.yaml` の `style.tone`(既定: ですます調・実務寄り)。
+を 1 メッセージにまとめて投げる。
 
 ## 完了後
 
-reviewer agent に通して指摘を受ける(本文の自動修正はしない)。問題生成は `quiz` skill。
+- 各 agent のサマリを 1 つの表に集約してユーザーに提示する(章ID / セクション数 / 実測字数 / 加筆の有無 / 懸念)。
+- 必要に応じて **`reviewer` agent** を起動して指摘レポートを得る(reviewer は自動修正しないので、修正が必要なら該当章だけ chapter-writer を再起動)。
+- クイズ生成は別タスク(`quiz` skill)。
