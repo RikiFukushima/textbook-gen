@@ -1,10 +1,142 @@
 title: AWS入門
 target_audience:
   level: 初級 # 初級 | 中級 | 上級
-  prerequisites: []
-  estimated_hours: 0
+  prerequisites:
+    - IT の基本用語(サーバー、ネットワーク、データベースなど)がなんとなく分かる
+    - Web ブラウザで Web サービスを操作した経験がある
+  estimated_hours: 2
 style:
   tone: ですます調・実務寄り
   code_examples: true
   diagram_default: mermaid
-chapters: []
+chapters:
+  - id: "01"
+    title: クラウドとは何か — オンプレミスとの違い
+    estimated_minutes: 15
+    learning_objectives:
+      - クラウドコンピューティングの定義と特徴を説明できる
+      - オンプレミスとクラウドの違いを費用・調達・運用の観点で説明できる
+      - クラウドの主なサービス形態(IaaS / PaaS / SaaS)を区別できる
+    sections:
+      - id: "01-01"
+        title: クラウドコンピューティングとは
+        estimated_minutes: 4
+      - id: "01-02"
+        title: オンプレミスとの違い(所有から利用へ)
+        estimated_minutes: 5
+      - id: "01-03"
+        title: IaaS / PaaS / SaaS の区別
+        estimated_minutes: 5
+    diagrams:
+      - purpose: オンプレミスとクラウドで「誰が何を管理するか」の責任範囲の違い
+        type: mermaid
+        section: "01-02"
+      - purpose: IaaS / PaaS / SaaS の管理範囲の比較図
+        type: mermaid
+        section: "01-03"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "02"
+    title: AWS の全体像とグローバルインフラ
+    estimated_minutes: 15
+    learning_objectives:
+      - AWS がどのような位置づけのサービス群かを説明できる
+      - リージョンとアベイラビリティーゾーン(AZ)の関係を説明できる
+      - リージョン / AZ を意識した可用性設計の基本的な考え方を理解する
+    sections:
+      - id: "02-01"
+        title: AWS とは — サービス群の全体像
+        estimated_minutes: 4
+      - id: "02-02"
+        title: リージョンとアベイラビリティーゾーン
+        estimated_minutes: 5
+      - id: "02-03"
+        title: エッジロケーションと可用性の考え方
+        estimated_minutes: 5
+    diagrams:
+      - purpose: リージョン・AZ・エッジロケーションの階層構造
+        type: mermaid
+        section: "02-02"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "03"
+    title: コンピューティングとストレージ(EC2 / S3)
+    estimated_minutes: 18
+    learning_objectives:
+      - EC2 が提供する仮想サーバーの基本概念を説明できる
+      - S3 のオブジェクトストレージとしての特徴を説明できる
+      - ブロックストレージとオブジェクトストレージの使い分けを理解する
+    sections:
+      - id: "03-01"
+        title: EC2 — クラウド上の仮想サーバー
+        estimated_minutes: 5
+      - id: "03-02"
+        title: ストレージの種類(EBS / S3 / インスタンスストア)
+        estimated_minutes: 5
+      - id: "03-03"
+        title: S3 — オブジェクトストレージの基本
+        estimated_minutes: 5
+    diagrams:
+      - purpose: EC2 とそれに紐づくストレージ(EBS / インスタンスストア)の関係
+        type: mermaid
+        section: "03-02"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "04"
+    title: ネットワークと権限(VPC / IAM)
+    estimated_minutes: 18
+    learning_objectives:
+      - VPC が提供する仮想ネットワークの役割を説明できる
+      - サブネット・ルーティング・セキュリティグループの基本を理解する
+      - IAM によるアクセス制御(ユーザー・ロール・ポリシー)の考え方を説明できる
+    sections:
+      - id: "04-01"
+        title: VPC — 自分専用の仮想ネットワーク
+        estimated_minutes: 5
+      - id: "04-02"
+        title: サブネット・ルーティング・セキュリティグループ
+        estimated_minutes: 5
+      - id: "04-03"
+        title: IAM — 誰が何にアクセスできるかを制御する
+        estimated_minutes: 6
+    diagrams:
+      - purpose: VPC 内のパブリック/プライベートサブネットとルーティングの構成
+        type: mermaid
+        section: "04-02"
+      - purpose: IAM のユーザー・ロール・ポリシーの関係
+        type: mermaid
+        section: "04-03"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "05"
+    title: データベースと課金・セキュリティの基本
+    estimated_minutes: 18
+    learning_objectives:
+      - RDS などのマネージドデータベースの利点を説明できる
+      - AWS の従量課金とコスト管理の基本を理解する
+      - 責任共有モデルにおける利用者側の責任範囲を説明できる
+    sections:
+      - id: "05-01"
+        title: RDS — マネージドなリレーショナルデータベース
+        estimated_minutes: 5
+      - id: "05-02"
+        title: 料金モデルとコスト管理の基本
+        estimated_minutes: 5
+      - id: "05-03"
+        title: 責任共有モデルとセキュリティの基本
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 責任共有モデルにおける AWS と利用者の責任分界
+        type: mermaid
+        section: "05-03"
+    quiz:
+      count: 8
+      difficulty: medium

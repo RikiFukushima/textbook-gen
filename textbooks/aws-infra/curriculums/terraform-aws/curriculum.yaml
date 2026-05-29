@@ -1,9 +1,18 @@
 id: terraform-aws
 title: Terraformで学ぶAWSインフラ構築の基礎
-description: ""
+description: IaC の概念から Terraform で AWS に環境(VPC / サブネット / EC2)を構築するまでを、手を動かしながら学ぶカリキュラム。state 管理・変数と再利用・実運用の注意点までを扱う
 order: 2
-estimated_hours: 0
+estimated_hours: 2.5
 target_audience:
-  level: 初級 # 初級 | 中級 | 上級
-  prerequisites: []
-chapter_order: []
+  level: 初級〜中級 # 初級 | 中級 | 上級
+  prerequisites:
+    - aws-basics 相当の AWS 基礎(EC2 / S3 / VPC / IAM の概要が分かる)
+    - ターミナルで基本的なコマンドを実行できる
+    - AWS アカウントと認証情報(アクセスキー等)を用意できる
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"
+  - "06"

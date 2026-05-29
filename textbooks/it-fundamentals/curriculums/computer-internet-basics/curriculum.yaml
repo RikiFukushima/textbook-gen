@@ -1,9 +1,15 @@
 id: computer-internet-basics
 title: コンピュータとインターネットの基礎
-description: ""
+description: パソコンの中身(ハードウェア)からデータとファイル、インターネットのしくみ、Webページが画面に表示されるまでを、専門用語をなるべく使わずやさしく学ぶ入門カリキュラム。完全な初心者・非エンジニア向け。
 order: 1
-estimated_hours: 0
+estimated_hours: 2
 target_audience:
   level: 初級 # 初級 | 中級 | 上級
-  prerequisites: []
-chapter_order: []
+  prerequisites:
+    - パソコンの基本操作(マウス・キーボード・文字入力)ができる
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"

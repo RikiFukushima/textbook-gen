@@ -1,10 +1,141 @@
 title: Claude Code超入門
 target_audience:
-  level: 初級 # 初級 | 中級 | 上級
-  prerequisites: []
-  estimated_hours: 0
+  level: 初級
+  prerequisites:
+    - パソコンの基本操作(文字入力・ファイルの保存や開閉)ができる
+  estimated_hours: 1.5
 style:
-  tone: ですます調・実務寄り
-  code_examples: true
+  tone: ですます調・やさしく丁寧
+  code_examples: false
   diagram_default: mermaid
-chapters: []
+chapters:
+  - id: "01"
+    title: Claude Code とは何か
+    estimated_minutes: 15
+    learning_objectives:
+      - Claude Code を「自分のパソコン上で作業を手伝ってくれる AI の相棒」として説明できる
+      - チャット型 AI アシスタントとの違い(ファイルや作業に直接手を出せる点)を説明できる
+      - 非エンジニアでも使える道具であることを理解する
+    sections:
+      - id: "01-01"
+        title: Claude Code をひとことで言うと
+        estimated_minutes: 4
+      - id: "01-02"
+        title: チャット型 AI と何が違うのか
+        estimated_minutes: 5
+      - id: "01-03"
+        title: なぜ非エンジニアにも役立つのか
+        estimated_minutes: 4
+    diagrams:
+      - purpose: チャット型 AI(言葉だけ返す)と Claude Code(手元のファイルに直接作業する)の役割の違い
+        type: mermaid
+        section: "01-02"
+    quiz:
+      count: 5
+      difficulty: easy
+
+  - id: "02"
+    title: 何ができて・何が苦手か
+    estimated_minutes: 15
+    learning_objectives:
+      - Claude Code が得意なこと(文章・資料・調べ物・繰り返し作業)を具体例で挙げられる
+      - 苦手なこと・任せきりにすると危ういことを理解する
+      - 「最後は人が確認する」という付き合い方の原則を説明できる
+    sections:
+      - id: "02-01"
+        title: 得意なこと — こんな作業を手伝ってくれる
+        estimated_minutes: 5
+      - id: "02-02"
+        title: 苦手なこと・間違えること
+        estimated_minutes: 5
+      - id: "02-03"
+        title: うまく付き合うための心構え
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 得意なこと・苦手なことを 4 象限で整理した早見表
+        type: mermaid
+        section: "02-01"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "03"
+    title: 使い始める準備
+    estimated_minutes: 14
+    learning_objectives:
+      - 使い始めるために何が必要か(アカウント・アプリ・作業フォルダ)を全体像として説明できる
+      - セットアップのおおまかな流れをイメージできる
+      - つまずいたときにどこを見ればよいかを理解する
+    sections:
+      - id: "03-01"
+        title: 始める前に用意するもの
+        estimated_minutes: 4
+      - id: "03-02"
+        title: セットアップの全体像
+        estimated_minutes: 5
+      - id: "03-03"
+        title: 「作業フォルダ」という考え方
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 準備からはじめての対話までのステップの流れ
+        type: mermaid
+        section: "03-02"
+    quiz:
+      count: 5
+      difficulty: easy
+
+  - id: "04"
+    title: 基本的な使い方
+    estimated_minutes: 16
+    learning_objectives:
+      - 自然な言葉でお願いごとを伝える(プロンプトの)コツを説明できる
+      - ファイルを読ませたり作らせたりする基本の流れを理解する
+      - 対話を往復しながら望む結果に近づける進め方を説明できる
+    sections:
+      - id: "04-01"
+        title: ふつうの言葉で頼んでみる
+        estimated_minutes: 4
+      - id: "04-02"
+        title: ファイルを読ませる・作ってもらう
+        estimated_minutes: 4
+      - id: "04-03"
+        title: 対話を往復して仕上げる
+        estimated_minutes: 4
+      - id: "04-04"
+        title: うまく伝えるための頼み方のコツ
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 頼む→結果を見る→直してもらう、の対話の往復ループ
+        type: mermaid
+        section: "04-03"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "05"
+    title: 非エンジニアの活用例と安全な使い方
+    estimated_minutes: 16
+    learning_objectives:
+      - 資料作成・調べ物・繰り返し作業の自動化など身近な活用例を挙げられる
+      - 機密情報や個人情報を扱うときの注意点を説明できる
+      - 安全に使い続けるためのチェック習慣を身につける
+    sections:
+      - id: "05-01"
+        title: 身近な活用例 — 資料作成・調べ物
+        estimated_minutes: 4
+      - id: "05-02"
+        title: 繰り返し作業を任せる
+        estimated_minutes: 4
+      - id: "05-03"
+        title: 機密情報・個人情報の扱い
+        estimated_minutes: 4
+      - id: "05-04"
+        title: 安全に使い続けるためのチェック習慣
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 共有してよい情報・渡してはいけない情報の切り分けフロー
+        type: mermaid
+        section: "05-03"
+    quiz:
+      count: 6
+      difficulty: easy
