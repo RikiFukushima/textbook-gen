@@ -1,0 +1,14 @@
+id: contract-types
+title: エンジニアの契約形態 〜 SES・受託・準委任・業務委託
+description: 請負と準委任の基礎から、SES・受託開発・「業務委託」の実態、偽装請負の注意点までを整理し、エンジニアが自分の契約形態を正しく理解・判断するための入門カリキュラム
+order: 2
+estimated_hours: 2
+target_audience:
+  level: 初級
+  prerequisites: []
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"

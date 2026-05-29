@@ -1,0 +1,140 @@
+title: エンジニアの契約形態 〜 SES・受託・準委任・業務委託
+target_audience:
+  level: 初級
+  prerequisites: []
+  estimated_hours: 2
+style:
+  tone: ですます調・実務寄り
+  code_examples: false
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: 契約の基礎 — 請負と準委任、責任の所在
+    estimated_minutes: 18
+    learning_objectives:
+      - 請負契約と準委任契約の違いを「成果物責任 vs 業務遂行」の観点で説明できる
+      - 完成義務・契約不適合責任など契約類型ごとの責任の違いを理解する
+      - 報酬の発生条件や指揮命令の所在が契約類型でどう変わるかを把握する
+    sections:
+      - id: "01-01"
+        title: なぜ契約形態を知る必要があるのか
+        estimated_minutes: 4
+      - id: "01-02"
+        title: 請負契約 — 成果物の完成に責任を負う
+        estimated_minutes: 5
+      - id: "01-03"
+        title: 準委任契約 — 業務の遂行に責任を負う
+        estimated_minutes: 5
+      - id: "01-04"
+        title: 責任・報酬・指揮命令の比較
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 請負と準委任の責任・報酬条件の対比
+        type: mermaid
+        section: "01-04"
+    quiz:
+      count: 7
+      difficulty: medium
+
+  - id: "02"
+    title: SESとは — 準委任での客先常駐
+    estimated_minutes: 20
+    learning_objectives:
+      - SES(システムエンジニアリングサービス)の基本的な仕組みを説明できる
+      - 客先常駐における指揮命令の所在が誰にあるかを理解する
+      - SESにまつわるよくある誤解を整理し、実態を把握できる
+    sections:
+      - id: "02-01"
+        title: SESの基本 — 何を売っている契約か
+        estimated_minutes: 5
+      - id: "02-02"
+        title: 客先常駐と指揮命令の所在
+        estimated_minutes: 5
+      - id: "02-03"
+        title: SESによくある誤解(派遣との違い・成果物の扱い)
+        estimated_minutes: 5
+      - id: "02-04"
+        title: SESで働くときに確認したいこと
+        estimated_minutes: 4
+    diagrams:
+      - purpose: SESにおける自社・客先・エンジニアの契約と指揮命令の関係
+        type: mermaid
+        section: "02-02"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "03"
+    title: 受託開発(請負)の流れとリスク
+    estimated_minutes: 18
+    learning_objectives:
+      - 受託開発(請負)の一般的な進め方の流れを説明できる
+      - 成果物責任・検収・契約不適合責任といったリスクの所在を理解する
+      - 仕様変更や見積もりに関するトラブルの典型例と備えの観点を持てる
+    sections:
+      - id: "03-01"
+        title: 受託開発とは — 案件の流れ(見積もりから検収まで)
+        estimated_minutes: 5
+      - id: "03-02"
+        title: 成果物責任と検収・契約不適合責任
+        estimated_minutes: 5
+      - id: "03-03"
+        title: よくあるリスク(仕様変更・見積もり・遅延)
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 受託開発の見積もりから検収までの流れ
+        type: mermaid
+        section: "03-01"
+    quiz:
+      count: 7
+      difficulty: medium
+
+  - id: "04"
+    title: 「業務委託」という呼び方の実態
+    estimated_minutes: 15
+    learning_objectives:
+      - 「業務委託」という言葉が法律用語ではなく俗称であることを説明できる
+      - 業務委託の実体が請負か準委任かで条件が変わることを理解する
+      - 契約書で実際の中身(請負/準委任・報酬条件)を確認する重要性を把握する
+    sections:
+      - id: "04-01"
+        title: 「業務委託」は契約類型ではない
+        estimated_minutes: 4
+      - id: "04-02"
+        title: 中身を見極める — 請負か準委任か
+        estimated_minutes: 5
+      - id: "04-03"
+        title: 契約書のどこを読むか
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 「業務委託」の呼び名と実体(請負・準委任)の対応
+        type: mermaid
+        section: "04-02"
+    quiz:
+      count: 6
+      difficulty: medium
+
+  - id: "05"
+    title: 偽装請負と注意点・契約形態の選び方
+    estimated_minutes: 18
+    learning_objectives:
+      - 偽装請負がどのような状態を指すかを説明できる
+      - 指揮命令と契約形態のズレがなぜ問題になるかを理解する
+      - 自分の立場や目的に応じて契約形態を見極める観点を持てる
+    sections:
+      - id: "05-01"
+        title: 偽装請負とは何か
+        estimated_minutes: 5
+      - id: "05-02"
+        title: なぜ問題になるのか(指揮命令と契約のズレ)
+        estimated_minutes: 5
+      - id: "05-03"
+        title: 契約形態の選び方と確認ポイント
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 適正な準委任・請負と偽装請負の指揮命令関係の違い
+        type: mermaid
+        section: "05-02"
+    quiz:
+      count: 7
+      difficulty: medium

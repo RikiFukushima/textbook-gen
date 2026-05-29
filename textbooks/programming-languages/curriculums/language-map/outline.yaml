@@ -1,0 +1,152 @@
+title: プログラミング言語の地図 〜 得意・不得意・使いどころ
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites: []
+  estimated_hours: 1
+style:
+  tone: ですます調・実務寄り
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: 言語を比べる「軸」を持つ
+    estimated_minutes: 15
+    learning_objectives:
+      - プログラミング言語に得意・不得意があることを説明できる
+      - コンパイル型とインタプリタ型の違いを説明できる
+      - 速度・型・エコシステム・学習コストという比較軸を挙げられる
+    sections:
+      - id: "01-01"
+        title: なぜ言語ごとに得意・不得意があるのか
+        estimated_minutes: 3
+      - id: "01-02"
+        title: コンパイル型とインタプリタ型
+        estimated_minutes: 4
+      - id: "01-03"
+        title: 静的型と動的型
+        estimated_minutes: 4
+      - id: "01-04"
+        title: 速度・エコシステム・学習コストという軸
+        estimated_minutes: 4
+    diagrams:
+      - purpose: ソースコードから実行までの流れ(コンパイル型とインタプリタ型の対比)
+        type: mermaid
+        section: "01-02"
+      - purpose: 比較軸を整理したマインドマップ的な関係図
+        type: mermaid
+        section: "01-04"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "02"
+    title: Go と Python ― 得意・不得意と使いどころ
+    estimated_minutes: 18
+    learning_objectives:
+      - Go の得意分野と不得意分野を説明できる
+      - Python の得意分野と不得意分野を説明できる
+      - 同じ処理を Go と Python で書いたときの違いを読み取れる
+    sections:
+      - id: "02-01"
+        title: Go の特徴 ― 速さとシンプルさ
+        estimated_minutes: 5
+      - id: "02-02"
+        title: Python の特徴 ― 書きやすさと豊富なライブラリ
+        estimated_minutes: 5
+      - id: "02-03"
+        title: 同じ処理を Go と Python で比べる
+        estimated_minutes: 4
+      - id: "02-04"
+        title: どんな場面でどちらを選ぶか
+        estimated_minutes: 4
+    diagrams:
+      - purpose: Go と Python の得意・不得意を対比したマトリクス
+        type: mermaid
+        section: "02-04"
+    quiz:
+      count: 8
+      difficulty: easy
+
+  - id: "03"
+    title: JavaScript / TypeScript と Java
+    estimated_minutes: 18
+    learning_objectives:
+      - JavaScript がブラウザとサーバの両方で使われる理由を説明できる
+      - TypeScript が JavaScript に型を加える意味を説明できる
+      - Java の特徴と主な使いどころを説明できる
+    sections:
+      - id: "03-01"
+        title: JavaScript ― Web を動かす言語
+        estimated_minutes: 5
+      - id: "03-02"
+        title: TypeScript ― JavaScript に型を足す
+        estimated_minutes: 4
+      - id: "03-03"
+        title: Java ― 大規模・業務システムの定番
+        estimated_minutes: 5
+      - id: "03-04"
+        title: 3 言語の使いどころを整理する
+        estimated_minutes: 4
+    diagrams:
+      - purpose: JavaScript / TypeScript / Java の実行環境と主な用途の関係図
+        type: mermaid
+        section: "03-04"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "04"
+    title: 低レイヤ系とその他の言語の概観
+    estimated_minutes: 16
+    learning_objectives:
+      - C / C++ が低レイヤで使われる理由を説明できる
+      - Rust が安全性と速度を両立しようとする言語であることを説明できる
+      - 用途特化の言語(SQL・Swift/Kotlin など)の位置づけを把握する
+    sections:
+      - id: "04-01"
+        title: C と C++ ― ハードウェアに近い言語
+        estimated_minutes: 4
+      - id: "04-02"
+        title: Rust ― 安全と速度の両立を狙う
+        estimated_minutes: 4
+      - id: "04-03"
+        title: 用途特化の言語たち(SQL・Swift・Kotlin ほか)
+        estimated_minutes: 4
+      - id: "04-04"
+        title: 言語全体を一枚の地図に並べる
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 低レイヤから高レイヤまで言語を抽象度で並べた地図
+        type: mermaid
+        section: "04-04"
+    quiz:
+      count: 6
+      difficulty: medium
+
+  - id: "05"
+    title: 用途別「この用途ならこの言語」早見表と選び方
+    estimated_minutes: 15
+    learning_objectives:
+      - 代表的な用途ごとに第一候補となる言語を挙げられる
+      - 言語を選ぶときの判断手順を説明できる
+      - 次に学ぶカリキュラム(Go / Python の基礎)へ進む道筋を描ける
+    sections:
+      - id: "05-01"
+        title: 用途別の早見表を読む
+        estimated_minutes: 4
+      - id: "05-02"
+        title: 言語を選ぶときの判断手順
+        estimated_minutes: 4
+      - id: "05-03"
+        title: 「最初の 1 言語」をどう決めるか
+        estimated_minutes: 4
+      - id: "05-04"
+        title: 次の一歩 ― Go と Python の基礎へ
+        estimated_minutes: 3
+    diagrams:
+      - purpose: 用途から言語へたどり着く選び方のフローチャート
+        type: mermaid
+        section: "05-02"
+    quiz:
+      count: 6
+      difficulty: easy

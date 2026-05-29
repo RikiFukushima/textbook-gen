@@ -1,0 +1,16 @@
+id: aws-basics
+title: AWS入門
+description: クラウドの考え方と AWS の全体像、主要サービス(EC2 / S3 / VPC / IAM / RDS)を俯瞰し、「AWS で何ができるか」を掴む入門カリキュラム
+order: 1
+estimated_hours: 2
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites:
+    - IT の基本用語(サーバー、ネットワーク、データベースなど)がなんとなく分かる
+    - Web ブラウザで Web サービスを操作した経験がある
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"

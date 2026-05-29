@@ -1,0 +1,15 @@
+id: claude-code-intro
+title: Claude Code超入門
+description: 非エンジニア向けに、Claude Code とは何か・何ができて何が苦手か・どう使い始めるかを、プログラミングの前提なしでやさしく学ぶ入門コースです。
+order: 1
+estimated_hours: 1.5
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites:
+    - パソコンの基本操作(文字入力・ファイルの保存や開閉)ができる
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"

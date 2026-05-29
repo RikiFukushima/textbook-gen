@@ -1,0 +1,146 @@
+title: 起業の基礎知識
+target_audience:
+  level: 初級
+  prerequisites: []
+  estimated_hours: 2
+style:
+  tone: ですます調・実務寄り
+  code_examples: false
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: 起業の選択肢 — 個人事業主と法人
+    estimated_minutes: 18
+    learning_objectives:
+      - 起業の代表的な形態(個人事業主・法人)の違いを説明できる
+      - 開業手続き・税金・信用・コストの観点で両者を比較できる
+      - 自分の状況に応じてどちらから始めるかを考える視点を持てる
+    sections:
+      - id: "01-01"
+        title: そもそも「起業」とは — 開業のかたち
+        estimated_minutes: 4
+      - id: "01-02"
+        title: 個人事業主 — 開業届ひとつで始められる
+        estimated_minutes: 5
+      - id: "01-03"
+        title: 法人 — 会社をつくって事業を行う
+        estimated_minutes: 5
+      - id: "01-04"
+        title: どちらを選ぶか — 比較の観点
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 個人事業主と法人の手続き・税金・信用・コストの対比
+        type: mermaid
+        section: "01-04"
+    quiz:
+      count: 7
+      difficulty: easy
+
+  - id: "02"
+    title: 法人設立の流れ
+    estimated_minutes: 20
+    learning_objectives:
+      - 株式会社と合同会社の違いの概要を説明できる
+      - 法人設立の一般的な手順(定款作成から登記まで)を俯瞰できる
+      - 設立にかかる費用や決めておくべき項目を把握できる
+    sections:
+      - id: "02-01"
+        title: 会社の種類 — 株式会社と合同会社
+        estimated_minutes: 5
+      - id: "02-02"
+        title: 設立前に決めること(商号・事業目的・資本金など)
+        estimated_minutes: 5
+      - id: "02-03"
+        title: 設立の手順 — 定款作成から登記まで
+        estimated_minutes: 5
+      - id: "02-04"
+        title: 設立にかかる費用と専門家の活用
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 法人設立の手続きの流れ(定款作成から登記完了まで)
+        type: mermaid
+        section: "02-03"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "03"
+    title: 資金と資本政策の基礎
+    estimated_minutes: 18
+    learning_objectives:
+      - 自己資金・融資・出資といった資金調達手段の違いを説明できる
+      - 資本金や株式・持ち株比率といった資本政策の基本的な考え方を理解する
+      - 調達手段ごとのメリットと注意点を把握できる
+    sections:
+      - id: "03-01"
+        title: 起業に必要なお金 — 開業資金と運転資金
+        estimated_minutes: 4
+      - id: "03-02"
+        title: 資金調達の手段 — 自己資金・融資・出資
+        estimated_minutes: 5
+      - id: "03-03"
+        title: 資本政策の基礎 — 資本金・株式・持ち株比率
+        estimated_minutes: 5
+      - id: "03-04"
+        title: 調達手段の選び方と注意点
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 融資(借入)と出資(株式)の違いの対比
+        type: mermaid
+        section: "03-02"
+    quiz:
+      count: 7
+      difficulty: medium
+
+  - id: "04"
+    title: 会計・税務・社会保険の基本
+    estimated_minutes: 20
+    learning_objectives:
+      - 起業後に必要となる会計・帳簿付けの基本を理解する
+      - 事業に関わる主な税金(所得税・法人税・消費税など)の概要を把握する
+      - 起業に伴う社会保険の扱いの変化を説明できる
+    sections:
+      - id: "04-01"
+        title: お金の記録 — 会計と帳簿付けの基本
+        estimated_minutes: 5
+      - id: "04-02"
+        title: 事業に関わる税金 — 所得税・法人税・消費税
+        estimated_minutes: 5
+      - id: "04-03"
+        title: 社会保険 — 個人事業と法人での違い
+        estimated_minutes: 5
+      - id: "04-04"
+        title: 専門家(税理士)に頼る判断
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 個人事業と法人で関わる主な税金の対比
+        type: mermaid
+        section: "04-02"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "05"
+    title: 起業の最初の一歩・よくある失敗
+    estimated_minutes: 15
+    learning_objectives:
+      - アイデアを事業として検証する初期ステップの考え方を理解する
+      - 起業初期によくある失敗のパターンを説明できる
+      - スモールスタートや段階的な独立といった現実的な始め方を把握できる
+    sections:
+      - id: "05-01"
+        title: 最初の一歩 — アイデアの検証とスモールスタート
+        estimated_minutes: 4
+      - id: "05-02"
+        title: よくある失敗とその背景
+        estimated_minutes: 5
+      - id: "05-03"
+        title: 無理なく始めるために(副業・段階的な独立)
+        estimated_minutes: 4
+    diagrams:
+      - purpose: アイデア検証から事業化までのスモールスタートの流れ
+        type: mermaid
+        section: "05-01"
+    quiz:
+      count: 6
+      difficulty: easy

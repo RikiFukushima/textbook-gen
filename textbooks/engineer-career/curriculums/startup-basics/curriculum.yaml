@@ -1,0 +1,14 @@
+id: startup-basics
+title: 起業の基礎知識
+description: 個人事業主と法人の違いから、法人設立の流れ、資金と資本政策、会計・税務・社会保険の基本、そして起業の最初の一歩とよくある失敗までを俯瞰し、エンジニアが起業を検討するための土台となる知識を身につける入門カリキュラム
+order: 3
+estimated_hours: 2
+target_audience:
+  level: 初級
+  prerequisites: []
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"

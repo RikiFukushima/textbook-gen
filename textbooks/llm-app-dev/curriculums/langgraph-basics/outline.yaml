@@ -1,0 +1,156 @@
+title: LangGraph基礎
+target_audience:
+  level: 中級
+  prerequisites:
+    - LangChain 基礎相当(Model / Prompt / Chain / Tool / Agent)の理解がある
+    - Python の基本文法(関数・クラス・型ヒント)を理解している
+  estimated_hours: 4
+style:
+  tone: ですます調・実務寄り
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: なぜLangGraphか 〜 状態を持つフロー
+    estimated_minutes: 15
+    learning_objectives:
+      - LangChain の Chain/Agent で制御が難しくなる場面を説明できる
+      - LangGraph がグラフ(状態 + ノード + エッジ)でフローを表現する利点を説明できる
+      - LangGraph が向くユースケース(分岐・ループ・人間の介在)を判断できる
+    sections:
+      - id: "01-01"
+        title: AgentExecutorの限界
+        estimated_minutes: 4
+      - id: "01-02"
+        title: フローをグラフで表すという発想
+        estimated_minutes: 5
+      - id: "01-03"
+        title: LangGraphが向くユースケース
+        estimated_minutes: 4
+    diagrams:
+      - purpose: ブラックボックスな AgentExecutor と明示的な状態グラフの対比
+        type: mermaid
+        section: "01-02"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "02"
+    title: State・Node・Edge の基本
+    estimated_minutes: 22
+    learning_objectives:
+      - State(状態)を TypedDict などで定義する方法を説明できる
+      - Node が State を受け取り更新を返す関数であることを理解する
+      - Edge がノード間の遷移を定義することを理解する
+      - reducer による State 更新のマージ挙動を説明できる
+    sections:
+      - id: "02-01"
+        title: Stateを定義する
+        estimated_minutes: 5
+      - id: "02-02"
+        title: Nodeは状態を更新する関数
+        estimated_minutes: 5
+      - id: "02-03"
+        title: Edgeでノードをつなぐ
+        estimated_minutes: 5
+      - id: "02-04"
+        title: reducerと状態のマージ
+        estimated_minutes: 5
+    diagrams:
+      - purpose: State を中心に Node と Edge が構成するグラフの基本要素
+        type: mermaid
+        section: "02-01"
+      - purpose: Node が State を受け取り部分更新を返し reducer がマージする流れ
+        type: mermaid
+        section: "02-04"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "03"
+    title: グラフの構築と実行
+    estimated_minutes: 18
+    learning_objectives:
+      - StateGraph にノード・エッジを登録し compile する流れを説明できる
+      - エントリポイントと終了(END)の指定方法を理解する
+      - invoke / stream でグラフを実行し中間状態を観測できる
+    sections:
+      - id: "03-01"
+        title: StateGraphを組み立てる
+        estimated_minutes: 5
+      - id: "03-02"
+        title: エントリポイントとEND
+        estimated_minutes: 4
+      - id: "03-03"
+        title: compileして実行する(invoke / stream)
+        estimated_minutes: 6
+    diagrams:
+      - purpose: ノード追加 → エッジ接続 → compile → 実行 の構築フロー
+        type: mermaid
+        section: "03-01"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "04"
+    title: 条件分岐・ループ・分岐合流
+    estimated_minutes: 22
+    learning_objectives:
+      - conditional edge で状態に応じて遷移先を切り替えられる
+      - ノードへ戻るエッジでループ(再試行・反復)を構成できる
+      - 複数の分岐を合流させるグラフ設計を理解する
+      - 無限ループを防ぐ recursion_limit を理解する
+    sections:
+      - id: "04-01"
+        title: 条件分岐(conditional edge)
+        estimated_minutes: 6
+      - id: "04-02"
+        title: ループを作る
+        estimated_minutes: 5
+      - id: "04-03"
+        title: 分岐の合流とfan-out / fan-in
+        estimated_minutes: 5
+      - id: "04-04"
+        title: 無限ループの防止(recursion_limit)
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 条件分岐で複数のノードへ遷移し再び合流するグラフ
+        type: mermaid
+        section: "04-01"
+      - purpose: ノードへ戻るループと終了条件の流れ
+        type: mermaid
+        section: "04-02"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "05"
+    title: 永続化(checkpointer)と human-in-the-loop
+    estimated_minutes: 22
+    learning_objectives:
+      - checkpointer による状態の永続化と thread_id による会話の継続を説明できる
+      - 実行を途中で止めて再開する(interrupt / resume)仕組みを理解する
+      - human-in-the-loop(人間の承認・修正をフローに組み込む)を構成できる
+    sections:
+      - id: "05-01"
+        title: checkpointerで状態を永続化する
+        estimated_minutes: 5
+      - id: "05-02"
+        title: thread_idで会話を継続する
+        estimated_minutes: 5
+      - id: "05-03"
+        title: 実行の中断と再開(interrupt)
+        estimated_minutes: 6
+      - id: "05-04"
+        title: human-in-the-loopを組み込む
+        estimated_minutes: 5
+    diagrams:
+      - purpose: checkpointer がノード実行ごとに状態を保存し thread_id で復元する流れ
+        type: mermaid
+        section: "05-01"
+      - purpose: 実行中断 → 人間の確認・修正 → 再開 の human-in-the-loop フロー
+        type: mermaid
+        section: "05-04"
+    quiz:
+      count: 8
+      difficulty: medium

@@ -1,0 +1,171 @@
+title: Terraformで学ぶAWSインフラ構築の基礎
+target_audience:
+  level: 初級〜中級 # 初級 | 中級 | 上級
+  prerequisites:
+    - aws-basics 相当の AWS 基礎(EC2 / S3 / VPC / IAM の概要が分かる)
+    - ターミナルで基本的なコマンドを実行できる
+    - AWS アカウントと認証情報(アクセスキー等)を用意できる
+  estimated_hours: 2.5
+style:
+  tone: ですます調・実務寄り
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: IaC とは — Terraform の位置づけ
+    estimated_minutes: 15
+    learning_objectives:
+      - Infrastructure as Code(IaC)が解決する課題を説明できる
+      - 宣言的アプローチと手続き的アプローチの違いを理解する
+      - Terraform が他の IaC ツールの中でどこに位置づくかを説明できる
+    sections:
+      - id: "01-01"
+        title: 手作業の構築が抱える課題
+        estimated_minutes: 4
+      - id: "01-02"
+        title: IaC とは — コードでインフラを定義する
+        estimated_minutes: 5
+      - id: "01-03"
+        title: Terraform の位置づけと特徴
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 手作業構築と IaC によるワークフローの違い
+        type: mermaid
+        section: "01-02"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "02"
+    title: Terraform 基礎 — HCL と基本ワークフロー
+    estimated_minutes: 22
+    learning_objectives:
+      - HCL の基本構文(block / argument)を読み書きできる
+      - provider と resource の役割を説明できる
+      - init / plan / apply のワークフローを実行できる
+    sections:
+      - id: "02-01"
+        title: Terraform のインストールと HCL の基本構文
+        estimated_minutes: 5
+      - id: "02-02"
+        title: provider と resource を書く
+        estimated_minutes: 5
+      - id: "02-03"
+        title: init / plan / apply のワークフロー
+        estimated_minutes: 6
+      - id: "02-04"
+        title: 最初のリソースを作って消す
+        estimated_minutes: 5
+    diagrams:
+      - purpose: init → plan → apply → destroy のワークフローの流れ
+        type: mermaid
+        section: "02-03"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "03"
+    title: state 管理の基礎
+    estimated_minutes: 18
+    learning_objectives:
+      - state ファイルが何を保持し、なぜ必要かを説明できる
+      - ローカル state とリモート state の違いを理解する
+      - S3 バックエンドとロックによるチーム運用の基本を説明できる
+    sections:
+      - id: "03-01"
+        title: state とは何か、なぜ必要か
+        estimated_minutes: 5
+      - id: "03-02"
+        title: ローカル state の注意点
+        estimated_minutes: 4
+      - id: "03-03"
+        title: リモート state(S3 バックエンド)とロック
+        estimated_minutes: 6
+    diagrams:
+      - purpose: state を介して実際のリソースと設定を突き合わせる仕組み
+        type: mermaid
+        section: "03-01"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "04"
+    title: AWS リソースを作る(VPC / サブネット / EC2)
+    estimated_minutes: 22
+    learning_objectives:
+      - VPC・サブネットを Terraform で定義できる
+      - リソース間の依存関係を参照で表現できる
+      - EC2 インスタンスを起動するまでの構成を組める
+    sections:
+      - id: "04-01"
+        title: VPC とサブネットを定義する
+        estimated_minutes: 5
+      - id: "04-02"
+        title: ルートテーブル・インターネットゲートウェイをつなぐ
+        estimated_minutes: 5
+      - id: "04-03"
+        title: セキュリティグループと EC2 インスタンス
+        estimated_minutes: 6
+      - id: "04-04"
+        title: リソース間の依存関係と参照
+        estimated_minutes: 5
+    diagrams:
+      - purpose: Terraform で構築する VPC・サブネット・EC2 の構成図
+        type: mermaid
+        section: "04-01"
+      - purpose: リソース間の参照による依存関係グラフ
+        type: mermaid
+        section: "04-04"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "05"
+    title: 変数と出力・再利用(variables / outputs / module)
+    estimated_minutes: 18
+    learning_objectives:
+      - variables で構成を外部からパラメータ化できる
+      - outputs で必要な値を取り出せる
+      - module による構成の再利用の基本を理解する
+    sections:
+      - id: "05-01"
+        title: variables — 構成をパラメータ化する
+        estimated_minutes: 5
+      - id: "05-02"
+        title: outputs — 値を取り出す
+        estimated_minutes: 4
+      - id: "05-03"
+        title: module — 構成をまとめて再利用する
+        estimated_minutes: 6
+    diagrams:
+      - purpose: module を呼び出して入力(variables)・出力(outputs)を受け渡す関係
+        type: mermaid
+        section: "05-03"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "06"
+    title: 実運用の注意 — 秘匿情報・破壊的変更・destroy
+    estimated_minutes: 18
+    learning_objectives:
+      - 秘匿情報を安全に扱う方法を説明できる
+      - plan の差分を読み、破壊的変更(replace)を見分けられる
+      - destroy の影響範囲を理解し安全に運用できる
+    sections:
+      - id: "06-01"
+        title: 秘匿情報の扱い(sensitive / state への混入)
+        estimated_minutes: 5
+      - id: "06-02"
+        title: plan の差分を読む — 破壊的変更を見分ける
+        estimated_minutes: 5
+      - id: "06-03"
+        title: destroy と安全な運用の心得
+        estimated_minutes: 5
+    diagrams:
+      - purpose: plan が示す変更種別(create / update / replace / destroy)の判断フロー
+        type: mermaid
+        section: "06-02"
+    quiz:
+      count: 8
+      difficulty: medium

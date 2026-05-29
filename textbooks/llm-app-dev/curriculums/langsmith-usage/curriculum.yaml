@@ -1,0 +1,16 @@
+id: langsmith-usage
+title: LangSmith活用事例
+description: ""
+order: 3
+estimated_hours: 2
+target_audience:
+  level: 中級 # 初級 | 中級 | 上級
+  prerequisites:
+    - LangChain / LangGraph を使ってアプリやエージェントを実装した経験がある
+    - Python の基本文法と環境変数(APIキー)の扱いを理解している
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"
