@@ -1,0 +1,9 @@
+id: python-basics
+title: Python言語の基礎
+description: ""
+order: 3
+estimated_hours: 0
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites: []
+chapter_order: []
