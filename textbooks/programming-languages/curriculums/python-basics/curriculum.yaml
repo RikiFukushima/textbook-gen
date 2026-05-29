@@ -1,9 +1,14 @@
 id: python-basics
 title: Python言語の基礎
-description: ""
+description: Python の文法・データ構造から、ファイル入出力・例外処理・pip と仮想環境までを手を動かしながら学ぶ入門カリキュラム。
 order: 3
-estimated_hours: 0
+estimated_hours: 2
 target_audience:
   level: 初級 # 初級 | 中級 | 上級
-  prerequisites: []
-chapter_order: []
+  prerequisites: [] # プログラミング未経験でも読める
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"

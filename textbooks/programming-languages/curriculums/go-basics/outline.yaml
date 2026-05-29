@@ -1,10 +1,151 @@
 title: Go言語の基礎
 target_audience:
   level: 初級 # 初級 | 中級 | 上級
-  prerequisites: []
-  estimated_hours: 0
+  prerequisites:
+    - 何らかのプログラミング経験があると望ましい(変数・関数・繰り返しを知っている)
+    - ターミナル(コマンドライン)で基本的なコマンドを実行できる
+  estimated_hours: 2
 style:
   tone: ですます調・実務寄り
   code_examples: true
   diagram_default: mermaid
-chapters: []
+chapters:
+  - id: "01"
+    title: Go とは何か ― 環境構築と Hello, World
+    estimated_minutes: 18
+    learning_objectives:
+      - Go がどんな言語で何に向いているかを説明できる
+      - Go の開発環境を構築できる
+      - hello world を書いてビルド・実行できる
+    sections:
+      - id: "01-01"
+        title: Go の特徴と使いどころ
+        estimated_minutes: 4
+      - id: "01-02"
+        title: 環境構築(インストールと go コマンド)
+        estimated_minutes: 5
+      - id: "01-03"
+        title: Hello, World を書いて実行する
+        estimated_minutes: 5
+      - id: "01-04"
+        title: go run / go build とプログラムの構成
+        estimated_minutes: 4
+    diagrams:
+      - purpose: ソースコードから go build / go run を経て実行されるまでの流れ
+        type: mermaid
+        section: "01-04"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "02"
+    title: 変数・型・制御構文
+    estimated_minutes: 20
+    learning_objectives:
+      - 変数の宣言方法と基本的な型を使い分けられる
+      - if / for / switch で処理を分岐・反復できる
+      - Go の型システムの基本的な考え方を説明できる
+    sections:
+      - id: "02-01"
+        title: 変数宣言と基本型(var と :=)
+        estimated_minutes: 5
+      - id: "02-02"
+        title: 数値・文字列・真偽値と型変換
+        estimated_minutes: 5
+      - id: "02-03"
+        title: if と switch による分岐
+        estimated_minutes: 5
+      - id: "02-04"
+        title: for による繰り返し
+        estimated_minutes: 5
+    diagrams:
+      - purpose: for 文の繰り返しと分岐の制御フロー
+        type: mermaid
+        section: "02-04"
+    quiz:
+      count: 8
+      difficulty: easy
+
+  - id: "03"
+    title: 関数・エラー処理・構造体
+    estimated_minutes: 22
+    learning_objectives:
+      - 関数を定義し、複数の戻り値を扱える
+      - error を返す Go 流のエラー処理を書ける
+      - 構造体とメソッドでデータと振る舞いをまとめられる
+    sections:
+      - id: "03-01"
+        title: 関数の定義と複数戻り値
+        estimated_minutes: 5
+      - id: "03-02"
+        title: error によるエラー処理
+        estimated_minutes: 6
+      - id: "03-03"
+        title: 構造体(struct)でデータをまとめる
+        estimated_minutes: 5
+      - id: "03-04"
+        title: メソッドとレシーバ
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 値を返す経路とエラーを返す経路の分岐フロー
+        type: mermaid
+        section: "03-02"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "04"
+    title: 並行処理 ― goroutine と channel
+    estimated_minutes: 22
+    learning_objectives:
+      - goroutine で処理を並行に実行できる
+      - channel で goroutine 間のデータをやり取りできる
+      - 並行処理で気をつける点(同期・終了待ち)を説明できる
+    sections:
+      - id: "04-01"
+        title: 並行処理とは ― goroutine の考え方
+        estimated_minutes: 5
+      - id: "04-02"
+        title: goroutine を起動する
+        estimated_minutes: 5
+      - id: "04-03"
+        title: channel でデータを受け渡す
+        estimated_minutes: 6
+      - id: "04-04"
+        title: sync と select で同期する
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 複数の goroutine が channel を介して通信する関係図
+        type: mermaid
+        section: "04-03"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "05"
+    title: パッケージ・モジュール・標準ライブラリ
+    estimated_minutes: 20
+    learning_objectives:
+      - パッケージとモジュールの関係を説明できる
+      - go mod で依存を管理できる
+      - 標準ライブラリの主要パッケージを使える
+    sections:
+      - id: "05-01"
+        title: パッケージという単位
+        estimated_minutes: 5
+      - id: "05-02"
+        title: go mod とモジュール管理
+        estimated_minutes: 5
+      - id: "05-03"
+        title: 外部パッケージの導入と import
+        estimated_minutes: 5
+      - id: "05-04"
+        title: 標準ライブラリを使ってみる(fmt / net/http ほか)
+        estimated_minutes: 5
+    diagrams:
+      - purpose: モジュール・パッケージ・ファイルの階層関係
+        type: mermaid
+        section: "05-01"
+    quiz:
+      count: 6
+      difficulty: medium

@@ -1,9 +1,14 @@
 id: language-map
 title: プログラミング言語の地図 〜 得意・不得意・使いどころ
-description: ""
+description: 主要なプログラミング言語を「得意・不得意・使いどころ」で横並びに比較し、用途から言語を選べるようになるための俯瞰回。この教材の入口。
 order: 1
-estimated_hours: 0
+estimated_hours: 1
 target_audience:
   level: 初級 # 初級 | 中級 | 上級
-  prerequisites: []
-chapter_order: []
+  prerequisites: [] # プログラミング未経験でも読める
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"

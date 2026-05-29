@@ -2,9 +2,151 @@ title: Python言語の基礎
 target_audience:
   level: 初級 # 初級 | 中級 | 上級
   prerequisites: []
-  estimated_hours: 0
+  estimated_hours: 2
 style:
   tone: ですます調・実務寄り
   code_examples: true
   diagram_default: mermaid
-chapters: []
+chapters:
+  - id: "01"
+    title: Python とは何か ― 環境構築と最初の一歩
+    estimated_minutes: 16
+    learning_objectives:
+      - Python がどんな言語で何に向いているかを説明できる
+      - Python の実行環境を用意できる
+      - 対話モードとスクリプト実行でプログラムを動かせる
+    sections:
+      - id: "01-01"
+        title: Python の特徴と使いどころ
+        estimated_minutes: 4
+      - id: "01-02"
+        title: 環境構築(インストールと python コマンド)
+        estimated_minutes: 4
+      - id: "01-03"
+        title: 対話モードと print で動かしてみる
+        estimated_minutes: 4
+      - id: "01-04"
+        title: スクリプトファイルを作って実行する
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 対話モードとスクリプト実行の流れの対比
+        type: mermaid
+        section: "01-04"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "02"
+    title: 変数・データ構造・制御構文
+    estimated_minutes: 22
+    learning_objectives:
+      - 変数と基本的なデータ型を使い分けられる
+      - list / dict などのデータ構造を扱える
+      - if / for / while で処理を分岐・反復できる
+    sections:
+      - id: "02-01"
+        title: 変数と基本のデータ型(数値・文字列・真偽値)
+        estimated_minutes: 5
+      - id: "02-02"
+        title: リストとタプル
+        estimated_minutes: 5
+      - id: "02-03"
+        title: 辞書(dict)と集合(set)
+        estimated_minutes: 5
+      - id: "02-04"
+        title: if による分岐
+        estimated_minutes: 4
+      - id: "02-05"
+        title: for と while による繰り返し
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 主なデータ構造(list/tuple/dict/set)の特徴を整理した関係図
+        type: mermaid
+        section: "02-03"
+    quiz:
+      count: 8
+      difficulty: easy
+
+  - id: "03"
+    title: 関数とモジュール
+    estimated_minutes: 18
+    learning_objectives:
+      - 関数を定義し、引数と戻り値を扱える
+      - 引数のデフォルト値やキーワード引数を使える
+      - モジュールを import してコードを分割・再利用できる
+    sections:
+      - id: "03-01"
+        title: 関数の定義と引数・戻り値
+        estimated_minutes: 5
+      - id: "03-02"
+        title: デフォルト引数とキーワード引数
+        estimated_minutes: 4
+      - id: "03-03"
+        title: スコープと変数の見える範囲
+        estimated_minutes: 4
+      - id: "03-04"
+        title: モジュールの import と標準ライブラリ
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 呼び出し元・関数・モジュールの関係と import の流れ
+        type: mermaid
+        section: "03-04"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "04"
+    title: ファイル入出力と例外処理
+    estimated_minutes: 18
+    learning_objectives:
+      - ファイルを開いて読み書きできる
+      - with 文でファイルを安全に扱える
+      - try/except で例外を捕捉し対処できる
+    sections:
+      - id: "04-01"
+        title: ファイルを読む・書く
+        estimated_minutes: 5
+      - id: "04-02"
+        title: with 文による安全なファイル操作
+        estimated_minutes: 4
+      - id: "04-03"
+        title: 例外とは ― try / except
+        estimated_minutes: 5
+      - id: "04-04"
+        title: 例外処理を実務でどう使うか
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 正常系と例外発生時の処理フロー(try/except/finally)
+        type: mermaid
+        section: "04-03"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "05"
+    title: ライブラリと pip・仮想環境
+    estimated_minutes: 18
+    learning_objectives:
+      - 外部ライブラリと pip の役割を説明できる
+      - pip でパッケージを導入できる
+      - 仮想環境でプロジェクトごとに依存を分離できる
+    sections:
+      - id: "05-01"
+        title: 標準ライブラリと外部ライブラリ
+        estimated_minutes: 4
+      - id: "05-02"
+        title: pip でパッケージを導入する
+        estimated_minutes: 5
+      - id: "05-03"
+        title: 仮想環境(venv)で依存を分離する
+        estimated_minutes: 5
+      - id: "05-04"
+        title: requirements.txt で環境を再現する
+        estimated_minutes: 4
+    diagrams:
+      - purpose: プロジェクトごとに仮想環境で依存を分離する構成図
+        type: mermaid
+        section: "05-03"
+    quiz:
+      count: 6
+      difficulty: medium
