@@ -1,10 +1,160 @@
 title: LangChain基礎 〜 LangGraphとの違いを理解する
 target_audience:
-  level: 初級 # 初級 | 中級 | 上級
-  prerequisites: []
-  estimated_hours: 0
+  level: 中級
+  prerequisites:
+    - Python の基本文法(関数・クラス・パッケージのインストール)を理解している
+    - LLM と API(リクエスト/レスポンス、APIキー)の基本概念を理解している
+  estimated_hours: 5
 style:
   tone: ですます調・実務寄り
   code_examples: true
   diagram_default: mermaid
-chapters: []
+chapters:
+  - id: "01"
+    title: LLMアプリ開発とLangChainの全体像
+    estimated_minutes: 15
+    learning_objectives:
+      - LLM を直接 API で叩く場合の課題と、フレームワークが解く問題を説明できる
+      - LangChain の主要コンポーネント(Model / Prompt / Chain / Retrieval / Tool / Agent)の役割を俯瞰できる
+      - LangChain と周辺エコシステム(LangGraph / LangSmith)の位置づけを大まかに把握できる
+    sections:
+      - id: "01-01"
+        title: なぜLLMアプリにフレームワークが必要か
+        estimated_minutes: 4
+      - id: "01-02"
+        title: LangChainの主要コンポーネント俯瞰
+        estimated_minutes: 5
+      - id: "01-03"
+        title: LangChainエコシステムの全体像(LangGraph / LangSmith)
+        estimated_minutes: 4
+    diagrams:
+      - purpose: LangChain の主要コンポーネント(Model / Prompt / Chain / Retrieval / Tool / Agent)の関係図
+        type: mermaid
+        section: "01-02"
+      - purpose: LangChain / LangGraph / LangSmith のエコシステム上の位置づけ
+        type: mermaid
+        section: "01-03"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "02"
+    title: Model・Prompt・Chain の基礎(LCEL)
+    estimated_minutes: 22
+    learning_objectives:
+      - ChatModel と PromptTemplate の役割と基本的な使い方を説明できる
+      - LCEL(LangChain Expression Language)でコンポーネントをパイプ連結できる
+      - OutputParser で LLM 出力を構造化データに変換できる
+      - Runnable の共通インターフェース(invoke / stream / batch)を理解する
+    sections:
+      - id: "02-01"
+        title: ChatModelとメッセージの扱い
+        estimated_minutes: 4
+      - id: "02-02"
+        title: PromptTemplateで入力を組み立てる
+        estimated_minutes: 4
+      - id: "02-03"
+        title: LCELでパイプをつなぐ(Runnable)
+        estimated_minutes: 6
+      - id: "02-04"
+        title: OutputParserで出力を構造化する
+        estimated_minutes: 5
+    diagrams:
+      - purpose: prompt | model | parser を LCEL でパイプ連結したときのデータの流れ
+        type: mermaid
+        section: "02-03"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "03"
+    title: Retrieval と RAG の基礎
+    estimated_minutes: 22
+    learning_objectives:
+      - RAG が解決する課題(知識の鮮度・ハルシネーション抑制)を説明できる
+      - Document Loader / Text Splitter / Embedding / VectorStore の役割を説明できる
+      - Retriever を使った検索と LLM への文脈注入の流れを組み立てられる
+      - 基本的な RAG チェーンを LCEL で構成できる
+    sections:
+      - id: "03-01"
+        title: なぜRAGなのか
+        estimated_minutes: 4
+      - id: "03-02"
+        title: ドキュメントの取り込みと分割
+        estimated_minutes: 5
+      - id: "03-03"
+        title: EmbeddingとVectorStoreで検索する
+        estimated_minutes: 5
+      - id: "03-04"
+        title: Retrieverを使ったRAGチェーン
+        estimated_minutes: 6
+    diagrams:
+      - purpose: RAG のインデックス作成から検索・回答生成までのパイプライン
+        type: mermaid
+        section: "03-01"
+      - purpose: ドキュメント取り込み(Load → Split → Embed → Store)の流れ
+        type: mermaid
+        section: "03-02"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "04"
+    title: Tool と Agent の基礎
+    estimated_minutes: 20
+    learning_objectives:
+      - Tool(関数呼び出し)の概念と LLM からの呼び出し方を説明できる
+      - Agent が「思考 → ツール実行 → 観測」を繰り返す仕組みを理解する
+      - Tool calling を使った簡単な Agent を構成できる
+      - Agent の課題(制御性・デバッグの難しさ)を認識する
+    sections:
+      - id: "04-01"
+        title: Toolとは何か(関数をLLMに渡す)
+        estimated_minutes: 5
+      - id: "04-02"
+        title: Tool callingの仕組み
+        estimated_minutes: 5
+      - id: "04-03"
+        title: Agentが自律的に動くということ
+        estimated_minutes: 5
+      - id: "04-04"
+        title: Agentの限界と制御の難しさ
+        estimated_minutes: 4
+    diagrams:
+      - purpose: Agent の思考 → ツール実行 → 観測 のループ
+        type: mermaid
+        section: "04-03"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "05"
+    title: LangChainとLangGraphの違いと使い分け
+    estimated_minutes: 20
+    learning_objectives:
+      - LangChain の Chain/Agent と LangGraph の状態グラフの設計思想の違いを説明できる
+      - 「どこからが LangGraph の領域か」(状態・分岐・ループ・人間の介在)を判断できる
+      - ユースケースごとに LangChain と LangGraph のどちらを選ぶか判断できる
+    sections:
+      - id: "05-01"
+        title: ChainとAgentで足りなくなるとき
+        estimated_minutes: 5
+      - id: "05-02"
+        title: LangGraphの考え方(状態を持つグラフ)
+        estimated_minutes: 5
+      - id: "05-03"
+        title: 機能比較と境界線の引き方
+        estimated_minutes: 5
+      - id: "05-04"
+        title: ユースケース別の使い分け
+        estimated_minutes: 4
+    diagrams:
+      - purpose: LangChain の線形なチェーンと LangGraph の状態グラフの構造比較
+        type: mermaid
+        section: "05-02"
+      - purpose: LangChain と LangGraph の機能・適性の比較(関係図)
+        type: mermaid
+        section: "05-03"
+    quiz:
+      count: 8
+      difficulty: medium

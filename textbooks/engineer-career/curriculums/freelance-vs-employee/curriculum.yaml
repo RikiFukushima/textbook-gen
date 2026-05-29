@@ -1,9 +1,14 @@
 id: freelance-vs-employee
 title: フリーランス vs 正社員(エンジニア編)
-description: ""
+description: エンジニアの「フリーランス」と「正社員」を、収入・税金・社会保険・安定性・案件獲得・キャリアの観点から比較し、自分に合った働き方を選ぶための判断軸を身につける入門カリキュラム
 order: 1
-estimated_hours: 0
+estimated_hours: 2
 target_audience:
-  level: 初級 # 初級 | 中級 | 上級
+  level: 初級
   prerequisites: []
-chapter_order: []
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"
