@@ -1,0 +1,11 @@
+id: "01"
+title: LangSmithとは 〜 全体像とセットアップ
+estimated_minutes: 15
+learning_objectives:
+  - LangSmith が解決する課題(LLM アプリの観測性・評価・運用)を説明できる
+  - トレース / データセット / 評価 / モニタリングという主要機能の関係を俯瞰できる
+  - 環境変数を設定して既存の LangChain アプリのトレースを有効化できる
+section_order:
+  - "01-01"
+  - "01-02"
+  - "01-03"
