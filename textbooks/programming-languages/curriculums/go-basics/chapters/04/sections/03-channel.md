@@ -4,7 +4,7 @@ chapter_id: "04"
 title: channel でデータを受け渡す
 order: 3
 estimated_minutes: 6
-estimated_chars: 1068
+estimated_chars: 1162
 learning_points:
   - channel を作成して送受信できる
   - channel が goroutine 間の同期も兼ねることを理解する
@@ -54,7 +54,7 @@ graph LR
 
 ## channel は同期も担う
 
-channel の重要な性質は、送受信が**ブロック(待ち合わせ)する**ことです。バッファのない channel では、送信側は受信側が値を受け取るまで待ち、受信側は値が送られてくるまで待ちます。この性質のおかげで、channel は単なるデータの通り道であると同時に、goroutine 間の**同期の道具**にもなります。
+channel の重要な性質は、送受信が**ブロック(待ち合わせ)する**ことです。バッファのない channel では、送信側は受信側が値を受け取るまで待ち、受信側は値が送られてくるまで待ちます。この性質のおかげで、channel は単なるデータの通り道であると同時に、goroutine 間の**同期の道具**にもなります。一方、`make(chan int, 3)` のように容量を指定した**バッファ付き channel** では、バッファが満杯になるまで送信側はブロックせず、貯めた値を受信側があとから取り出せます。
 
 次のコードは goroutine で計算した合計を channel 経由で受け取る例です。`<-ch` が値を受け取るまで `main` は自然に待つため、§04-02 で見た WaitGroup を使わずに終了待ちが実現できています。
 

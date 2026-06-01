@@ -4,7 +4,7 @@ chapter_id: "02"
 title: 変数宣言と基本型(var と :=)
 order: 1
 estimated_minutes: 5
-estimated_chars: 1700
+estimated_chars: 1076
 learning_points:
   - var による変数宣言と型の指定方法
   - := による短縮宣言の使いどころ
@@ -25,9 +25,6 @@ key_terms:
   - term: ゼロ値
     definition: 初期値を書かずに宣言した変数に自動で入る既定値。数値は 0、文字列は空文字、真偽値は false
 ---
-
-# 変数宣言と基本型(var と :=)
-
 ## このセクションで学ぶこと
 
 - var による変数宣言と型の指定方法

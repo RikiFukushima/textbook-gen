@@ -4,7 +4,7 @@ chapter_id: "04"
 title: 分岐の合流とfan-out / fan-in
 order: 3
 estimated_minutes: 5
-estimated_chars: 1166
+estimated_chars: 1182
 learning_points:
   - 複数の分岐を 1 つのノードへ合流させる設計を理解する
   - fan-out で複数ノードを並行して起動する考え方を知る
@@ -34,7 +34,7 @@ key_terms:
 
 ## 分かれた道を 1 本にまとめる「合流」
 
-§4-01 では State に応じて道を分けました。分けた後は、多くの場合どこかで **合流** させて共通の後処理(整形・応答生成など)に進みます。合流は特別な API ではなく、**複数のノードから同じ後続ノードへ `add_edge` を張るだけ**で成立します。`search` からも `reply` からも同じ `format` ノードへつなげば、どちらの経路を通っても `format` に集まります。
+§4-01 では State に応じて道を分けました。分けた後は、多くの場合どこかで **合流** させて共通の後処理(整形・応答生成など)に進みます。合流は特別な API ではなく、**複数のノードから同じ後続ノードへ `add_edge` を張るだけ**で成立します。下の図のように `branch_a`・`branch_b`・`branch_c` から同じ `merge` ノードへつなげば、どの経路を通っても `merge` に集まります。
 
 ```mermaid
 flowchart TD

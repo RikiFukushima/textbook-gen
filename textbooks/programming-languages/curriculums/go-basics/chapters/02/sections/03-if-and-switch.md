@@ -4,7 +4,7 @@ chapter_id: "02"
 title: if と switch による分岐
 order: 3
 estimated_minutes: 5
-estimated_chars: 1800
+estimated_chars: 1156
 learning_points:
   - if による条件分岐の書き方(丸括弧なし・波括弧必須)
   - if の初期化文でスコープを限定する書き方
@@ -27,9 +27,6 @@ key_terms:
   - term: フォールスルー
     definition: ある case の処理が終わった後、次の case へ続けて流れること。Go では既定で起きず、fallthrough で明示する
 ---
-
-# if と switch による分岐
-
 ## このセクションで学ぶこと
 
 - if による条件分岐の書き方(丸括弧なし・波括弧必須)

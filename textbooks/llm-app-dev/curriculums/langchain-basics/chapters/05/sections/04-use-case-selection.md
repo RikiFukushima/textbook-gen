@@ -4,7 +4,7 @@ chapter_id: "05"
 title: ユースケース別の使い分け
 order: 4
 estimated_minutes: 4
-estimated_chars: 1500
+estimated_chars: 1350
 learning_points:
   - 代表的なユースケースごとに LangChain と LangGraph のどちらが向くかを判断できる
   - 「まず LangChain、複雑になったら LangGraph」という現実的な進め方を理解する

@@ -4,7 +4,7 @@ chapter_id: "05"
 title: outputs — 値を取り出す
 order: 2
 estimated_minutes: 4
-estimated_chars: 1003
+estimated_chars: 1048
 learning_points:
   - output ブロックで構成が生成した値を外に取り出す
   - 作成後に確定する属性(IP・ID 等)を outputs で参照可能にする
@@ -63,11 +63,11 @@ vpc_id = "vpc-0abc123def456"
 
 ## 機密値は sensitive で隠す
 
-データベースのパスワードや認証トークンなど、画面やログに出したくない値もあります。その場合は `sensitive = true` を付けます。
+データベースのパスワードや認証トークンなど、画面やログに出したくない値もあります。たとえば `random_password` リソースで生成したパスワードを出力する場合です。その場合は `sensitive = true` を付けます。
 
 ```hcl
 output "db_password" {
-  value     = aws_db_instance.main.password
+  value     = random_password.db.result
   sensitive = true
 }
 ```

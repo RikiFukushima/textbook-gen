@@ -4,7 +4,7 @@ chapter_id: "02"
 title: for による繰り返し
 order: 4
 estimated_minutes: 5
-estimated_chars: 1318
+estimated_chars: 1307
 learning_points:
   - Go の唯一の繰り返し構文 for の 3 つの書き方
   - range を使ったスライスやマップの走査
@@ -27,9 +27,6 @@ key_terms:
   - term: continue
     definition: 現在の繰り返しの残りをスキップし、次の繰り返しへ進むための文
 ---
-
-# for による繰り返し
-
 ## このセクションで学ぶこと
 
 - Go の唯一の繰り返し構文 for の 3 つの書き方

@@ -4,7 +4,7 @@ chapter_id: "02"
 title: 数値・文字列・真偽値と型変換
 order: 2
 estimated_minutes: 5
-estimated_chars: 1800
+estimated_chars: 1261
 learning_points:
   - 数値・文字列・真偽値という基本型の種類
   - Go では暗黙の型変換が行われないこと
@@ -26,9 +26,6 @@ key_terms:
   - term: strconv
     definition: 文字列と数値を相互変換する標準ライブラリのパッケージ。Atoi や Itoa などの関数を持つ
 ---
-
-# 数値・文字列・真偽値と型変換
-
 ## このセクションで学ぶこと
 
 - 数値・文字列・真偽値という基本型の種類
