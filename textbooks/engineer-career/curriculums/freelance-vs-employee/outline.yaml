@@ -1,0 +1,140 @@
+title: フリーランス vs 正社員(エンジニア編)
+target_audience:
+  level: 初級
+  prerequisites: []
+  estimated_hours: 2
+style:
+  tone: ですます調・実務寄り
+  code_examples: false
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: 働き方の全体像 — フリーランスと正社員はどう違うのか
+    estimated_minutes: 15
+    learning_objectives:
+      - フリーランスと正社員を分ける本質的な違い(雇用契約の有無)を説明できる
+      - エンジニアの代表的な働き方の選択肢を俯瞰できる
+      - この教材で扱う比較軸(収入・税金・安定性・キャリア)を理解する
+    sections:
+      - id: "01-01"
+        title: そもそも「フリーランス」「正社員」とは
+        estimated_minutes: 4
+      - id: "01-02"
+        title: エンジニアの働き方マップ(正社員・契約社員・フリーランス・副業)
+        estimated_minutes: 5
+      - id: "01-03"
+        title: この教材で比べる5つの軸
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 雇用関係の有無で分かれる働き方の分類
+        type: mermaid
+        section: "01-02"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "02"
+    title: 収入・税金・社会保険の違い
+    estimated_minutes: 20
+    learning_objectives:
+      - 額面年収と手取りの違い、フリーランスの「単価」の考え方を説明できる
+      - 給与所得と事業所得、源泉徴収と確定申告の違いの概要を理解する
+      - 健康保険・年金・雇用保険の扱いが働き方でどう変わるかを把握する
+    sections:
+      - id: "02-01"
+        title: 給与と報酬 — 額面・手取り・単価の考え方
+        estimated_minutes: 5
+      - id: "02-02"
+        title: 税金のしくみ — 年末調整と確定申告、経費の基本
+        estimated_minutes: 5
+      - id: "02-03"
+        title: 社会保険 — 健康保険・年金・雇用保険の違い
+        estimated_minutes: 5
+      - id: "02-04"
+        title: ざっくり比較 — 同じ報酬でも残るお金は違う
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 給与所得(年末調整)と事業所得(確定申告)の処理フローの違い
+        type: mermaid
+        section: "02-02"
+      - purpose: 正社員とフリーランスの社会保険加入先の対比
+        type: mermaid
+        section: "02-03"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "03"
+    title: 安定性とリスク — 案件・収入・保障
+    estimated_minutes: 18
+    learning_objectives:
+      - 収入の安定性とリスクが働き方でどう異なるかを説明できる
+      - 案件が途切れる・契約が終わるといったフリーランス特有のリスクを理解する
+      - 病気・休業・退職時の保障の違いを把握し、備えの観点を持てる
+    sections:
+      - id: "03-01"
+        title: 収入の安定性 — 固定給と変動報酬
+        estimated_minutes: 5
+      - id: "03-02"
+        title: 契約終了・案件途切れというリスク
+        estimated_minutes: 5
+      - id: "03-03"
+        title: もしものときの保障 — 病気・休業・退職
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 正社員とフリーランスのリスクと保障の対比
+        type: mermaid
+        section: "03-03"
+    quiz:
+      count: 7
+      difficulty: medium
+
+  - id: "04"
+    title: 案件獲得とキャリア形成
+    estimated_minutes: 18
+    learning_objectives:
+      - フリーランスの案件獲得の主な経路(エージェント・人脈・直請け)を説明できる
+      - 正社員とフリーランスでスキルアップやキャリアの伸ばし方がどう違うかを理解する
+      - 単価や評価につながる実績・信頼の積み上げ方の観点を持てる
+    sections:
+      - id: "04-01"
+        title: フリーランスの案件獲得 — エージェント・人脈・直請け
+        estimated_minutes: 5
+      - id: "04-02"
+        title: スキルアップと評価のされ方の違い
+        estimated_minutes: 5
+      - id: "04-03"
+        title: 長期的なキャリアの描き方
+        estimated_minutes: 5
+    diagrams:
+      - purpose: フリーランスの案件獲得経路の比較
+        type: mermaid
+        section: "04-01"
+    quiz:
+      count: 7
+      difficulty: medium
+
+  - id: "05"
+    title: 向き不向きと判断軸
+    estimated_minutes: 15
+    learning_objectives:
+      - フリーランス・正社員それぞれが向いている人の傾向を説明できる
+      - 自分の状況に合わせて働き方を選ぶための判断軸を持てる
+      - いきなり独立せず段階的に試す選択肢があることを理解する
+    sections:
+      - id: "05-01"
+        title: どんな人がフリーランスに向くか・正社員に向くか
+        estimated_minutes: 4
+      - id: "05-02"
+        title: 自分で決めるための判断軸(チェックリスト)
+        estimated_minutes: 5
+      - id: "05-03"
+        title: 段階的に試すという選択肢(副業・契約社員)
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 働き方を選ぶための判断フロー
+        type: mermaid
+        section: "05-02"
+    quiz:
+      count: 6
+      difficulty: easy

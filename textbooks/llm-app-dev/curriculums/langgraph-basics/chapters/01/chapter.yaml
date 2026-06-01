@@ -1,0 +1,11 @@
+id: "01"
+title: なぜLangGraphか 〜 状態を持つフロー
+estimated_minutes: 15
+learning_objectives:
+  - LangChain の Chain/Agent で制御が難しくなる場面を説明できる
+  - LangGraph がグラフ(状態 + ノード + エッジ)でフローを表現する利点を説明できる
+  - LangGraph が向くユースケース(分岐・ループ・人間の介在)を判断できる
+section_order:
+  - "01-01"
+  - "01-02"
+  - "01-03"

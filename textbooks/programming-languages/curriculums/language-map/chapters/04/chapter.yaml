@@ -1,0 +1,12 @@
+id: "04"
+title: 低レイヤ系とその他の言語の概観
+estimated_minutes: 16
+learning_objectives:
+  - C / C++ が低レイヤで使われる理由を説明できる
+  - Rust が安全性と速度を両立しようとする言語であることを説明できる
+  - 用途特化の言語(SQL・Swift/Kotlin など)の位置づけを把握する
+section_order:
+  - "04-01"
+  - "04-02"
+  - "04-03"
+  - "04-04"

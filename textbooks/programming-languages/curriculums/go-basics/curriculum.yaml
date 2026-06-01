@@ -1,0 +1,16 @@
+id: go-basics
+title: Go言語の基礎
+description: Go の文法と並行処理、モジュール管理までを手を動かしながら学ぶ入門カリキュラム。
+order: 2
+estimated_hours: 2
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites:
+    - 何らかのプログラミング経験があると望ましい(変数・関数・繰り返しを知っている)
+    - ターミナル(コマンドライン)で基本的なコマンドを実行できる
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"

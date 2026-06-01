@@ -1,0 +1,12 @@
+id: "02"
+title: 変数・型・制御構文
+estimated_minutes: 20
+learning_objectives:
+  - 変数の宣言方法と基本的な型を使い分けられる
+  - if / for / switch で処理を分岐・反復できる
+  - Go の型システムの基本的な考え方を説明できる
+section_order:
+  - "02-01"
+  - "02-02"
+  - "02-03"
+  - "02-04"

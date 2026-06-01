@@ -1,0 +1,11 @@
+id: "01"
+title: LLMアプリ開発とLangChainの全体像
+estimated_minutes: 15
+learning_objectives:
+  - LLM を直接 API で叩く場合の課題と、フレームワークが解く問題を説明できる
+  - LangChain の主要コンポーネント(Model / Prompt / Chain / Retrieval / Tool / Agent)の役割を俯瞰できる
+  - LangChain と周辺エコシステム(LangGraph / LangSmith)の位置づけを大まかに把握できる
+section_order:
+  - "01-01"
+  - "01-02"
+  - "01-03"

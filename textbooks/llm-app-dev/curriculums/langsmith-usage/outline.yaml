@@ -1,0 +1,155 @@
+title: LangSmith活用事例
+target_audience:
+  level: 中級
+  prerequisites:
+    - LangChain / LangGraph を使ってアプリやエージェントを実装した経験がある
+    - Python の基本文法と環境変数(APIキー)の扱いを理解している
+  estimated_hours: 4
+style:
+  tone: ですます調・実務寄り
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: LangSmithとは 〜 全体像とセットアップ
+    estimated_minutes: 15
+    learning_objectives:
+      - LangSmith が解決する課題(LLM アプリの観測性・評価・運用)を説明できる
+      - トレース / データセット / 評価 / モニタリングという主要機能の関係を俯瞰できる
+      - 環境変数を設定して既存の LangChain アプリのトレースを有効化できる
+    sections:
+      - id: "01-01"
+        title: なぜLLMアプリに観測性が必要か
+        estimated_minutes: 4
+      - id: "01-02"
+        title: LangSmithの全体像(トレース・評価・モニタリング)
+        estimated_minutes: 5
+      - id: "01-03"
+        title: セットアップとトレースの有効化
+        estimated_minutes: 5
+    diagrams:
+      - purpose: LangSmith の主要機能(トレース / データセット / 評価 / モニタリング)の関係図
+        type: mermaid
+        section: "01-02"
+      - purpose: アプリ実行から LangSmith へトレースが送信され可視化されるまでの流れ
+        type: mermaid
+        section: "01-03"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "02"
+    title: トレーシングとデバッグ
+    estimated_minutes: 22
+    learning_objectives:
+      - Run / Trace の構造(親子関係・入出力・レイテンシ・トークン)を読み解ける
+      - チェーンやエージェントの失敗・遅延の原因をトレースから切り分けられる
+      - メタデータ・タグ・run 名を付与してトレースを検索しやすくできる
+    sections:
+      - id: "02-01"
+        title: TraceとRunの構造を読む
+        estimated_minutes: 5
+      - id: "02-02"
+        title: エージェントの実行をデバッグする
+        estimated_minutes: 6
+      - id: "02-03"
+        title: メタデータ・タグで絞り込む
+        estimated_minutes: 5
+      - id: "02-04"
+        title: エラーとレイテンシのボトルネックを見つける
+        estimated_minutes: 5
+    diagrams:
+      - purpose: チェーン / エージェント実行が親子の Run ツリーとして記録される構造
+        type: mermaid
+        section: "02-01"
+      - purpose: トレースから原因を切り分けるデバッグの流れ
+        type: mermaid
+        section: "02-02"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "03"
+    title: データセットと評価(evaluation)
+    estimated_minutes: 22
+    learning_objectives:
+      - データセット(入力・参照出力のペア)を作成・管理する目的を説明できる
+      - 評価器(ヒューリスティック / LLM-as-judge)の違いと使い分けを理解する
+      - データセット上でオフライン評価を実行し結果を比較できる
+      - 評価指標を使って改修前後の品質を回帰チェックできる
+    sections:
+      - id: "03-01"
+        title: なぜ評価が必要か(主観から測定へ)
+        estimated_minutes: 4
+      - id: "03-02"
+        title: データセットを作る
+        estimated_minutes: 5
+      - id: "03-03"
+        title: 評価器の種類と選び方(LLM-as-judge含む)
+        estimated_minutes: 6
+      - id: "03-04"
+        title: オフライン評価を実行して比較する
+        estimated_minutes: 6
+    diagrams:
+      - purpose: データセット → 対象アプリ実行 → 評価器 → スコア集計 の評価パイプライン
+        type: mermaid
+        section: "03-04"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "04"
+    title: プロンプト管理と実験
+    estimated_minutes: 20
+    learning_objectives:
+      - Prompt Hub でプロンプトをバージョン管理・共有する利点を説明できる
+      - プロンプト・モデル・パラメータを変えた実験を比較する方法を理解する
+      - 実験結果(コスト・レイテンシ・スコア)を根拠に改善判断ができる
+    sections:
+      - id: "04-01"
+        title: プロンプトをバージョン管理する(Prompt Hub)
+        estimated_minutes: 5
+      - id: "04-02"
+        title: プロンプト・モデルを変えて実験する
+        estimated_minutes: 6
+      - id: "04-03"
+        title: 実験結果を比較して改善判断する
+        estimated_minutes: 5
+      - id: "04-04"
+        title: Playgroundで素早く試す
+        estimated_minutes: 4
+    diagrams:
+      - purpose: プロンプトのバージョン管理と複数実験の比較の流れ
+        type: mermaid
+        section: "04-02"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "05"
+    title: 本番モニタリングと活用事例
+    estimated_minutes: 20
+    learning_objectives:
+      - 本番トラフィックの監視指標(レイテンシ・コスト・エラー率・フィードバック)を説明できる
+      - ユーザーフィードバックやオンライン評価を品質改善のループに組み込める
+      - トレース・評価・モニタリングを通した運用サイクルを実務に当てはめられる
+    sections:
+      - id: "05-01"
+        title: 本番モニタリングのダッシュボード
+        estimated_minutes: 5
+      - id: "05-02"
+        title: ユーザーフィードバックを収集する
+        estimated_minutes: 5
+      - id: "05-03"
+        title: オンライン評価と継続的な品質監視
+        estimated_minutes: 5
+      - id: "05-04"
+        title: 活用事例 〜 改善ループを回す
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 本番運用での観測 → フィードバック → 評価 → 改善 のフィードバックループ
+        type: mermaid
+        section: "05-04"
+    quiz:
+      count: 8
+      difficulty: medium

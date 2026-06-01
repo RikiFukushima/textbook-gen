@@ -1,0 +1,12 @@
+id: "04"
+title: ファイル入出力と例外処理
+estimated_minutes: 18
+learning_objectives:
+  - ファイルを開いて読み書きできる
+  - with 文でファイルを安全に扱える
+  - try/except で例外を捕捉し対処できる
+section_order:
+  - "04-01"
+  - "04-02"
+  - "04-03"
+  - "04-04"

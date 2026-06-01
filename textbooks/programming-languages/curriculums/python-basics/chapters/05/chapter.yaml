@@ -1,0 +1,12 @@
+id: "05"
+title: ライブラリと pip・仮想環境
+estimated_minutes: 18
+learning_objectives:
+  - 外部ライブラリと pip の役割を説明できる
+  - pip でパッケージを導入できる
+  - 仮想環境でプロジェクトごとに依存を分離できる
+section_order:
+  - "05-01"
+  - "05-02"
+  - "05-03"
+  - "05-04"

@@ -1,0 +1,11 @@
+id: "01"
+title: Claude Code とは何か
+estimated_minutes: 15
+learning_objectives:
+  - Claude Code を「自分のパソコン上で作業を手伝ってくれる AI の相棒」として説明できる
+  - チャット型 AI アシスタントとの違い(ファイルや作業に直接手を出せる点)を説明できる
+  - 非エンジニアでも使える道具であることを理解する
+section_order:
+  - "01-01"
+  - "01-02"
+  - "01-03"

@@ -1,0 +1,13 @@
+id: "02"
+title: Model・Prompt・Chain の基礎(LCEL)
+estimated_minutes: 22
+learning_objectives:
+  - ChatModel と PromptTemplate の役割と基本的な使い方を説明できる
+  - LCEL(LangChain Expression Language)でコンポーネントをパイプ連結できる
+  - OutputParser で LLM 出力を構造化データに変換できる
+  - Runnable の共通インターフェース(invoke / stream / batch)を理解する
+section_order:
+  - "02-01"
+  - "02-02"
+  - "02-03"
+  - "02-04"

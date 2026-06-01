@@ -1,0 +1,156 @@
+title: コンピュータとインターネットの基礎
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites:
+    - パソコンの基本操作(マウス・キーボード・文字入力)ができる
+  estimated_hours: 2
+style:
+  tone: ですます調・やさしく丁寧
+  code_examples: false
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: コンピュータってなんだろう
+    estimated_minutes: 12
+    learning_objectives:
+      - コンピュータが「入力・処理・出力」で動いていることを説明できる
+      - 身のまわりにあるコンピュータの例を挙げられる
+      - これから学ぶ全体像(機械・つながり・画面表示)をイメージできる
+    sections:
+      - id: "01-01"
+        title: 私たちのまわりはコンピュータだらけ
+        estimated_minutes: 3
+      - id: "01-02"
+        title: コンピュータの基本は「入力・処理・出力」
+        estimated_minutes: 4
+      - id: "01-03"
+        title: この教材で学ぶことの全体地図
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 入力・処理・出力の流れ(身近な例で)
+        type: mermaid
+        section: "01-02"
+      - purpose: 教材全体の流れ(機械→つながり→画面表示)の地図
+        type: mermaid
+        section: "01-03"
+    quiz:
+      count: 5
+      difficulty: easy
+
+  - id: "02"
+    title: パソコンの中身をのぞいてみよう(ハードウェア)
+    estimated_minutes: 18
+    learning_objectives:
+      - CPU・メモリ・ストレージそれぞれの役割を自分の言葉で説明できる
+      - メモリとストレージの違い(作業机と引き出し)を区別できる
+      - 入力装置と出力装置の例を挙げられる
+    sections:
+      - id: "02-01"
+        title: ハードウェアとは(目に見える部品たち)
+        estimated_minutes: 3
+      - id: "02-02"
+        title: 頭脳のCPUと、作業机のメモリ
+        estimated_minutes: 5
+      - id: "02-03"
+        title: しまっておくストレージ
+        estimated_minutes: 4
+      - id: "02-04"
+        title: 情報を出し入れする入力装置と出力装置
+        estimated_minutes: 4
+    diagrams:
+      - purpose: CPU・メモリ・ストレージ・入出力装置の関係(パソコン全体像)
+        type: mermaid
+        section: "02-01"
+      - purpose: メモリ(作業机)とストレージ(引き出し)の違いの対比
+        type: mermaid
+        section: "02-03"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "03"
+    title: データとファイルのしくみ
+    estimated_minutes: 14
+    learning_objectives:
+      - コンピュータが情報を0と1で扱っていることをイメージできる
+      - ファイルとフォルダの関係を説明できる
+      - 容量の単位(KB・MB・GB)の大小をざっくり区別できる
+    sections:
+      - id: "03-01"
+        title: コンピュータは0と1で考えている
+        estimated_minutes: 4
+      - id: "03-02"
+        title: ファイルとフォルダで情報を整理する
+        estimated_minutes: 4
+      - id: "03-03"
+        title: 容量の単位(KB・MB・GB)を知ろう
+        estimated_minutes: 4
+    diagrams:
+      - purpose: フォルダの中にフォルダやファイルが入る入れ子構造(ツリー)
+        type: mermaid
+        section: "03-02"
+    quiz:
+      count: 5
+      difficulty: easy
+
+  - id: "04"
+    title: インターネットはどうつながっているの
+    estimated_minutes: 18
+    learning_objectives:
+      - お願いする側(クライアント)と応える側(サーバ)の関係を説明できる
+      - IPアドレスとDNSの役割をたとえで説明できる
+      - HTTPが「やり取りの約束ごと」であることをイメージできる
+    sections:
+      - id: "04-01"
+        title: たのむ人と、こたえる人(クライアントとサーバ)
+        estimated_minutes: 5
+      - id: "04-02"
+        title: 住所のようなIPアドレス
+        estimated_minutes: 4
+      - id: "04-03"
+        title: 名前を住所に変えるDNS
+        estimated_minutes: 4
+      - id: "04-04"
+        title: やり取りの約束ごとHTTP
+        estimated_minutes: 5
+    diagrams:
+      - purpose: クライアントがサーバにお願いして応えてもらう関係
+        type: mermaid
+        section: "04-01"
+      - purpose: ドメイン名からIPアドレスを調べるDNSの流れ
+        type: mermaid
+        section: "04-03"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "05"
+    title: Webページが画面に出るまで
+    estimated_minutes: 18
+    learning_objectives:
+      - URLを入力してからページが表示されるまでの流れを順番に説明できる
+      - リクエストとレスポンスのやり取りを説明できる
+      - ブラウザが受け取ったデータを画面に組み立てる役割を理解する
+    sections:
+      - id: "05-01"
+        title: URLを入力すると何が始まるのか
+        estimated_minutes: 4
+      - id: "05-02"
+        title: 名前を調べて、お願いを送る(DNSとリクエスト)
+        estimated_minutes: 5
+      - id: "05-03"
+        title: サーバからの返事(レスポンス)
+        estimated_minutes: 4
+      - id: "05-04"
+        title: ブラウザが画面を組み立てる(レンダリング)
+        estimated_minutes: 5
+    diagrams:
+      - purpose: URL入力からページ表示までの一連の流れ(端から端まで)
+        type: mermaid
+        section: "05-01"
+      - purpose: ブラウザとサーバのリクエスト・レスポンスのやり取り
+        type: mermaid
+        section: "05-03"
+    quiz:
+      count: 6
+      difficulty: easy

@@ -1,0 +1,16 @@
+id: langgraph-basics
+title: LangGraph基礎
+description: ""
+order: 2
+estimated_hours: 2
+target_audience:
+  level: 中級 # 初級 | 中級 | 上級
+  prerequisites:
+    - LangChain 基礎相当(Model / Prompt / Chain / Tool / Agent)の理解がある
+    - Python の基本文法(関数・クラス・型ヒント)を理解している
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"

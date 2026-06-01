@@ -1,0 +1,12 @@
+id: "01"
+title: Python とは何か ― 環境構築と最初の一歩
+estimated_minutes: 16
+learning_objectives:
+  - Python がどんな言語で何に向いているかを説明できる
+  - Python の実行環境を用意できる
+  - 対話モードとスクリプト実行でプログラムを動かせる
+section_order:
+  - "01-01"
+  - "01-02"
+  - "01-03"
+  - "01-04"

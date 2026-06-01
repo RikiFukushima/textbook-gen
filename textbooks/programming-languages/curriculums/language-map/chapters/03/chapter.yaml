@@ -1,0 +1,12 @@
+id: "03"
+title: JavaScript / TypeScript と Java
+estimated_minutes: 18
+learning_objectives:
+  - JavaScript がブラウザとサーバの両方で使われる理由を説明できる
+  - TypeScript が JavaScript に型を加える意味を説明できる
+  - Java の特徴と主な使いどころを説明できる
+section_order:
+  - "03-01"
+  - "03-02"
+  - "03-03"
+  - "03-04"

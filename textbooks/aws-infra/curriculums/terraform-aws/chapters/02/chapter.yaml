@@ -1,0 +1,12 @@
+id: "02"
+title: Terraform 基礎 — HCL と基本ワークフロー
+estimated_minutes: 22
+learning_objectives:
+  - HCL の基本構文(block / argument)を読み書きできる
+  - provider と resource の役割を説明できる
+  - init / plan / apply のワークフローを実行できる
+section_order:
+  - "02-01"
+  - "02-02"
+  - "02-03"
+  - "02-04"

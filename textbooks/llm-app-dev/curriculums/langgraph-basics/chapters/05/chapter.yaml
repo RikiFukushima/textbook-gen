@@ -1,0 +1,12 @@
+id: "05"
+title: 永続化(checkpointer)と human-in-the-loop
+estimated_minutes: 22
+learning_objectives:
+  - checkpointer による状態の永続化と thread_id による会話の継続を説明できる
+  - 実行を途中で止めて再開する(interrupt / resume)仕組みを理解する
+  - human-in-the-loop(人間の承認・修正をフローに組み込む)を構成できる
+section_order:
+  - "05-01"
+  - "05-02"
+  - "05-03"
+  - "05-04"

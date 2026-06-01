@@ -1,0 +1,12 @@
+id: "02"
+title: Go と Python ― 得意・不得意と使いどころ
+estimated_minutes: 18
+learning_objectives:
+  - Go の得意分野と不得意分野を説明できる
+  - Python の得意分野と不得意分野を説明できる
+  - 同じ処理を Go と Python で書いたときの違いを読み取れる
+section_order:
+  - "02-01"
+  - "02-02"
+  - "02-03"
+  - "02-04"

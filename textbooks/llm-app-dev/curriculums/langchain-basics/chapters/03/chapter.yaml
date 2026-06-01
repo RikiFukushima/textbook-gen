@@ -1,0 +1,13 @@
+id: "03"
+title: Retrieval と RAG の基礎
+estimated_minutes: 22
+learning_objectives:
+  - RAG が解決する課題(知識の鮮度・ハルシネーション抑制)を説明できる
+  - Document Loader / Text Splitter / Embedding / VectorStore の役割を説明できる
+  - Retriever を使った検索と LLM への文脈注入の流れを組み立てられる
+  - 基本的な RAG チェーンを LCEL で構成できる
+section_order:
+  - "03-01"
+  - "03-02"
+  - "03-03"
+  - "03-04"
