@@ -4,7 +4,7 @@ chapter_id: "02"
 title: for と while による繰り返し
 order: 5
 estimated_minutes: 5
-estimated_chars: 928
+estimated_chars: 909
 learning_points:
   - for で要素やリスト・辞書を順番に処理できる
   - while で条件が成り立つ間だけ繰り返せる
@@ -85,5 +85,3 @@ for n in range(5):
 - `for` はリストや `range()` の要素を 1 つずつ取り出して、その数だけ処理を繰り返す。
 - `while` は条件が `True` の間くり返す。条件を進める更新を忘れると無限ループになる。
 - `break` でループを打ち切り、`continue` でその周だけ飛ばして次へ進める。
-</content>
-</invoke>

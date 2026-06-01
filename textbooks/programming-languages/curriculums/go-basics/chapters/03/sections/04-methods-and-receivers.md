@@ -4,7 +4,7 @@ chapter_id: "03"
 title: メソッドとレシーバ
 order: 4
 estimated_minutes: 5
-estimated_chars: 1163
+estimated_chars: 1144
 learning_points:
   - 構造体に紐づく関数(メソッド)を定義できる
   - 値レシーバとポインタレシーバの違いを理解して使い分けられる
@@ -84,5 +84,3 @@ fmt.Println(u.Age) // 29
 - メソッドは `func (レシーバ 型) 名前() { ... }` の形で型に振る舞いを紐づける。
 - 値レシーバはコピー、ポインタレシーバは元の値を指し、変更を反映できる。
 - 状態を変えるメソッドや大きな構造体ではポインタレシーバを使うのが基本。
-</content>
-</invoke>
