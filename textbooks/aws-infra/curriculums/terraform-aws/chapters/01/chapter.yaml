@@ -1,0 +1,11 @@
+id: "01"
+title: IaC とは — Terraform の位置づけ
+estimated_minutes: 15
+learning_objectives:
+  - Infrastructure as Code(IaC)が解決する課題を説明できる
+  - 宣言的アプローチと手続き的アプローチの違いを理解する
+  - Terraform が他の IaC ツールの中でどこに位置づくかを説明できる
+section_order:
+  - "01-01"
+  - "01-02"
+  - "01-03"

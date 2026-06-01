@@ -1,0 +1,12 @@
+id: "04"
+title: AWS リソースを作る(VPC / サブネット / EC2)
+estimated_minutes: 22
+learning_objectives:
+  - VPC・サブネットを Terraform で定義できる
+  - リソース間の依存関係を参照で表現できる
+  - EC2 インスタンスを起動するまでの構成を組める
+section_order:
+  - "04-01"
+  - "04-02"
+  - "04-03"
+  - "04-04"

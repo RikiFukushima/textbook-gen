@@ -1,0 +1,11 @@
+id: "03"
+title: state 管理の基礎
+estimated_minutes: 18
+learning_objectives:
+  - state ファイルが何を保持し、なぜ必要かを説明できる
+  - ローカル state とリモート state の違いを理解する
+  - S3 バックエンドとロックによるチーム運用の基本を説明できる
+section_order:
+  - "03-01"
+  - "03-02"
+  - "03-03"

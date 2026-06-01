@@ -1,0 +1,11 @@
+id: "05"
+title: 変数と出力・再利用(variables / outputs / module)
+estimated_minutes: 18
+learning_objectives:
+  - variables で構成を外部からパラメータ化できる
+  - outputs で必要な値を取り出せる
+  - module による構成の再利用の基本を理解する
+section_order:
+  - "05-01"
+  - "05-02"
+  - "05-03"

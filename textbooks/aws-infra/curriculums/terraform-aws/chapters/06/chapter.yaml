@@ -1,0 +1,11 @@
+id: "06"
+title: 実運用の注意 — 秘匿情報・破壊的変更・destroy
+estimated_minutes: 18
+learning_objectives:
+  - 秘匿情報を安全に扱う方法を説明できる
+  - plan の差分を読み、破壊的変更(replace)を見分けられる
+  - destroy の影響範囲を理解し安全に運用できる
+section_order:
+  - "06-01"
+  - "06-02"
+  - "06-03"
