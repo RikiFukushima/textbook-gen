@@ -1,0 +1,12 @@
+id: "04"
+title: 並行処理 ― goroutine と channel
+estimated_minutes: 22
+learning_objectives:
+  - goroutine で処理を並行に実行できる
+  - channel で goroutine 間のデータをやり取りできる
+  - 並行処理で気をつける点(同期・終了待ち)を説明できる
+section_order:
+  - "04-01"
+  - "04-02"
+  - "04-03"
+  - "04-04"

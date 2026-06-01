@@ -1,0 +1,12 @@
+id: "01"
+title: Go とは何か ― 環境構築と Hello, World
+estimated_minutes: 18
+learning_objectives:
+  - Go がどんな言語で何に向いているかを説明できる
+  - Go の開発環境を構築できる
+  - hello world を書いてビルド・実行できる
+section_order:
+  - "01-01"
+  - "01-02"
+  - "01-03"
+  - "01-04"
