@@ -1,0 +1,13 @@
+id: "04"
+title: 条件分岐・ループ・分岐合流
+estimated_minutes: 22
+learning_objectives:
+  - conditional edge で状態に応じて遷移先を切り替えられる
+  - ノードへ戻るエッジでループ(再試行・反復)を構成できる
+  - 複数の分岐を合流させるグラフ設計を理解する
+  - 無限ループを防ぐ recursion_limit を理解する
+section_order:
+  - "04-01"
+  - "04-02"
+  - "04-03"
+  - "04-04"

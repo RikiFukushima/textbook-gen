@@ -1,0 +1,13 @@
+id: "02"
+title: State・Node・Edge の基本
+estimated_minutes: 22
+learning_objectives:
+  - State(状態)を TypedDict などで定義する方法を説明できる
+  - Node が State を受け取り更新を返す関数であることを理解する
+  - Edge がノード間の遷移を定義することを理解する
+  - reducer による State 更新のマージ挙動を説明できる
+section_order:
+  - "02-01"
+  - "02-02"
+  - "02-03"
+  - "02-04"

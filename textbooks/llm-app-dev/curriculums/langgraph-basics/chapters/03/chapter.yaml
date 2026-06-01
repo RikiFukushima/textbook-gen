@@ -1,0 +1,11 @@
+id: "03"
+title: グラフの構築と実行
+estimated_minutes: 18
+learning_objectives:
+  - StateGraph にノード・エッジを登録し compile する流れを説明できる
+  - エントリポイントと終了(END)の指定方法を理解する
+  - invoke / stream でグラフを実行し中間状態を観測できる
+section_order:
+  - "03-01"
+  - "03-02"
+  - "03-03"
