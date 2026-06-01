@@ -1,0 +1,13 @@
+id: "04"
+title: Tool と Agent の基礎
+estimated_minutes: 20
+learning_objectives:
+  - Tool(関数呼び出し)の概念と LLM からの呼び出し方を説明できる
+  - Agent が「思考 → ツール実行 → 観測」を繰り返す仕組みを理解する
+  - Tool calling を使った簡単な Agent を構成できる
+  - Agent の課題(制御性・デバッグの難しさ)を認識する
+section_order:
+  - "04-01"
+  - "04-02"
+  - "04-03"
+  - "04-04"

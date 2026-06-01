@@ -1,0 +1,12 @@
+id: "05"
+title: LangChainとLangGraphの違いと使い分け
+estimated_minutes: 20
+learning_objectives:
+  - LangChain の Chain/Agent と LangGraph の状態グラフの設計思想の違いを説明できる
+  - 「どこからが LangGraph の領域か」(状態・分岐・ループ・人間の介在)を判断できる
+  - ユースケースごとに LangChain と LangGraph のどちらを選ぶか判断できる
+section_order:
+  - "05-01"
+  - "05-02"
+  - "05-03"
+  - "05-04"
