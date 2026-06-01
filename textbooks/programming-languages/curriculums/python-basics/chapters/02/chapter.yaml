@@ -1,0 +1,13 @@
+id: "02"
+title: 変数・データ構造・制御構文
+estimated_minutes: 22
+learning_objectives:
+  - 変数と基本的なデータ型を使い分けられる
+  - list / dict などのデータ構造を扱える
+  - if / for / while で処理を分岐・反復できる
+section_order:
+  - "02-01"
+  - "02-02"
+  - "02-03"
+  - "02-04"
+  - "02-05"
