@@ -1,0 +1,141 @@
+{
+  "chapter_id": "03",
+  "questions": [
+    {
+      "id": "q03-01",
+      "question": "Terraform の state ファイル(terraform.tfstate)が果たす役割として、最も適切なものはどれですか。",
+      "options": [
+        { "id": "a", "text": "AWS の API に問い合わせれば取得できる情報のキャッシュにすぎず、消してもすぐに再構築される。" },
+        { "id": "b", "text": "設定(.tf ファイル)と実物のリソースを結びつける対応表として、Terraform が管理対象のリソース ID などの現状を記録する。" },
+        { "id": "c", "text": "Terraform の実行ログを時系列に蓄積するファイルで、過去の apply 内容を監査するために使う。" },
+        { "id": "d", "text": "設定ファイル(.tf)のコピーであり、人間が編集して構成を変更するためのもの。" }
+      ],
+      "answer": "b",
+      "explanation": "state は「設定」と「実物のリソース」を結ぶ対応表で、コード上の名前と AWS 上の実リソース ID の対応などを JSON で記録します。AWS API には『このコードに対応するリソースはどれか』を問い合わせる機能がないため、Terraform 自身が state で覚えておく必要があります。",
+      "source_refs": [
+        { "section_id": "03-01", "anchor": "state は「設定」と「実物」を結ぶ対応表" }
+      ],
+      "difficulty": "medium",
+      "tags": ["state", "basics"]
+    },
+    {
+      "id": "q03-02",
+      "question": "terraform plan が差分を計算する仕組みについて、最も正確な説明はどれですか。",
+      "options": [
+        { "id": "a", "text": "毎回 AWS から全リソースの状態をゼロから取得し、設定と比較してすべてを作り直す計画を出す。" },
+        { "id": "b", "text": "state を読み込み、その情報をクラウドの実態と突き合わせて最新化(リフレッシュ)したうえで、設定との差分だけを実行計画として提示する。" },
+        { "id": "c", "text": "設定ファイル同士を前回の .tf と比較し、ファイルの diff をそのまま実行計画とする。" },
+        { "id": "d", "text": "state は使わず、クラウドの現状と設定だけを比較するため、state が無くても plan の結果は同じになる。" }
+      ],
+      "answer": "b",
+      "explanation": "plan は state を起点にリフレッシュを行い、『設定が求める状態』と『state が示す現状』を比較して差分だけを計算します。state があるからこそ、毎回ゼロから作り直さず変更分のみを適用できます。",
+      "source_refs": [
+        { "section_id": "03-01", "anchor": "plan は state を起点に差分を計算する" }
+      ],
+      "difficulty": "medium",
+      "tags": ["plan", "state", "refresh"]
+    },
+    {
+      "id": "q03-03",
+      "question": "state ファイルを誤って削除してしまった場合、次の terraform apply で起きうる現象として最も適切なものはどれですか。",
+      "options": [
+        { "id": "a", "text": "Terraform が AWS から自動で state を完全に復元するため、特に問題は起きない。" },
+        { "id": "b", "text": "Terraform は実物の存在を忘れ、すでに存在するリソースをもう一度作ろうとして衝突したり、二重に課金される恐れがある。" },
+        { "id": "c", "text": "Terraform が異常検知して apply を拒否し、何も変更されないため安全である。" },
+        { "id": "d", "text": "既存リソースは保持されるが、新規リソースだけが作成できなくなる。" }
+      ],
+      "answer": "b",
+      "explanation": "state を消すと Terraform は管理対象の実物を忘れ、apply で『まだ何も作られていない』と判断します。その結果、既存リソースをもう一度作ろうとして衝突したり、二重に課金されるなど整合性が崩れます。",
+      "source_refs": [
+        { "section_id": "03-01", "anchor": "state を壊すと整合性が崩れる" }
+      ],
+      "difficulty": "medium",
+      "tags": ["state", "operations"]
+    },
+    {
+      "id": "q03-04",
+      "question": "AWS コンソールから手作業でリソースを変更してしまった結果、state の記録と実際のリソースがずれた状態を何と呼びますか。",
+      "options": [
+        { "id": "a", "text": "リフレッシュ" },
+        { "id": "b", "text": "ロールバック" },
+        { "id": "c", "text": "ドリフト" },
+        { "id": "d", "text": "リプレース" }
+      ],
+      "answer": "c",
+      "explanation": "コンソール等での手作業によって state と実物がずれた状態を『ドリフト』と呼びます。リフレッシュは plan / apply 前に state とクラウドの実態を突き合わせて最新化する処理で、別概念です。",
+      "source_refs": [
+        { "section_id": "03-01", "anchor": "ドリフト" }
+      ],
+      "difficulty": "medium",
+      "tags": ["state", "drift"]
+    },
+    {
+      "id": "q03-05",
+      "question": "ローカルバックエンド(ローカル state)をチーム開発で使うとどんな問題が起きるか、最も適切な説明はどれですか。",
+      "options": [
+        { "id": "a", "text": "Terraform が自動で他メンバーの state とマージしてくれるが、性能が落ちる。" },
+        { "id": "b", "text": "各メンバーの PC に state が分散するため、互いに同じリソースを再作成したり、同時 apply で実態と食い違ったり、PC 故障で state を喪失する恐れがある。" },
+        { "id": "c", "text": "ローカル state はリードオンリーになるため、複数人での apply が物理的に不可能になり、衝突自体は起きない。" },
+        { "id": "d", "text": "ローカル state は AWS 側に自動同期されるため、共有上の問題はなく秘匿情報の心配だけが残る。" }
+      ],
+      "answer": "b",
+      "explanation": "ローカル state は実行マシンのディスクにあるだけで共有や排他制御の仕組みがありません。state がメンバー間でずれ、同時 apply で衝突し、PC の故障や誤削除で喪失するリスクが残ります。",
+      "source_refs": [
+        { "section_id": "03-02", "anchor": "チームで使うと衝突・喪失が起きる" }
+      ],
+      "difficulty": "medium",
+      "tags": ["state", "team", "local-backend"]
+    },
+    {
+      "id": "q03-06",
+      "question": "「ローカル state を Git で共有すれば、チームでも問題なく使える」という考えが推奨されない主な理由はどれですか。",
+      "options": [
+        { "id": "a", "text": "Git のリポジトリサイズが肥大化し、push に時間がかかるから。" },
+        { "id": "b", "text": "state は機械生成の JSON で手でマージできず、また DB パスワードなどの秘匿情報が平文で残ることがあるため漏洩につながるから。" },
+        { "id": "c", "text": "Terraform が Git 管理下の state を一切読み込まない仕様になっているから。" },
+        { "id": "d", "text": "AWS の利用規約で state を Git に置くことが明示的に禁止されているから。" }
+      ],
+      "answer": "b",
+      "explanation": "state は機械が生成する JSON でマージ衝突を手で解決すると壊れます。さらにリソース属性として DB パスワードや接続文字列が平文で残ることがあり、リポジトリで共有すると秘匿情報が漏れます。`.gitignore` に `*.tfstate*` を加えるのが定石です。",
+      "source_refs": [
+        { "section_id": "03-02", "anchor": "state を Git にコミットしてはいけない" }
+      ],
+      "difficulty": "medium",
+      "tags": ["state", "security", "git"]
+    },
+    {
+      "id": "q03-07",
+      "question": "S3 バックエンドを設定する `backend \"s3\"` ブロックの各引数の説明として、適切でないものはどれですか。",
+      "options": [
+        { "id": "a", "text": "`bucket` は state を保存する S3 バケット名を指定する。" },
+        { "id": "b", "text": "`key` はバケット内のパスで、複数の構成を同じバケットで管理するときに分けて衝突を避ける。" },
+        { "id": "c", "text": "`encrypt = true` は保存時に state を暗号化し、秘匿情報が平文のまま残るリスクを下げる。" },
+        { "id": "d", "text": "`bucket` を変更すれば自動的に新しいバケットへ state が移行し、`terraform init` を実行する必要はない。" }
+      ],
+      "answer": "d",
+      "explanation": "バックエンドを追加・変更したら `terraform init` で初期化し直す必要があり、既存のローカル state があればリモートへ移行するか確認されます。bucket / key / encrypt の説明は本文どおり正しい記述です。",
+      "source_refs": [
+        { "section_id": "03-03", "anchor": "S3 バックエンドを設定する" }
+      ],
+      "difficulty": "medium",
+      "tags": ["backend", "s3", "init"]
+    },
+    {
+      "id": "q03-08",
+      "question": "state ロックの役割と仕組みについて、最も適切な説明はどれですか。",
+      "options": [
+        { "id": "a", "text": "state ファイルを読み取り専用にして、apply 自体ができないようにする仕組み。" },
+        { "id": "b", "text": "誰かが apply 中は他の plan / apply を待たせる排他制御で、S3 自体のロック機能(use_lockfile)や従来は DynamoDB を併用して実現する。" },
+        { "id": "c", "text": "Terraform Cloud 以外では実現できず、S3 バックエンド単体ではロックは利用できない。" },
+        { "id": "d", "text": "ロックは同じ S3 バケットへの保存順序を保証するだけで、同時 apply による上書き自体は防げない。" }
+      ],
+      "answer": "b",
+      "explanation": "state ロックは apply 中の同時実行を待たせる排他制御で、共有ストレージへの同時書き換えによる state 破壊を防ぎます。S3 バックエンドでは `use_lockfile = true` による S3 自体のロック機能、または従来から使われている DynamoDB テーブルとの併用で実現します。",
+      "source_refs": [
+        { "section_id": "03-03", "anchor": "ロックが同時実行による破壊を防ぐ" }
+      ],
+      "difficulty": "medium",
+      "tags": ["state-lock", "backend", "s3"]
+    }
+  ]
+}

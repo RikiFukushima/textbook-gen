@@ -1,0 +1,141 @@
+{
+  "chapter_id": "05",
+  "questions": [
+    {
+      "id": "q05-01",
+      "question": "variable ブロックで `default` を書かなかった変数を、値を渡さずに `terraform plan` を実行するとどうなりますか。",
+      "options": [
+        { "id": "a", "text": "型のゼロ値(string なら空文字)が自動的に入って実行される" },
+        { "id": "b", "text": "その変数を参照しているリソースだけがスキップされる" },
+        { "id": "c", "text": "必須の入力として扱われ、対話的に値の入力を求められる" },
+        { "id": "d", "text": "警告ログだけが出て、変数の参照箇所は null として処理される" }
+      ],
+      "answer": "c",
+      "explanation": "`default` を書かない変数は必須入力となり、値を渡さずに `terraform plan` を実行すると対話的に入力を求められます。型のゼロ値や null が自動で入ることはありません。",
+      "source_refs": [
+        { "section_id": "05-01", "anchor": "variable ブロックを宣言する" }
+      ],
+      "difficulty": "medium",
+      "tags": ["variables", "default"]
+    },
+    {
+      "id": "q05-02",
+      "question": "同じ変数 `instance_type` に対して、`terraform.tfvars` への記述・`TF_VAR_instance_type` の環境変数・`terraform apply -var=\"instance_type=...\"` の 3 通りすべてで値が指定されていました。最終的に採用される値はどれですか。",
+      "options": [
+        { "id": "a", "text": "`terraform.tfvars` の値(自動読み込みされる tfvars が最も優先される)" },
+        { "id": "b", "text": "`TF_VAR_` 環境変数の値(セッション固有の指定が最も優先される)" },
+        { "id": "c", "text": "コマンドラインの `-var` で渡した値(コマンドライン指定が最も優先される)" },
+        { "id": "d", "text": "variable ブロックの `default` 値(複数指定があると曖昧として既定値にフォールバックする)" }
+      ],
+      "answer": "c",
+      "explanation": "本文の優先順位どおり、コマンドラインの -var / -var-file が最も強く、次に自動読み込みの tfvars、環境変数、最後に default の順で優先されます。tfvars は強そうに見えますが、コマンドラインに上書きされます。",
+      "source_refs": [
+        { "section_id": "05-01", "anchor": "コマンドラインの -var / -var-file が最も強く" }
+      ],
+      "difficulty": "medium",
+      "tags": ["variables", "tfvars", "precedence"]
+    },
+    {
+      "id": "q05-03",
+      "question": "本番環境用の値を `prod.tfvars` というファイルにまとめて、apply 時にそれを使いたい場合のコマンドはどれが適切ですか。",
+      "options": [
+        { "id": "a", "text": "`terraform apply -var-file=prod.tfvars`" },
+        { "id": "b", "text": "`terraform apply --tfvars prod.tfvars`" },
+        { "id": "c", "text": "`terraform apply prod.tfvars`(引数としてファイル名を直接渡す)" },
+        { "id": "d", "text": "`TF_VAR_FILE=prod.tfvars terraform apply`" }
+      ],
+      "answer": "a",
+      "explanation": "本文に書かれているとおり、自動で読み込まれるのは `terraform.tfvars` だけで、それ以外のファイルは `-var-file=prod.tfvars` のように明示的に指定します。`--tfvars` や `TF_VAR_FILE` のような書き方はありません。",
+      "source_refs": [
+        { "section_id": "05-01", "anchor": "tfvars ファイル" }
+      ],
+      "difficulty": "medium",
+      "tags": ["variables", "tfvars"]
+    },
+    {
+      "id": "q05-04",
+      "question": "output ブロックを使う主な目的として、本文の説明に最もよく合うものはどれですか。",
+      "options": [
+        { "id": "a", "text": "apply 前に確定している入力値を構成の外から差し替えるため" },
+        { "id": "b", "text": "apply 後に確定する属性(IP や ID など)を取り出して表示・参照できるようにするため" },
+        { "id": "c", "text": "state ファイルから機密情報を完全に取り除くため" },
+        { "id": "d", "text": "リソース間の依存関係を Terraform に明示的に伝えるため" }
+      ],
+      "answer": "b",
+      "explanation": "outputs は「構成が生成した値を外に取り出す」ためのブロックで、特に apply してみて初めて確定する IP や ID を表示・参照できるようにします。入力値の差し替えは variables の役割、依存関係は参照で表現されるため別物です。",
+      "source_refs": [
+        { "section_id": "05-02", "anchor": "作ったあとに知りたい値をどう拾うか" }
+      ],
+      "difficulty": "medium",
+      "tags": ["outputs"]
+    },
+    {
+      "id": "q05-05",
+      "question": "output に `sensitive = true` を付けたときの挙動として正しいものはどれですか。",
+      "options": [
+        { "id": "a", "text": "値が state ファイルからも取り除かれ、平文では保存されなくなる" },
+        { "id": "b", "text": "apply 時の画面表示は `(sensitive value)` となるが、値そのものは state には平文で保存される" },
+        { "id": "c", "text": "`terraform output` コマンドからも一切値を取り出せなくなる" },
+        { "id": "d", "text": "その値を参照している他のリソースも自動的に sensitive 扱いになり、apply が拒否される" }
+      ],
+      "answer": "b",
+      "explanation": "sensitive はあくまで画面・ログへの露出を防ぐ仕組みで、本文どおり state ファイルには平文で保存される点に注意が必要です。state の保護は別途必要となり、第 6 章で扱われます。",
+      "source_refs": [
+        { "section_id": "05-02", "anchor": "state ファイルには平文で保存される" }
+      ],
+      "difficulty": "medium",
+      "tags": ["outputs", "sensitive", "state"]
+    },
+    {
+      "id": "q05-06",
+      "question": "シェルスクリプトの引数に Terraform の出力値(例: instance_public_ip)をクォートなしで渡したい場合に最適なコマンドはどれですか。",
+      "options": [
+        { "id": "a", "text": "`terraform output instance_public_ip`(名前だけ指定するとクォートが外れる)" },
+        { "id": "b", "text": "`terraform output -raw instance_public_ip`" },
+        { "id": "c", "text": "`terraform show instance_public_ip`" },
+        { "id": "d", "text": "`terraform state show instance_public_ip`" }
+      ],
+      "answer": "b",
+      "explanation": "本文どおり、`terraform output -raw <name>` はクォートなしの生の値を返すため、シェルスクリプトやコマンド引数に渡すのに便利です。名前だけを指定した場合はクォート付きで表示されます。",
+      "source_refs": [
+        { "section_id": "05-02", "anchor": "terraform output" }
+      ],
+      "difficulty": "medium",
+      "tags": ["outputs", "terraform-output"]
+    },
+    {
+      "id": "q05-07",
+      "question": "module の入力と出力に関する説明として、本文の内容に最も合うものはどれですか。",
+      "options": [
+        { "id": "a", "text": "module は variables を入力口、outputs を出力口とする再利用可能な構成の部品である" },
+        { "id": "b", "text": "module は outputs を入力口、variables を出力口とする部品で、ルートモジュールが呼び出される側になる" },
+        { "id": "c", "text": "module は内部のリソースを直接参照することで入出力を表現し、variables や outputs を持たない" },
+        { "id": "d", "text": "module を呼び出すと、入力値は自動的に環境変数 `TF_VAR_*` 経由で渡される" }
+      ],
+      "answer": "a",
+      "explanation": "module は variables を入力口、outputs を出力口として持つ「部品」で、ルートモジュール側から呼び出して使います。入出力が逆になることはなく、TF_VAR_ は variables への値渡し方法のひとつであって module 呼び出しの仕組みではありません。",
+      "source_refs": [
+        { "section_id": "05-03", "anchor": "同じ構成を繰り返し作りたい" }
+      ],
+      "difficulty": "medium",
+      "tags": ["module", "variables", "outputs"]
+    },
+    {
+      "id": "q05-08",
+      "question": "次のように `network` module を呼び出したあと、その module が公開する `vpc_id` を別のリソースから参照したいときの記法はどれですか。\n\n```hcl\nmodule \"network\" {\n  source     = \"./modules/network\"\n  cidr_block = \"10.0.0.0/16\"\n}\n```",
+      "options": [
+        { "id": "a", "text": "`var.network.vpc_id`" },
+        { "id": "b", "text": "`module.network.vpc_id`" },
+        { "id": "c", "text": "`output.network.vpc_id`" },
+        { "id": "d", "text": "`network.vpc_id`(module ブロック名から直接参照する)" }
+      ],
+      "answer": "b",
+      "explanation": "本文どおり、module の出力は `module.<名前>.<出力名>` で参照します。`var.*` は variables の参照、`output.*` という記法はなく、module ブロック名からの直接参照もできません。なお新しく module を追加したときは `terraform init` で読み込み直す必要があります。",
+      "source_refs": [
+        { "section_id": "05-03", "anchor": "module.<名前>.<出力名>" }
+      ],
+      "difficulty": "medium",
+      "tags": ["module", "reference"]
+    }
+  ]
+}

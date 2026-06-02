@@ -3,12 +3,12 @@ title: ゼロから学ぶITの仕組み
 description: ""
 version: 0.1.0
 created_at: 2026-05-29
-updated_at: 2026-05-29
+updated_at: 2026-06-02
 authors: []
-visibility: private # private | shared | unlisted | public
+visibility: public # private | shared | unlisted | public
 shared_with: []
 unlisted_token: null
-search_indexable: false
+search_indexable: true
 allow_fork: false
 tags: []
 contains_local_sources: false

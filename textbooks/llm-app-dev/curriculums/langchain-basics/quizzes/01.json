@@ -1,0 +1,107 @@
+{
+  "chapter_id": "01",
+  "questions": [
+    {
+      "id": "q01-01",
+      "question": "LLM を API で直接呼ぶ「素朴な実装」が実務で破綻しやすい理由として、本文で挙げられていないものはどれですか?",
+      "options": [
+        { "id": "a", "text": "プロンプトを文字列連結で組み立てると、変数の差し込みや使い回しがすぐに散らかる" },
+        { "id": "b", "text": "別ベンダーのモデルに乗り換えるとき、API の呼び出し方が違うとコードを大きく書き直すことになる" },
+        { "id": "c", "text": "LLM は学習時点の知識しか持たず、社内ドキュメントや最新情報を知らない" },
+        { "id": "d", "text": "LLM の API 呼び出しそのものに高度な並列処理の実装が必須になる" }
+      ],
+      "answer": "d",
+      "explanation": "本文では、プロンプト管理の煩雑さ、モデル差し替えにくさ、外部知識の不足、複数ステップ連携の難しさ、構造化出力の扱いの面倒さが挙げられています。API 呼び出し自体の並列処理は本文の課題に含まれません。",
+      "source_refs": [
+        { "section_id": "01-01", "anchor": "LLM を直接叩くのは意外と簡単、だが…" }
+      ],
+      "difficulty": "easy",
+      "tags": ["LangChain", "LLM", "課題"]
+    },
+    {
+      "id": "q01-02",
+      "question": "本文によれば、LangChain のようなフレームワークが提供する価値の説明として最も適切なものはどれですか?",
+      "options": [
+        { "id": "a", "text": "LLM 本体の精度を向上させ、生成される回答の品質そのものを引き上げてくれる" },
+        { "id": "b", "text": "LLM を中心に据えたアプリを組み立てる際の周辺処理を標準化し、再利用可能にする" },
+        { "id": "c", "text": "API キーの管理やネットワーク通信を完全に隠蔽し、LLM の利用料金も無料にしてくれる" },
+        { "id": "d", "text": "プロンプトを自動生成してくれるので、開発者が指示文を書く必要がなくなる" }
+      ],
+      "answer": "b",
+      "explanation": "本文では、フレームワークの価値は「LLM を呼ぶこと」そのものではなく「LLM を中心に据えたアプリを組み立てる際の周辺処理を標準化し、再利用可能にすること」と明記されています。a は精度向上に関する記述はなく、プロンプト管理や差し替えやすさを扱う点と混同しやすい誤答です。",
+      "source_refs": [
+        { "section_id": "01-01", "anchor": "フレームワークが肩代わりしてくれること" }
+      ],
+      "difficulty": "easy",
+      "tags": ["LangChain", "フレームワーク"]
+    },
+    {
+      "id": "q01-03",
+      "question": "本文で「小さなアプリにはフレームワークが過剰なこともある」とされる理由として最も適切なものはどれですか?",
+      "options": [
+        { "id": "a", "text": "フレームワークの抽象化がかえって学習コストや見通しの悪さを生むことがあるため" },
+        { "id": "b", "text": "フレームワークを使うと LLM の応答精度が必ず下がってしまうため" },
+        { "id": "c", "text": "フレームワークは商用利用が制限されており、小規模では使えないため" },
+        { "id": "d", "text": "フレームワークは外部知識との連携機能を一切持たないため" }
+      ],
+      "answer": "a",
+      "explanation": "本文の「注意点」では、API を一回叩くだけのような小さな用途では、フレームワークの抽象化が学習コストや見通しの悪さを生むことがあると述べられています。b/c/d は本文に根拠がありません。",
+      "source_refs": [
+        { "section_id": "01-01", "anchor": "注意点:小さなアプリには過剰なこともある" }
+      ],
+      "difficulty": "easy",
+      "tags": ["LangChain", "フレームワーク", "注意点"]
+    },
+    {
+      "id": "q01-04",
+      "question": "LangChain の主要コンポーネントについて、本文の説明と一致しないものはどれですか?",
+      "options": [
+        { "id": "a", "text": "Prompt は LLM への指示文をテンプレート化し、変数を埋め込んで動的に組み立てる" },
+        { "id": "b", "text": "Retrieval は Embedding や VectorStore を含み、RAG の中核を担う" },
+        { "id": "c", "text": "Tool は LLM が呼び出せる外部機能で、電卓・Web 検索・社内 API などを関数として登録する" },
+        { "id": "d", "text": "Chain は LLM 自身に次に何をすべきかを判断させ、結果を観測しながら自律的に動く仕組みである" }
+      ],
+      "answer": "d",
+      "explanation": "d は Agent の説明であり、Chain の説明ではありません。本文では Chain は「複数の部品を連結し、一連の処理として実行する」もので、LCEL でパイプ演算子としてつなぐと説明されています。Agent と Chain は混同しやすいため要注意です。",
+      "source_refs": [
+        { "section_id": "01-02", "anchor": "LangChain は「役割ごとの部品」の集まり" }
+      ],
+      "difficulty": "easy",
+      "tags": ["LangChain", "コンポーネント"]
+    },
+    {
+      "id": "q01-05",
+      "question": "本文で説明されている Chain と Agent の違いとして最も適切なものはどれですか?",
+      "options": [
+        { "id": "a", "text": "Chain は LLM を一切使わず、Agent だけが LLM を利用する" },
+        { "id": "b", "text": "Chain は部品を線形につなぎ、Agent は Model の判断で Tool を動的に呼び出す" },
+        { "id": "c", "text": "Chain と Agent は実装上まったく同じもので、呼び方だけが違う" },
+        { "id": "d", "text": "Chain は外部 API を呼べないが、Agent は LLM を呼べないという役割分担になっている" }
+      ],
+      "answer": "b",
+      "explanation": "本文では「Chain は部品を線形につなぎ、Agent は Model の判断を起点に Tool を動的に呼び出す」と性格の違いが説明されています。Chain は LCEL で線形連結、Agent は自律的に Tool を動かす点が対照的です。",
+      "source_refs": [
+        { "section_id": "01-02", "anchor": "コンポーネントの関係を図で見る" }
+      ],
+      "difficulty": "easy",
+      "tags": ["LangChain", "Chain", "Agent"]
+    },
+    {
+      "id": "q01-06",
+      "question": "LangChain / LangGraph / LangSmith の担当領域について、本文の説明と最も一致するものはどれですか?",
+      "options": [
+        { "id": "a", "text": "LangChain は実行の観測、LangGraph はアプリ基盤、LangSmith は複雑な制御フローを担当する" },
+        { "id": "b", "text": "LangChain はアプリ基盤、LangGraph は複雑な制御フロー、LangSmith は実行の観測を担当する" },
+        { "id": "c", "text": "三者は競合関係にあり、どれか一つだけを選んで使うのが原則とされている" },
+        { "id": "d", "text": "LangChain と LangGraph は同じ機能を持ち、LangSmith だけが別の役割を担う" }
+      ],
+      "answer": "b",
+      "explanation": "本文では「LangChain はアプリ基盤、LangGraph は複雑な制御フロー、LangSmith は実行の観測を担当する」とまとめられ、三者は競合ではなく補完関係にあると説明されています。役割の対応をひっくり返した a が「ほぼ正解だが部分的に違う」典型的な誤答です。",
+      "source_refs": [
+        { "section_id": "01-03", "anchor": "三者の位置づけを図で見る" }
+      ],
+      "difficulty": "easy",
+      "tags": ["LangChain", "LangGraph", "LangSmith", "エコシステム"]
+    }
+  ]
+}

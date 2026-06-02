@@ -1,0 +1,131 @@
+{
+  "chapter_id": "05",
+  "questions": [
+    {
+      "id": "q05-01",
+      "question": "LCEL の Chain(`prompt | model | parser` のような構成)について、本文の説明として最も適切なものはどれですか。",
+      "options": [
+        { "id": "a", "text": "入力から出力まで一方向に流れる線形処理が前提で、シンプルでデバッグもしやすい。" },
+        { "id": "b", "text": "ループや条件分岐を含む複雑な制御フローを線形のまま簡潔に表現できる。" },
+        { "id": "c", "text": "LLM の判断で次の処理を自律的に決めるため、流れを開発者が指定する必要はない。" },
+        { "id": "d", "text": "State を全コンポーネントで共有しながら、各ステップが自由に読み書きする設計である。" }
+      ],
+      "answer": "a",
+      "explanation": "本文では Chain は『一方向に流れる(線形な)処理』が本質で、シンプルでデバッグしやすい強みがあると説明しています。b は「線形のまま」が誤り(複雑な制御は読みにくくなる)、c は Agent の説明、d は LangGraph の State の説明です。",
+      "source_refs": [{ "section_id": "05-01", "anchor": "Chain は「一直線」が前提" }],
+      "difficulty": "medium",
+      "tags": ["Chain", "LCEL"]
+    },
+    {
+      "id": "q05-02",
+      "question": "本文が指摘する AgentExecutor(LangChain の Agent)の課題として、最も適切なものはどれですか。",
+      "options": [
+        { "id": "a", "text": "ループや分岐を一切表現できないため、複雑なタスクには使えない。" },
+        { "id": "b", "text": "どのツールをいつ呼ぶかを LLM 任せにするため、決まった制御や人間の承認を差し込みにくく、動きが毎回変わりデバッグも難しい。" },
+        { "id": "c", "text": "State を中央で共有する設計のため、コンポーネント間でデータが衝突しやすい。" },
+        { "id": "d", "text": "API 仕様が固定で柔軟性に欠けるため、新しいツールを追加できない。" }
+      ],
+      "answer": "b",
+      "explanation": "本文では Agent は『どのツールをいつ呼ぶか、いつ止まるかをすべて LLM 任せ』で、決まった制御を差し込みにくく、動きが毎回変わるためデバッグも難しいと述べられています。a は逆で Agent はループ・分岐が得意、c の State 共有は LangGraph の話、d は本文に記述なし。",
+      "source_refs": [{ "section_id": "05-01", "anchor": "Agent は「自由すぎて」制御しにくい" }],
+      "difficulty": "medium",
+      "tags": ["Agent", "制御性"]
+    },
+    {
+      "id": "q05-03",
+      "question": "LangGraph がアプリケーションを記述するために使う 3 つの基本要素は何ですか。",
+      "options": [
+        { "id": "a", "text": "Prompt・Model・Parser" },
+        { "id": "b", "text": "Tool・Memory・Retriever" },
+        { "id": "c", "text": "State(状態)・ノード(Node)・エッジ(Edge)" },
+        { "id": "d", "text": "Chain・Agent・Executor" }
+      ],
+      "answer": "c",
+      "explanation": "本文は LangGraph の登場人物として State・ノード・エッジの 3 つを明示しています。a は LCEL チェーンの典型構成、b は LangChain の別コンポーネント群、d は LangChain 側の概念で、いずれも LangGraph の基本要素ではありません。",
+      "source_refs": [{ "section_id": "05-02", "anchor": "LangGraph は「状態を持つグラフ」" }],
+      "difficulty": "easy",
+      "tags": ["LangGraph", "State"]
+    },
+    {
+      "id": "q05-04",
+      "question": "LangGraph の「条件付きエッジ(conditional edge)」の役割として、本文に即して最も適切なものはどれですか。",
+      "options": [
+        { "id": "a", "text": "現在の State を見て次にどのノードへ進むかを動的に決め、分岐やループを表現する。" },
+        { "id": "b", "text": "ノード間のデータ受け渡しを暗号化して、機密情報の漏えいを防ぐ。" },
+        { "id": "c", "text": "LLM が次のツール選択を完全に自律的に決めるためのプロンプトテンプレート。" },
+        { "id": "d", "text": "ノード実行のタイムアウトを設定し、長時間処理を強制終了する。" }
+      ],
+      "answer": "a",
+      "explanation": "条件付きエッジは『現在の状態を見て次にどのノードへ進むかを動的に決める接続』で、分岐やループを表現する仕組みだと本文・key_terms 双方で説明されています。b/d は本文に記述なし、c は AgentExecutor の発想に近く、開発者が骨格を明示する LangGraph の趣旨とは逆です。",
+      "source_refs": [{ "section_id": "05-02", "anchor": "条件付きエッジ" }],
+      "difficulty": "medium",
+      "tags": ["LangGraph", "条件付きエッジ"]
+    },
+    {
+      "id": "q05-05",
+      "question": "本文における LangChain と LangGraph の関係の説明として、最も適切なものはどれですか。",
+      "options": [
+        { "id": "a", "text": "LangGraph は LangChain の上位互換であり、新規開発では常に LangGraph を選ぶべきである。" },
+        { "id": "b", "text": "LangGraph は LangChain を置き換えるものではなく上に乗るもので、各ノードの中身は LangChain の ChatModel・LCEL・ツールでできている。" },
+        { "id": "c", "text": "LangChain と LangGraph はまったく独立した別系列のフレームワークで、相互運用はできない。" },
+        { "id": "d", "text": "LangGraph は LangChain の内部実装の一部であり、開発者から直接使うことはない。" }
+      ],
+      "answer": "b",
+      "explanation": "本文は『LangGraph は LangChain を置き換えるものではなく上に乗るもの』『各ノードの中身は LangChain の部品でできている』と明記しています。a は本文が否定する典型的な誤解(『上位互換』という思い込み)、c/d は事実誤認です。",
+      "source_refs": [
+        { "section_id": "05-02", "anchor": "上に乗るもの" },
+        { "section_id": "05-03", "anchor": "対立ではなく役割分担" }
+      ],
+      "difficulty": "medium",
+      "tags": ["LangChain", "LangGraph", "レイヤー"]
+    },
+    {
+      "id": "q05-06",
+      "question": "本文の比較表で、LangChain(Chain/Agent)と LangGraph(状態グラフ)の「制御性」の記述として正しいものはどれですか。",
+      "options": [
+        { "id": "a", "text": "Chain は低い / Agent は高い / LangGraph は中程度。" },
+        { "id": "b", "text": "Chain は高い / Agent は低い / LangGraph は高い(骨格を自分で書く)。" },
+        { "id": "c", "text": "Chain・Agent・LangGraph いずれも制御性は同程度。" },
+        { "id": "d", "text": "Chain は高い / Agent も高い / LangGraph は低い(LLM 任せ)。" }
+      ],
+      "answer": "b",
+      "explanation": "比較表では制御性について『Chain は高い / Agent は低い』『LangGraph は高い(骨格を自分で書く)』と明示されています。a は Chain と Agent が逆、d は Agent と LangGraph の評価が誤りです。",
+      "source_refs": [{ "section_id": "05-03", "anchor": "項目ごとの比較" }],
+      "difficulty": "medium",
+      "tags": ["比較", "制御性"]
+    },
+    {
+      "id": "q05-07",
+      "question": "本文で示された「LangGraph を検討する合図(境界線)」に該当しないものはどれですか。",
+      "options": [
+        { "id": "a", "text": "状態を複数ステップで持ち回りたい。" },
+        { "id": "b", "text": "条件で前のステップに戻る・繰り返したい。" },
+        { "id": "c", "text": "途中で人間の承認を挟みたい。" },
+        { "id": "d", "text": "入力→出力が一直線で書け、状態もループも分岐も人間の介在も不要である。" }
+      ],
+      "answer": "d",
+      "explanation": "本文の分岐図では『どれも不要・一直線で書ける』場合は『LangChain で十分』と整理されており、a/b/c はいずれも LangGraph 検討の合図に該当します。d は LangGraph を検討する合図ではなく、LangChain のままで十分なケースです。",
+      "source_refs": [{ "section_id": "05-03", "anchor": "境界線をどこに引くか" }],
+      "difficulty": "medium",
+      "tags": ["境界線", "判断軸"]
+    },
+    {
+      "id": "q05-08",
+      "question": "ユースケースと選定の指針について、本文の主張に最も合うものはどれですか。",
+      "options": [
+        { "id": "a", "text": "将来複雑化する可能性を見越して、要約や 1 回限りの RAG でも最初から LangGraph で設計するのが望ましい。" },
+        { "id": "b", "text": "LangGraph は LangChain の上位互換なので、新規プロジェクトでは LangChain を使う理由はもうない。" },
+        { "id": "c", "text": "まず LangChain(LCEL)で素直に書き始め、状態・ループ・人間の介在などが必要になった時点で LangGraph に載せ替えるのが堅実である。" },
+        { "id": "d", "text": "ユースケースに関係なく、Agent を中心に据えて LLM 任せで自動化するのが最も保守しやすい。" }
+      ],
+      "answer": "c",
+      "explanation": "本文は『まず LangChain(LCEL)で素直に書き始める』『必要になったら LangGraph に載せ替える』という現実的な進め方を推奨しています。a は『過剰設計』として戒められ、b は『上位互換』という思い込みとして否定され、d は本文の趣旨と無関係です。",
+      "source_refs": [
+        { "section_id": "05-04", "anchor": "現実的な進め方" },
+        { "section_id": "05-04", "anchor": "過剰設計" }
+      ],
+      "difficulty": "medium",
+      "tags": ["使い分け", "過剰設計"]
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "chapter_id": "06",
+  "questions": [
+    {
+      "id": "q06-01",
+      "question": "Terraform で DB パスワードのような秘匿情報を扱うとき、本文が「基本方針」として推奨しているのはどれですか。",
+      "options": [
+        { "id": "a", "text": "`.tf` ファイルに直接書き、Git の履歴で変更を追えるようにする" },
+        { "id": "b", "text": "`terraform.tfvars` に値を書き、そのファイルを Git にコミットして共有する" },
+        { "id": "c", "text": "variables や `TF_VAR_` 環境変数を通じてコードの外から注入する" },
+        { "id": "d", "text": "Terraform からは扱わず、apply 後に AWS マネジメントコンソールで手動設定する" }
+      ],
+      "answer": "c",
+      "explanation": "本文では「秘匿情報はコードの外から注入する」のが基本方針で、variables 経由や CI/CD では `TF_VAR_db_password` のような環境変数を使うのが定番と説明しています。`.tf` への直書きや、`terraform.tfvars` を Git にコミットする運用は禁物とされています。",
+      "source_refs": [
+        { "section_id": "06-01", "anchor": "秘匿情報を「コードに直接書かない」" }
+      ],
+      "difficulty": "medium",
+      "tags": ["secrets", "variables"]
+    },
+    {
+      "id": "q06-02",
+      "question": "変数や output に `sensitive = true` を付けた場合に、Terraform が実際に行う挙動として正しいものはどれですか。",
+      "options": [
+        { "id": "a", "text": "state ファイルに書き込まれる値が暗号化され、`terraform state pull` でも復号できなくなる" },
+        { "id": "b", "text": "plan / apply の出力で値が `(sensitive value)` と伏せられて表示される" },
+        { "id": "c", "text": "その値を参照しているリソース全体が plan に表示されなくなる" },
+        { "id": "d", "text": "値が `.tf` ファイルから自動的に削除され、環境変数経由でしか渡せなくなる" }
+      ],
+      "answer": "b",
+      "explanation": "本文では sensitive はあくまで「画面・ログ表示を隠す」機能で、plan / apply の出力で `(sensitive value)` と伏せて表示されると説明しています。state の暗号化機能ではなく、値は state に平文で残ります。",
+      "source_refs": [
+        { "section_id": "06-01", "anchor": "sensitive で画面・ログから隠す" }
+      ],
+      "difficulty": "medium",
+      "tags": ["sensitive", "logging"]
+    },
+    {
+      "id": "q06-03",
+      "question": "「秘匿情報と state ファイルの関係」について、本文の説明と一致するのはどれですか。",
+      "options": [
+        { "id": "a", "text": "sensitive を付けた値は state にも暗号化されて保存されるため、state を Git にコミットしても安全" },
+        { "id": "b", "text": "sensitive を付けた値は state には書き込まれないので、state を共有しても秘匿情報は漏れない" },
+        { "id": "c", "text": "sensitive を付けても state には平文で残るため、S3 バックエンドの暗号化やアクセス制限で state ごと守る必要がある" },
+        { "id": "d", "text": "秘匿情報を扱う構成では、Terraform が自動的にローカル state を使い、リモート state には書き込まない" }
+      ],
+      "answer": "c",
+      "explanation": "本文は「sensitive を付けても、値は state ファイルには平文で記録されます」と明言し、対策は state 側で行う(S3 バックエンドの SSE 暗号化やアクセス権限の絞り込み、ローカル state を Git にコミットしない)としています。",
+      "source_refs": [
+        { "section_id": "06-01", "anchor": "state には平文で残る、という前提を持つ" }
+      ],
+      "difficulty": "medium",
+      "tags": ["state", "security"]
+    },
+    {
+      "id": "q06-04",
+      "question": "`terraform plan` の出力に現れる記号の意味の組み合わせとして正しいものはどれですか。",
+      "options": [
+        { "id": "a", "text": "`+` = create、`~` = update(in-place)、`-/+` = replace、`-` = destroy" },
+        { "id": "b", "text": "`+` = replace、`~` = create、`-/+` = update、`-` = destroy" },
+        { "id": "c", "text": "`+` = create、`~` = replace、`-/+` = update、`-` = destroy" },
+        { "id": "d", "text": "`+` = create、`~` = update(in-place)、`-/+` = destroy、`-` = replace" }
+      ],
+      "answer": "a",
+      "explanation": "本文の記号表では `+` が create、`~` が in-place update、`-/+` が replace(一度削除して作り直す)、`-` が destroy と定義されています。",
+      "source_refs": [
+        { "section_id": "06-02", "anchor": "plan の記号を読み分ける" }
+      ],
+      "difficulty": "medium",
+      "tags": ["plan", "diff"]
+    },
+    {
+      "id": "q06-05",
+      "question": "plan の差分に `# forces replacement` というコメントが付いていました。これはどういう意味で、なぜ注意が必要ですか。",
+      "options": [
+        { "id": "a", "text": "プロバイダのバージョンが古いことを示す警告で、provider をアップグレードすれば消える" },
+        { "id": "b", "text": "その属性は ForceNew のため変更すると in-place 更新ができず、リソースの再作成(replace)が発生して、ダウンタイムやデータ消失につながる可能性がある" },
+        { "id": "c", "text": "その属性が他のリソースから参照されていることを示し、依存元のリソースも併せて更新する必要があるという通知" },
+        { "id": "d", "text": "Terraform がその属性の差分を検知できなかったことを示し、apply してもリソースには反映されない" }
+      ],
+      "answer": "b",
+      "explanation": "本文は `# forces replacement` が付いた属性が再作成を引き起こす犯人で、これは属性が ForceNew(変更すると再作成が必要)としてプロバイダ側で定義されているために起こると説明しています。EC2 のデータ消失や IP 変更などダウンタイム・データ消失に直結する点が危険です。",
+      "source_refs": [
+        { "section_id": "06-02", "anchor": "forces replacement" }
+      ],
+      "difficulty": "medium",
+      "tags": ["replace", "ForceNew"]
+    },
+    {
+      "id": "q06-06",
+      "question": "本文が「意図しない破壊を防ぐ apply 前の定石」として挙げているものはどれですか。",
+      "options": [
+        { "id": "a", "text": "`terraform apply -auto-approve` を必ず付けて、確認プロンプトを無視して即時適用する" },
+        { "id": "b", "text": "`terraform plan -out=tfplan` で plan を保存し、`terraform apply tfplan` で「確認した plan そのもの」を適用する" },
+        { "id": "c", "text": "apply の直前に必ず `terraform destroy` を実行して state をクリーンにする" },
+        { "id": "d", "text": "plan の出力は読まず、サマリの末尾の Plan 行だけを見て判断する" }
+      ],
+      "answer": "b",
+      "explanation": "本文は plan を保存して確認したものをそのまま apply する手順を勧め、これで plan と apply の間に状態がずれる心配がなくなると説明しています。さらに `prevent_destroy` や `create_before_destroy` で破壊を制御するとあります。",
+      "source_refs": [
+        { "section_id": "06-02", "anchor": "apply 前の確認を習慣にする" }
+      ],
+      "difficulty": "medium",
+      "tags": ["plan", "safety"]
+    },
+    {
+      "id": "q06-07",
+      "question": "`terraform destroy` の対象範囲について、本文の説明と一致するものはどれですか。",
+      "options": [
+        { "id": "a", "text": "コマンド実行時に現在開いている `.tf` ファイルに記述されたリソースだけを削除する" },
+        { "id": "b", "text": "現在の作業ディレクトリにある `.tf` ファイルから新規生成できるリソースだけを削除する" },
+        { "id": "c", "text": "state に記録されている全リソースをまとめて削除する。VPC・サブネット・EC2・RDS を 1 構成で管理していれば一発で全部消える" },
+        { "id": "d", "text": "AWS アカウント上のすべてのリソースを削除する。Terraform 外で作成したものも対象になる" }
+      ],
+      "answer": "c",
+      "explanation": "本文は destroy の対象が「いま開いている `.tf` ファイル」ではなく「state に記録されている全リソース」だと強調し、1 つの構成でまとめて管理していれば destroy 一発ですべてが消えると説明しています。",
+      "source_refs": [
+        { "section_id": "06-03", "anchor": "destroy は「state 全体」を消しにいく" }
+      ],
+      "difficulty": "medium",
+      "tags": ["destroy", "state"]
+    },
+    {
+      "id": "q06-08",
+      "question": "`-target` オプションと `prevent_destroy` の使い分けについて、本文の趣旨に最も合うのはどれですか。",
+      "options": [
+        { "id": "a", "text": "`-target` は依存関係を考慮した安全な部分操作の手段で、本番運用でも常用が推奨される。`prevent_destroy` は逆に応急処置向き" },
+        { "id": "b", "text": "`-target` は依存関係を無視するため state と実体がずれる原因になりやすく応急処置向き。`prevent_destroy` は消したくないリソースの恒久的な保護に使う" },
+        { "id": "c", "text": "どちらも同じ機能で、書き方が違うだけ。お好みで選べばよい" },
+        { "id": "d", "text": "`-target` は state ファイルの暗号化を有効にし、`prevent_destroy` はリモートロックを有効にする設定である" }
+      ],
+      "answer": "b",
+      "explanation": "本文は `-target` を「依存関係を無視して部分操作するため state と実体がずれる原因になりがちで、応急処置と考え常用は避ける」と述べ、一方 `prevent_destroy` は「消したら戻せないリソースを守る」恒久的な保護として位置づけています。",
+      "source_refs": [
+        { "section_id": "06-03", "anchor": "影響範囲を絞る・守る" }
+      ],
+      "difficulty": "medium",
+      "tags": ["destroy", "prevent_destroy", "target"]
+    }
+  ]
+}
