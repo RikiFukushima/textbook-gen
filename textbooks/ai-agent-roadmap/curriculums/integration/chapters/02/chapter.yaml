@@ -1,0 +1,11 @@
+id: "02"
+title: 観測性とトレーシング
+estimated_minutes: 16
+learning_objectives:
+  - LLM アプリに観測性が必須な理由を説明できる
+  - トレースから何を読み取るかを理解する
+section_order:
+  - "02-01"
+  - "02-02"
+  - "02-03"
+  - "02-04"

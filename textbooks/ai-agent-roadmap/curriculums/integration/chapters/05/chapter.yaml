@@ -1,0 +1,11 @@
+id: "05"
+title: LMS 文脈へのユースケース展開
+estimated_minutes: 16
+learning_objectives:
+  - LMS における AI 活用の地図を描ける
+  - ユースケースを評価し1つに絞り込める
+section_order:
+  - "05-01"
+  - "05-02"
+  - "05-03"
+  - "05-04"

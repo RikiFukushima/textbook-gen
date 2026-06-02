@@ -1,0 +1,10 @@
+id: "04"
+title: LangChain と LangGraph の位置付け
+estimated_minutes: 12
+learning_objectives:
+  - LangChain の役割と現在地を説明できる
+  - LangGraph が必要になる理由を説明できる
+section_order:
+  - "04-01"
+  - "04-02"
+  - "04-03"

@@ -1,0 +1,12 @@
+id: "07"
+title: ファインチューニングの全体像
+estimated_minutes: 20
+learning_objectives:
+  - 学習段階の違いを説明できる
+  - LoRA/QLoRA の仕組みと実験の流れを説明できる
+section_order:
+  - "07-01"
+  - "07-02"
+  - "07-03"
+  - "07-04"
+  - "07-05"

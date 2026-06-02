@@ -1,0 +1,11 @@
+id: "03"
+title: ベクトル DB の選定
+estimated_minutes: 16
+learning_objectives:
+  - ANN が解いている問題を説明できる
+  - 用途に応じてベクトル DB を選定できる
+section_order:
+  - "03-01"
+  - "03-02"
+  - "03-03"
+  - "03-04"

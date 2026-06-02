@@ -1,0 +1,11 @@
+id: "04"
+title: コストとパフォーマンス設計
+estimated_minutes: 16
+learning_objectives:
+  - トークン経済の基礎を説明できる
+  - コスト・レイテンシ最適化の手段を選べる
+section_order:
+  - "04-01"
+  - "04-02"
+  - "04-03"
+  - "04-04"
