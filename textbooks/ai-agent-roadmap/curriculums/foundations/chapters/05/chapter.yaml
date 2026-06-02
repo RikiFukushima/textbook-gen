@@ -1,0 +1,11 @@
+id: "05"
+title: 評価とハルシネーション
+estimated_minutes: 12
+learning_objectives:
+  - LLM 評価が難しい理由を説明できる
+  - ハルシネーションを分類できる
+  - 評価手法の全体像を俯瞰できる
+section_order:
+  - "05-01"
+  - "05-02"
+  - "05-03"

@@ -1,0 +1,141 @@
+{
+  "chapter_id": "02",
+  "questions": [
+    {
+      "id": "q02-01",
+      "question": "プロンプトを Instruction / Context / Input / Output の 4 要素に分解して書くことの主な利点として、最も適切なものはどれですか?",
+      "options": [
+        { "id": "a", "text": "4 要素を必ずこの順序で書くことで、モデル内部の重みが更新され精度が上がる" },
+        { "id": "b", "text": "出力に問題が出たときに、どの要素を直せばよいかを切り分けやすくなる" },
+        { "id": "c", "text": "Context をできるだけ多く詰め込めば、Instruction の品質を気にしなくてよくなる" },
+        { "id": "d", "text": "4 要素に分けて書けば、LLM が Output で指定した形式を自動的に検証してくれるため、ホスト側のスキーマ検証が不要になる" }
+      ],
+      "answer": "b",
+      "explanation": "4 要素に分けると、決定事項が拾えない → Instruction/Context、形式が崩れる → Output、というように問題と直す場所が対応します。順序は厳密に守る必要はなく(a は誤り)、Context を詰め込みすぎると lost in the middle が起きるため c は逆効果。Output に形式を書いてもモデルは確率的に外す可能性があり、形式の検証はホスト側で行う必要があります(d)。",
+      "source_refs": [
+        { "section_id": "02-01", "anchor": "構造化の効能と落とし穴" }
+      ],
+      "difficulty": "medium",
+      "tags": ["prompt-structure"]
+    },
+    {
+      "id": "q02-02",
+      "question": "Few-shot プロンプティングが Zero-shot より効きやすいタスクとして、最も適切なものはどれですか?",
+      "options": [
+        { "id": "a", "text": "JSON のキー一覧と型を Output 指定だけで完全に固定できる単純なタスク" },
+        { "id": "b", "text": "同じパターンの例を 20 件以上並べてラベルを偏らせたい分類タスク" },
+        { "id": "c", "text": "出力の表記揺れや混在ケースの扱いなど、暗黙の判断基準を例で示したいタスク" },
+        { "id": "d", "text": "中間の推論過程を伝える必要がある複雑な多段推論タスク" }
+      ],
+      "answer": "c",
+      "explanation": "Few-shot は形式と判断基準を例で渡すのが本質で、混在ケースのような暗黙ルールの共有に効きます。Output 指定だけで形が決まる単純タスク(a)では例示は冗長で、例の偏り(b)はモデルがそれを真似て品質を崩します。中間推論が要るタスク(d)は Few-shot では伝わらず、次節の CoT が必要です。",
+      "source_refs": [
+        { "section_id": "02-02", "anchor": "Few-shot が効かない・悪化するケース" }
+      ],
+      "difficulty": "medium",
+      "tags": ["few-shot", "in-context-learning"]
+    },
+    {
+      "id": "q02-03",
+      "question": "Chain-of-Thought (CoT) が複雑なタスクで精度を上げる「直感的な理由」として、最も適切なものはどれですか?",
+      "options": [
+        { "id": "a", "text": "途中過程を出力させると、その出力が文脈に積み上がり、後段のトークン生成が前のステップを参照できるから" },
+        { "id": "b", "text": "ステップごとに考えさせると、モデルの重みが暗黙に更新されて推論能力が永続的に高まるから" },
+        { "id": "c", "text": "「ステップごとに考えて」と書くことで temperature が自動的に 0 になり、決定的な答えが返るから" },
+        { "id": "d", "text": "CoT を使うと、出力の途中で必ず外部ツールが呼び出されて事実が裏付けられるから" }
+      ],
+      "answer": "a",
+      "explanation": "LLM は次トークン予測を繰り返して文を生成するため、途中過程を言語化するとそれが後段の文脈になり、推論を助けます。プロンプトでは重みは更新されず(b)、temperature も自動では変わりません(c)。外部ツールを使うのは ReAct の仕事で、CoT は頭の中だけで考えます(d)。",
+      "source_refs": [
+        { "section_id": "02-03", "anchor": "なぜ途中過程を書かせると精度が上がるのか" }
+      ],
+      "difficulty": "medium",
+      "tags": ["chain-of-thought", "reasoning"]
+    },
+    {
+      "id": "q02-04",
+      "question": "Chain-of-Thought (CoT) の限界に関する説明として、最も適切なものはどれですか?",
+      "options": [
+        { "id": "a", "text": "CoT を使うと出力が必ず短くなるため、長文生成タスクには向かない" },
+        { "id": "b", "text": "CoT は単純な分類・抽出ほど精度向上が大きく、複雑タスクではむしろ悪化する" },
+        { "id": "c", "text": "途中式が筋道立って見えても、計算ミスや前提誤りを含むことがあり、正しさは保証されない" },
+        { "id": "d", "text": "CoT の途中過程はモデル内部でしか展開されず、プロンプトや出力には現れない" }
+      ],
+      "answer": "c",
+      "explanation": "CoT は「もっともらしく見える嘘」を含むことがあり、正しさは保証されません。重要な判断ではツール併用(ReAct)が現実解です。CoT はむしろ前置きが増えて長くなりやすく(a)、効くのは複雑タスクで単純タスクでは過剰(b は逆)。途中過程は文字通り出力に現れます(d)。",
+      "source_refs": [
+        { "section_id": "02-03", "anchor": "CoT が効かない・使えないケース" }
+      ],
+      "difficulty": "medium",
+      "tags": ["chain-of-thought", "limitations"]
+    },
+    {
+      "id": "q02-05",
+      "question": "ReAct パターンが Chain-of-Thought と決定的に違う点として、最も適切なものはどれですか?",
+      "options": [
+        { "id": "a", "text": "ReAct は temperature を 0 に固定するため、同じ入力に対して必ず同じ出力が返る" },
+        { "id": "b", "text": "ReAct では中間の Thought を一切出力せず、最終答えだけを返すことでコストを抑える" },
+        { "id": "c", "text": "ReAct は LLM の重みを更新するためのファインチューニング手法である" },
+        { "id": "d", "text": "Thought に加えて Action(ツール呼び出し)と Observation(結果の取り込み)があり、外部世界とのやり取りを推論ループに組み込む" }
+      ],
+      "answer": "d",
+      "explanation": "ReAct の本質は Thought → Action → Observation のループで外部情報を取り込む点です。CoT が頭の中だけで考えるのに対し、ReAct は行動を挟みます。temperature は固定されず(a)、Thought は明示的に出力されます(b)。重みの更新は伴いません(c)。",
+      "source_refs": [
+        { "section_id": "02-04", "anchor": "CoT との違い、Agent へのつながり" }
+      ],
+      "difficulty": "medium",
+      "tags": ["react", "agent"]
+    },
+    {
+      "id": "q02-06",
+      "question": "確率的な LLM 出力に対して Self-Consistency(複数回サンプリングして多数決)が効きやすいタスクはどれですか?",
+      "options": [
+        { "id": "a", "text": "長文要約のように、毎回の出力が文章として異なるが意味が近いタスク" },
+        { "id": "b", "text": "数値計算や分類のように、最終答えが離散的で「同じ」が定義しやすいタスク" },
+        { "id": "c", "text": "モデルが体系的に同じ思い込みを持っており、ほぼ毎回同じ誤答に収束するタスク" },
+        { "id": "d", "text": "1 回の呼び出しのコストを必ず抑えたい、レイテンシ最優先のタスク" }
+      ],
+      "answer": "b",
+      "explanation": "Self-Consistency は最終答えが離散的で多数決を取りやすいタスク(数値計算・分類・論理パズル)で効きます。長文・要約は答えが連続的で「同じ」が定義しにくく(a)、モデルが同じ思い込みを持つ場合は多数決でも同じ誤りに収束します(c)。N 倍のコストとレイテンシがかかるため、レイテンシ最優先のタスクには不向きです(d)。",
+      "source_refs": [
+        { "section_id": "02-05", "anchor": "効くタスクと避けたいタスク" }
+      ],
+      "difficulty": "medium",
+      "tags": ["self-consistency", "sampling"]
+    },
+    {
+      "id": "q02-07",
+      "question": "「念のため」と参照資料を全部プロンプトに貼り付ける書き方の問題点として、本章の説明に最も整合するものはどれですか?",
+      "options": [
+        { "id": "a", "text": "Context を増やすほど Output 指定が自動的に弱まり、JSON が必ず崩れる" },
+        { "id": "b", "text": "資料が長いほど Attention の計算量が減るため、出力が極端に高速化してしまう" },
+        { "id": "c", "text": "Context に貼った内容はモデルの重みに学習され、別タスクで意図せず再利用される" },
+        { "id": "d", "text": "コンテキストが圧迫されて lost in the middle が起き、重要箇所が埋もれてコストも増える" }
+      ],
+      "answer": "d",
+      "explanation": "アンチパターン「Context の詰め込みすぎ」は、lost in the middle で重要箇所が埋もれ、コストも増えるのが本質的な問題です。Output が崩れる原因は別(スキーマ未指定)で(a)、長文ほど Attention は重くなります(b は第 1 章で扱った逆)。プロンプトで重みは更新されないため(c)も誤り。",
+      "source_refs": [
+        { "section_id": "02-06", "anchor": "Context の詰め込みすぎ" }
+      ],
+      "difficulty": "medium",
+      "tags": ["antipatterns", "context"]
+    },
+    {
+      "id": "q02-08",
+      "question": "「JSON で返してください」とだけ指示して出力が安定しない場合の、最も適切な対策はどれですか?",
+      "options": [
+        { "id": "a", "text": "「絶対に JSON で返してください、間違えたらシステムが停止します」のように脅し文を強める" },
+        { "id": "b", "text": "キー一覧・型・必須/任意・サンプル出力 1 件を示し、可能なら API の構造化出力(JSON Schema 指定)機能を使う" },
+        { "id": "c", "text": "Few-shot で同じ JSON 例を 20 件並べ、コンテキストを埋め尽くす" },
+        { "id": "d", "text": "temperature を上げてサンプリング多様性を増やし、毎回違う JSON を試させる" }
+      ],
+      "answer": "b",
+      "explanation": "Output 指定なしで JSON を期待するアンチパターンの対策は、スキーマと例を示し、API 側の構造化出力機能を活用することです。脅し文(a)は本章のアンチパターン 3 そのもので脆くなります。例の偏りはモデルを偏らせ(c)、temperature を上げると形式の揺れはむしろ悪化します(d)。",
+      "source_refs": [
+        { "section_id": "02-06", "anchor": "Output 指定なしで JSON を期待する" }
+      ],
+      "difficulty": "medium",
+      "tags": ["antipatterns", "structured-output"]
+    }
+  ]
+}

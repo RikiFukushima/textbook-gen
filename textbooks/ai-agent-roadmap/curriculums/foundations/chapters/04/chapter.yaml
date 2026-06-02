@@ -1,0 +1,13 @@
+id: "04"
+title: Agent の基本パラダイム
+estimated_minutes: 20
+learning_objectives:
+  - Agent と Chain の本質的な違いを説明できる
+  - Tool Use と Function Calling の仕組みを説明できる
+  - Agent が失敗する典型パターンを挙げられる
+section_order:
+  - "04-01"
+  - "04-02"
+  - "04-03"
+  - "04-04"
+  - "04-05"
