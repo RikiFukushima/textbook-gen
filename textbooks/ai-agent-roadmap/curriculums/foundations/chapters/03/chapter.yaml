@@ -1,0 +1,13 @@
+id: "03"
+title: RAG の基本原理
+estimated_minutes: 20
+learning_objectives:
+  - RAG が必要になる理由を説明できる
+  - ベクトル検索と生成のパイプラインを説明できる
+  - RAG が効かないケースを見分けられる
+section_order:
+  - "03-01"
+  - "03-02"
+  - "03-03"
+  - "03-04"
+  - "03-05"
