@@ -1,0 +1,141 @@
+{
+  "chapter_id": "02",
+  "questions": [
+    {
+      "id": "q02-01",
+      "question": "Hybrid Search が「ベクトル単独より平均的に Recall を上げやすい」と説明される理由として、最も適切なものはどれですか?",
+      "options": [
+        { "id": "a", "text": "BM25 はベクトル検索より常に精度が高く、ベクトル側のノイズを上書きしてくれるから" },
+        { "id": "b", "text": "ベクトル検索は意味の近さ、BM25 は字面の一致に強く、両者の苦手領域がほぼ補完関係にあるから" },
+        { "id": "c", "text": "ベクトル検索と BM25 のスコアを足し合わせると、片方が 0 でも結果として上位が安定するから" },
+        { "id": "d", "text": "Hybrid Search では複数の埋め込みモデルを並列に使うため、表現揺れに対して頑健になるから" }
+      ],
+      "answer": "b",
+      "explanation": "本文では、ベクトル検索は意味の近さで拾えるが固有名詞・型番・エラーコードに弱く、BM25 は字面一致に強いが表現揺れに弱い、と「得意領域がほぼ補完関係にある」点が Hybrid Search の根拠として説明されています。a は『BM25 が常に高精度』が誤り、c はスコアではなく Recall(取りこぼし)を議論している点とずれる、d は複数埋め込みモデルの話は本文にありません。",
+      "source_refs": [
+        { "section_id": "02-01", "anchor": "得意領域がほぼ補完関係にある" }
+      ],
+      "difficulty": "medium",
+      "tags": ["hybrid-search", "recall"]
+    },
+    {
+      "id": "q02-02",
+      "question": "Hybrid Search のスコア統合手法として、RRF(Reciprocal Rank Fusion)と重み付き和を比較したときに正しい説明はどれですか?",
+      "options": [
+        { "id": "a", "text": "RRF はスコアの絶対値を直接足し合わせるため、検索器ごとのスコアスケール差に強く影響を受ける" },
+        { "id": "b", "text": "重み付き和は順位だけを使うので、スコア正規化を一切考えずに使える" },
+        { "id": "c", "text": "RRF は順位の逆数を足し合わせるためスケール差に頑健で、まず試す既定値として向いている" },
+        { "id": "d", "text": "重み付き和は調整パラメータが k だけなので、ドメインごとのチューニングがほぼ不要である" }
+      ],
+      "answer": "c",
+      "explanation": "本文では RRF を『順位だけを使うためスコアスケールの違いに頑健で、k だけがチューニング項目なので最初に試す既定値として優秀』と説明しています。一方で重み付き和は『α 等で重みを調整できる代わりに、スコアの正規化方法に注意が必要』と整理されており、a/b/d はそれぞれ RRF と重み付き和の性質を取り違えた選択肢です。",
+      "source_refs": [
+        { "section_id": "02-01", "anchor": "スコア統合の2つの定番" }
+      ],
+      "difficulty": "medium",
+      "tags": ["hybrid-search", "rrf", "fusion"]
+    },
+    {
+      "id": "q02-03",
+      "question": "Bi-Encoder と Cross-Encoder を組み合わせた「2段階検索」の発想として、本文の説明に最も近いものはどれですか?",
+      "options": [
+        { "id": "a", "text": "Cross-Encoder で全文書を事前にスコア化し、Bi-Encoder でクエリ時に並べ替える" },
+        { "id": "b", "text": "Bi-Encoder で広く粗く候補を取り、Cross-Encoder で狭く精密に並べ替えることで計算量と精度を両立する" },
+        { "id": "c", "text": "Bi-Encoder と Cross-Encoder の両方で全文書を毎回スコア化し、平均値で並べ替える" },
+        { "id": "d", "text": "Cross-Encoder で粗く取った候補を、Bi-Encoder で精密に並べ替えてレイテンシを下げる" }
+      ],
+      "answer": "b",
+      "explanation": "本文の中核となる主張は『Bi-Encoder で広く粗く取り、Cross-Encoder で狭く精密に絞る』2段階構成です。Cross-Encoder は毎回クエリと文書の組ごとに推論が必要で全文書には適用できないため、a・c のような『全文書に Cross-Encoder』は現実的ではありません。d は Bi-Encoder と Cross-Encoder の役割を入れ替えており、精度・コストの理屈が成立しません。",
+      "source_refs": [
+        { "section_id": "02-02", "anchor": "Bi-Encoder で広く粗く取り、Cross-Encoder で狭く精密に絞る" }
+      ],
+      "difficulty": "medium",
+      "tags": ["reranking", "cross-encoder", "bi-encoder"]
+    },
+    {
+      "id": "q02-04",
+      "question": "RAG パイプラインで Re-ranker を入れても期待した精度改善が得られない局面の説明として、最も適切なものはどれですか?",
+      "options": [
+        { "id": "a", "text": "Bi-Encoder の候補上位 50 件の中には正解が含まれているが、上位 5 件には入っていないとき" },
+        { "id": "b", "text": "そもそも Bi-Encoder の取得した候補集合に正解文書が一切含まれていないとき" },
+        { "id": "c", "text": "ベクトル検索の Recall は十分だが、最終的な上位の順位だけがずれているとき" },
+        { "id": "d", "text": "FAQ のような短い文書群で、正解が候補上位 10 件以内に含まれているとき" }
+      ],
+      "answer": "b",
+      "explanation": "本文では『Re-ranker は順位の問題を解く道具で、取りこぼしの問題は解けない』と明確に整理されています。候補に正解が含まれていない場合(Recall 不足)は、いくら Re-ranker を強化しても改善せず、Hybrid Search や Multi-Query などの Recall 改善策が先です。a・c・d はいずれも Re-ranker が効きやすい『候補に正解が含まれているが順位が低い』ケースであり、改善が期待できる側です。",
+      "source_refs": [
+        { "section_id": "02-02", "anchor": "Re-ranker は「順位の問題」を解く道具" }
+      ],
+      "difficulty": "medium",
+      "tags": ["reranking", "recall", "trade-off"]
+    },
+    {
+      "id": "q02-05",
+      "question": "次のうち、Query Rewriting の戦略と適用場面の組み合わせとして本文の説明と整合するものはどれですか?",
+      "options": [
+        { "id": "a", "text": "マルチターン対話の RAG では、まず Step-back Prompting で抽象化することが事実上必須である" },
+        { "id": "b", "text": "コーパスが用語固定の技術文書の場合は、抽象化(Step-back Prompting)が最も安定する" },
+        { "id": "c", "text": "マルチターン対話では、代名詞や省略を埋める自己完結化(decontextualization)が事実上必須の前処理になる" },
+        { "id": "d", "text": "ユーザーが初心者で抽象的な質問を投げるシステムでは、キーワード抽出だけに絞るのが最適である" }
+      ],
+      "answer": "c",
+      "explanation": "本文では『マルチターン対話の RAG では自己完結化(decontextualization)が事実上必須』と明示されています。用語固定の技術文書ではキーワード抽出(2)が安定、初心者向けでは具体化・抽象化(3)(4)が試す価値ありと整理されているため、a・b・d はそれぞれ戦略と場面の対応がずれた『ほぼ正解だが部分的に違う』選択肢です。",
+      "source_refs": [
+        { "section_id": "02-03", "anchor": "自己完結化(decontextualization)" }
+      ],
+      "difficulty": "medium",
+      "tags": ["query-rewriting", "multi-turn"]
+    },
+    {
+      "id": "q02-06",
+      "question": "HyDE(Hypothetical Document Embeddings)の発想を最も正確に表しているのはどれですか?",
+      "options": [
+        { "id": "a", "text": "LLM に正確な回答を生成させ、その内容が事実として正しいことを確認したうえで埋め込みベクトルとして使う" },
+        { "id": "b", "text": "LLM に仮の回答文を生成させ、その埋め込みを検索クエリに使うことで質問と文書の文体差を埋める" },
+        { "id": "c", "text": "ユーザー質問を複数の言い換えに展開し、それぞれのベクトル検索結果を RRF で統合する" },
+        { "id": "d", "text": "ユーザー質問の代名詞や省略を会話履歴から補い、検索しやすい1文に書き換える" }
+      ],
+      "answer": "b",
+      "explanation": "HyDE は『質問と文書の文体差』を、LLM に生成させた『仮の回答』の埋め込みを介して埋める手法です。本文は『仮回答の内容が正しい必要はない』と明示しており、a の『事実として正しいことを確認』は誤りです。c は Multi-Query / RAG-Fusion(02-06)、d は Query Rewriting の自己完結化(02-03)であり、HyDE とは別の技法です。",
+      "source_refs": [
+        { "section_id": "02-04", "anchor": "仮回答の **内容が正しい必要はない**" }
+      ],
+      "difficulty": "medium",
+      "tags": ["hyde", "embedding"]
+    },
+    {
+      "id": "q02-07",
+      "question": "Parent-Child Chunking が解決している本質的なトレードオフとして、最も適切な説明はどれですか?",
+      "options": [
+        { "id": "a", "text": "ベクトル検索とキーワード検索のスコアスケールが揃わない問題を、親子の2階層で統合する" },
+        { "id": "b", "text": "LLM の context window を圧迫しないよう、親チャンクだけを検索対象にして子チャンクは破棄する" },
+        { "id": "c", "text": "検索精度は細かいチャンクが有利で、生成品質は大きい文脈が有利という対立を、検索単位と生成単位を分けて解消する" },
+        { "id": "d", "text": "Bi-Encoder と Cross-Encoder の精度差を、親子の階層的なスコアリングで埋める" }
+      ],
+      "answer": "c",
+      "explanation": "本文は『検索精度を上げるには細かく区切りたい / 生成品質を上げるには大きな文脈を渡したい』という板挟みを、『検索する単位と生成に渡す単位を分けて持つ』ことで解消するのが Parent-Child Chunking、と説明しています。a は Hybrid Search(02-01)、d は Re-ranking(02-02)の話、b は『親だけ検索して子は捨てる』と役割を取り違えており、いずれも別の技法・別の論点です。",
+      "source_refs": [
+        { "section_id": "02-05", "anchor": "「検索する単位」と「生成に渡す単位」を分けて持つ" }
+      ],
+      "difficulty": "medium",
+      "tags": ["parent-child-chunking", "trade-off"]
+    },
+    {
+      "id": "q02-08",
+      "question": "Multi-Query を RRF で統合する RAG-Fusion の特徴として、単純な和集合 + 重複排除との違いを正しく説明しているのはどれですか?",
+      "options": [
+        { "id": "a", "text": "和集合 + 重複排除のほうが、複数クエリで何度も上位に出る文書を自然に上位に押し上げられる" },
+        { "id": "b", "text": "RAG-Fusion は RRF を使うため、複数クエリの上位に共通して現れる文書が自然に上位に来る" },
+        { "id": "c", "text": "RAG-Fusion は LLM を一切呼び出さず、和集合より低コストで実装できる" },
+        { "id": "d", "text": "和集合 + 重複排除は順位情報を保持するため、後段に Re-ranker が無い構成でも RAG-Fusion より精度が高い" }
+      ],
+      "answer": "b",
+      "explanation": "本文では RAG-Fusion を『RRF で各クエリの順位を足し合わせるため、複数クエリの上位に共通して現れる文書が自然に上位に来る』と整理しています。和集合 + 重複排除は実装が楽な反面、『何度も上位に出た文書を強くする』情報が捨てられる点がデメリットです。a・d は和集合と RAG-Fusion の性質を逆にしており、c は Multi-Query 自体が LLM 呼び出しを前提とするため誤りです。",
+      "source_refs": [
+        { "section_id": "02-06", "anchor": "複数クエリの上位に共通して現れる文書が自然に上位に来ます" }
+      ],
+      "difficulty": "medium",
+      "tags": ["multi-query", "rag-fusion", "rrf"]
+    }
+  ]
+}

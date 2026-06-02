@@ -1,0 +1,13 @@
+id: "05"
+title: LangGraph による Agent 設計
+estimated_minutes: 24
+learning_objectives:
+  - Agent をステートマシンとして設計できる
+  - 条件分岐・永続化・人間介入を設計に組み込める
+section_order:
+  - "05-01"
+  - "05-02"
+  - "05-03"
+  - "05-04"
+  - "05-05"
+  - "05-06"

@@ -1,0 +1,11 @@
+id: "08"
+title: FT vs RAG vs プロンプト改善の判断軸
+estimated_minutes: 16
+learning_objectives:
+  - 3 アプローチが解く問題の違いを説明できる
+  - 状況に応じた選択フローを描ける
+section_order:
+  - "08-01"
+  - "08-02"
+  - "08-03"
+  - "08-04"

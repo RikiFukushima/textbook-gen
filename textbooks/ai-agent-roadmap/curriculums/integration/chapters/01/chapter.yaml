@@ -1,0 +1,12 @@
+id: "01"
+title: LLM 評価の体系
+estimated_minutes: 20
+learning_objectives:
+  - 評価設計の全体像を描ける
+  - RAG / Agent の評価手法を選べる
+section_order:
+  - "01-01"
+  - "01-02"
+  - "01-03"
+  - "01-04"
+  - "01-05"

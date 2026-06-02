@@ -1,0 +1,91 @@
+{
+  "chapter_id": "04",
+  "questions": [
+    {
+      "id": "q04-01",
+      "question": "2025〜2026 年時点での LangChain 本体の立ち位置として、本書の説明にもっとも近いものはどれですか。",
+      "options": [
+        { "id": "a", "text": "設計が古く非推奨となったフレームワークで、現在は新規プロジェクトで使うべきではない" },
+        { "id": "b", "text": "学習・プロトタイピングや小〜中規模の直列パイプラインで実質的なデファクト。複雑な Agent は姉妹プロジェクトの LangGraph に移っている" },
+        { "id": "c", "text": "RAG 用途に特化したフレームワークで、Agent や LLM 抽象化の機能は当初から持っていない" },
+        { "id": "d", "text": "Agent から RAG まで本番運用も含めてすべて LangChain 本体で書くのが現在の標準であり、LangGraph は実験的位置付けに留まる" }
+      ],
+      "answer": "b",
+      "explanation": "本文では「Agent や複雑なワークフローを本番品質で動かす用途は LangGraph へ移っている」一方で、LangChain 本体は学習・プロトタイピング・小〜中規模の直列パイプラインで実質的なデファクトと述べています。a は「使うべきでない」と決めつけている点、d は「すべて LangChain 本体で書くのが標準」と過度に逆の主張をしている点で誤りです。c は LangChain がモデル呼び出し・ツール・メモリなどを最初に揃えた歴史的経緯と矛盾します。",
+      "source_refs": [
+        { "section_id": "04-01", "anchor": "2025〜2026 年の立ち位置" }
+      ],
+      "difficulty": "medium",
+      "tags": ["langchain", "positioning"]
+    },
+    {
+      "id": "q04-02",
+      "question": "本書が「学習目的では深追いしなくてよい」としている LangChain の領域はどれですか。",
+      "options": [
+        { "id": "a", "text": "`PromptTemplate` や Chat モデル呼び出しの基本 API" },
+        { "id": "b", "text": "`Retriever` や `Tool` といった共通抽象" },
+        { "id": "c", "text": "`LLMChain` / `AgentExecutor` / `ConversationalAgent` などのレガシー Agent 機能" },
+        { "id": "d", "text": "LCEL の `|` パイプによる Runnable 合成の基本記法" }
+      ],
+      "answer": "c",
+      "explanation": "本文では「入る範囲」として PromptTemplate / Chat モデル / Retriever / Tool / LCEL の基本記法を挙げ、「深追いしない範囲」として旧来の LLMChain・AgentExecutor・ConversationalAgent などのレガシー Agent 機能を挙げています。これらは LangGraph 側で書き直すのが推奨で、新規に学ぶ価値は薄いと明記されています。a/b/d はいずれも「入る範囲」側に分類されている要素です。",
+      "source_refs": [
+        { "section_id": "04-01", "anchor": "学習目的でどこまで踏み込むか" }
+      ],
+      "difficulty": "medium",
+      "tags": ["langchain", "scope"]
+    },
+    {
+      "id": "q04-03",
+      "question": "本書が挙げる「Chain(直列パイプライン)では表現しきれず、LangGraph に乗り換える価値がある」要件として適切でないものはどれですか。",
+      "options": [
+        { "id": "a", "text": "ツール呼び出しを複数回ループさせて ReAct 的に動かしたい" },
+        { "id": "b", "text": "途中で人間の承認を挟み、承認が来てから再開する処理を入れたい" },
+        { "id": "c", "text": "長時間処理を中断し、別プロセス・別マシンから再開できるようにしたい" },
+        { "id": "d", "text": "プロンプト整形 → LLM 呼び出し → 文字列パース、という一方向の処理を組みたい" }
+      ],
+      "answer": "d",
+      "explanation": "d は「プロンプト整形 → LLM → パース」という典型的な直列パイプラインであり、本文でも LangChain だけで十分きれいに書けると説明されているケースです。a の複数回ループ、b の Human-in-the-Loop、c の中断・再開はいずれも「LangGraph に移す価値がある」要件として節末に列挙されています。",
+      "source_refs": [
+        { "section_id": "04-02", "anchor": "どこから LangGraph に乗り換えるべきか" }
+      ],
+      "difficulty": "medium",
+      "tags": ["langgraph", "decision"]
+    },
+    {
+      "id": "q04-04",
+      "question": "LangGraph がレガシー Agent(`AgentExecutor` など)に対して改善している本質的なポイントはどれですか。",
+      "options": [
+        { "id": "a", "text": "LLM 呼び出しの速度を高速化し、推論コストを大幅に削減してくれる" },
+        { "id": "b", "text": "ノード・エッジ・共有 State として制御フローと状態を明示的に書けるため、デバッグや拡張がしやすい" },
+        { "id": "c", "text": "プロンプトを自動生成してくれるため、開発者はプロンプト設計を一切意識しなくてよい" },
+        { "id": "d", "text": "LangChain の API を完全に置き換える後継ライブラリで、LCEL や Retriever などの抽象はもう使わなくてよい" }
+      ],
+      "answer": "b",
+      "explanation": "本文ではレガシー Agent の問題点として「ロジックが黒い箱の中に隠れる」ためデバッグや拡張がしづらかった点を挙げ、LangGraph はノード・エッジ・共有 State として明示的に書く点が改善だと説明しています。a の推論速度・c の自動プロンプト生成はいずれも本文に記述がありません。d は LCEL や Retriever を引き続き「読めるようにする」方針と矛盾し、LangGraph は LangChain の置き換えではなく住み分けです。",
+      "source_refs": [
+        { "section_id": "04-02", "anchor": "グラフと共有 State という発想" }
+      ],
+      "difficulty": "medium",
+      "tags": ["langgraph", "state-machine"]
+    },
+    {
+      "id": "q04-05",
+      "question": "本書が示す LCEL の説明として、もっとも適切なものはどれですか。",
+      "options": [
+        { "id": "a", "text": "Python とは独立した新しいプログラミング言語で、LangChain を使うには専用の処理系をインストールする必要がある" },
+        { "id": "b", "text": "Runnable を `|` で繋ぐ表記法だが、`invoke` / `stream` / `batch` といったメソッドは Runnable ごとに名前が異なる" },
+        { "id": "c", "text": "Agent の複雑な分岐・ループを記述するための DSL で、LangGraph の代わりに使うことが推奨されている" },
+        { "id": "d", "text": "Runnable という共通インタフェースを `|` で繋ぐ合成記法で、`invoke` / `stream` / `batch` の 3 メソッドが共通の呼び出し方になっている" }
+      ],
+      "answer": "d",
+      "explanation": "本文は「LCEL は新しい言語ではなく、`|` で部品を連結する Python の書き方」で、すべての部品が Runnable を実装し `invoke` / `stream` / `batch` の 3 メソッドを共通で持つ、と説明しています。a は「新しい言語」と誤解した内容、b はメソッド名が共通である点を取り違えています。c は「複雑な制御は LCEL ではなく LangGraph に任せるのが現在の標準」という本文の方針と正反対です。",
+      "source_refs": [
+        { "section_id": "04-03", "anchor": "LCEL は「Runnable を pipe で繋ぐ」だけの記法" },
+        { "section_id": "04-03", "anchor": "覚えるのは 3 つのメソッドと 1 つの演算子だけ" }
+      ],
+      "difficulty": "medium",
+      "tags": ["lcel", "runnable"]
+    }
+  ]
+}

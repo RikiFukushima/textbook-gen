@@ -1,0 +1,13 @@
+id: "01"
+title: LlamaIndex による RAG 構築
+estimated_minutes: 24
+learning_objectives:
+  - LlamaIndex のデータモデルを説明できる
+  - Retriever と Query Engine の構成を選べる
+section_order:
+  - "01-01"
+  - "01-02"
+  - "01-03"
+  - "01-04"
+  - "01-05"
+  - "01-06"

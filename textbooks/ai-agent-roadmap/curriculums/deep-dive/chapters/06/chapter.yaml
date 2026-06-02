@@ -1,0 +1,11 @@
+id: "06"
+title: Multi-Agent パターン
+estimated_minutes: 16
+learning_objectives:
+  - Multi-Agent にすべき条件を見極められる
+  - 代表的な協調構造を説明できる
+section_order:
+  - "06-01"
+  - "06-02"
+  - "06-03"
+  - "06-04"
