@@ -1,0 +1,141 @@
+{
+  "chapter_id": "02",
+  "questions": [
+    {
+      "id": "q02-01",
+      "question": "HCL の block と argument の説明として最も適切なものはどれですか。",
+      "options": [
+        { "id": "a", "text": "block は種別を表すキーワードとラベル、波括弧の本体からなる構造単位で、argument はその本体の中に書く `名前 = 値` の記述である。" },
+        { "id": "b", "text": "argument は種別とラベルを持つ構造単位で、block は argument の中に並ぶ `名前 = 値` の記述である。" },
+        { "id": "c", "text": "block も argument もどちらも `名前 = 値` の形式で書かれる記述で、両者の役割に違いはない。" },
+        { "id": "d", "text": "block は波括弧で囲まれた構造単位だが、種別やラベルは持たず、内部の argument だけが意味を持つ。" }
+      ],
+      "answer": "a",
+      "explanation": "HCL は block(種別+ラベル+波括弧の本体)と argument(`名前 = 値`)の 2 要素で構成されます。block と argument の役割を入れ替えた選択肢や、両者の違いを否定する選択肢は誤りです。",
+      "source_refs": [
+        { "section_id": "02-01", "anchor": "HCL の基本構文 — block と argument" }
+      ],
+      "difficulty": "easy",
+      "tags": ["HCL", "block", "argument"]
+    },
+    {
+      "id": "q02-02",
+      "question": "1 つの作業ディレクトリ内の `.tf` ファイルの扱いとして正しいものはどれですか。",
+      "options": [
+        { "id": "a", "text": "Terraform は同じディレクトリ内の `.tf` ファイルをすべてまとめて 1 つの設定として扱うため、ファイル分割は人間にとっての見やすさのためにすぎない。" },
+        { "id": "b", "text": "Terraform は `main.tf` という名前のファイルしか読み込まないため、設定はすべて `main.tf` に書く必要がある。" },
+        { "id": "c", "text": "Terraform は `.tf` ファイルを個別の設定として独立に扱い、ファイルごとに別々に init や apply を実行する。" },
+        { "id": "d", "text": "Terraform は `.tf` ファイルを読み込む順序が重要で、ファイル名のアルファベット順に依存関係が決まる。" }
+      ],
+      "answer": "a",
+      "explanation": "Terraform は同じディレクトリの `.tf` を結合して 1 つの設定として扱います。`main.tf` などの命名は慣習に過ぎず、ファイル分割は人間にとっての見やすさのためです。",
+      "source_refs": [
+        { "section_id": "02-01", "anchor": "ファイルとディレクトリの考え方" }
+      ],
+      "difficulty": "easy",
+      "tags": ["Terraform", "ディレクトリ"]
+    },
+    {
+      "id": "q02-03",
+      "question": "Terraform で AWS を操作するときの provider の役割として最も適切なものはどれですか。",
+      "options": [
+        { "id": "a", "text": "AWS などの特定プラットフォームの API を Terraform から操作するためのプラグインで、リージョンや認証情報を設定する。" },
+        { "id": "b", "text": "AWS リソースの料金見積もりを行い、apply 前にコストを表示するためのプラグインである。" },
+        { "id": "c", "text": "ローカルの state ファイルを暗号化して保存するための内部コンポーネントで、AWS との通信は行わない。" },
+        { "id": "d", "text": "AWS リソースをまとめて再利用するためのテンプレートで、複数の resource を 1 つにグループ化する仕組みである。" }
+      ],
+      "answer": "a",
+      "explanation": "provider は対象プラットフォームの API を扱うプラグインで、リージョンや認証情報を設定します。d は module、b・c の機能は provider のものではありません。",
+      "source_refs": [
+        { "section_id": "02-02", "anchor": "provider — プラットフォームへの橋渡し" }
+      ],
+      "difficulty": "medium",
+      "tags": ["provider", "AWS"]
+    },
+    {
+      "id": "q02-04",
+      "question": "`resource \"aws_instance\" \"web\"` という記述についての説明として正しいものはどれですか。",
+      "options": [
+        { "id": "a", "text": "`aws_instance` がリソースタイプ(前半が provider 名に対応)、`\"web\"` はこの設定内でリソースを参照するための名前で、AWS 上のリソース名そのものではない。" },
+        { "id": "b", "text": "`aws_instance` がリソースタイプで、`\"web\"` は AWS マネジメントコンソールにそのまま表示されるインスタンス名になる。" },
+        { "id": "c", "text": "`aws_instance` は AWS アカウント ID を表し、`\"web\"` がリソースタイプの省略名である。" },
+        { "id": "d", "text": "`aws_instance` は provider 名で、`\"web\"` がリソースタイプを表す。リソースの種類は `\"web\"` 側で決まる。" }
+      ],
+      "answer": "a",
+      "explanation": "`aws_instance` がリソースタイプ(前半 `aws_` が provider に対応)、`\"web\"` はコード内での参照名であり AWS 上の名前ではありません。b は「AWS 上の名前」という誤解を含む紛らわしい選択肢です。",
+      "source_refs": [
+        { "section_id": "02-02", "anchor": "resource — 管理したいインフラ部品" }
+      ],
+      "difficulty": "medium",
+      "tags": ["resource", "リソースタイプ"]
+    },
+    {
+      "id": "q02-05",
+      "question": "`terraform init` の役割として最も適切なものはどれですか。",
+      "options": [
+        { "id": "a", "text": "作業ディレクトリを初期化し、設定が必要とする provider プラグインをダウンロードして Terraform を実行できる状態にする。" },
+        { "id": "b", "text": "設定と現状を突き合わせ、適用すると何がどう変わるかを実行せずに表示する。" },
+        { "id": "c", "text": "plan で示された変更を実際のインフラに適用し、リソースを作成・更新・削除する。" },
+        { "id": "d", "text": "Terraform が管理しているリソースをすべて削除し、作業ディレクトリを片付ける。" }
+      ],
+      "answer": "a",
+      "explanation": "init は作業ディレクトリの初期化と provider プラグインの取得を行うコマンドです。b は plan、c は apply、d は destroy の説明で、いずれもコマンドを取り違えています。",
+      "source_refs": [
+        { "section_id": "02-03", "anchor": "terraform init — 作業ディレクトリの初期化" }
+      ],
+      "difficulty": "easy",
+      "tags": ["init", "ワークフロー"]
+    },
+    {
+      "id": "q02-06",
+      "question": "Terraform で plan と apply を分けている意義として最も適切なものはどれですか。",
+      "options": [
+        { "id": "a", "text": "plan は何も変更しないため何度でも安全に確認でき、apply は確認を挟んで適用するので、意図しない変更を直前で止められる。" },
+        { "id": "b", "text": "plan は実際にリソースを作成しつつ差分を表示するため、apply を省略しても適用は完了する。" },
+        { "id": "c", "text": "plan は apply より高速にリソースを作成するための軽量モードで、本番では apply、検証では plan を使い分ける。" },
+        { "id": "d", "text": "plan は state ファイルを書き換えるだけのコマンドで、実際の差分は apply 時に初めて計算される。" }
+      ],
+      "answer": "a",
+      "explanation": "plan は実際の変更を行わずに差分を見せるコマンドで、apply は確認(`yes`)を挟んで実際に適用します。この 2 段階によって意図しない変更を直前で止められます。",
+      "source_refs": [
+        { "section_id": "02-03", "anchor": "terraform plan — 適用前に差分を見る" }
+      ],
+      "difficulty": "medium",
+      "tags": ["plan", "apply", "ワークフロー"]
+    },
+    {
+      "id": "q02-07",
+      "question": "Terraform の「冪等性(べきとうせい)」を最もよく表しているのはどれですか。",
+      "options": [
+        { "id": "a", "text": "設定と実際の状態が一致していれば、同じ設定で何度 apply しても `0 added, 0 changed, 0 destroyed` となり結果が変わらない性質。" },
+        { "id": "b", "text": "apply を実行するたびに、設定どおりに新しいリソースが追加で作成されていく性質。" },
+        { "id": "c", "text": "destroy を実行しても、Terraform が管理していないリソースは決して削除されない性質。" },
+        { "id": "d", "text": "plan と apply の結果が、間に手作業の変更があっても常に完全に一致する性質。" }
+      ],
+      "answer": "a",
+      "explanation": "冪等性は「同じ操作を何度行っても結果が変わらない性質」です。設定と現状が一致していれば再度 apply しても変更が出ないことが具体例にあたります。c は destroy の対象範囲に関する説明として正しい面はありますが、冪等性そのものの定義ではないため誤りです。",
+      "source_refs": [
+        { "section_id": "02-04", "anchor": "冪等性" }
+      ],
+      "difficulty": "medium",
+      "tags": ["冪等性", "apply"]
+    },
+    {
+      "id": "q02-08",
+      "question": "`terraform destroy` を扱うときの注意点として、本文の説明に最もよく合うものはどれですか。",
+      "options": [
+        { "id": "a", "text": "destroy はそのディレクトリで Terraform が管理しているリソースをまとめて削除するので、本番環境では plan で対象を確認してから実行する。" },
+        { "id": "b", "text": "destroy は対象リソースを 1 つずつ指定する必要があり、何も指定しなければ何も削除されない安全な設計になっている。" },
+        { "id": "c", "text": "destroy は apply と異なり確認プロンプトが出ないため、実行と同時に即座にリソースが削除される。" },
+        { "id": "d", "text": "destroy は state ファイルからリソースの記録を消すだけで、AWS 上の実体は別途コンソールから削除する必要がある。" }
+      ],
+      "answer": "a",
+      "explanation": "destroy はそのディレクトリで管理しているリソースをまとめて削除するため、本番では plan(destroy 時も削除対象が表示される)で確認してから実行するのが安全です。c は誤り(destroy も `yes` の確認を挟む)、d も誤り(実体も削除される)です。",
+      "source_refs": [
+        { "section_id": "02-04", "anchor": "destroy で片付ける" }
+      ],
+      "difficulty": "medium",
+      "tags": ["destroy", "安全運用"]
+    }
+  ]
+}

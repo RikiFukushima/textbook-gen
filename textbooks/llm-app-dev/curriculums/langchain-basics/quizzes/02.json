@@ -1,0 +1,141 @@
+{
+  "chapter_id": "02",
+  "questions": [
+    {
+      "id": "q02-01",
+      "question": "LangChain の ChatModel の入出力に関する説明として、最も正確なものはどれですか?",
+      "options": [
+        { "id": "a", "text": "文字列を入力に取り、文字列を返す。役割の区別は内部的に消える。" },
+        { "id": "b", "text": "メッセージのリストを入力に取り、1 件の応答メッセージ(AIMessage)を返す。" },
+        { "id": "c", "text": "メッセージのリストを入力に取り、メッセージのリストを返す。" },
+        { "id": "d", "text": "プロンプトテンプレートを直接入力に取り、構造化済みのオブジェクトを返す。" }
+      ],
+      "answer": "b",
+      "explanation": "ChatModel は『メッセージのリストを入力に取り、1 件の応答メッセージを返す』という一貫した約束を持ちます。文字列を渡すこともできますが、内部的には HumanMessage 1 件に変換されるだけで、本来の入力はメッセージのリストです。",
+      "source_refs": [
+        { "section_id": "02-01", "anchor": "ChatModel は「メッセージの列」を受け取る" }
+      ],
+      "difficulty": "easy",
+      "tags": ["chatmodel", "message"]
+    },
+    {
+      "id": "q02-02",
+      "question": "SystemMessage / HumanMessage / AIMessage の役割の組み合わせとして正しいものはどれですか?",
+      "options": [
+        { "id": "a", "text": "SystemMessage はユーザー入力、HumanMessage はモデルの応答、AIMessage は方針指示。" },
+        { "id": "b", "text": "SystemMessage はモデルの応答、HumanMessage は方針指示、AIMessage はユーザー入力。" },
+        { "id": "c", "text": "SystemMessage は方針指示、HumanMessage はユーザー入力、AIMessage はモデルの応答。" },
+        { "id": "d", "text": "SystemMessage はログ、HumanMessage はユーザー入力、AIMessage はツールの実行結果。" }
+      ],
+      "answer": "c",
+      "explanation": "SystemMessage はモデルの役割や口調、守るべき方針を与える指示(会話の先頭に置くことが多い)、HumanMessage はユーザーからの入力、AIMessage はモデルが生成した応答を表します。",
+      "source_refs": [
+        { "section_id": "02-01", "anchor": "3 種類のメッセージを使い分ける" }
+      ],
+      "difficulty": "easy",
+      "tags": ["message", "role"]
+    },
+    {
+      "id": "q02-03",
+      "question": "ChatPromptTemplate を `prompt.invoke({\"language\": \"日本語\", \"text\": \"Hello\"})` のように呼び出したとき、戻り値から得られる中身として最も適切なものはどれですか?",
+      "options": [
+        { "id": "a", "text": "モデルが生成した応答テキストの文字列。" },
+        { "id": "b", "text": "変数が埋め込まれた SystemMessage と HumanMessage のリスト。" },
+        { "id": "c", "text": "テンプレート文字列のまま(変数は未置換)で返ってくる。" },
+        { "id": "d", "text": "PromptTemplate オブジェクト自身のコピー。" }
+      ],
+      "answer": "b",
+      "explanation": "ChatPromptTemplate に入力変数を辞書で渡すと、テンプレート内のプレースホルダが実際の値に置き換わり、SystemMessage と HumanMessage のリストが生成されます(`messages.to_messages()` で取り出せます)。モデルにかけるのはそのあとの工程です。",
+      "source_refs": [
+        { "section_id": "02-02", "anchor": "ChatPromptTemplate で役割付きメッセージを組み立てる" }
+      ],
+      "difficulty": "medium",
+      "tags": ["prompt", "template"]
+    },
+    {
+      "id": "q02-04",
+      "question": "PromptTemplate の本文に JSON 例のような波括弧 `{` `}` をそのまま書きたいとき、正しい対処はどれですか?",
+      "options": [
+        { "id": "a", "text": "波括弧の前にバックスラッシュ `\\{` を付けてエスケープする。" },
+        { "id": "b", "text": "波括弧を二重にして `{{` `}}` と書く。" },
+        { "id": "c", "text": "波括弧はそのまま書いてよい。テンプレートは波括弧を区別する仕組みを持たない。" },
+        { "id": "d", "text": "本文中に波括弧は一切書けないので、別途文字列連結で後付けする。" }
+      ],
+      "answer": "b",
+      "explanation": "PromptTemplate は波括弧を変数のプレースホルダとして解釈するため、本文中にそのまま波括弧を書きたい場合は `{{` `}}` のように二重にしてエスケープします。エスケープを忘れると未定義変数として扱われ、エラーになります。",
+      "source_refs": [
+        { "section_id": "02-02", "anchor": "波括弧" }
+      ],
+      "difficulty": "medium",
+      "tags": ["prompt", "template", "escape"]
+    },
+    {
+      "id": "q02-05",
+      "question": "`chain = prompt | model | parser` と書いたとき、`chain.invoke({\"question\": \"...\"})` の実行で起きることの説明として最も適切なものはどれですか?",
+      "options": [
+        { "id": "a", "text": "3 つのコンポーネントが並列に実行され、結果がマージされる。" },
+        { "id": "b", "text": "入力辞書が prompt に渡り、その出力が model へ、さらに parser へと自動で流れる。" },
+        { "id": "c", "text": "prompt と model が実行され、parser は明示的に呼び出さない限り動かない。" },
+        { "id": "d", "text": "辞書は model に直接渡され、prompt と parser は補助的に動く。" }
+      ],
+      "answer": "b",
+      "explanation": "LCEL のパイプ演算子は『前の出力を次の入力に流す』記法です。`chain.invoke({...})` を呼ぶと、入力辞書が prompt に渡り、その出力(メッセージのリスト)が model へ、さらに parser へと順に流れます。並列実行や parser スキップは起こりません。",
+      "source_refs": [
+        { "section_id": "02-03", "anchor": "LCEL でコンポーネントをパイプ連結する" }
+      ],
+      "difficulty": "medium",
+      "tags": ["lcel", "chain", "pipe"]
+    },
+    {
+      "id": "q02-06",
+      "question": "Runnable が共通で備えるメソッドの組み合わせとして正しいものはどれですか?",
+      "options": [
+        { "id": "a", "text": "invoke / stream / batch" },
+        { "id": "b", "text": "run / call / apply" },
+        { "id": "c", "text": "predict / fit / transform" },
+        { "id": "d", "text": "send / receive / close" }
+      ],
+      "answer": "a",
+      "explanation": "LCEL で連結できる部品はすべて Runnable で、`invoke`(同期・単発)、`stream`(逐次出力)、`batch`(複数入力をまとめて処理)という共通インターフェースを持ちます。",
+      "source_refs": [
+        { "section_id": "02-03", "anchor": "すべては Runnable という共通の部品" }
+      ],
+      "difficulty": "easy",
+      "tags": ["runnable", "interface"]
+    },
+    {
+      "id": "q02-07",
+      "question": "`prompt | model | StrOutputParser()` のように StrOutputParser をチェーンの末尾に置く目的として最も適切なものはどれですか?",
+      "options": [
+        { "id": "a", "text": "AIMessage を Pydantic オブジェクトに変換する。" },
+        { "id": "b", "text": "モデル出力に format_instructions を自動で付与する。" },
+        { "id": "c", "text": "AIMessage から `.content` の文字列だけを取り出し、チェーンの戻り値を素の文字列にする。" },
+        { "id": "d", "text": "モデルの応答をストリーミングで逐次返すように切り替える。" }
+      ],
+      "answer": "c",
+      "explanation": "StrOutputParser は AIMessage を受け取り、`.content` の文字列だけを取り出すもっとも基本のパーサーです。末尾に置くとチェーンの戻り値が AIMessage ではなく素の文字列になり、そのまま表示やログに使えます。",
+      "source_refs": [
+        { "section_id": "02-04", "anchor": "もっとも基本の StrOutputParser" }
+      ],
+      "difficulty": "medium",
+      "tags": ["output-parser", "stroutputparser"]
+    },
+    {
+      "id": "q02-08",
+      "question": "PydanticOutputParser で LLM 出力を構造化データに変換するとき、安定して動かすためのポイントとして最も適切なものはどれですか?",
+      "options": [
+        { "id": "a", "text": "Pydantic モデルさえ定義しておけば、プロンプトに何も書かなくてもパーサー側で自動的に LLM に形式を伝えてくれる。" },
+        { "id": "b", "text": "パーサーが生成する format_instructions をプロンプトに埋め込み、モデルに正しい出力フォーマットを指示する。" },
+        { "id": "c", "text": "PydanticOutputParser はモデル出力のフォーマットを強制するため、temperature を高く設定するほど精度が上がる。" },
+        { "id": "d", "text": "PydanticOutputParser はチェーンの先頭に置き、入力側を構造化する役割を担う。" }
+      ],
+      "answer": "b",
+      "explanation": "PydanticOutputParser は『モデルがある程度フォーマットに従う』ことを前提にした後処理です。パーサーの `get_format_instructions()` で得られる format_instructions をプロンプトに埋め込み、出力形式をモデルに指示することが安定動作の鍵になります(temperature を下げたり、`with_structured_output` を使うのも有効です)。",
+      "source_refs": [
+        { "section_id": "02-04", "anchor": "format_instructions" }
+      ],
+      "difficulty": "medium",
+      "tags": ["output-parser", "pydantic", "structured-output"]
+    }
+  ]
+}
