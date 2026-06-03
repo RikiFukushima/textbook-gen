@@ -35,6 +35,23 @@ export function ChevronRight({ size }: { size?: number }) {
   );
 }
 
+export function ChevronUp({ size }: { size?: number }) {
+  return (
+    <Icon size={size}>
+      <path d="M6 15l6-6 6 6" />
+    </Icon>
+  );
+}
+
+export function CloseIcon({ size }: { size?: number }) {
+  return (
+    <Icon size={size}>
+      <line x1="6" y1="6" x2="18" y2="18" />
+      <line x1="18" y1="6" x2="6" y2="18" />
+    </Icon>
+  );
+}
+
 export function ListIcon({ size = 15 }: { size?: number }) {
   return (
     <Icon size={size}>

@@ -29,6 +29,12 @@ export default async function QuizPage({
   const ch = cur?.chapters.find((c) => c.meta.id === chapter);
   if (!tb || !cur || !ch || !ch.quiz || ch.quiz.questions.length === 0) notFound();
 
+  const chapterList = cur.chapters.map((c) => ({
+    id: c.meta.id,
+    number: Number(c.meta.id),
+    title: c.meta.title,
+  }));
+
   return (
     <QuizViewer
       slug={slug}
@@ -36,6 +42,7 @@ export default async function QuizPage({
       chapterId={ch.meta.id}
       chapterTitle={`第${Number(ch.meta.id)}章 ${ch.meta.title}`}
       quiz={ch.quiz}
+      chapterList={chapterList}
     />
   );
 }
