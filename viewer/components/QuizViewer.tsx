@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import type { Quiz } from "@/lib/types";
+import type { Quiz, QuizOption } from "@/lib/types";
 import { useProgress } from "@/lib/progress";
-import BackLink from "./BackLink";
+import ChapterFab, { type ChapterRef } from "./ChapterFab";
 
 interface Props {
   slug: string;
@@ -11,6 +11,18 @@ interface Props {
   chapterId: string;
   chapterTitle: string;
   quiz: Quiz;
+  chapterList: ChapterRef[];
+}
+
+const LETTERS = ["A", "B", "C", "D", "E", "F"];
+
+function shuffle<T>(arr: T[]): T[] {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
 
 export default function QuizViewer({
@@ -19,6 +31,7 @@ export default function QuizViewer({
   chapterId,
   chapterTitle,
   quiz,
+  chapterList,
 }: Props) {
   const { recordAnswer } = useProgress(slug);
   const curriculumHref = `/textbooks/${slug}/${curriculumId}`;
@@ -29,8 +42,14 @@ export default function QuizViewer({
   const [correctCount, setCorrectCount] = useState(0);
   const [done, setDone] = useState(false);
 
+  // 各設問の選択肢順をマウント時に一度だけシャッフル
+  const [shuffledOptions] = useState<QuizOption[][]>(() =>
+    quiz.questions.map((q) => shuffle(q.options))
+  );
+
   const total = quiz.questions.length;
   const q = quiz.questions[index];
+  const options = shuffledOptions[index];
 
   function choose(optionId: string) {
     if (revealed) return;
@@ -79,15 +98,24 @@ export default function QuizViewer({
             </Link>
           </div>
         </div>
+
+        <ChapterFab
+          slug={slug}
+          curriculumId={curriculumId}
+          chapterId={chapterId}
+          chapterList={chapterList}
+        />
       </main>
     );
   }
 
   return (
     <main className="flex min-h-[100dvh] flex-col bg-[var(--accent-weak)]">
-      <header className="flex items-center justify-between border-b border-[var(--border)] px-4 py-3">
-        <BackLink href={curriculumHref}>{chapterTitle}</BackLink>
-        <span className="text-xs text-[var(--muted)]">
+      <header className="flex items-center justify-between gap-3 border-b border-[var(--border)] bg-[var(--card)] px-4 py-3">
+        <span className="min-w-0 flex-1 truncate text-sm font-bold">
+          {chapterTitle}
+        </span>
+        <span className="shrink-0 text-xs text-[var(--muted)]">
           問 {index + 1} / {total}
         </span>
       </header>
@@ -97,7 +125,7 @@ export default function QuizViewer({
           <h2 className="text-lg font-bold leading-relaxed">{q.question}</h2>
 
           <ul className="mt-6 space-y-3">
-            {q.options.map((opt) => {
+            {options.map((opt, i) => {
               const isAnswer = opt.id === q.answer;
               const isSelected = opt.id === selected;
               let cls =
@@ -117,7 +145,7 @@ export default function QuizViewer({
                     className={`flex w-full items-start gap-3 rounded-xl border p-4 text-left transition-colors ${cls}`}
                   >
                     <span className="font-mono text-sm text-[var(--muted)]">
-                      {opt.id.toUpperCase()}
+                      {LETTERS[i] ?? String(i + 1)}
                     </span>
                     <span>{opt.text}</span>
                   </button>
@@ -149,6 +177,13 @@ export default function QuizViewer({
           )}
         </div>
       </div>
+
+      <ChapterFab
+        slug={slug}
+        curriculumId={curriculumId}
+        chapterId={chapterId}
+        chapterList={chapterList}
+      />
     </main>
   );
 }
