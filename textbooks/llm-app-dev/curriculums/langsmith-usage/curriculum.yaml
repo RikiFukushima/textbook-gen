@@ -1,6 +1,6 @@
 id: langsmith-usage
 title: LangSmith活用事例
-description: ""
+description: LangSmith でトレース・デバッグ・評価・モニタリングを行い、LLM アプリを観測して改善する方法を具体的な活用事例で学ぶカリキュラム
 order: 3
 estimated_hours: 2
 target_audience:

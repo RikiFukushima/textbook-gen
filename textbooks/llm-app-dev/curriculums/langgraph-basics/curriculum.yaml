@@ -1,6 +1,6 @@
 id: langgraph-basics
 title: LangGraph基礎
-description: ""
+description: 状態とグラフで LLM アプリのフローを制御する LangGraph の考え方を、ノード・エッジ・状態管理を中心に手を動かして学ぶカリキュラム
 order: 2
 estimated_hours: 2
 target_audience:

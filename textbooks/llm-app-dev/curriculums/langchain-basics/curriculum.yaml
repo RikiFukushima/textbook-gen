@@ -1,6 +1,6 @@
 id: langchain-basics
 title: LangChain基礎 〜 LangGraphとの違いを理解する
-description: ""
+description: LangChain の主要コンポーネント(モデル・プロンプト・チェーン)を押さえ、LangGraph との違いと使い分けを理解するための基礎カリキュラム
 order: 1
 estimated_hours: 2
 target_audience:
