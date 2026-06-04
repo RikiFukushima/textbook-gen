@@ -2,7 +2,18 @@
 
 任意の学習対象から、教材(Markdown)と理解度確認問題(4 択)を自動生成するプロジェクトです。生成物は `textbooks/{slug}/` 配下に出力し、Next.js ビューワで閲覧・演習します。
 
-要件の全体像は `../docs/textbook-gen-spec.md`、教材スキーマの詳細は `../docs/outline-schema.md` を参照してください。
+## 参照ドキュメント(迷ったらこの順で戻る)
+
+1. **`../docs/PHILOSOPHY.md`** — 最上位の判断基準(哲学・スタンス・捨てるもの)。
+2. `../docs/textbook-gen-spec.md` — 実装層の要件・スキーマ・UX・ロードマップ。
+3. `../docs/outline-schema.md` — 骨子(outline.yaml)の詳細。
+4. `.claude/skills/textbook-style/SKILL.md` — 執筆・レビュー規約の正本(SSOT)。哲学と spec を運用に落とした手続き層。
+
+判断が衝突したら **PHILOSOPHY が勝つ**。spec / textbook-style は PHILOSOPHY の従属物として読むこと。
+
+## 現在地(2026 年現在のフェーズ)
+
+**教材の量を増やし、精度を上げる時期。** 動画レイヤー(PHILOSOPHY §6)とマネタイズはスコープ外。再訪できる地図 UX(§7)・Supabase 進捗履歴の拡張も同じく後回し。**いま手を入れるのはテキスト教材とクイズの生成パイプラインだけ**。詳細は PHILOSOPHY §0。
 
 ## 階層(必ず守る)
 

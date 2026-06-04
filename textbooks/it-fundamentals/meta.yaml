@@ -1,16 +1,21 @@
 slug: it-fundamentals
 title: ゼロから学ぶITの仕組み
-description: ""
+description: パソコンの中身からインターネットの仕組み、Web ページが表示されるまでを、専門用語をなるべく使わずに学ぶ完全初心者向けの入門教材
 version: 0.1.0
 created_at: 2026-05-29
-updated_at: 2026-06-02
+updated_at: 2026-06-04
 authors: []
 visibility: public # private | shared | unlisted | public
 shared_with: []
 unlisted_token: null
 search_indexable: true
 allow_fork: false
-tags: []
+tags:
+  - it
+  - basics
+  - internet
+  - computer
+  - beginner
 contains_local_sources: false
 curriculum_order:
   - computer-internet-basics
