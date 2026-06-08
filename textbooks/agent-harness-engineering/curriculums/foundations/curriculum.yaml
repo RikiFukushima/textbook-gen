@@ -1,0 +1,16 @@
+id: foundations
+title: harness とは何か
+description: なぜモデル単体では足りないのか。harness を 5 つの構成要素(ツール/コンテキスト/権限/ループ/観測)に分解し、エージェントの「自律」の正体を言語化する。Claude Code を生きた教材として読む。
+order: 1
+estimated_hours: 1.5
+target_audience:
+  level: 中級
+  prerequisites:
+    - LLM・RAG・エージェントの基本概念を知っている(ai-agent-roadmap 相当)
+    - 何らかのエージェントや LLM API を触ったことがある
+    - プログラミングの基礎経験(言語不問)
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"

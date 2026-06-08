@@ -1,0 +1,15 @@
+id: resilience
+title: 壊れない自律をつくる
+description: 自律を安全に走らせ続けるための工学。ループ制御(終了条件・予算・再計画)、エラー回復(分類・リトライ・graceful degradation)、観測(トレース・非決定性デバッグ・評価とレッドチーミング)で「壊れない harness」を組み上げる。
+order: 3
+estimated_hours: 1.5
+target_audience:
+  level: 中級
+  prerequisites:
+    - foundations / design カリキュラムを理解している
+    - エージェントのループとツール呼び出しの流れを追える
+    - プログラミングの基礎経験(言語不問)
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
