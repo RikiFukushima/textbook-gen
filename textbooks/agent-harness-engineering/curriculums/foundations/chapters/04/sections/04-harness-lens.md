@@ -17,6 +17,7 @@ related_sections:
   - "02-04"
   - "02-05"
   - "04-01"
+  - "04-02"
   - "04-03"
 key_terms:
   - term: 観測(Observability)
