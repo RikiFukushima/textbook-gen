@@ -4,7 +4,7 @@ chapter_id: "02"
 title: 何を入れるか — 指示・履歴・ツール結果・取得知識の 4 種
 order: 2
 estimated_minutes: 4
-estimated_chars: 1850
+estimated_chars: 1165
 learning_points:
   - コンテキストを構成する 4 種類(指示・履歴・ツール結果・取得知識)を区別できること
   - それぞれが予算に占める性質(固定/累積/可変)の違い
