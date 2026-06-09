@@ -12,7 +12,7 @@
       ],
       "answer": "a",
       "explanation": "本文では、コードを書くのはモデルだが、ファイルを実際に読み書きし、文脈を保ち、危険な操作の前で確認を求め、複数作業を続けるのは足場の側だと整理しています。b は性能の優劣の話ではなく、c は「コードを書いているのはモデル」という本文の記述に反します。",
-      "source_refs": [{ "section_id": "04-01", "anchor": "賢いモデル" }],
+      "source_refs": [{ "section_id": "04-01", "anchor": "5 要素を実装したひとつの harness" }],
       "difficulty": "medium",
       "tags": ["claude-code", "harness"]
     },
@@ -42,7 +42,7 @@
       ],
       "answer": "a",
       "explanation": "本文は、読み取りは自由・書き込みや破壊的操作は確認というように操作の種類で扱いを分けていると観察します。b は読み取りが黙って進む記述に反し、c・d はそれぞれループの停止・コンテキストの話で、許可プロンプトの説明としては誤りです。",
-      "source_refs": [{ "section_id": "04-03", "anchor": "権限とループは噛み合っている" }],
+      "source_refs": [{ "section_id": "04-03", "anchor": "操作の種類で扱いを分けている" }],
       "difficulty": "medium",
       "tags": ["permission", "claude-code"]
     },

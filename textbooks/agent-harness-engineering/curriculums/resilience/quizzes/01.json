@@ -27,7 +27,7 @@
       ],
       "answer": "a",
       "explanation": "暴走の被害はコスト(API 請求の膨張)・副作用(取り消しにくい外界への変更)・信頼(放っておけないと見なされること)の三方向で説明されていました。",
-      "source_refs": [{ "section_id": "01-01", "anchor": "副作用" }],
+      "source_refs": [{ "section_id": "01-01", "anchor": "被害は大きく三つに分かれます" }],
       "difficulty": "medium",
       "tags": ["loop-control", "safety"]
     },
