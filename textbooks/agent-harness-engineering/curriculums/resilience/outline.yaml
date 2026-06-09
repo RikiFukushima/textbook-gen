@@ -1,0 +1,96 @@
+title: 壊れない自律をつくる
+target_audience:
+  level: 中級
+  prerequisites:
+    - foundations / design カリキュラムを理解している
+    - エージェントのループとツール呼び出しの流れを追える
+    - プログラミングの基礎経験(言語不問)
+  estimated_hours: 1.5
+style:
+  tone: ですます調・実務寄り
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: ループ制御 — 自律を「止める」設計
+    estimated_minutes: 20
+    learning_objectives:
+      - 終了条件の設計が自律の安全性を決めることを説明できる
+      - 無限ループの典型と検知方法を挙げられる
+      - ステップ上限・予算・タイムアウトの役割を説明できる
+    sections:
+      - id: "01-01"
+        title: 止まらない自律は事故である
+        estimated_minutes: 4
+      - id: "01-02"
+        title: 終了条件の設計 — いつゴールとみなすか
+        estimated_minutes: 4
+      - id: "01-03"
+        title: 無限ループの典型と検知
+        estimated_minutes: 4
+      - id: "01-04"
+        title: 予算で縛る — ステップ上限・トークン・時間
+        estimated_minutes: 4
+      - id: "01-05"
+        title: 迷ったら立て直す — 計画と再計画
+        estimated_minutes: 4
+    diagrams:
+      - purpose: エージェントループと脱出条件(継続/終了/中断)の状態遷移
+        type: mermaid
+        section: "01-03"
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "02"
+    title: エラー回復 — 壊れても立て直す
+    estimated_minutes: 16
+    learning_objectives:
+      - エージェントの失敗を種類で分類できる
+      - リトライと冪等性の関係を説明できる
+      - 失敗をコンテキストに残して学習させる設計を説明できる
+    sections:
+      - id: "02-01"
+        title: 失敗の分類 — ツール障害・モデル誤り・環境変化
+        estimated_minutes: 4
+      - id: "02-02"
+        title: リトライと冪等性 — 安全にやり直す条件
+        estimated_minutes: 4
+      - id: "02-03"
+        title: 失敗から学ぶループ — エラーをコンテキストに残す
+        estimated_minutes: 4
+      - id: "02-04"
+        title: 部分的に諦める — graceful degradation
+        estimated_minutes: 4
+    quiz:
+      count: 5
+      difficulty: medium
+  - id: "03"
+    title: 観測 — 見えないものは直せない
+    estimated_minutes: 19
+    learning_objectives:
+      - エージェントで何を記録すべきか(トレース/ステップ)を説明できる
+      - 非決定的な挙動のデバッグ手法を説明できる
+      - 評価とレッドチーミングで壊れ方を先取りする意義を説明できる
+    sections:
+      - id: "03-01"
+        title: 何を記録するか — トレース・スパン・ステップ
+        estimated_minutes: 4
+      - id: "03-02"
+        title: 非決定性をデバッグする — 再現できないバグと向き合う
+        estimated_minutes: 4
+      - id: "03-03"
+        title: 壊れ方を先に知る — 評価とレッドチーミング
+        estimated_minutes: 4
+      - id: "03-04"
+        title: 本番の観測 — コスト・レイテンシ・品質
+        estimated_minutes: 4
+      - id: "03-05"
+        title: harness を育て続ける — 観測から改善へ
+        estimated_minutes: 3
+    diagrams:
+      - purpose: 観測パイプライン(トレース収集→分析→改善)の流れ
+        type: mermaid
+        section: "03-01"
+    quiz:
+      count: 6
+      difficulty: medium

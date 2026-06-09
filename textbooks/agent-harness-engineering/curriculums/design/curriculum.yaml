@@ -1,0 +1,15 @@
+id: design
+title: ツール・コンテキスト・権限の設計
+description: harness の中核 3 要素を設計する。モデルに手を与えるツール定義、有限資源としてのコンテキスト工学(RAG/メモリ/圧縮を含む)、自律を安全に縛る権限とガードレール(プロンプトインジェクション対策を含む)。
+order: 2
+estimated_hours: 1.5
+target_audience:
+  level: 中級
+  prerequisites:
+    - foundations カリキュラム(harness の 5 要素とエージェントループ)を理解している
+    - 何らかのエージェントや LLM API を触ったことがある
+    - JSON / スキーマの基本がわかる
+chapter_order:
+  - "01"
+  - "02"
+  - "03"

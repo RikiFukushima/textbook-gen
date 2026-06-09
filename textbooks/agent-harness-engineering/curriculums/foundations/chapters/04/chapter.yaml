@@ -1,0 +1,12 @@
+id: "04"
+title: 生きた教材 — Claude Code を harness として読む
+estimated_minutes: 16
+learning_objectives:
+  - 身近なエージェント(Claude Code)を harness の 5 要素に分解して読める
+  - 各要素が実際の挙動にどう現れるかを観察できる
+  - harness 視点で既存ツールを評価する習慣を持つ
+section_order:
+  - "04-01"
+  - "04-02"
+  - "04-03"
+  - "04-04"

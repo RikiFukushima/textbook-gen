@@ -1,0 +1,103 @@
+title: ツール・コンテキスト・権限の設計
+target_audience:
+  level: 中級
+  prerequisites:
+    - foundations カリキュラム(harness の 5 要素とエージェントループ)を理解している
+    - 何らかのエージェントや LLM API を触ったことがある
+    - JSON / スキーマの基本がわかる
+  estimated_hours: 1.5
+style:
+  tone: ですます調・実務寄り
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: ツール設計 — モデルに「手」を与える
+    estimated_minutes: 20
+    learning_objectives:
+      - ツール定義の構成要素(name/description/schema)を説明できる
+      - ツールの粒度と説明文が選択挙動を左右する理由を説明できる
+      - ツールのエラーをモデルに返す設計の重要性を説明できる
+    sections:
+      - id: "01-01"
+        title: ツールとは何か — モデルが外界を動かす唯一の手段
+        estimated_minutes: 4
+      - id: "01-02"
+        title: ツール定義の解剖 — 名前・説明・スキーマ
+        estimated_minutes: 4
+      - id: "01-03"
+        title: 説明文はプロンプトである — モデルは description でツールを選ぶ
+        estimated_minutes: 4
+      - id: "01-04"
+        title: 粒度の設計 — 1 ツールにどこまで持たせるか
+        estimated_minutes: 4
+      - id: "01-05"
+        title: エラーをモデルに返す — 失敗も次の入力になる
+        estimated_minutes: 4
+    diagrams:
+      - purpose: モデルのツール呼び出しから実行・結果返却までの流れ
+        type: mermaid
+        section: "01-01"
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "02"
+    title: コンテキストエンジニアリング — 何を入れ、何を捨てるか
+    estimated_minutes: 20
+    learning_objectives:
+      - コンテキストウィンドウを有限資源として設計できる
+      - システムプロンプト/履歴/ツール結果/取得知識の配分を判断できる
+      - 圧縮・要約・メモリで溢れを防ぐ手段を説明できる
+    sections:
+      - id: "02-01"
+        title: コンテキストは有限資源 — トークン予算という制約
+        estimated_minutes: 4
+      - id: "02-02"
+        title: 何を入れるか — 指示・履歴・ツール結果・取得知識の 4 種
+        estimated_minutes: 4
+      - id: "02-03"
+        title: RAG はコンテキスト設計である — 検索を「詰め込み」として読み直す
+        estimated_minutes: 4
+      - id: "02-04"
+        title: 溢れる前に畳む — 圧縮・要約・打ち切り
+        estimated_minutes: 4
+      - id: "02-05"
+        title: セッションを越えて覚える — メモリの設計
+        estimated_minutes: 4
+    diagrams:
+      - purpose: コンテキストウィンドウの内訳(指示/履歴/結果/知識)の積み上げ
+        type: mermaid
+        section: "02-02"
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "03"
+    title: 権限とガードレール — 自律を安全に縛る
+    estimated_minutes: 20
+    learning_objectives:
+      - 自律に権限制御が必要な理由を説明できる
+      - 許可/確認/拒否の権限モデルを設計できる
+      - プロンプトインジェクションと出力制御の基本対策を挙げられる
+    sections:
+      - id: "03-01"
+        title: 自律の代償 — なぜ縛りが要るのか
+        estimated_minutes: 4
+      - id: "03-02"
+        title: 権限モデル — 許可・確認・拒否の三層
+        estimated_minutes: 4
+      - id: "03-03"
+        title: プロンプトインジェクション — 外部入力という攻撃面
+        estimated_minutes: 4
+      - id: "03-04"
+        title: 出力制御とポリシー — 何をさせないかを決める
+        estimated_minutes: 4
+      - id: "03-05"
+        title: 人間をループに残す — human-in-the-loop の設計
+        estimated_minutes: 4
+    diagrams:
+      - purpose: ツール呼び出しに対する許可/確認/拒否の権限判定フロー
+        type: mermaid
+        section: "03-02"
+    quiz:
+      count: 6
+      difficulty: medium

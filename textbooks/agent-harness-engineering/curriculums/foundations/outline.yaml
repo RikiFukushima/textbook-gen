@@ -1,0 +1,120 @@
+title: harness とは何か
+target_audience:
+  level: 中級
+  prerequisites:
+    - LLM・RAG・エージェントの基本概念を知っている(ai-agent-roadmap 相当)
+    - 何らかのエージェントや LLM API を触ったことがある
+    - プログラミングの基礎経験(言語不問)
+  estimated_hours: 1.5
+style:
+  tone: ですます調・実務寄り
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: なぜモデル単体では「足場」が要るのか
+    estimated_minutes: 16
+    learning_objectives:
+      - LLM が入力と出力しか持たない確率的関数であることを説明できる
+      - モデル単体では記憶・行動・継続ができない理由を説明できる
+      - harness を「モデルを動かす周辺すべて」として定義できる
+    sections:
+      - id: "01-01"
+        title: LLM は何を「できない」のか — 状態を持たない確率的関数
+        estimated_minutes: 4
+      - id: "01-02"
+        title: 一問一答から抜け出せない — 記憶・行動・継続の欠如
+        estimated_minutes: 4
+      - id: "01-03"
+        title: harness という発想 — モデルを「動かす」足場
+        estimated_minutes: 4
+      - id: "01-04"
+        title: harness が変えること — 同じモデルでも別物になる
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 確率的関数としてのモデルと、それを取り囲む harness の関係図
+        type: mermaid
+        section: "01-03"
+    quiz:
+      count: 5
+      difficulty: medium
+  - id: "02"
+    title: harness の解剖学 — 5 つの構成要素
+    estimated_minutes: 20
+    learning_objectives:
+      - harness を構成する 5 要素(ツール/コンテキスト/権限/ループ/観測)を列挙できる
+      - 各要素がモデルのどの限界を補うかを対応づけられる
+      - 5 要素が相互に依存し、一つ欠けると崩れることを説明できる
+    sections:
+      - id: "02-01"
+        title: 解剖図 — ツール・コンテキスト・権限・ループ・観測
+        estimated_minutes: 4
+      - id: "02-02"
+        title: ツールとコンテキスト — 外界に触れ、状況を保つ
+        estimated_minutes: 4
+      - id: "02-03"
+        title: 権限とループ — 縛りながら走らせる
+        estimated_minutes: 4
+      - id: "02-04"
+        title: 観測 — 自律を見えるようにする
+        estimated_minutes: 4
+      - id: "02-05"
+        title: 5 要素は支え合う — 一つ欠けると崩れる
+        estimated_minutes: 4
+    diagrams:
+      - purpose: harness を構成する 5 要素とモデルの関係を示す解剖図
+        type: mermaid
+        section: "02-01"
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "03"
+    title: エージェントループの実体 — 「自律」の正体
+    estimated_minutes: 17
+    learning_objectives:
+      - 推論→行動→観測のループが自律の実体であることを説明できる
+      - 1 ターンの中でメッセージがどう往復するかを追える
+      - stateless なモデルを stateful に見せる仕組みを説明できる
+    sections:
+      - id: "03-01"
+        title: 推論・行動・観測の循環 — ReAct を harness 視点で読み直す
+        estimated_minutes: 4
+      - id: "03-02"
+        title: 1 ターンの中身 — メッセージの往復を追う
+        estimated_minutes: 5
+      - id: "03-03"
+        title: 「自律」の正体 — ループが回り続けるだけ
+        estimated_minutes: 4
+      - id: "03-04"
+        title: stateless なモデル、stateful な harness
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 推論→行動→観測の 1 ループにおけるモデルと harness のメッセージ往復
+        type: mermaid
+        section: "03-02"
+    quiz:
+      count: 5
+      difficulty: medium
+  - id: "04"
+    title: 生きた教材 — Claude Code を harness として読む
+    estimated_minutes: 16
+    learning_objectives:
+      - 身近なエージェント(Claude Code)を harness の 5 要素に分解して読める
+      - 各要素が実際の挙動にどう現れるかを観察できる
+      - harness 視点で既存ツールを評価する習慣を持つ
+    sections:
+      - id: "04-01"
+        title: Claude Code はひとつの harness である
+        estimated_minutes: 4
+      - id: "04-02"
+        title: ツールとコンテキストを観察する — ファイル操作と会話履歴
+        estimated_minutes: 4
+      - id: "04-03"
+        title: 権限とループを観察する — 許可プロンプトと自律実行
+        estimated_minutes: 4
+      - id: "04-04"
+        title: harness の目で道具を見る — 既存エージェントの読み解き方
+        estimated_minutes: 4
+    quiz:
+      count: 5
+      difficulty: medium
