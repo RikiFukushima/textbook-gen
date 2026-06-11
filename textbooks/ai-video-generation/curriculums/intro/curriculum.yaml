@@ -1,0 +1,14 @@
+id: intro
+title: AI動画生成 入門 ― プロンプトで1本作る
+description: 動画編集の経験がまったくない人が、編集ソフトを使わずにプロンプトと最低限の仕上げだけで短い動画を1本作れるようになる入門カリキュラム。
+order: 1
+estimated_hours: 1
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites:
+    - パソコンまたはスマホの基本操作(文字入力・ファイルの保存や開閉)ができる
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"

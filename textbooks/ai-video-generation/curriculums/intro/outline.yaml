@@ -1,0 +1,122 @@
+title: AI動画生成 入門 ― プロンプトで1本作る
+target_audience:
+  level: 初級
+  prerequisites:
+    - パソコンまたはスマホの基本操作(文字入力・ファイルの保存や開閉)ができる
+  estimated_hours: 1
+style:
+  tone: ですます調・やさしく丁寧。未経験者を脅かさない。失敗は前提として扱い、必ず直し方をセットで示す
+  code_examples: false
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: まず1本作ってみる
+    estimated_minutes: 13
+    learning_objectives:
+      - 編集ソフトを使わなくても、指示文から動画が作れることを完成例で説明できる
+      - 簡単な指示を入れて実際に短いクリップを1本出力できる
+      - 自分が作った動画を尺・アスペクト比・解像度の観点で見られる
+    sections:
+      - id: "01-01"
+        title: AI動画生成って何ができるの?
+        estimated_minutes: 4
+      - id: "01-02"
+        title: はじめての5秒クリップ
+        estimated_minutes: 5
+      - id: "01-03"
+        title: 出てきた動画の「見方」
+        estimated_minutes: 4
+    diagrams:
+      - purpose: テキストや画像を入力すると AI が動画を出力する、という生成の流れ
+        type: mermaid
+        section: "01-01"
+      - purpose: ツールを開く→指示を入れる→出力を待つ→確認、の最小手順の流れ
+        type: mermaid
+        section: "01-02"
+    quiz:
+      count: 5
+      difficulty: easy
+
+  - id: "02"
+    title: プロンプトで思い通りに近づける
+    estimated_minutes: 24
+    learning_objectives:
+      - 「何を・どう動く・どこから撮る・どんな雰囲気」というプロンプトの型を使って指示を書ける
+      - 被写体・動き・カメラワーク・雰囲気を具体的な言葉で指定できる
+      - 動画が破綻する理由を理解し、プロンプトの直し方で対処できる
+      - 画像から動かす方法と、同じキャラ・雰囲気を保つコツを説明できる
+    sections:
+      - id: "02-01"
+        title: プロンプトの基本の型
+        estimated_minutes: 4
+      - id: "02-02"
+        title: 被写体と動きを言葉にする
+        estimated_minutes: 4
+      - id: "02-03"
+        title: カメラワークを指定する
+        estimated_minutes: 4
+      - id: "02-04"
+        title: 雰囲気を決める(スタイル・照明・色)
+        estimated_minutes: 4
+      - id: "02-05"
+        title: うまくいかない時の直し方
+        estimated_minutes: 4
+      - id: "02-06"
+        title: 画像から動かす + 一貫性を保つ
+        estimated_minutes: 4
+    diagrams:
+      - purpose: プロンプトの型の4要素(被写体・動き・カメラ・雰囲気)の関係
+        type: mermaid
+        section: "02-01"
+      - purpose: 破綻が起きる→原因を切り分ける→プロンプトを直す、の修正ループ
+        type: mermaid
+        section: "02-05"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "03"
+    title: 最低限の仕上げ
+    estimated_minutes: 14
+    learning_objectives:
+      - 不要部分のカットと複数クリップの連結で、短い動画を1本にまとめられる
+      - テロップ・BGM・ナレーションを足して伝わる動画にできる
+      - 投稿先に合わせて縦・横を整え、書き出して完成形にできる
+    sections:
+      - id: "03-01"
+        title: クリップを切る・つなぐ
+        estimated_minutes: 4
+      - id: "03-02"
+        title: 文字・BGM・ナレーションを足す
+        estimated_minutes: 5
+      - id: "03-03"
+        title: 縦動画/横動画に整えて書き出す
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 複数クリップをカット→順につなぐ→1本に書き出す、の流れ
+        type: mermaid
+        section: "03-01"
+    quiz:
+      count: 5
+      difficulty: easy
+
+  - id: "04"
+    title: 使ううえで知っておくこと
+    estimated_minutes: 9
+    learning_objectives:
+      - 日本での商用利用と、アップロード素材がAI学習に使われ得る点の最低限を押さえられる
+      - クレジット制・無料枠の制限(透かし・尺・解像度)を理解し、有料化の判断ができる
+    sections:
+      - id: "04-01"
+        title: 著作権と商用利用の基本
+        estimated_minutes: 4
+      - id: "04-02"
+        title: 無料枠とクレジット、課金の考え方
+        estimated_minutes: 4
+    diagrams:
+      - purpose: やってよい / 確認が必要、を切り分ける判断フロー
+        type: mermaid
+        section: "04-01"
+    quiz:
+      count: 4
+      difficulty: easy
