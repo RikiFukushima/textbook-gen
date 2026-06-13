@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import type { Section } from "@/lib/types";
 import { useProgress } from "@/lib/progress";
 import Markdown from "./Markdown";
@@ -30,11 +31,19 @@ export default function SectionViewer({
   chapterList,
 }: Props) {
   const trackRef = useRef<HTMLDivElement>(null);
-  const [index, setIndex] = useState(0);
+  const searchParams = useSearchParams();
+  // ?section=N で動画フィードから飛んできた場合の初期位置
+  const initialSection = Math.max(
+    0,
+    Math.min(Number(searchParams.get("section") ?? 0), sections.length - 1)
+  );
+  const [index, setIndex] = useState(initialSection);
   const { progress, markSectionComplete } = useProgress(slug);
 
   const curriculumHref = `/textbooks/${slug}/${curriculumId}`;
   const quizHref = `/textbooks/${slug}/${curriculumId}/${chapterId}/quiz`;
+  const videoFeedHref = `/textbooks/${slug}/${curriculumId}/${chapterId}/videos/`;
+  const hasVideo = sections.some((s) => s.videoPath);
   const sectionCount = sections.length;
   const onBreak = index >= sectionCount;
   const qualify = (id: string) => `${curriculumId}:${id}`;
@@ -45,6 +54,15 @@ export default function SectionViewer({
     const clamped = Math.max(0, Math.min(i, track.children.length - 1));
     const page = track.children[clamped] as HTMLElement;
     track.scrollTo({ left: page.offsetLeft, behavior: "smooth" });
+  }, []);
+
+  // ?section=N で開始位置が指定されている場合、マウント後に即座にジャンプ
+  useEffect(() => {
+    if (initialSection > 0) {
+      goTo(initialSection);
+    }
+    // マウント時のみ実行
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -92,6 +110,15 @@ export default function SectionViewer({
           <span className="text-[var(--muted)]">第{chapterNumber}章</span>
           <span className="ml-2">{chapterTitle}</span>
         </span>
+        {hasVideo && (
+          <Link
+            href={videoFeedHref}
+            className="shrink-0 rounded-full bg-[var(--accent-weak)] px-2.5 py-1 text-xs font-semibold text-[var(--accent)]"
+            title="動画で見る"
+          >
+            ▶ 動画
+          </Link>
+        )}
         <span className="shrink-0 text-xs text-[var(--muted)]">
           {onBreak ? "読了" : `${index + 1} / ${sectionCount}`}
         </span>

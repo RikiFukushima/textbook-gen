@@ -8,23 +8,42 @@ export const QuestHookScene: React.FC<Props> = ({ caption }) => {
   const { fps } = useVideoConfig();
   const frame = useCurrentFrame();
 
+  // blink は Math.sin を使うが Remotion では問題ない（frame ベース）
   const blink = 0.7 + Math.sin((frame / fps) * Math.PI * 3) * 0.3;
 
-  // 「?」ループアニメーション
+  // 「?」ループ
   const qPulse = 0.95 + Math.sin((frame / fps) * Math.PI * 2) * 0.05;
+
+  // 背景グロー
+  const glowP = easeOutExpo(progress(frame, 0, fps * 0.5));
+
+  // 「?」スケールイン
+  const qScale = easeOutElastic(progress(frame, fps * 0.05, fps * 0.6));
+  const qOpacity = easeOutExpo(progress(frame, fps * 0.05, fps * 0.3));
+
+  // メインメッセージ
+  const msg1P = easeOutExpo(progress(frame, fps * 0.3, fps * 0.4));
+  const msg2P = easeOutExpo(progress(frame, fps * 0.5, fps * 0.4));
+
+  // アンダーライン
+  const lineP = easeOutExpo(progress(frame, fps * 0.65, fps * 0.4));
+
+  // caption
+  const captionP = easeOutExpo(progress(frame, fps * 0.7, fps * 0.4));
 
   return (
     <div
       style={{
         width: 1080,
         height: 1920,
-        background: "linear-gradient(170deg, #0f0c29 0%, #1a1a2e 40%, #16213e 100%)",
+        background:
+          "linear-gradient(135deg, #1a1a4e 0%, #0d1b69 30%, #1e0a4a 70%, #0a1628 100%)",
         position: "relative",
         overflow: "hidden",
         fontFamily: '"Hiragino Sans", sans-serif',
       }}
     >
-      {/* 背景グロー: コーラル */}
+      {/* 背景グロー: 中央 */}
       <div
         style={{
           position: "absolute",
@@ -35,12 +54,27 @@ export const QuestHookScene: React.FC<Props> = ({ caption }) => {
           height: 1000,
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(255,107,74,0.15) 0%, rgba(0,210,200,0.08) 50%, transparent 80%)",
-          opacity: easeOutExpo(progress(frame, 0, fps * 0.5)),
+            "radial-gradient(circle, rgba(56,189,248,0.15) 0%, rgba(167,139,250,0.08) 50%, transparent 80%)",
+          opacity: glowP,
         }}
       />
 
-      {/* 大きな「?」(問いで締める演出) */}
+      {/* 右下グロー */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: -100,
+          right: -100,
+          width: 500,
+          height: 500,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(167,139,250,0.18) 0%, transparent 70%)",
+          opacity: glowP,
+        }}
+      />
+
+      {/* 大きな「?」 */}
       <div
         style={{
           position: "absolute",
@@ -51,10 +85,10 @@ export const QuestHookScene: React.FC<Props> = ({ caption }) => {
           fontSize: 280,
           fontWeight: 900,
           color: "transparent",
-          WebkitTextStroke: "3px rgba(255,107,74,0.5)",
+          WebkitTextStroke: "3px rgba(56,189,248,0.4)",
           lineHeight: 1,
-          transform: `scale(${easeOutElastic(progress(frame, fps * 0.05, fps * 0.6)) * qPulse})`,
-          opacity: easeOutExpo(progress(frame, fps * 0.05, fps * 0.3)) * 0.8,
+          transform: `scale(${qScale * qPulse})`,
+          opacity: qOpacity * 0.8,
         }}
       >
         ?
@@ -70,11 +104,11 @@ export const QuestHookScene: React.FC<Props> = ({ caption }) => {
           textAlign: "center",
         }}
       >
-        {/* 問いかけ */}
+        {/* 問いかけ 1行目 */}
         <div
           style={{
-            opacity: easeOutExpo(progress(frame, fps * 0.3, fps * 0.4)),
-            transform: `translateY(${(1 - easeOutExpo(progress(frame, fps * 0.3, fps * 0.4))) * 20}px)`,
+            opacity: msg1P,
+            transform: `translateY(${(1 - msg1P) * 20}px)`,
             marginBottom: 16,
           }}
         >
@@ -88,10 +122,12 @@ export const QuestHookScene: React.FC<Props> = ({ caption }) => {
             あなたの RAG は
           </span>
         </div>
+
+        {/* 問いかけ 2行目 */}
         <div
           style={{
-            opacity: easeOutExpo(progress(frame, fps * 0.5, fps * 0.4)),
-            transform: `translateY(${(1 - easeOutExpo(progress(frame, fps * 0.5, fps * 0.4))) * 20}px)`,
+            opacity: msg2P,
+            transform: `translateY(${(1 - msg2P) * 20}px)`,
             marginBottom: 48,
           }}
         >
@@ -99,8 +135,9 @@ export const QuestHookScene: React.FC<Props> = ({ caption }) => {
             style={{
               fontSize: 88,
               fontWeight: 900,
-              color: "#ff6b4a",
+              color: "#38bdf8",
               lineHeight: 1.2,
+              textShadow: "0 0 30px rgba(56,189,248,0.5)",
             }}
           >
             何型？
@@ -110,25 +147,26 @@ export const QuestHookScene: React.FC<Props> = ({ caption }) => {
         {/* アンダーライン */}
         <div
           style={{
-            height: 3,
-            background: "linear-gradient(90deg, transparent, #ff6b4a, transparent)",
-            width: `${easeOutExpo(progress(frame, fps * 0.65, fps * 0.4)) * 100}%`,
+            height: 4,
+            background:
+              "linear-gradient(90deg, transparent, #38bdf8, #a78bfa, transparent)",
+            width: `${lineP * 100}%`,
             margin: "0 auto 48px",
-            boxShadow: "0 0 10px rgba(255,107,74,0.4)",
+            boxShadow: "0 0 12px rgba(56,189,248,0.4)",
           }}
         />
 
-        {/* サブ */}
+        {/* caption */}
         <div
           style={{
-            opacity: easeOutExpo(progress(frame, fps * 0.7, fps * 0.4)),
-            transform: `translateY(${(1 - easeOutExpo(progress(frame, fps * 0.7, fps * 0.4))) * 16}px)`,
+            opacity: captionP,
+            transform: `translateY(${(1 - captionP) * 16}px)`,
           }}
         >
           <span
             style={{
               fontSize: 46,
-              color: "rgba(0,210,200,0.85)",
+              color: "rgba(167,139,250,0.9)",
               fontWeight: 700,
             }}
           >
@@ -137,7 +175,7 @@ export const QuestHookScene: React.FC<Props> = ({ caption }) => {
         </div>
       </div>
 
-      {/* CTA ボタン */}
+      {/* CTA ボタン: グラスモーフィズム */}
       <div
         style={{
           position: "absolute",
@@ -151,10 +189,12 @@ export const QuestHookScene: React.FC<Props> = ({ caption }) => {
       >
         <div
           style={{
-            background: "linear-gradient(135deg, #ff6b4a, #ff8c42)",
+            background: "linear-gradient(135deg, #38bdf8, #818cf8)",
+            backdropFilter: "blur(20px)",
             borderRadius: 999,
             padding: "28px 80px",
-            boxShadow: "0 0 32px rgba(255,107,74,0.4), 0 8px 24px rgba(0,0,0,0.3)",
+            boxShadow:
+              "0 0 40px rgba(56,189,248,0.35), 0 8px 24px rgba(0,0,0,0.3)",
           }}
         >
           <span
@@ -188,7 +228,7 @@ export const QuestHookScene: React.FC<Props> = ({ caption }) => {
             letterSpacing: "0.15em",
           }}
         >
-          05 / 05  ·  COMPLETE
+          COMPLETE
         </span>
       </div>
     </div>

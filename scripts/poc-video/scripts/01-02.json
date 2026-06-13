@@ -1,0 +1,44 @@
+{
+  "_comment": "D案「問い駆動型」台本。Document直接ベクトル化という誤解を崩し、Document→Node→Indexの3階層とNodeのメタデータ設計の重要性を伝える。",
+  "section_id": "01-02",
+  "title": "Document / Node / Index の関係 — データモデルを理解する",
+  "source": "textbooks/ai-agent-roadmap/curriculums/deep-dive/chapters/01/sections/02-document-node-index.md",
+  "scenes": [
+    {
+      "kind": "cover",
+      "caption": "Documentをそのまま\nベクトル化してる？",
+      "narration": "DocumentをそのままベクトルDBに入れてると思ってない？実はNodeに分割してから格納するのだ。この違いが精度を決めるのだ。",
+      "durationSec": 8.97
+    },
+    {
+      "kind": "point",
+      "label": "3階層の流れ",
+      "caption": "Document→Node\n→Index",
+      "narration": "データはDocument、Node、Indexの3階層で流れるのだ。検索でヒットするのはNodeで、LLMに渡るのもNodeのテキストなのだ。",
+      "durationSec": 10.18,
+      "diagram": "flow"
+    },
+    {
+      "kind": "point",
+      "label": "Nodeの力",
+      "caption": "メタデータ＋\n関係情報",
+      "narration": "NodeはメタデータとNode間の関係情報を持てるのだ。出典の追跡、検索フィルタ、前後の文脈補足。この3つが回答の質を底上げするのだ。",
+      "durationSec": 11.31,
+      "diagram": "none"
+    },
+    {
+      "kind": "point",
+      "label": "設計の注意点",
+      "caption": "盛りすぎは\n逆効果",
+      "narration": "メタデータは便利だが盛りすぎは逆効果なのだ。LLMに見せる情報と検索にだけ使う情報を分けて設計するのが、精度を守るコツなのだ。",
+      "durationSec": 10.05,
+      "diagram": "comparison"
+    },
+    {
+      "kind": "hook",
+      "caption": "続きは本文で。",
+      "narration": "あなたのNodeのメタデータ、ちゃんと設計してるのだ？詳しい設計の仕方は本文で確かめるのだ。",
+      "durationSec": 6.95
+    }
+  ]
+}

@@ -1,24 +1,19 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig } from "remotion";
-import { easeOutExpo, easeOutBack, progress } from "../../easing";
-import { DiagramKind } from "../../types";
-import { QuestComparisonDiagram } from "../../diagrams/quest/QuestComparisonDiagram";
-import { QuestFlowDiagram } from "../../diagrams/quest/QuestFlowDiagram";
-import { QuestVersusDiagram } from "../../diagrams/quest/QuestVersusDiagram";
+import { easeOutExpo, progress } from "../../easing";
+import { SlideData } from "../../types";
+import { BulletsSlide } from "../../slides/BulletsSlide";
+import { CompareSlide } from "../../slides/CompareSlide";
+import { StepsSlide } from "../../slides/StepsSlide";
+import { KeywordSlide } from "../../slides/KeywordSlide";
 
 type Props = {
   label: string;
   caption: string;
-  // 「誤解→実際は」の反転テキスト
-  misconception?: string;    // ❌ よくある誤解
-  revelation?: string;       // ✅ 実際は
+  slide?: SlideData;
   index: number;
   total: number;
-  diagram?: DiagramKind;
 };
-
-// シーンごとのアクセントカラー
-const ACCENT_COLORS = ["#ff6b4a", "#00d2c8", "#a78bfa"];
 
 // タイプライター風: 文字が1文字ずつ出現
 function TypewriterText({
@@ -67,58 +62,64 @@ function TypewriterText({
   );
 }
 
+// シーンごとのアクセントカラー
+const ACCENT_COLORS = ["#38bdf8", "#a78bfa", "#34d399"];
+
 export const QuestPointScene: React.FC<Props> = ({
   label,
   caption,
-  misconception,
-  revelation,
+  slide,
   index,
   total,
-  diagram = "none",
 }) => {
   const { fps } = useVideoConfig();
   const frame = useCurrentFrame();
   const accent = ACCENT_COLORS[index % ACCENT_COLORS.length];
-  const hasDiagram = diagram !== "none";
 
-  // 上部プログレスバー
+  // プログレスバーの幅
   const progressW = ((index + 1) / total) * 100;
 
   const lines = caption.split("\n");
+  const hasSlide = slide !== undefined;
+
+  // 背景グロー opacity
+  const glowP = easeOutExpo(progress(frame, 0, fps * 0.5));
 
   return (
     <div
       style={{
         width: 1080,
         height: 1920,
-        background: "linear-gradient(170deg, #0f0c29 0%, #1a1a2e 40%, #16213e 100%)",
+        background:
+          "linear-gradient(135deg, #1a1a4e 0%, #0d1b69 30%, #1e0a4a 70%, #0a1628 100%)",
         position: "relative",
         overflow: "hidden",
         fontFamily: '"Hiragino Sans", sans-serif',
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       {/* 背景グロー */}
       <div
         style={{
           position: "absolute",
-          top: 400,
+          top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 800,
-          height: 800,
+          width: 1000,
+          height: 1000,
           borderRadius: "50%",
           background: `radial-gradient(circle, ${accent}14 0%, transparent 70%)`,
-          opacity: easeOutExpo(progress(frame, 0, fps * 0.5)),
+          opacity: glowP,
+          pointerEvents: "none",
         }}
       />
 
-      {/* 上部プログレスバー */}
+      {/* ━━ 上部固定ゾーン: プログレスバー + ラベル ━━ */}
+      {/* プログレスバー */}
       <div
         style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
+          flexShrink: 0,
           height: 6,
           background: "rgba(255,255,255,0.08)",
         }}
@@ -133,15 +134,16 @@ export const QuestPointScene: React.FC<Props> = ({
         />
       </div>
 
-      {/* ━━ ラベル ━━ */}
+      {/* ラベルバー */}
       <div
         style={{
-          position: "absolute",
-          top: 56,
-          left: 80,
+          flexShrink: 0,
+          paddingTop: 40,
+          paddingLeft: 64,
+          paddingBottom: 16,
           display: "flex",
           alignItems: "center",
-          gap: 16,
+          gap: 14,
           opacity: easeOutExpo(progress(frame, fps * 0.05, fps * 0.3)),
           transform: `translateX(${(1 - easeOutExpo(progress(frame, fps * 0.05, fps * 0.3))) * -40}px)`,
         }}
@@ -152,7 +154,7 @@ export const QuestPointScene: React.FC<Props> = ({
             height: 36,
             background: accent,
             borderRadius: 3,
-            boxShadow: `0 0 10px ${accent}88`,
+            boxShadow: `0 0 14px ${accent}88`,
           }}
         />
         <span
@@ -167,129 +169,85 @@ export const QuestPointScene: React.FC<Props> = ({
         </span>
       </div>
 
-      {/* ━━ キャプション ━━ */}
+      {/* ━━ メインコンテンツ: キャプション + スライドをflexで縦積み ━━ */}
       <div
         style={{
-          position: "absolute",
-          top: 130,
-          left: 80,
-          right: 80,
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          paddingLeft: 64,
+          paddingRight: 64,
+          paddingBottom: 64,
+          gap: 24,
+          minHeight: 0,
         }}
       >
-        {lines.map((line, i) => {
-          const maxW = 920;
-          const baseSize = hasDiagram ? 72 : 96;
-          const calcSize = line.length > 0
-            ? Math.min(baseSize, Math.floor(maxW / line.length / 0.95))
-            : baseSize;
-          const fs = Math.max(44, calcSize);
+        {/* キャプション */}
+        <div style={{ flexShrink: 0 }}>
+          {lines.map((line, i) => {
+            const maxW = 952;
+            // スライドあり: キャプションは小さめにしてスライドに余白を与える
+            const baseSize = hasSlide ? 60 : 96;
+            const calcSize =
+              line.length > 0
+                ? Math.min(baseSize, Math.floor(maxW / line.length / 0.9))
+                : baseSize;
+            const fs = Math.max(44, calcSize);
 
-          return (
-            <TypewriterText
-              key={i}
-              text={line}
-              fontSize={fs}
-              color="#ffffff"
-              startFrame={fps * (0.15 + i * 0.2)}
-              totalDuration={fps * 0.5}
-              style={{ marginBottom: 6 }}
-            />
-          );
-        })}
+            return (
+              <TypewriterText
+                key={i}
+                text={line}
+                fontSize={fs}
+                color="#ffffff"
+                startFrame={fps * (0.15 + i * 0.2)}
+                totalDuration={fps * 0.5}
+                style={{ marginBottom: 2 }}
+              />
+            );
+          })}
 
-        {/* キャプション下線 */}
-        <div
-          style={{
-            height: 3,
-            background: `linear-gradient(90deg, ${accent}, transparent)`,
-            width: `${easeOutExpo(progress(frame, fps * 0.4, fps * 0.4)) * 100}%`,
-            borderRadius: 2,
-            marginTop: 16,
-            boxShadow: `0 0 8px ${accent}66`,
-          }}
-        />
+          {/* キャプション下線 */}
+          <div
+            style={{
+              height: 3,
+              background: `linear-gradient(90deg, ${accent}, transparent)`,
+              width: `${easeOutExpo(progress(frame, fps * 0.4, fps * 0.4)) * 100}%`,
+              borderRadius: 2,
+              marginTop: 12,
+              boxShadow: `0 0 8px ${accent}66`,
+            }}
+          />
+        </div>
+
+        {/* スライドエリア: flex:1でキャプション以外の残りを使う */}
+        {hasSlide && (
+          <div
+            style={{
+              flex: 1,
+              minHeight: 0,
+              opacity: easeOutExpo(progress(frame, fps * 0.35, fps * 0.35)),
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+            }}
+          >
+            {slide.kind === "bullets" && <BulletsSlide data={slide} />}
+            {slide.kind === "compare" && <CompareSlide data={slide} />}
+            {slide.kind === "steps" && <StepsSlide data={slide} />}
+            {slide.kind === "keyword" && <KeywordSlide data={slide} />}
+          </div>
+        )}
       </div>
 
-      {/* ━━ 誤解→実際は(misconception/revelation) ━━ */}
-      {(misconception || revelation) && !hasDiagram && (
-        <div
-          style={{
-            position: "absolute",
-            top: 500,
-            left: 80,
-            right: 80,
-            display: "flex",
-            flexDirection: "column",
-            gap: 20,
-          }}
-        >
-          {misconception && (
-            <div
-              style={{
-                background: "rgba(255,80,80,0.08)",
-                border: "1px solid rgba(255,80,80,0.2)",
-                borderRadius: 16,
-                padding: "20px 24px",
-                opacity: easeOutExpo(progress(frame, fps * 0.5, fps * 0.4)),
-                transform: `translateX(${(1 - easeOutExpo(progress(frame, fps * 0.5, fps * 0.4))) * -20}px)`,
-              }}
-            >
-              <span style={{ fontSize: 26, color: "rgba(255,80,80,0.9)", fontWeight: 700 }}>
-                ❌ {misconception}
-              </span>
-            </div>
-          )}
-          {revelation && (
-            <div
-              style={{
-                background: `rgba(${accent === "#00d2c8" ? "0,210,200" : "255,107,74"},0.08)`,
-                border: `1px solid ${accent}44`,
-                borderRadius: 16,
-                padding: "20px 24px",
-                opacity: easeOutExpo(progress(frame, fps * 0.75, fps * 0.4)),
-                transform: `translateX(${(1 - easeOutExpo(progress(frame, fps * 0.75, fps * 0.4))) * 20}px)`,
-              }}
-            >
-              <span style={{ fontSize: 26, color: accent, fontWeight: 700 }}>
-                ✅ {revelation}
-              </span>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* ━━ 図解エリア ━━ */}
-      {hasDiagram && (
-        <div
-          style={{
-            position: "absolute",
-            top: 420,
-            left: 60,
-            right: 60,
-            bottom: 120,
-            opacity: easeOutExpo(progress(frame, fps * 0.45, fps * 0.35)),
-          }}
-        >
-          {diagram === "comparison" && (
-            <QuestComparisonDiagram accentColor={accent} />
-          )}
-          {diagram === "flow" && (
-            <QuestFlowDiagram accentColor={accent} />
-          )}
-          {diagram === "versus" && (
-            <QuestVersusDiagram accentColor={accent} />
-          )}
-        </div>
-      )}
-
-      {/* ━━ 進捗テキスト ━━ */}
+      {/* 進捗テキスト */}
       <div
         style={{
           position: "absolute",
-          bottom: 60,
-          right: 80,
+          bottom: 36,
+          right: 72,
           color: "rgba(255,255,255,0.2)",
-          fontSize: 26,
+          fontSize: 24,
           letterSpacing: "0.15em",
           opacity: easeOutExpo(progress(frame, fps * 0.8, fps * 0.3)),
         }}

@@ -1,0 +1,42 @@
+{
+  "title": "LlamaIndexの設計思想 — なぜIndex中心の抽象なのか",
+  "source": "textbooks/ai-agent-roadmap/curriculums/deep-dive/chapters/01/sections/01-llamaindex-design.md",
+  "scenes": [
+    {
+      "kind": "cover",
+      "caption": "LlamaIndex、\n何を解いてるの？",
+      "narration": "LlamaIndexって検索ツールだと思ってない？実は解いてるのは索引設計の問題なのだ。知らないと本番RAGで詰まるのだ。",
+      "durationSec": 8.69
+    },
+    {
+      "kind": "point",
+      "label": "Indexが中心の理由",
+      "caption": "RAGの本質は\n索引設計だ",
+      "narration": "よくある誤解は「検索してLLMに渡すだけ」なのだ。LlamaIndexはそれ以前の「どう整理して問い合わせ可能にするか」をIndexという抽象で前面に出しているのだ。",
+      "durationSec": 12.59,
+      "diagram": "comparison"
+    },
+    {
+      "kind": "point",
+      "label": "4段階パイプライン",
+      "caption": "取込→索引化\n→検索→生成",
+      "narration": "処理は4段階に分かれるのだ。取り込み、索引化、検索、生成。それぞれ独立した抽象が担当するから、どこでも差し替えられるのだ。",
+      "durationSec": 10.78,
+      "diagram": "flow"
+    },
+    {
+      "kind": "point",
+      "label": "LangChainとの違い",
+      "caption": "連鎖 vs 索引\n主役が違う",
+      "narration": "LangChainはLLM連鎖が主役、LlamaIndexはIndex設計が主役なのだ。同じRAGでもコードの主役が違うのだ。競合じゃなく使い分けるものなのだ。",
+      "durationSec": 11.25,
+      "diagram": "versus"
+    },
+    {
+      "kind": "hook",
+      "caption": "続きは本文で。",
+      "narration": "あなたのRAGのIndexはどの型なのだ？使い分けのくわしい話は本文で確かめるのだ。",
+      "durationSec": 6.25
+    }
+  ]
+}

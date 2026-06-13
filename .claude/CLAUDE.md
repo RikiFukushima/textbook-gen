@@ -13,7 +13,7 @@
 
 ## 現在地(2026 年現在のフェーズ)
 
-**教材の量を増やし、精度を上げる時期。** 動画レイヤー(PHILOSOPHY §6)とマネタイズはスコープ外。再訪できる地図 UX(§7)・Supabase 進捗履歴の拡張も同じく後回し。**いま手を入れるのはテキスト教材とクイズの生成パイプラインだけ**。詳細は PHILOSOPHY §0。
+**教材の量を増やし、精度を上げる時期。** 動画生成パイプライン(video skill)は稼働済みで、生成した MP4 はビューワーの動画フィード(`/videos/`ルート)で閲覧できる。Supabase 進捗履歴・コミュニティ機能・マネタイズはスコープ外。**いま手を入れるのはテキスト教材・クイズ・ショート動画の生成パイプライン**。詳細は PHILOSOPHY §0。
 
 ## 階層(必ず守る)
 
@@ -29,12 +29,18 @@
 
 | 用途 | 入口 | 実体 |
 | --- | --- | --- |
+| **一気通貫生成** | **`generate` skill** | **雛形→骨子→本文→クイズ→動画を全自動** |
 | 教材・カリキュラム雛形 | `init-textbook` skill | `scripts/init-textbook.ts`(決定論的) |
 | 骨子(章・節)の設計 | `outline` skill | main で実行 |
 | 章本文の執筆 | `chapter` skill(オーケストレータ) | **`chapter-writer` agent を並列起動** |
 | クイズ生成 | `quiz` skill(オーケストレータ) | **`quiz-writer` agent を並列起動** |
 | レビュー | `reviewer` agent | 指摘レポートのみ(自動修正しない) |
 | **ショート動画生成** | **`video` skill(オーケストレータ)** | **`video-script-writer` → `video-renderer` agent を順次起動** |
+
+**典型的な使い方:**
+- 「〇〇の教材を全部作って」→ **`generate` skill 一択**
+- 既存教材に章を追加したい → `chapter` skill
+- 骨子だけ先に確認したい → `outline` skill → `chapter` skill
 
 ## 執筆規約の正本
 
@@ -49,7 +55,24 @@
 
 **ルールを変更するときは textbook-style だけを編集する**(他の skill / agent に同じ規約を二重に書かない)。chapter-writer / quiz-writer / reviewer は frontmatter の `skills: [textbook-style]` で起動時にこの内容を **プリロード(全文がコンテキストに注入される)** ので、agent 起動の度に内容が同期される。
 
-## 生成フロー(典型)
+## 生成フロー
+
+### ▶ 一気通貫（推奨）
+
+```
+/generate "学習テーマ"
+```
+
+`generate` skill が以下をすべて自動実行する:
+
+1. 情報確認(slug / レベル / 時間 / 章数)
+2. `init-textbook` で雛形作成
+3. `outline.yaml` / `curriculum.yaml` を生成・ユーザー確認
+4. `chapter-writer` を並列起動して本文生成
+5. `quiz-writer` を並列起動してクイズ生成
+6. `video-script-writer` → `video-renderer` で動画生成
+
+### ▶ フェーズ別実行（部分的に再生成したい場合）
 
 1. `init-textbook` で雛形を作る。
 2. `outline` で骨子を埋める(対話・レビューを挟む)。
@@ -73,6 +96,14 @@
 - 台本品質チェックリスト
 
 **ルールを変更するときは video-style だけを編集する**。`video-script-writer` / `video-renderer` は `skills: [video-style]` でプリロードする。
+
+## 動画 × ビューワーの接続ルール
+
+- 最終 MP4 は `textbooks/{slug}/curriculums/{curriculum-id}/chapters/{chapter-id}/sections/{section-slug}.md` と**同階層・同名**の `.mp4` として配置する。
+- ビューワーの `content.ts` は MDと同名の MP4 を自動検出して `videoPath` に設定する。
+- 動画フィードは `/textbooks/{slug}/{curriculum}/{chapter}/videos/` ルートで提供。動画付きチャプターにのみ生成される。
+- GitHub Pages ビルド時は `viewer/scripts/copy-videos.mjs` が MP4 を `out/` にコピーする（`npm run build` に自動組み込み済み）。
+- MP4 の git 管理容量目安: 1本 4MB × 6本/章。100本超えたら GitHub LFS 移行を検討すること。
 
 ## 安全(リマインダー)
 

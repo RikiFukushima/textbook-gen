@@ -16,19 +16,6 @@ function sceneDurationFrames(durationSec: number): number {
   return Math.ceil(durationSec * FPS);
 }
 
-// D案専用の追加情報(誤解→実際は)
-const MISCONCEPTIONS: { misconception?: string; revelation?: string }[] = [
-  {
-    misconception: "検索+LLMでつなぐだけでしょ？",
-    revelation: "索引設計こそが精度の鍵だった",
-  },
-  {}, // flowシーンは図解のみ
-  {
-    misconception: "LangChainの代替？",
-    revelation: "目的が違う — 使い分けるもの",
-  },
-];
-
 export const QuestVideoComposition: React.FC<Props> = ({ script, audioFiles }) => {
   let offset = 0;
   const pointIndex = { current: 0 };
@@ -50,16 +37,13 @@ export const QuestVideoComposition: React.FC<Props> = ({ script, audioFiles }) =
           sceneEl = <QuestHookScene caption={scene.caption} />;
         } else {
           const idx = pointIndex.current++;
-          const extra = MISCONCEPTIONS[idx] ?? {};
           sceneEl = (
             <QuestPointScene
               label={scene.label ?? ""}
               caption={scene.caption}
-              misconception={extra.misconception}
-              revelation={extra.revelation}
+              slide={scene.slide}
               index={idx}
               total={totalPoints}
-              diagram={scene.diagram ?? "none"}
             />
           );
         }

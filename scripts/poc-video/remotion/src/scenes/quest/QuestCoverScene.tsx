@@ -1,128 +1,83 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig } from "remotion";
-import { easeOutExpo, easeOutBack, easeOutElastic, progress } from "../../easing";
+import { easeOutExpo, easeOutElastic, progress } from "../../easing";
 
 type Props = { caption: string };
 
-// 1行ずつスパンで出現するテキスト
-function RevealText({
-  text,
-  fontSize,
-  color,
-  startFrame,
-  duration,
-  style,
-}: {
-  text: string;
-  fontSize: number;
-  color: string;
-  startFrame: number;
-  duration: number;
-  style?: React.CSSProperties;
-}) {
-  const frame = useCurrentFrame();
-  const p = easeOutExpo(progress(frame, startFrame, duration));
-  return (
-    <div
-      style={{
-        fontSize,
-        color,
-        fontFamily: '"Hiragino Sans", "Noto Sans JP", sans-serif',
-        fontWeight: 800,
-        lineHeight: 1.3,
-        opacity: p,
-        transform: `translateY(${(1 - p) * 20}px)`,
-        ...style,
-      }}
-    >
-      {text}
-    </div>
-  );
-}
-
-export const QuestCoverScene: React.FC<Props> = () => {
+export const QuestCoverScene: React.FC<Props> = ({ caption }) => {
   const { fps } = useVideoConfig();
   const frame = useCurrentFrame();
 
-  // 大きな「?」のアニメーション
-  const qScale = easeOutElastic(progress(frame, 0, fps * 0.7));
-  const qOpacity = easeOutExpo(progress(frame, 0, fps * 0.35));
+  const lines = caption.split("\n");
+  const line1 = lines[0] ?? "";
+  const line2 = lines[1] ?? "";
+
+  // ラベルアニメ
+  const labelP = easeOutExpo(progress(frame, fps * 0.1, fps * 0.35));
+
+  // 1行目アニメ
+  const text1P = easeOutExpo(progress(frame, fps * 0.3, fps * 0.4));
+
+  // 2行目アニメ
+  const text2P = easeOutExpo(progress(frame, fps * 0.55, fps * 0.4));
+
+  // アンダーライン
+  const lineP = easeOutExpo(progress(frame, fps * 0.75, fps * 0.4));
 
   // 背景グロー
-  const glowOpacity = easeOutExpo(progress(frame, fps * 0.2, fps * 0.6));
+  const glowP = easeOutExpo(progress(frame, 0, fps * 0.5));
 
-  // ラベルバー
-  const labelP = easeOutExpo(progress(frame, fps * 0.3, fps * 0.35));
+  // 光の球: 左上
+  const glow1Scale = easeOutElastic(progress(frame, 0, fps * 0.7));
 
   return (
     <div
       style={{
         width: 1080,
         height: 1920,
-        background: "linear-gradient(170deg, #0f0c29 0%, #1a1a2e 40%, #16213e 100%)",
+        background:
+          "linear-gradient(135deg, #1a1a4e 0%, #0d1b69 30%, #1e0a4a 70%, #0a1628 100%)",
         position: "relative",
         overflow: "hidden",
-        fontFamily: '"Hiragino Sans", sans-serif',
+        fontFamily: '"Hiragino Sans", "Noto Sans JP", sans-serif',
       }}
     >
-      {/* 背景グロー: コーラル */}
+      {/* 光の球: 左上 */}
       <div
         style={{
           position: "absolute",
-          top: 600,
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: 900,
-          height: 900,
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle, rgba(255,107,74,0.18) 0%, rgba(255,107,74,0.04) 60%, transparent 80%)",
-          opacity: glowOpacity,
-        }}
-      />
-
-      {/* 背景グロー: ティール */}
-      <div
-        style={{
-          position: "absolute",
-          top: 1300,
-          left: "50%",
-          transform: "translate(-50%, -50%)",
+          top: -200,
+          left: -200,
           width: 700,
           height: 700,
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(0,210,200,0.12) 0%, transparent 70%)",
-          opacity: glowOpacity,
+            "radial-gradient(circle, rgba(56,189,248,0.25) 0%, rgba(56,189,248,0.05) 60%, transparent 80%)",
+          transform: `scale(${glow1Scale})`,
+          opacity: glowP,
         }}
       />
 
-      {/* 大きな「?」 */}
+      {/* 光の球: 右下 */}
       <div
         style={{
           position: "absolute",
-          top: 300,
-          left: 0,
-          right: 0,
-          textAlign: "center",
-          fontSize: 360,
-          fontWeight: 900,
-          color: "transparent",
-          WebkitTextStroke: "3px rgba(255,107,74,0.35)",
-          lineHeight: 1,
-          transform: `scale(${0.3 + qScale * 0.7})`,
-          opacity: qOpacity * 0.6,
-          userSelect: "none",
+          bottom: -150,
+          right: -150,
+          width: 600,
+          height: 600,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(167,139,250,0.2) 0%, rgba(167,139,250,0.05) 60%, transparent 80%)",
+          opacity: glowP,
         }}
-      >
-        ?
-      </div>
+      />
 
-      {/* ラベルバー */}
+      {/* ラベル「LESSON」 */}
       <div
         style={{
           position: "absolute",
-          top: 240,
+          top: 260,
           left: 80,
           display: "flex",
           alignItems: "center",
@@ -135,20 +90,20 @@ export const QuestCoverScene: React.FC<Props> = () => {
           style={{
             width: 6,
             height: 40,
-            background: "#ff6b4a",
+            background: "#38bdf8",
             borderRadius: 3,
-            boxShadow: "0 0 12px rgba(255,107,74,0.6)",
+            boxShadow: "0 0 14px rgba(56,189,248,0.7)",
           }}
         />
         <span
           style={{
             fontSize: 28,
-            color: "#ff6b4a",
+            color: "#38bdf8",
             fontWeight: 700,
-            letterSpacing: "0.15em",
+            letterSpacing: "0.2em",
           }}
         >
-          LESSON 01
+          LESSON
         </span>
       </div>
 
@@ -161,66 +116,76 @@ export const QuestCoverScene: React.FC<Props> = () => {
           right: 80,
         }}
       >
-        <RevealText
-          text="RAGが遅い理由、"
-          fontSize={96}
-          color="#ffffff"
-          startFrame={fps * 0.5}
-          duration={fps * 0.4}
-          style={{ marginBottom: 8 }}
-        />
-        <RevealText
-          text="知ってる？"
-          fontSize={96}
-          color="#ff6b4a"
-          startFrame={fps * 0.75}
-          duration={fps * 0.4}
-          style={{ marginBottom: 48 }}
-        />
+        {/* 1行目: 白文字 */}
+        <div
+          style={{
+            fontSize: 96,
+            fontWeight: 800,
+            color: "#ffffff",
+            lineHeight: 1.3,
+            marginBottom: 8,
+            opacity: text1P,
+            transform: `translateY(${(1 - text1P) * 24}px)`,
+            textShadow: "0 0 30px rgba(255,255,255,0.2)",
+          }}
+        >
+          {line1}
+        </div>
+
+        {/* 2行目: スカイブルー */}
+        <div
+          style={{
+            fontSize: 96,
+            fontWeight: 800,
+            color: "#38bdf8",
+            lineHeight: 1.3,
+            marginBottom: 48,
+            opacity: text2P,
+            transform: `translateY(${(1 - text2P) * 24}px)`,
+            textShadow: "0 0 30px rgba(56,189,248,0.4)",
+          }}
+        >
+          {line2}
+        </div>
 
         {/* アンダーライン */}
         <div
           style={{
-            height: 3,
-            background: "linear-gradient(90deg, #ff6b4a, transparent)",
-            width: `${easeOutExpo(progress(frame, fps * 0.9, fps * 0.4)) * 100}%`,
+            height: 4,
+            background: "linear-gradient(90deg, #38bdf8, #a78bfa, transparent)",
+            width: `${lineP * 100}%`,
             borderRadius: 2,
-            marginBottom: 48,
-            boxShadow: "0 0 10px rgba(255,107,74,0.4)",
+            boxShadow: "0 0 12px rgba(56,189,248,0.5)",
           }}
-        />
-
-        <RevealText
-          text="実は LlamaIndex が解いてる問題は"
-          fontSize={46}
-          color="rgba(255,255,255,0.65)"
-          startFrame={fps * 1.0}
-          duration={fps * 0.4}
-          style={{ marginBottom: 8, fontWeight: 400 }}
-        />
-        <RevealText
-          text="LLM じゃなくて「索引設計」だった。"
-          fontSize={46}
-          color="rgba(0,210,200,0.9)"
-          startFrame={fps * 1.25}
-          duration={fps * 0.4}
-          style={{ fontWeight: 700 }}
         />
       </div>
 
-      {/* 下部: ページ番号 */}
+      {/* グラスカード: 下部装飾 */}
       <div
         style={{
           position: "absolute",
-          bottom: 80,
+          bottom: 140,
+          left: 80,
           right: 80,
-          color: "rgba(255,255,255,0.25)",
-          fontSize: 26,
-          letterSpacing: "0.15em",
-          opacity: easeOutExpo(progress(frame, fps * 1.4, fps * 0.3)),
+          background: "rgba(255,255,255,0.06)",
+          backdropFilter: "blur(20px)",
+          border: "1px solid rgba(255,255,255,0.12)",
+          borderRadius: 20,
+          padding: "20px 28px",
+          opacity: easeOutExpo(progress(frame, fps * 0.9, fps * 0.35)),
+          transform: `translateY(${(1 - easeOutExpo(progress(frame, fps * 0.9, fps * 0.35))) * 20}px)`,
         }}
       >
-        01 / 05
+        <span
+          style={{
+            fontSize: 30,
+            color: "rgba(255,255,255,0.5)",
+            fontWeight: 600,
+            letterSpacing: "0.05em",
+          }}
+        >
+          このセクションで学ぶこと
+        </span>
       </div>
     </div>
   );

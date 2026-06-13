@@ -72,6 +72,24 @@
     "FINETUNE": "ファインチューン",
     "FINE-TUNE": "ファインチューン",
     "FINETUNING": "ファインチューニング",
-    "FINE-TUNING": "ファインチューニング"
+    "FINE-TUNING": "ファインチューニング",
+    "BM25": "ビーエムニジュウゴ",
+    "RRF": "アールアールエフ",
+    "HYBRID": "ハイブリッド",
+    "POSTPROCESSOR": "ポストプロセッサー",
+    "COMPACT": "コンパクト",
+    "REFINE": "リファイン",
+    "TREESUMMARIZE": "ツリーサマライズ",
+    "TREE_SUMMARIZE": "ツリーサマライズ",
+    "SIMILARITY": "シミラリティ",
+    "SENTENCE": "センテンス",
+    "SEMANTIC": "セマンティック",
+    "PARSER": "パーサー",
+    "CHUNKING": "チャンキング",
+    "OVERLAP": "オーバーラップ",
+    "TOP_K": "トップケー",
+    "TOPK": "トップケー",
+    "DOCUMENT": "ドキュメント",
+    "METADATA": "メタデータ"
   }
 }

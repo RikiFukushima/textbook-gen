@@ -1,0 +1,43 @@
+{
+  "_comment": "D案「問い駆動型」台本。誤解（RAGの精度はLLMの問題）→逆転（実は分割の仕方）→3種Parser比較→設計指針＋落とし穴→問いで締める構成。",
+  "source": "textbooks/ai-agent-roadmap/curriculums/deep-dive/chapters/01/sections/03-node-parser-chunking.md",
+  "title": "Node Parserとチャンキング戦略（問い駆動版）",
+  "scenes": [
+    {
+      "kind": "cover",
+      "caption": "RAGの精度が低い原因、\nどこを疑う？",
+      "narration": "RAGの精度が低いとき、LLMのモデルを疑ってないのだ？実は原因の多くは「ドキュメントの切り方」にあるのだ。",
+      "durationSec": 8.81
+    },
+    {
+      "kind": "point",
+      "label": "精度の真犯人",
+      "caption": "分割の仕方が\n精度を決める",
+      "narration": "答えが複数のNodeに分散していたり、Nodeが大きすぎて検索の解像度が落ちたりする。Node Parserの設計が検索精度に直結するのだ。",
+      "durationSec": 10.42,
+      "diagram": "comparison"
+    },
+    {
+      "kind": "point",
+      "label": "3種のParser",
+      "caption": "Sentence / Token\n/ Semantic",
+      "narration": "代表的なParserは3種なのだ。文単位で束ねるSentenceSplitter、トークン数を厳密に守るTokenTextSplitter、意味の切れ目で分けるSemanticSplitter。まずSentenceSplitterから始めるのが定石なのだ。",
+      "durationSec": 15.43,
+      "diagram": "versus"
+    },
+    {
+      "kind": "point",
+      "label": "設計の指針",
+      "caption": "chunk_size 512\noverlapは10〜20%",
+      "narration": "出発点はchunk_sizeを512前後、overlapはその10〜20%なのだ。Semantic Splitterは強力だけど、取り込み時に埋め込み計算のコストが乗るのだ。構造化されたMarkdownならSentenceSplitterで十分なことが多いのだ。",
+      "durationSec": 18.33,
+      "diagram": "flow"
+    },
+    {
+      "kind": "hook",
+      "caption": "続きは本文で。",
+      "narration": "あなたのドキュメント、どのParserが合うのだ？設計の詳しい指針は本文で確かめるのだ。",
+      "durationSec": 6.54
+    }
+  ]
+}

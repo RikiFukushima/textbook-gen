@@ -1,0 +1,43 @@
+{
+  "_comment": "D案「問い駆動型」台本。refine=高精度という誤解→compact優先の逆転→3モード使い分け→出典設計→問いで締める構成。narrationはずんだもんに渡す話し言葉。",
+  "source": "textbooks/ai-agent-roadmap/curriculums/deep-dive/chapters/01/sections/06-response-synthesizer.md",
+  "title": "Response Synthesizer — 検索結果を回答に統合する方式の選択",
+  "scenes": [
+    {
+      "kind": "cover",
+      "caption": "refineにすれば\n精度が上がる？",
+      "narration": "refineにすれば精度が上がるって思ってない？実はそれ、コストを無駄に増やしてるだけかもしれないのだ。",
+      "durationSec": 6.84
+    },
+    {
+      "kind": "point",
+      "label": "3つのモード",
+      "caption": "3モードを\n使い分ける",
+      "narration": "Response Modeは3種類なのだ。compactは1回で詰め込む最速モード、refineはNodeごとに磨く精度寄り、tree_summarizeは大量Node向けなのだ。",
+      "durationSec": 10.47,
+      "diagram": "flow"
+    },
+    {
+      "kind": "point",
+      "label": "トレードオフ",
+      "caption": "まずcompact、\nそれから切替",
+      "narration": "よくある誤解は「精度のためにrefine」なのだ。でもrefineはNode数ぶんだけLLM呼び出しが走るのだ。まずcompactで評価して、足りなければ切り替えるのが正解なのだ。",
+      "durationSec": 12.38,
+      "diagram": "comparison"
+    },
+    {
+      "kind": "point",
+      "label": "出典設計",
+      "caption": "出典表示＋\nプロンプト設計",
+      "narration": "source_nodesは必ず表示するのだ。プロンプトに「根拠がなければ分かりませんと答えて」と入れるだけでハルシネーションが目に見えて減るのだ。",
+      "durationSec": 9.58,
+      "diagram": "none"
+    },
+    {
+      "kind": "hook",
+      "caption": "続きは本文で。",
+      "narration": "あなたのRAGのResponse Mode、何を選んでるのだ？使い分けのくわしい基準は本文で確かめるのだ。",
+      "durationSec": 7.05
+    }
+  ]
+}

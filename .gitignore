@@ -1,3 +1,6 @@
+# Claude Code のセッション別メモリ（ローカル専用）
+.claude/projects/
+
 node_modules/
 .env
 .env.local
@@ -5,8 +8,19 @@ node_modules/
 dist/
 .next/
 *.log
+viewer/out/
 
-# 動画生成の出力（再生成可能なため除外）
-.poc-video-out/
+# ── 動画生成の中間生成物（再生成可能なため除外） ──────────────────────────
+# remotion の中間出力MP4（最終成果物は textbooks/.../*.mp4 に手動配置する）
+scripts/poc-video/remotion/out/
+# レビュー用フレームキャプチャ
 scripts/poc-video/remotion/review-frames/
+# 音声ファイル（VOICEVOXでローカル生成、サイズ大）
 scripts/poc-video/remotion/public/
+# gitignore 規約上の旧パス（念のため残す）
+.poc-video-out/
+
+# ── NOTE ─────────────────────────────────────────────────────────────────────
+# 最終MP4 (textbooks/.../*.mp4) はgit管理対象。
+# 1ファイル約4MB、チャプター1本あたり6本程度を想定。
+# 容量が問題になったら GitHub LFS への移行を検討すること。

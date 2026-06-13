@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { getTextbook, getVisibleSlugs } from "@/lib/content";
 import SectionViewer from "@/components/SectionViewer";
 
@@ -34,16 +35,18 @@ export default async function ChapterPage({
   }));
 
   return (
-    <SectionViewer
-      slug={slug}
-      curriculumId={cur.meta.id}
-      chapterId={ch.meta.id}
-      chapterNumber={Number(ch.meta.id)}
-      chapterTitle={ch.meta.title}
-      sections={ch.sections}
-      estimatedMinutes={ch.meta.estimated_minutes}
-      hasQuiz={!!ch.quiz && ch.quiz.questions.length > 0}
-      chapterList={chapterList}
-    />
+    <Suspense>
+      <SectionViewer
+        slug={slug}
+        curriculumId={cur.meta.id}
+        chapterId={ch.meta.id}
+        chapterNumber={Number(ch.meta.id)}
+        chapterTitle={ch.meta.title}
+        sections={ch.sections}
+        estimatedMinutes={ch.meta.estimated_minutes}
+        hasQuiz={!!ch.quiz && ch.quiz.questions.length > 0}
+        chapterList={chapterList}
+      />
+    </Suspense>
   );
 }

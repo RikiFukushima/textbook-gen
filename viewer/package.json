@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "BUILD_VISIBILITY=all next dev -p 4001",
-    "build": "next build",
-    "build:all": "BUILD_VISIBILITY=all next build",
+    "build": "next build && node scripts/copy-videos.mjs",
+    "build:all": "BUILD_VISIBILITY=all next build && node scripts/copy-videos.mjs",
     "start": "next start",
     "lint": "next lint"
   },
