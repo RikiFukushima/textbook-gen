@@ -1,0 +1,118 @@
+title: ITの歴史と文化 — 当たり前の来歴を辿る 4 つの物語
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites:
+    - 日常的に PC やスマートフォンを使っている
+    - プログラミング経験は不問
+  estimated_hours: 1
+style:
+  tone: ですます調・読み物寄り(物語性を重視)
+  code_examples: false
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: インターネット誕生の物語 — 核戦争の恐怖から海底ケーブルまで
+    estimated_minutes: 16
+    learning_objectives:
+      - ARPANET から WWW までの大きな流れを物語として説明できる
+      - インターネットと WWW(Web)の違いを説明できる
+      - 「クラウド」の実体がデータセンターと海底ケーブルという物理であることを説明できる
+    sections:
+      - id: "01-01"
+        title: 核戦争とコンピュータ — ARPANET はなぜ生まれたか
+        estimated_minutes: 4
+      - id: "01-02"
+        title: バラバラのネットワークをつなぐ共通語 — TCP/IP
+        estimated_minutes: 4
+      - id: "01-03"
+        title: WWW の発明とブラウザ戦争 — Web が「みんなのもの」になるまで
+        estimated_minutes: 4
+      - id: "01-04"
+        title: 「クラウド」はどこにあるのか — 海底ケーブルとデータセンターの物理
+        estimated_minutes: 4
+    diagrams:
+      - purpose: ARPANET → TCP/IP → WWW → ブラウザ戦争のインターネット史年表
+        type: mermaid
+        section: "01-03"
+    quiz:
+      count: 5
+      difficulty: easy
+  - id: "02"
+    title: プログラミング言語・名前の由来と誕生秘話
+    estimated_minutes: 16
+    learning_objectives:
+      - 主要言語(Python / Java / JavaScript / C / Go)の名前の由来と誕生背景を説明できる
+      - Java と JavaScript が別物である理由を歴史から説明できる
+      - C を起点とする言語の系譜を大まかに説明できる
+    sections:
+      - id: "02-01"
+        title: Python はヘビじゃない — コメディ番組から生まれた言語
+        estimated_minutes: 4
+      - id: "02-02"
+        title: Java はコーヒー、JavaScript は「他人の空似」
+        estimated_minutes: 4
+      - id: "02-03"
+        title: すべての道は C に通ず — 言語の系譜をたどる
+        estimated_minutes: 4
+      - id: "02-04"
+        title: 巨大企業の事情から生まれる言語 — Go と現代の言語たち
+        estimated_minutes: 4
+    diagrams:
+      - purpose: C を起点とする主要プログラミング言語のファミリーツリー
+        type: mermaid
+        section: "02-03"
+    quiz:
+      count: 5
+      difficulty: easy
+  - id: "03"
+    title: 暗号の歴史 — 隠す技術 4000 年
+    estimated_minutes: 16
+    learning_objectives:
+      - シーザー暗号から現代暗号までの発展の流れを説明できる
+      - エニグマ解読が第二次世界大戦とコンピュータ誕生に与えた影響を説明できる
+      - 公開鍵暗号の「鍵を公開する」発想がなぜ画期的だったかを説明できる
+      - ブラウザの鍵マーク(HTTPS)が暗号史の到達点であることを説明できる
+    sections:
+      - id: "03-01"
+        title: 文字をずらすだけ — シーザー暗号と古代からの知恵比べ
+        estimated_minutes: 4
+      - id: "03-02"
+        title: エニグマと第二次世界大戦 — 暗号が歴史を動かした日
+        estimated_minutes: 4
+      - id: "03-03"
+        title: 鍵を公開するという逆転の発想 — 公開鍵暗号の発明
+        estimated_minutes: 4
+      - id: "03-04"
+        title: ポケットの中の 4000 年 — HTTPS と鍵マークの正体
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 共通鍵暗号と公開鍵暗号の鍵の受け渡しの違い
+        type: mermaid
+        section: "03-03"
+    quiz:
+      count: 5
+      difficulty: easy
+  - id: "04"
+    title: オープンソースとハッカー文化 — なぜ無料で巨大ソフトが作られるのか
+    estimated_minutes: 16
+    learning_objectives:
+      - GNU と Linux 誕生の経緯を物語として説明できる
+      - オープンソースライセンスが「無料でも壊れない」仕組みである理由を説明できる
+      - RFC 文化とジョーク RFC に見るインターネットの文化を説明できる
+      - ハッカーとクラッカーの違いを説明できる
+    sections:
+      - id: "04-01"
+        title: 印刷機が動かない — GNU 誕生と「自由なソフトウェア」
+        estimated_minutes: 4
+      - id: "04-02"
+        title: 趣味で作った OS が世界を動かすまで — Linux とバザール開発
+        estimated_minutes: 4
+      - id: "04-03"
+        title: ライセンスという発明 — 無料なのに秩序が保たれる理由
+        estimated_minutes: 4
+      - id: "04-04"
+        title: 鳥がパケットを運ぶ日 — RFC 文化とハッカーのユーモア
+        estimated_minutes: 4
+    quiz:
+      count: 5
+      difficulty: easy

@@ -1,0 +1,22 @@
+slug: everyday-it-why
+title: 身の回りのITの「なぜ」
+description: 時刻処理の地獄・キリのいい数字・HTTP ステータスコード・UI アイコンの由来・伝説のソフトウェア障害。毎日触れているのに誰も理由を知らない「IT の当たり前」を、設計上の都合と歴史的経緯という共通の視点で解剖する雑学教材。
+version: 0.1.0
+created_at: 2026-06-12
+updated_at: 2026-06-13
+authors: []
+visibility: public # private | shared | unlisted | public
+shared_with: []
+unlisted_token: null
+search_indexable: true
+allow_fork: false
+tags:
+  - it教養
+  - 雑学
+  - 読み物
+  - http
+  - 時刻処理
+  - 障害事例
+contains_local_sources: false
+curriculum_order:
+  - core

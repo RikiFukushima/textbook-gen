@@ -1,0 +1,136 @@
+title: 身の回りのITの「なぜ」 — 毎日触れているのに誰も理由を知らない
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites:
+    - 日常的に PC やスマートフォンを使っている
+    - プログラミング経験は不問
+  estimated_hours: 1.5
+style:
+  tone: ですます調・読み物寄り(「あるある」起点で引き込む)
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: 時間とコンピュータはなぜこんなに相性が悪いのか
+    estimated_minutes: 16
+    learning_objectives:
+      - Unix 時間の仕組みと 2038 年問題が起きる理由を説明できる
+      - タイムゾーン・UTC・夏時間がバグの温床になる構造を説明できる
+      - うるう秒が実際にサービス障害を起こした事例を説明できる
+    sections:
+      - id: "01-01"
+        title: うるう秒でサービスが落ちた日 — たった 1 秒の地獄
+        estimated_minutes: 4
+      - id: "01-02"
+        title: コンピュータの時計の正体 — Unix 時間と 2038 年問題
+        estimated_minutes: 4
+      - id: "01-03"
+        title: タイムゾーンという人間の都合 — UTC・JST・夏時間
+        estimated_minutes: 4
+      - id: "01-04"
+        title: エンジニアが時刻処理を恐れる理由 — 地雷原の歩き方
+        estimated_minutes: 4
+    diagrams:
+      - purpose: Unix 時間(32bit 符号付き整数)が 2038 年に溢れるまでの年表
+        type: mermaid
+        section: "01-02"
+    quiz:
+      count: 5
+      difficulty: easy
+  - id: "02"
+    title: なぜこの数字なの? — コンピュータの「キリのいい数字」
+    estimated_minutes: 16
+    learning_objectives:
+      - 8bit = 1byte、256、1024 が「キリのいい数字」である理由を 2 進数から説明できる
+      - 1KB = 1000 バイトか 1024 バイトか問題の背景を説明できる
+      - 80 番・443 番などポート番号の数字の意味を説明できる
+      - ゼロから数える理由とオフバイワンエラーの関係を説明できる
+    sections:
+      - id: "02-01"
+        title: 2 のべき乗の世界 — 8bit・256・1024 のカラクリ
+        estimated_minutes: 4
+      - id: "02-02"
+        title: 1KB は 1000 バイトか 1024 バイトか — 単位をめぐる仁義なき戦い
+        estimated_minutes: 4
+      - id: "02-03"
+        title: 80 番と 443 番 — ポート番号は建物の部屋番号
+        estimated_minutes: 4
+      - id: "02-04"
+        title: ゼロから数える理由 — オフバイワンエラーという宿敵
+        estimated_minutes: 4
+    quiz:
+      count: 5
+      difficulty: easy
+  - id: "03"
+    title: HTTP ステータスコードの文化史 — エラー番号は設計者たちの会話
+    estimated_minutes: 16
+    learning_objectives:
+      - ステータスコード 3 桁の構造(1xx〜5xx)を説明できる
+      - 404 / 500 / 503 / 301 など代表的なコードの意味と使い分けを説明できる
+      - 418 I'm a teapot のようなジョークコードが生まれた文化的背景を説明できる
+    sections:
+      - id: "03-01"
+        title: 404 はなぜ「見つからない」なのか — 3 桁の数字の文法
+        estimated_minutes: 4
+      - id: "03-02"
+        title: 500 と 503 — サーバの悲鳴の聞き分け方
+        estimated_minutes: 4
+      - id: "03-03"
+        title: 301 と 302 — Web の引っ越し通知の使い分け
+        estimated_minutes: 4
+      - id: "03-04"
+        title: 418 I'm a teapot — ジョークが公式仕様になった日
+        estimated_minutes: 4
+    diagrams:
+      - purpose: ステータスコード 5 クラス(1xx〜5xx)の分類と代表例
+        type: mermaid
+        section: "03-01"
+    quiz:
+      count: 5
+      difficulty: easy
+  - id: "04"
+    title: UI アイコンとショートカットの由来 — 毎日触る記号の正体
+    estimated_minutes: 16
+    learning_objectives:
+      - 保存アイコンがフロッピーディスクのままである「記号の化石化」の構造を説明できる
+      - Bluetooth ロゴと QWERTY 配列の歴史的由来を説明できる
+      - Ctrl+C/V などショートカットやハンバーガーメニューの由来を説明できる
+    sections:
+      - id: "04-01"
+        title: 保存=フロッピー — 見たことのないものを毎日押している
+        estimated_minutes: 4
+      - id: "04-02"
+        title: Bluetooth のロゴは王様の名前 — 青歯王ハーラルの物語
+        estimated_minutes: 4
+      - id: "04-03"
+        title: QWERTY 配列の謎 — 速く打つための配列ではなかった?
+        estimated_minutes: 4
+      - id: "04-04"
+        title: Ctrl+C/V とハンバーガーメニュー — 操作に染みついた歴史
+        estimated_minutes: 4
+    quiz:
+      count: 5
+      difficulty: easy
+  - id: "05"
+    title: 伝説のソフトウェア障害と「バグ」の語源 — 1 行のミスがロケットを落とす
+    estimated_minutes: 16
+    learning_objectives:
+      - 「バグ」という言葉の由来(本物の蛾の逸話と、それ以前の用例)を説明できる
+      - Ariane 5 爆発と Mars Climate Orbiter 喪失の原因を説明できる
+      - 小さなミスが巨大事故に至る構造と、そこから生まれた設計・テスト文化を説明できる
+    sections:
+      - id: "05-01"
+        title: 世界初のバグは本物の蛾だった — グレース・ホッパーの記録
+        estimated_minutes: 4
+      - id: "05-02"
+        title: Ariane 5 爆発 — 再利用したコードに潜んでいた罠
+        estimated_minutes: 4
+      - id: "05-03"
+        title: 火星にたどり着けなかった探査機 — 単位ミスという単純さ
+        estimated_minutes: 4
+      - id: "05-04"
+        title: 失敗は設計を進化させる — 障害から生まれたエンジニアリング文化
+        estimated_minutes: 4
+    quiz:
+      count: 5
+      difficulty: easy
