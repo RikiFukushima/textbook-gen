@@ -34,6 +34,7 @@
 | 章本文の執筆 | `chapter` skill(オーケストレータ) | **`chapter-writer` agent を並列起動** |
 | クイズ生成 | `quiz` skill(オーケストレータ) | **`quiz-writer` agent を並列起動** |
 | レビュー | `reviewer` agent | 指摘レポートのみ(自動修正しない) |
+| **ショート動画生成** | **`video` skill(オーケストレータ)** | **`video-script-writer` → `video-renderer` agent を順次起動** |
 
 ## 執筆規約の正本
 
@@ -55,6 +56,23 @@
 3. `chapter` で本文を生成 → 章を並列で `chapter-writer` に流す。
 4. `quiz` でクイズを生成 → 章を並列で `quiz-writer` に流す。
 5. 必要に応じて `reviewer` を回し、指摘箇所だけ該当 skill を再実行。
+6. `video` でショート動画を生成 → `video-script-writer`(台本)→ `video-renderer`(音声+レンダリング)の順で実行。
+
+## 動画生成規約の正本
+
+**`.claude/skills/video-style/SKILL.md`** がすべての動画生成ルールの単一の正本(Single Source of Truth)です。次の内容を含みます:
+
+- 動画スペック(1080×1920 / 30fps / 30〜45秒)
+- シーン構成(cover×1 / point×3 / hook×1 の5シーン固定)
+- 台本フォーマット(ScriptData JSON スキーマ)
+- caption / narration の書き方ルール
+- 音声仕様(VOICEVOX / ずんだもん / speedScale=1.15)
+- アニメーション仕様(使用イージング・禁止事項)
+- ファイル構成・出力先ルール
+- 開発フロー(7ステップ)
+- 台本品質チェックリスト
+
+**ルールを変更するときは video-style だけを編集する**。`video-script-writer` / `video-renderer` は `skills: [video-style]` でプリロードする。
 
 ## 安全(リマインダー)
 

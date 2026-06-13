@@ -1,0 +1,35 @@
+{
+  "_comment": "D案「問い駆動型」台本。冒頭の問いかけ→誤解の提示→認識の逆転→使い分けの結論→問いで締める構成。narrationはずんだもんに渡す話し言葉。",
+  "source": "textbooks/ai-agent-roadmap/curriculums/deep-dive/chapters/01/sections/01-llamaindex-design.md",
+  "title": "LlamaIndexの設計思想(問い駆動版)",
+  "scenes": [
+    {
+      "kind": "cover",
+      "caption": "RAGが遅い理由、\n知ってる？",
+      "narration": "RAGが遅い理由、知ってるのだ？実はLlamaIndexが解いてる問題はLLMじゃなくて索引設計だったのだ。"
+    },
+    {
+      "kind": "point",
+      "label": "設計の核心",
+      "caption": "RAG は\n索引設計だ",
+      "narration": "よくある誤解は「検索してLLMにつなぐだけ」なのだ。でも実際は索引の設計こそが精度の鍵なのだ。"
+    },
+    {
+      "kind": "point",
+      "label": "4ステップ",
+      "caption": "取込→索引化→検索→生成",
+      "narration": "取り込み、索引化、検索、生成。この4段階のどこでも自由に差し替えられるのが強みなのだ。"
+    },
+    {
+      "kind": "point",
+      "label": "LangChainとの違い",
+      "caption": "連鎖 vs 索引\n主役が違う",
+      "narration": "LangChainとの違いで迷う人も多いのだ。でも目的が違うのだ。LangChainは処理フローの連結、LlamaIndexは索引設計が主役。競合じゃなくて使い分けるものなのだ。"
+    },
+    {
+      "kind": "hook",
+      "caption": "続きは本文で。",
+      "narration": "あなたのRAGはどの型なのだ？索引設計のくわしいやり方は本文で確かめるのだ。"
+    }
+  ]
+}

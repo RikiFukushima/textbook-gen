@@ -5,3 +5,8 @@ node_modules/
 dist/
 .next/
 *.log
+
+# 動画生成の出力（再生成可能なため除外）
+.poc-video-out/
+scripts/poc-video/remotion/review-frames/
+scripts/poc-video/remotion/public/
