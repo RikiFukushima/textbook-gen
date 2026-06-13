@@ -1,0 +1,12 @@
+id: "04"
+title: シェルスクリプト入門
+estimated_minutes: 18
+learning_objectives:
+  - shebang と実行権限を備えたスクリプトを作成できる
+  - 変数と引数($1・$@)を使ったスクリプトを書ける
+  - if と for で条件分岐・繰り返しを書ける
+section_order:
+  - "04-01"
+  - "04-02"
+  - "04-03"
+  - "04-04"

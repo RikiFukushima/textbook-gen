@@ -1,0 +1,89 @@
+title: なぜ CLI か
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites:
+    - PC の基本操作(ファイル・フォルダの概念)ができる
+    - プログラミング経験は不問
+  estimated_hours: 1
+style:
+  tone: ですます調・実務寄り
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: 黒い画面の正体 — なぜエンジニアは CLI を使うのか
+    estimated_minutes: 16
+    learning_objectives:
+      - GUI と CLI のそれぞれの得意分野を説明できる
+      - CLI が選ばれる理由(自動化・再現性・遠隔操作)を挙げられる
+      - ターミナル・シェル・カーネルの役割の違いを説明できる
+    sections:
+      - id: "01-01"
+        title: マウスのない世界 — GUI と CLI の得意分野
+        estimated_minutes: 4
+      - id: "01-02"
+        title: なぜプロは CLI を使うのか — 自動化・再現性・遠隔操作
+        estimated_minutes: 4
+      - id: "01-03"
+        title: ターミナル・シェル・カーネル — 言葉の交通整理
+        estimated_minutes: 4
+      - id: "01-04"
+        title: プロンプトを読む — 黒い画面が伝えていること
+        estimated_minutes: 4
+    diagrams:
+      - purpose: ターミナル → シェル → カーネルと命令が伝わる流れ図
+        type: mermaid
+        section: "01-03"
+    quiz:
+      count: 5
+      difficulty: easy
+  - id: "02"
+    title: コマンドの文法 — 動詞・オプション・引数
+    estimated_minutes: 17
+    learning_objectives:
+      - コマンドをコマンド名・オプション・引数の 3 要素に分解して読める
+      - pwd・cd・ls で現在地の確認と移動ができる
+      - --help や man で自力でコマンドを調べられる
+    sections:
+      - id: "02-01"
+        title: コマンドは文である — コマンド名・オプション・引数
+        estimated_minutes: 4
+      - id: "02-02"
+        title: いま、どこにいる? — pwd と cd で動く
+        estimated_minutes: 5
+      - id: "02-03"
+        title: ls で見る、--help と man で調べる
+        estimated_minutes: 4
+      - id: "02-04"
+        title: 困ったときの脱出法 — Ctrl+C と q
+        estimated_minutes: 4
+    quiz:
+      count: 5
+      difficulty: easy
+  - id: "03"
+    title: ファイルシステムの地図 — どこに何があるか
+    estimated_minutes: 17
+    learning_objectives:
+      - ファイルシステムをルートからの木構造として描ける
+      - 絶対パスと相対パス(.・..・~)を使い分けられる
+      - ルート直下の主要ディレクトリ(/etc・/home・/var・/usr)の役割を言える
+    sections:
+      - id: "03-01"
+        title: すべては / から始まる — 木構造とパス
+        estimated_minutes: 4
+      - id: "03-02"
+        title: 絶対パスと相対パス — . と .. と ~
+        estimated_minutes: 5
+      - id: "03-03"
+        title: / 直下の地図 — etc・home・var・usr の役割
+        estimated_minutes: 4
+      - id: "03-04"
+        title: Tab 補完と履歴 — 打たないが勝ち
+        estimated_minutes: 4
+    diagrams:
+      - purpose: ルート直下の主要ディレクトリを示す木構造図
+        type: mermaid
+        section: "03-01"
+    quiz:
+      count: 5
+      difficulty: easy

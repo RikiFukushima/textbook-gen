@@ -1,0 +1,95 @@
+{
+  "chapter_id": "04",
+  "questions": [
+    {
+      "id": "q04-01",
+      "question": "Linux でユーザーを「グループ」にまとめる利点として、本文の説明に最も合うものはどれですか?",
+      "options": [
+        { "id": "a", "text": "グループに所属したユーザーは、そのグループのファイルすべての所有者になる" },
+        { "id": "b", "text": "グループ単位で権限を与えておけば、ユーザーをグループに入れるだけで権限を共有できる" },
+        { "id": "c", "text": "グループに所属したユーザーは、root と同じように権限チェックを受けなくなる" },
+        { "id": "d", "text": "グループは www-data のようなプログラム専用ユーザーだけが所属できる単位である" }
+      ],
+      "answer": "b",
+      "explanation": "グループは「ユーザーをまとめる単位」で、グループに権限を与えておけばメンバーを 1 人ずつ設定しなくても「グループに入れるだけ」で権限を共有できます。グループに入ってもファイルの所有者になるわけではなく(所有者は別に設定されます)、権限チェックを免除されるのは root だけです。プログラム専用ユーザーもグループに所属できますが、グループは人間のユーザーも含めてまとめる仕組みです。",
+      "source_refs": [{ "section_id": "04-01", "anchor": "グループに入れるだけ" }],
+      "difficulty": "medium",
+      "tags": ["linux", "permissions", "group"]
+    },
+    {
+      "id": "q04-02",
+      "question": "ls -l report.txt の結果が「-rw-r--r-- 1 alice developers 1024 Jun 13 10:00 report.txt」のとき、所有者ではないが developers グループに属するユーザー bob ができる操作はどれですか?",
+      "options": [
+        { "id": "a", "text": "読み取りと書き込みの両方ができる" },
+        { "id": "b", "text": "読み取りと実行の両方ができる" },
+        { "id": "c", "text": "読み取りだけができる" },
+        { "id": "d", "text": "どの操作もできない" }
+      ],
+      "answer": "c",
+      "explanation": "適用される区分は左から順に「最初に当てはまった区分だけ」です。bob は所有者(alice)ではなく developers グループのメンバーなので、グループの 3 文字 r-- が適用され、読み取りだけができます。読み書きできるのは所有者の rw- が適用される alice だけです。",
+      "source_refs": [{ "section_id": "04-02", "anchor": "具体例 — 1 行を読み解く" }],
+      "difficulty": "medium",
+      "tags": ["linux", "permissions", "rwx", "ls"]
+    },
+    {
+      "id": "q04-03",
+      "question": "「書き込み禁止のファイルなのに消せてしまった」という現象が起きることがあります。ファイルを削除できるかどうかを決めるのはどれですか?",
+      "options": [
+        { "id": "a", "text": "親ディレクトリに w(書き込み)権限があるかどうか" },
+        { "id": "b", "text": "ファイル自身に w(書き込み)権限があるかどうか" },
+        { "id": "c", "text": "ファイル自身に x(実行)権限があるかどうか" },
+        { "id": "d", "text": "親ディレクトリに r(読み取り)権限があるかどうか" }
+      ],
+      "answer": "a",
+      "explanation": "削除とはディレクトリという「台帳」から名前を消す操作なので、可否はファイル自身の w ではなく「親ディレクトリの w」で決まります。そのため、ファイル自身が書き込み禁止でも親ディレクトリに w があれば削除できてしまいます。親ディレクトリの r は一覧表示(ls)に関わる権限です。",
+      "source_refs": [{ "section_id": "04-02", "anchor": "親ディレクトリの w" }],
+      "difficulty": "medium",
+      "tags": ["linux", "permissions", "directory"]
+    },
+    {
+      "id": "q04-04",
+      "question": "ファイル report.txt を「所有者は読み書き、グループとその他は読みだけ」(rw-r--r--)にしたいとき、chmod の数値指定として正しいものはどれですか?",
+      "options": [
+        { "id": "a", "text": "chmod 664 report.txt" },
+        { "id": "b", "text": "chmod 755 report.txt" },
+        { "id": "c", "text": "chmod 600 report.txt" },
+        { "id": "d", "text": "chmod 644 report.txt" }
+      ],
+      "answer": "d",
+      "explanation": "数値指定は r=4・w=2・x=1 の合計を所有者・グループ・その他の順に 3 桁並べます。rw- は 4+2=6、r-- は 4 なので rw-r--r-- は 644 です。664 はグループにも書き込みを許してしまい、755 は実行権限まで付く別の定番パターン(rwxr-xr-x)、600 は所有者以外が何もできなくなる設定です。",
+      "source_refs": [{ "section_id": "04-03", "anchor": "数値指定 — r=4・w=2・x=1 の足し算" }],
+      "difficulty": "medium",
+      "tags": ["linux", "permissions", "chmod"]
+    },
+    {
+      "id": "q04-05",
+      "question": "作成したスクリプト deploy.sh に「所有者だけ」実行権限を付けたいとき、正しいコマンドはどれですか?",
+      "options": [
+        { "id": "a", "text": "chmod o+x deploy.sh" },
+        { "id": "b", "text": "chmod u+x deploy.sh" },
+        { "id": "c", "text": "chmod a+x deploy.sh" },
+        { "id": "d", "text": "chmod 777 deploy.sh" }
+      ],
+      "answer": "b",
+      "explanation": "記号指定は「誰に(u/g/o/a)+ どうする(+/-)+ 何を(r/w/x)」の順で、所有者(user)は u です。o は owner ではなく「その他(others)」を指す点に注意してください。a+x でも実行はできるようになりますが全員に付いてしまい、777 は全員に全権限を与える危険な設定なので「所有者だけ」という目的に合いません。",
+      "source_refs": [{ "section_id": "04-03", "anchor": "chmod — 記号で「誰に・何を」指定する" }],
+      "difficulty": "medium",
+      "tags": ["linux", "permissions", "chmod"]
+    },
+    {
+      "id": "q04-06",
+      "question": "sudo apt update を実行したときに起きることの説明として正しいものはどれですか?",
+      "options": [
+        { "id": "a", "text": "root のパスワードを入力し、root ユーザーに完全に切り替わって以降の操作がすべて root 権限になる" },
+        { "id": "b", "text": "自分のパスワードを入力すると、そのシェルで以降に実行する操作がすべて root 権限になる" },
+        { "id": "c", "text": "自分のパスワードを入力し、指定した 1 コマンドだけが root 権限で実行される" },
+        { "id": "d", "text": "root のパスワードを入力し、指定した 1 コマンドだけが root 権限で実行される" }
+      ],
+      "answer": "c",
+      "explanation": "sudo は普段は一般ユーザーのまま、指定した 1 コマンドだけを root 権限で実行する仕組みです。聞かれるのは root のパスワードではなく自分のパスワードで、コマンドの実行中だけ root になり、終われば一般ユーザーに戻ります。この「必要な瞬間だけ強い権限を借りる」スタイルが最小権限の原則の実践です。",
+      "source_refs": [{ "section_id": "04-04", "anchor": "自分のパスワード" }],
+      "difficulty": "medium",
+      "tags": ["linux", "permissions", "sudo", "root"]
+    }
+  ]
+}

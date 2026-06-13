@@ -1,0 +1,12 @@
+id: "01"
+title: 3 本の流れ — 標準入出力とリダイレクト
+estimated_minutes: 16
+learning_objectives:
+  - stdin・stdout・stderr の 3 つの流れを区別できる
+  - "> と >> と < でリダイレクトを使い分けられる"
+  - 2> でエラー出力だけを分離できる
+section_order:
+  - "01-01"
+  - "01-02"
+  - "01-03"
+  - "01-04"

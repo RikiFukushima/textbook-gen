@@ -1,0 +1,12 @@
+id: "04"
+title: 権限 — 誰が何をできるか
+estimated_minutes: 17
+learning_objectives:
+  - ls -l の出力から所有者・グループ・権限を読み取れる
+  - chmod・chown で権限と所有者を変更できる
+  - sudo と root の意味とリスクを説明できる
+section_order:
+  - "04-01"
+  - "04-02"
+  - "04-03"
+  - "04-04"

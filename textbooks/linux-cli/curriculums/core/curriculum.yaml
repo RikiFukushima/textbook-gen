@@ -1,0 +1,14 @@
+id: core
+title: ファイル・プロセス・権限
+description: ファイル操作の基本動詞から「すべてはファイル」という Linux の世界観、プロセスと権限まで。システムの中で「何が動き、誰が何をできるか」を読めるようになる。
+order: 2
+estimated_hours: 1
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites:
+    - foundations 修了相当(pwd・cd・ls などの基本操作とパスの概念)
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
