@@ -1,0 +1,12 @@
+id: "03"
+title: シェルを自分の道具にする
+estimated_minutes: 16
+learning_objectives:
+  - 環境変数の役割と PATH がコマンドを見つける仕組みを説明できる
+  - .bashrc・.zshrc がいつ読まれるかを説明できる
+  - エイリアスで自分用のショートカットを作れる
+section_order:
+  - "03-01"
+  - "03-02"
+  - "03-03"
+  - "03-04"

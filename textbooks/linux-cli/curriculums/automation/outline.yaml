@@ -1,0 +1,111 @@
+title: パイプとスクリプトで自動化
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites:
+    - core 修了相当(ファイル操作・プロセス・権限の基本)
+  estimated_hours: 1
+style:
+  tone: ですます調・実務寄り
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: 3 本の流れ — 標準入出力とリダイレクト
+    estimated_minutes: 16
+    learning_objectives:
+      - stdin・stdout・stderr の 3 つの流れを区別できる
+      - "> と >> と < でリダイレクトを使い分けられる"
+      - 2> でエラー出力だけを分離できる
+    sections:
+      - id: "01-01"
+        title: コマンドには 3 本の口がある — stdin・stdout・stderr
+        estimated_minutes: 4
+      - id: "01-02"
+        title: "> と >> — 出力をファイルへ"
+        estimated_minutes: 4
+      - id: "01-03"
+        title: "< — ファイルから入力へ"
+        estimated_minutes: 4
+      - id: "01-04"
+        title: 2> — エラーだけを別の場所へ
+        estimated_minutes: 4
+    diagrams:
+      - purpose: コマンドを中心とした stdin・stdout・stderr の 3 本の流れ図
+        type: mermaid
+        section: "01-01"
+    quiz:
+      count: 5
+      difficulty: medium
+  - id: "02"
+    title: パイプ — 小さな道具をつなぐ
+    estimated_minutes: 17
+    learning_objectives:
+      - パイプが「前の出力を次の入力へ」つなぐ仕組みを説明できる
+      - grep・sort・uniq・wc・head・tail を組み合わせて使える
+      - UNIX 哲学「一つのことをうまくやる」がパイプ設計にどう現れるかを説明できる
+    sections:
+      - id: "02-01"
+        title: "| の発明 — 出力を入力につなぐ"
+        estimated_minutes: 4
+      - id: "02-02"
+        title: 定番フィルタ 6 選 — grep・sort・uniq・wc・head・tail
+        estimated_minutes: 5
+      - id: "02-03"
+        title: 組み合わせの実例 — ログからランキングを作る
+        estimated_minutes: 4
+      - id: "02-04"
+        title: UNIX 哲学 — 小さな道具が強い理由
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 複数コマンドをパイプでつないだときのデータの流れ図
+        type: mermaid
+        section: "02-03"
+    quiz:
+      count: 5
+      difficulty: medium
+  - id: "03"
+    title: シェルを自分の道具にする
+    estimated_minutes: 16
+    learning_objectives:
+      - 環境変数の役割と PATH がコマンドを見つける仕組みを説明できる
+      - .bashrc・.zshrc がいつ読まれるかを説明できる
+      - エイリアスで自分用のショートカットを作れる
+    sections:
+      - id: "03-01"
+        title: 環境変数 — シェルが持つ「設定メモ」
+        estimated_minutes: 4
+      - id: "03-02"
+        title: PATH — コマンドが見つかる仕組み
+        estimated_minutes: 5
+      - id: "03-03"
+        title: .bashrc と .zshrc — シェルの起動設定
+        estimated_minutes: 4
+      - id: "03-04"
+        title: エイリアス — よく打つコマンドに別名を
+        estimated_minutes: 3
+    quiz:
+      count: 5
+      difficulty: medium
+  - id: "04"
+    title: シェルスクリプト入門
+    estimated_minutes: 18
+    learning_objectives:
+      - shebang と実行権限を備えたスクリプトを作成できる
+      - 変数と引数($1・$@)を使ったスクリプトを書ける
+      - if と for で条件分岐・繰り返しを書ける
+    sections:
+      - id: "04-01"
+        title: はじめてのスクリプト — shebang と chmod +x
+        estimated_minutes: 4
+      - id: "04-02"
+        title: 変数と引数 — $1 と $@
+        estimated_minutes: 5
+      - id: "04-03"
+        title: if と for — 判断と繰り返し
+        estimated_minutes: 5
+      - id: "04-04"
+        title: 毎日の作業を 1 コマンドに — 実用スクリプトを組む
+        estimated_minutes: 4
+    quiz:
+      count: 6
+      difficulty: medium

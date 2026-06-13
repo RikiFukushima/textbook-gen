@@ -1,0 +1,111 @@
+title: ファイル・プロセス・権限
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites:
+    - foundations 修了相当(pwd・cd・ls などの基本操作とパスの概念)
+  estimated_hours: 1
+style:
+  tone: ですます調・実務寄り
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: ファイル操作の基本動詞
+    estimated_minutes: 17
+    learning_objectives:
+      - cat・less でファイルの中身を確認できる
+      - cp・mv・rm を「ゴミ箱はない」リスクを理解した上で使える
+      - 隠しファイル(dotfiles)の意味と役割を説明できる
+    sections:
+      - id: "01-01"
+        title: 中身を見る — cat と less
+        estimated_minutes: 4
+      - id: "01-02"
+        title: 作る — mkdir と touch
+        estimated_minutes: 4
+      - id: "01-03"
+        title: 写す・動かす・消す — cp・mv・rm と「ゴミ箱はない」
+        estimated_minutes: 5
+      - id: "01-04"
+        title: 隠しファイルの正体 — dotfiles
+        estimated_minutes: 4
+    quiz:
+      count: 5
+      difficulty: easy
+  - id: "02"
+    title: 「すべてはファイル」— Linux の世界観
+    estimated_minutes: 16
+    learning_objectives:
+      - 「すべてはファイル」という設計思想を例とともに説明できる
+      - シンボリックリンクの仕組みと用途を説明できる
+      - find と grep で目的のファイル・行を探せる
+    sections:
+      - id: "02-01"
+        title: デバイスもプロセスもファイル — 思想としての統一
+        estimated_minutes: 4
+      - id: "02-02"
+        title: シンボリックリンク — 同じものを指す別の名前
+        estimated_minutes: 4
+      - id: "02-03"
+        title: find で探す — 名前と条件で見つける
+        estimated_minutes: 4
+      - id: "02-04"
+        title: grep で探す — 中身から見つける
+        estimated_minutes: 4
+    quiz:
+      count: 5
+      difficulty: medium
+  - id: "03"
+    title: プロセス — 動いているプログラム
+    estimated_minutes: 17
+    learning_objectives:
+      - プログラムとプロセスの違いを PID とともに説明できる
+      - ps・top で動いているプロセスを確認できる
+      - kill でシグナルを送り、フォアグラウンドとバックグラウンドを切り替えられる
+    sections:
+      - id: "03-01"
+        title: プロセスとは何か — プログラムに命が宿る
+        estimated_minutes: 4
+      - id: "03-02"
+        title: ps と top — 今、何が動いているか
+        estimated_minutes: 4
+      - id: "03-03"
+        title: kill とシグナル — 止め方にも作法がある
+        estimated_minutes: 4
+      - id: "03-04"
+        title: 前と後ろ — フォアグラウンドとバックグラウンド
+        estimated_minutes: 5
+    diagrams:
+      - purpose: プログラム(ファイル)とプロセス(実行中の実体)の関係、親子プロセスの図
+        type: mermaid
+        section: "03-01"
+    quiz:
+      count: 5
+      difficulty: medium
+  - id: "04"
+    title: 権限 — 誰が何をできるか
+    estimated_minutes: 17
+    learning_objectives:
+      - ls -l の出力から所有者・グループ・権限を読み取れる
+      - chmod・chown で権限と所有者を変更できる
+      - sudo と root の意味とリスクを説明できる
+    sections:
+      - id: "04-01"
+        title: ユーザーとグループ — Linux は多人数前提
+        estimated_minutes: 4
+      - id: "04-02"
+        title: rwx を読む — ls -l の 9 文字
+        estimated_minutes: 5
+      - id: "04-03"
+        title: chmod と chown — 権限を変える
+        estimated_minutes: 4
+      - id: "04-04"
+        title: sudo と root — 最強権限の作法
+        estimated_minutes: 4
+    diagrams:
+      - purpose: rwx 9 文字を所有者・グループ・その他に分解する構造図
+        type: mermaid
+        section: "04-02"
+    quiz:
+      count: 6
+      difficulty: medium

@@ -1,0 +1,14 @@
+id: foundations
+title: なぜ CLI か
+description: 黒い画面の正体を知り、コマンドの文法とファイルシステムの地図を手に入れる。GUI しか知らない人が「ターミナルが怖くない」状態になるための最初のカリキュラム。
+order: 1
+estimated_hours: 1
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites:
+    - PC の基本操作(ファイル・フォルダの概念)ができる
+    - プログラミング経験は不問
+chapter_order:
+  - "01"
+  - "02"
+  - "03"

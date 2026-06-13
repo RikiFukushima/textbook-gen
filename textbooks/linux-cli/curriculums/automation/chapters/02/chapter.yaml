@@ -1,0 +1,12 @@
+id: "02"
+title: パイプ — 小さな道具をつなぐ
+estimated_minutes: 17
+learning_objectives:
+  - パイプが「前の出力を次の入力へ」つなぐ仕組みを説明できる
+  - grep・sort・uniq・wc・head・tail を組み合わせて使える
+  - UNIX 哲学「一つのことをうまくやる」がパイプ設計にどう現れるかを説明できる
+section_order:
+  - "02-01"
+  - "02-02"
+  - "02-03"
+  - "02-04"

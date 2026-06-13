@@ -1,0 +1,14 @@
+id: automation
+title: パイプとスクリプトで自動化
+description: 標準入出力とパイプで小さな道具をつなぎ、環境変数とシェル設定で足場を整え、シェルスクリプトで毎日の作業を 1 コマンドにする。CLI を「使う」から「組み合わせて自動化する」へ。
+order: 3
+estimated_hours: 1
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites:
+    - core 修了相当(ファイル操作・プロセス・権限の基本)
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"

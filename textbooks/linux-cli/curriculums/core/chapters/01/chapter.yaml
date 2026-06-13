@@ -1,0 +1,12 @@
+id: "01"
+title: ファイル操作の基本動詞
+estimated_minutes: 17
+learning_objectives:
+  - cat・less でファイルの中身を確認できる
+  - cp・mv・rm を「ゴミ箱はない」リスクを理解した上で使える
+  - 隠しファイル(dotfiles)の意味と役割を説明できる
+section_order:
+  - "01-01"
+  - "01-02"
+  - "01-03"
+  - "01-04"

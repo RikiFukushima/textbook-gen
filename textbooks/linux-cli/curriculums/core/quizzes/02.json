@@ -1,0 +1,194 @@
+{
+  "chapter_id": "02",
+  "questions": [
+    {
+      "id": "q02-01",
+      "question": "Linux の「すべてはファイル」という設計思想の説明として、最も適切なものはどれですか?",
+      "options": [
+        {
+          "id": "a",
+          "text": "デバイスやプロセス情報の中身を、すべてディスク上に実体のあるファイルとして保存しておく仕組み"
+        },
+        {
+          "id": "b",
+          "text": "デバイスやプロセス情報も「開く・読む・書く・閉じる」というファイルと同じ操作で扱えるように、インターフェースを統一する思想"
+        },
+        {
+          "id": "c",
+          "text": "あらゆるデータを必ずテキスト形式のファイルで保存するという決まり"
+        },
+        {
+          "id": "d",
+          "text": "システムのすべての設定を 1 つのファイルにまとめて管理する方針"
+        }
+      ],
+      "answer": "b",
+      "explanation": "「すべてはファイル」の狙いは、操作のインターフェースを 1 種類に統一することです。相手がディスクでもプロセス情報でも「開く・読む・書く・閉じる」という同じ流儀でアクセスできます。a は惜しい説明ですが、/proc 配下のファイルはディスク上に実体がなく、読まれた瞬間にカーネルが中身を生成する仮想ファイルなので誤りです。",
+      "source_refs": [
+        {
+          "section_id": "02-01",
+          "anchor": "操作のインターフェースを 1 種類に統一できる"
+        },
+        {
+          "section_id": "02-01",
+          "anchor": "読まれた瞬間にカーネルが中身を生成している"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "philosophy",
+        "dev",
+        "proc"
+      ]
+    },
+    {
+      "id": "q02-02",
+      "question": "original.txt を指すシンボリックリンク shortcut.txt を作るコマンドとして、正しいものはどれですか?",
+      "options": [
+        {
+          "id": "a",
+          "text": "ln -s original.txt shortcut.txt"
+        },
+        {
+          "id": "b",
+          "text": "ln -s shortcut.txt original.txt"
+        },
+        {
+          "id": "c",
+          "text": "ln original.txt shortcut.txt"
+        },
+        {
+          "id": "d",
+          "text": "cp original.txt shortcut.txt"
+        }
+      ],
+      "answer": "a",
+      "explanation": "シンボリックリンクは「ln -s 実体 リンク名」の順で作ります。「実体が先、リンク名が後」という引数の順番がポイントです。b は順番が逆で、もっとも混同しやすい間違いです。c は -s がないためシンボリックリンクになりません。d はコピーであり、実体を指し示す「矢印」にはなりません。",
+      "source_refs": [
+        {
+          "section_id": "02-02",
+          "anchor": "実体が先、リンク名が後"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "symlink",
+        "ln"
+      ]
+    },
+    {
+      "id": "q02-03",
+      "question": "シンボリックリンク shortcut.txt が original.txt を指しているとき、削除に関するふるまいの説明として正しいものはどれですか?",
+      "options": [
+        {
+          "id": "a",
+          "text": "original.txt を削除すると、shortcut.txt も自動的に一覧から消える"
+        },
+        {
+          "id": "b",
+          "text": "rm shortcut.txt を実行すると、リンクと一緒に指し先の original.txt も削除される"
+        },
+        {
+          "id": "c",
+          "text": "rm shortcut.txt で消えるのはリンクだけで、実体の original.txt は無事に残る"
+        },
+        {
+          "id": "d",
+          "text": "original.txt を削除しても、shortcut.txt が中身のコピーを保持しているので読み出せる"
+        }
+      ],
+      "answer": "c",
+      "explanation": "リンクを rm で消しても、消えるのはリンクだけで実体は無事です。b はこの逆の勘違いで誤り。a は誤りで、指し先が消えてもリンク自体は ls に残り続け、開こうとするとエラーになる「リンク切れ」状態になります。d も誤りで、リンクは指し先のパスを覚えているだけでデータの実体を持ちません。",
+      "source_refs": [
+        {
+          "section_id": "02-02",
+          "anchor": "リンク切れと削除のふるまい"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "symlink",
+        "rm"
+      ]
+    },
+    {
+      "id": "q02-04",
+      "question": "カレントディレクトリ以下から、拡張子が .log のファイル(ディレクトリは除く)だけを探すコマンドとして最も適切なものはどれですか?",
+      "options": [
+        {
+          "id": "a",
+          "text": "grep -rn \"*.log\" ."
+        },
+        {
+          "id": "b",
+          "text": "find . -type d -name \"*.log\""
+        },
+        {
+          "id": "c",
+          "text": "find \"*.log\" ."
+        },
+        {
+          "id": "d",
+          "text": "find . -type f -name \"*.log\""
+        }
+      ],
+      "answer": "d",
+      "explanation": "find は「find 起点 条件」の語順で、-type f がファイル、-name がファイル名のパターン指定です。b は惜しいですが -type d はディレクトリを意味するため、.log ファイルは見つかりません。c は grep のように「パターンが先」の語順になっており、find では起点を最初に書きます。a の grep は中身を検索するコマンドで、名前で探す用途には使いません。",
+      "source_refs": [
+        {
+          "section_id": "02-03",
+          "anchor": "find 起点 条件"
+        },
+        {
+          "section_id": "02-03",
+          "anchor": "種類で絞りたいときは `-type` を使います"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "find",
+        "search"
+      ]
+    },
+    {
+      "id": "q02-05",
+      "question": "「./app ディレクトリのどこかのファイルに timeout という文字列が書かれているはずだが、どのファイルの何行目かわからない」というとき、最も適切なコマンドはどれですか?",
+      "options": [
+        {
+          "id": "a",
+          "text": "grep -rn \"timeout\" ./app"
+        },
+        {
+          "id": "b",
+          "text": "grep -n \"timeout\" ./app"
+        },
+        {
+          "id": "c",
+          "text": "find ./app -name \"timeout\""
+        },
+        {
+          "id": "d",
+          "text": "find ./app -type f -name \"*.log\""
+        }
+      ],
+      "answer": "a",
+      "explanation": "中身を手がかりに探すのは grep の役目で、-r でディレクトリ配下を再帰検索し、-n で行番号も表示されるため「どのファイルの何行目か」まで一発でわかります。b は惜しいですが -r がないためディレクトリ配下の横断検索になりません。c の find は名前で探すコマンドで、ファイルの中身は調べられません。d はログファイルの一覧が出るだけで、文字列の場所は特定できません。",
+      "source_refs": [
+        {
+          "section_id": "02-04",
+          "anchor": "grep -rn"
+        },
+        {
+          "section_id": "02-04",
+          "anchor": "名前で探すなら `find`、中身で探すなら `grep`"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "grep",
+        "find",
+        "search"
+      ]
+    }
+  ]
+}
