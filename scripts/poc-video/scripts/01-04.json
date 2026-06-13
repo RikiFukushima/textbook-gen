@@ -1,0 +1,43 @@
+{
+  "_comment": "D案「問い駆動型」台本。冒頭の誤解型フック→Vector/Keyword対比→得意パターンの使い分け→パラメータ注意点→問いで締める構成。narrationはずんだもんに渡す話し言葉。",
+  "source": "textbooks/ai-agent-roadmap/curriculums/deep-dive/chapters/01/sections/04-retriever-types.md",
+  "title": "Retrieverの種類と使い分け — Vector / Keyword / Hybrid",
+  "scenes": [
+    {
+      "kind": "cover",
+      "caption": "キーワード検索って\n古くない？",
+      "narration": "キーワード検索って古くない？って思ってるのだ？実はそれ、RAGで一番詰まるパターンなのだ。",
+      "durationSec": 7.24
+    },
+    {
+      "kind": "point",
+      "label": "3種類の違い",
+      "caption": "Vector vs Keyword\nvs Hybrid",
+      "narration": "VectorはクエリをベクトルにしてNode同士の意味の近さで引くのだ。KeywordはBM25で単語の一致で引くのだ。HybridはこのふたつをRRFでまとめて使うのだ。",
+      "durationSec": 11.57,
+      "diagram": "comparison"
+    },
+    {
+      "kind": "point",
+      "label": "得意な質問パターン",
+      "caption": "言い換え vs 固有名詞\nどちらが効く？",
+      "narration": "「動作が重い」と「パフォーマンスが悪い」を同一視したいならVectorなのだ。PostgreSQLやコマンド名を確実に引きたいならKeywordなのだ。両方混ざるならHybridが安全なのだ。",
+      "durationSec": 13.54,
+      "diagram": "versus"
+    },
+    {
+      "kind": "point",
+      "label": "パラメータの勘どころ",
+      "caption": "top_k=5 から\n評価で調整",
+      "narration": "Top-Kを増やすと取りこぼしは減るがノイズも増えるのだ。出発点はtop_k=5前後なのだ。HybridはBM25が日本語で素直に動かないから、トークナイザの設定を確認するのだ。",
+      "durationSec": 13.87,
+      "diagram": "none"
+    },
+    {
+      "kind": "hook",
+      "caption": "続きは本文で。",
+      "narration": "あなたのRAGにはどのRetrieverが合うのだ？評価データで比べる方法は本文で確かめるのだ。",
+      "durationSec": 6.36
+    }
+  ]
+}

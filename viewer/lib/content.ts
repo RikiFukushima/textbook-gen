@@ -65,7 +65,13 @@ export function getListableSlugs(): string[] {
   );
 }
 
-function loadChapter(chaptersDir: string, quizzesDir: string, chapterId: string): Chapter {
+function loadChapter(
+  chaptersDir: string,
+  quizzesDir: string,
+  chapterId: string,
+  slug: string,
+  curriculumId: string,
+): Chapter {
   const chapterDir = path.join(chaptersDir, chapterId);
   const meta = readYaml<ChapterMeta>(path.join(chapterDir, "chapter.yaml"));
 
@@ -77,9 +83,18 @@ function loadChapter(chaptersDir: string, quizzesDir: string, chapterId: string)
   const sections: Section[] = files
     .map((file) => {
       const parsed = matter(fs.readFileSync(path.join(sectionsDir, file), "utf-8"));
+      // MDと同名のMP4が隣に存在すれば videoPath を設定する。
+      // ビューワーは textbooks/ を public/ に静的コピーして配信するため、
+      // パスは /textbooks/... 形式（basePath は Next.js が自動付与）。
+      const stem = file.replace(/\.md$/, "");
+      const mp4Abs = path.join(sectionsDir, `${stem}.mp4`);
+      const videoPath = fs.existsSync(mp4Abs)
+        ? `/textbooks/${slug}/curriculums/${curriculumId}/chapters/${chapterId}/sections/${stem}.mp4`
+        : undefined;
       return {
         frontmatter: parsed.data as SectionFrontmatter,
         content: parsed.content.trim(),
+        videoPath,
       };
     })
     .sort((a, b) => (a.frontmatter.order ?? 0) - (b.frontmatter.order ?? 0));
@@ -119,7 +134,7 @@ function loadCurriculum(slug: string, curriculumId: string): Curriculum | null {
   const chapters = ids
     .map((id) => {
       try {
-        return loadChapter(chaptersDir, quizzesDir, id);
+        return loadChapter(chaptersDir, quizzesDir, id, slug, curriculumId);
       } catch {
         return null;
       }

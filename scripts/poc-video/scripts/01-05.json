@@ -1,0 +1,43 @@
+{
+  "_comment": "D案「問い駆動型」台本。1行APIの誤解→パイプライン構造の提示→Postprocessorの役割→低レベル組み立ての意義→問いで締める構成。narrationはずんだもんに渡す話し言葉。",
+  "source": "textbooks/ai-agent-roadmap/curriculums/deep-dive/chapters/01/sections/05-query-engine.md",
+  "title": "Query Engine の構造 — 検索から生成までの組み立て",
+  "scenes": [
+    {
+      "kind": "cover",
+      "caption": "1行で動くから\n中身は関係ない？",
+      "narration": "as_query_engineの1行の裏に精度を決める3段パイプラインが隠れてるのだ。",
+      "durationSec": 6.37
+    },
+    {
+      "kind": "point",
+      "label": "3段パイプライン",
+      "caption": "検索→後処理→生成\nの順で動く",
+      "narration": "内部はRetriever、Node Postprocessor、Response Synthesizerの順なのだ。どの段で問題が起きてるかを切り分けると解決が早いのだ。",
+      "durationSec": 10.49,
+      "diagram": "flow"
+    },
+    {
+      "kind": "point",
+      "label": "Postprocessorの定石",
+      "caption": "広く拾って\n厳しく絞る",
+      "narration": "top_kを10で広く拾い、similarity_cutoffで低品質なNodeを捨てるのだ。これだけでハルシネーションが減るのだ。",
+      "durationSec": 8.01,
+      "diagram": "comparison"
+    },
+    {
+      "kind": "point",
+      "label": "高レベル vs 低レベル",
+      "caption": "APIは出発点、\n本番は組み立てる",
+      "narration": "本番品質を出すにはRetrieverQueryEngineで部品を明示的に組み立て、source_nodesを必ずUIに出すのだ。",
+      "durationSec": 8.14,
+      "diagram": "versus"
+    },
+    {
+      "kind": "hook",
+      "caption": "続きは本文で。",
+      "narration": "あなたのQuery EngineにPostprocessorは入ってるのだ？詳しい組み立て方は本文で確かめるのだ。",
+      "durationSec": 7.30
+    }
+  ]
+}

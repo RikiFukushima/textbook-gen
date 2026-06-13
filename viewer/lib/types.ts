@@ -78,6 +78,8 @@ export interface SectionFrontmatter {
 export interface Section {
   frontmatter: SectionFrontmatter;
   content: string;
+  /** セクションに対応するショート動画のパス（ビューワー公開ルートからの相対パス）。動画がない場合は undefined。 */
+  videoPath?: string;
 }
 
 export interface QuizOption {
