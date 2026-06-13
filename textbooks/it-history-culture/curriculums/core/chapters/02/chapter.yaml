@@ -1,0 +1,12 @@
+id: "02"
+title: プログラミング言語・名前の由来と誕生秘話
+estimated_minutes: 16
+learning_objectives:
+  - 主要言語(Python / Java / JavaScript / C / Go)の名前の由来と誕生背景を説明できる
+  - Java と JavaScript が別物である理由を歴史から説明できる
+  - C を起点とする言語の系譜を大まかに説明できる
+section_order:
+  - "02-01"
+  - "02-02"
+  - "02-03"
+  - "02-04"
