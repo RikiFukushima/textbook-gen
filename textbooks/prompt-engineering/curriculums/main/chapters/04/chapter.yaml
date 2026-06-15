@@ -1,0 +1,12 @@
+id: "04"
+title: 推論を引き出すテクニック
+estimated_minutes: 20
+learning_objectives:
+  - Zero-shot と Few-shot を使い分け、効果的な例示を設計できる
+  - Chain-of-Thought が精度を上げる理由と限界を説明できる
+  - タスク分解・多数決など、難問に対する戦略を選択できる
+section_order:
+  - "04-01"
+  - "04-02"
+  - "04-03"
+  - "04-04"
