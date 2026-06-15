@@ -4,7 +4,7 @@ chapter_id: "04"
 title: Zero-shot と Few-shot — 例示が効く理由・効かない理由
 order: 1
 estimated_minutes: 4
-estimated_chars: 1850
+estimated_chars: 1170
 learning_points:
   - Zero-shot(例なし)と Few-shot(例つき)の違いと、それぞれの向き不向き
   - 例示が効くのは「形式や判断基準を言葉で説明しにくいとき」だという原理

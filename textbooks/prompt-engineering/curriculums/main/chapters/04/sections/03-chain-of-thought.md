@@ -4,7 +4,7 @@ chapter_id: "04"
 title: Chain-of-Thought — 思考を外に出すとなぜ精度が上がるのか
 order: 3
 estimated_minutes: 4
-estimated_chars: 1880
+estimated_chars: 1173
 learning_points:
   - 「順を追って考えて」と促すと、途中計算を出力させることで精度が上がる仕組み
   - Zero-shot CoT と Few-shot CoT の使い分け

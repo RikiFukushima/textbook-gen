@@ -4,7 +4,7 @@ chapter_id: "04"
 title: 良い例示の設計 — 数・多様性・順序が出力を左右する
 order: 2
 estimated_minutes: 4
-estimated_chars: 1820
+estimated_chars: 1007
 learning_points:
   - 例の「数」は多ければ良いわけではなく、効果が頭打ちになる
   - 例の「多様性」がカバー範囲を決め、偏りが出力の偏りを生む
