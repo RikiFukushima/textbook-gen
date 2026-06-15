@@ -1,0 +1,17 @@
+id: main
+title: プロンプトエンジニアリング入門
+description: プロンプトが出力を左右する理由を起点に、構造設計・出力制御・推論誘導・評価駆動の反復までを体系的に学ぶ。全 AI 利用者の横断スキルとしての「プロンプトを書く技芸」を中級レベルで身につける。
+order: 1
+estimated_hours: 2
+target_audience:
+  level: 中級
+  prerequisites:
+    - LLM(ChatGPT / Claude など)をチャットとして日常的に使ったことがある
+    - 特定のプログラミング言語の知識は不要
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"
+  - "06"

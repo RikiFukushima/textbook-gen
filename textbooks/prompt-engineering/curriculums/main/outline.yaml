@@ -1,0 +1,153 @@
+title: プロンプトエンジニアリング入門
+target_audience:
+  level: 中級
+  prerequisites:
+    - LLM(ChatGPT / Claude など)をチャットとして日常的に使ったことがある
+    - 特定のプログラミング言語の知識は不要
+style:
+  tone: ですます調・実務寄り
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: なぜプロンプトで結果が変わるのか
+    estimated_minutes: 20
+    learning_objectives:
+      - LLM が確率的に次トークンを選ぶ仕組みから、プロンプトが出力を条件づける理由を説明できる
+      - 「良いプロンプト」が曖昧さを減らして分布を絞り込む行為だと理解する
+      - プロンプトエンジニアリングで解ける問題と解けない問題の境界を区別できる
+    sections:
+      - id: "01-01"
+        title: プロンプトは出力の確率分布を条件づけている — なぜ言い方で答えが変わるのか
+        estimated_minutes: 4
+      - id: "01-02"
+        title: 曖昧さこそが敵 — モデルは「察してくれない」を出発点にする
+        estimated_minutes: 4
+      - id: "01-03"
+        title: プロンプトエンジニアリングとは何で、何ではないか — 魔法の呪文ではなく仕様記述
+        estimated_minutes: 4
+      - id: "01-04"
+        title: 解ける問題・解けない問題 — プロンプトで埋まらないギャップ(知識・計算・最新情報)
+        estimated_minutes: 4
+    diagrams:
+      - purpose: プロンプトが次トークンの確率分布を絞り込む様子
+        type: mermaid
+        section: "01-01"
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "02"
+    title: プロンプトの構造を設計する
+    estimated_minutes: 20
+    learning_objectives:
+      - 指示・文脈・入力・出力形式の4要素にプロンプトを分解して設計できる
+      - 役割付与(システムプロンプト/ペルソナ)が出力に与える効果を説明できる
+      - 区切り記号と制約の明示で曖昧さを排除できる
+    sections:
+      - id: "02-01"
+        title: プロンプトの4要素 — 指示 / 文脈 / 入力 / 出力形式に分解する
+        estimated_minutes: 4
+      - id: "02-02"
+        title: 役割とペルソナ — 「あなたは〇〇です」がなぜ効くのか、いつ効かないのか
+        estimated_minutes: 4
+      - id: "02-03"
+        title: 区切りと構造化 — デリミタ・見出し・タグで入力境界を明示する
+        estimated_minutes: 4
+      - id: "02-04"
+        title: 制約と禁止の書き方 — 「やらないこと」を指定する技術
+        estimated_minutes: 4
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "03"
+    title: 出力をコントロールする
+    estimated_minutes: 20
+    learning_objectives:
+      - 出力形式(JSON / 表 / 箇条書き)を指定して後工程で扱いやすくできる
+      - トーン・長さ・粒度を意図通りに制御できる
+      - 出力が崩れたときのリカバリ設計ができる
+    sections:
+      - id: "03-01"
+        title: 出力形式を指定する — 自然文から JSON・表・箇条書きへ
+        estimated_minutes: 4
+      - id: "03-02"
+        title: 構造化出力とスキーマ — 機械が読める出力を安定させる
+        estimated_minutes: 4
+      - id: "03-03"
+        title: トーン・長さ・粒度の制御 — 読み手に合わせて出力を調律する
+        estimated_minutes: 4
+      - id: "03-04"
+        title: 出力が崩れたとき — 検証・再指示・フォールバックの設計
+        estimated_minutes: 4
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "04"
+    title: 推論を引き出すテクニック
+    estimated_minutes: 20
+    learning_objectives:
+      - Zero-shot と Few-shot を使い分け、効果的な例示を設計できる
+      - Chain-of-Thought が精度を上げる理由と限界を説明できる
+      - タスク分解・多数決など、難問に対する戦略を選択できる
+    sections:
+      - id: "04-01"
+        title: Zero-shot と Few-shot — 例示が効く理由・効かない理由
+        estimated_minutes: 4
+      - id: "04-02"
+        title: 良い例示の設計 — 数・多様性・順序が出力を左右する
+        estimated_minutes: 4
+      - id: "04-03"
+        title: Chain-of-Thought — 思考を外に出すとなぜ精度が上がるのか
+        estimated_minutes: 4
+      - id: "04-04"
+        title: タスク分解と多数決 — 難問を分けて解く / ばらつきを平均する
+        estimated_minutes: 4
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "05"
+    title: 反復して改善する — 評価駆動のプロンプト開発
+    estimated_minutes: 20
+    learning_objectives:
+      - 失敗した出力を観察し、原因を切り分けて改善できる
+      - 1要素ずつ変える反復で因果を特定できる
+      - プロンプトの良し悪しを測る評価の基準を作れる
+    sections:
+      - id: "05-01"
+        title: プロンプトは一発では決まらない — 観察 → 仮説 → 修正のループ
+        estimated_minutes: 4
+      - id: "05-02"
+        title: 一度に1つだけ変える — 因果を特定するための反復作法
+        estimated_minutes: 4
+      - id: "05-03"
+        title: 評価基準を作る — 何をもって「良いプロンプト」とするか
+        estimated_minutes: 4
+      - id: "05-04"
+        title: プロンプトを資産として管理する — バージョン・テスト・使い回し
+        estimated_minutes: 4
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "06"
+    title: アンチパターンと実務への接続
+    estimated_minutes: 20
+    learning_objectives:
+      - 典型的な失敗プロンプト(過剰指示・矛盾・丸投げ)を見抜いて回避できる
+      - プロンプトインジェクションの基本リスクと初歩的な対策を説明できる
+      - 単発のプロンプトからアプリ・エージェントへ橋渡しする視点を持つ
+    sections:
+      - id: "06-01"
+        title: アンチパターン集 — 過剰指示・矛盾・丸投げ・呪文信仰
+        estimated_minutes: 4
+      - id: "06-02"
+        title: プロンプトインジェクション入門 — 信頼できない入力が指示を乗っ取る
+        estimated_minutes: 4
+      - id: "06-03"
+        title: 単発から仕組みへ — アプリ・エージェントの中でプロンプトはどう使われるか
+        estimated_minutes: 4
+      - id: "06-04"
+        title: チームで運用する — プロンプトを共有し改善し続けるために
+        estimated_minutes: 4
+    quiz:
+      count: 6
+      difficulty: medium
