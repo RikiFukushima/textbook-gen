@@ -120,7 +120,7 @@ export default function QuizViewer({
         </span>
       </header>
 
-      <div className="flex flex-1 items-start justify-center px-5 py-8">
+      <div className="flex flex-1 items-start justify-center px-5 pt-8 pb-28">
         <div className="w-full max-w-2xl">
           <h2 className="text-lg font-bold leading-relaxed">{q.question}</h2>
 
