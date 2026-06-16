@@ -6,6 +6,7 @@
   "scripts": {
     "sync": "tsx scripts/sync.ts",
     "init-textbook": "tsx scripts/init-textbook.ts",
+    "count-chars": "node scripts/section-chars.mjs",
     "gen-root": "tsx scripts/poc-video/gen-root.ts"
   },
   "devDependencies": {

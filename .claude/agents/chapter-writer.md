@@ -39,20 +39,15 @@ textbooks/{slug}/curriculums/{curriculum-id}/chapters/{chapter-id}/
    - 本文は textbook-style §4.2 の 3 層構造(「このセクションで学ぶこと」→ 概念 → 具体例 → 注意点 → 「まとめ」)。
    - 図解は outline の `diagrams[]` を参考に、`section` 指定がある節では Mermaid を入れる。
 4. **書き終えたら字数を実測**して frontmatter を確定する(全 section):
-   - 字数測定は次のワンライナーで地の文+見出しのみ抽出して数える(frontmatter・コード・Mermaid を除外):
+   - 字数測定は **必ず** 専用スクリプトを使う(textbook-style §4.3 の基準=frontmatter・コード・Mermaid 除外を決定論的に実装したもの)。**目分量や `wc -m`(全文)で代用しない**:
 
      ```bash
-     awk '
-       /^---$/ { fm = !fm; next }
-       fm { next }
-       /^```/ { code = !code; next }
-       code { next }
-       { print }
-     ' <FILE> | tr -d '[:space:]' | wc -m
+     npm run count-chars -- <FILE>            # 1 ファイル: 「<字数>\t<パス>」を出力
+     npm run count-chars -- chapters/<ch>/sections/*.md   # 章まとめて測定(末尾に TOTAL)
      ```
 
    - 下限(通常 1200 字 / コード多めは 800 字 / 概念導入は 500 字)を満たさない場合は **加筆して再測定**。
-   - 実測値を frontmatter の `estimated_chars` に入れる(乖離禁止)。
+   - **スクリプトが出した値をそのまま** frontmatter の `estimated_chars` に入れる(乖離禁止)。`estimated_chars` は frontmatter・コードブロック・Mermaid を **含まない** 地の文+見出しのみの値であることに注意(ファイル全体の文字数ではない)。
 5. **完了サマリを返す**(親の文脈を汚さないよう要点のみ):
    - 生成した `chapter.yaml` のパス
    - 生成した section ファイルの一覧と、それぞれの実測 `estimated_chars`
