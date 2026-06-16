@@ -4,7 +4,7 @@ chapter_id: "04"
 title: 生成AIがもたらした衝撃
 order: 4
 estimated_minutes: 4
-estimated_chars: 2932
+estimated_chars: 1054
 learning_points:
   - これまでのAIが「見分ける」のに対し、生成AIは「作り出す」こと
   - 文章・画像・音声などさまざまなものを生成AIが作れること

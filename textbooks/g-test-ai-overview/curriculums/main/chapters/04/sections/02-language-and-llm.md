@@ -4,7 +4,7 @@ chapter_id: "04"
 title: 言葉を「あつかう」AIと大規模言語モデル
 order: 2
 estimated_minutes: 5
-estimated_chars: 2952
+estimated_chars: 1052
 learning_points:
   - 自然言語処理が「人間の言葉をAIが扱う」分野だということ
   - 大規模言語モデル(LLM)が「次に来る言葉」を予想して文章を作っていること

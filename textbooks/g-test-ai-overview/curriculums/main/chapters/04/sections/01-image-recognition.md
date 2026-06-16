@@ -4,7 +4,7 @@ chapter_id: "04"
 title: 画像を「見る」AI — 画像認識
 order: 1
 estimated_minutes: 4
-estimated_chars: 2957
+estimated_chars: 1045
 learning_points:
   - 画像認識が「画像に何が写っているか」を当てる技術であること
   - 画像認識・物体検出・顔認証など身近な使われ方
