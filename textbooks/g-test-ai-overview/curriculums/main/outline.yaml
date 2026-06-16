@@ -1,0 +1,184 @@
+title: G検定で見渡す AIの世界
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites:
+    - スマホやパソコンで日常的にアプリを使っている
+    - 数式やプログラミングの知識は不要
+  estimated_hours: 1.5
+style:
+  tone: ですます調・やさしく丁寧
+  code_examples: false
+  diagram_default: mermaid
+# この教材は G検定の「合格対策」ではなく、G検定が扱うテーマを広く浅く見渡す「地図」です。
+# 深掘りは試験勉強や AI への質問に委ねる前提で、全体像と重要概念だけを押さえます(PHILOSOPHY §1・§2)。
+chapters:
+  - id: "01"
+    title: AIってそもそも何だろう
+    estimated_minutes: 15
+    learning_objectives:
+      - 身のまわりのどこに AI が使われているかを例として挙げられる
+      - AI・機械学習・ディープラーニングの包含関係を説明できる
+      - AI が3度のブームを経て今に至ったという大きな流れをイメージできる
+    sections:
+      - id: "01-01"
+        title: 私たちの日常は、もう AI だらけ
+        estimated_minutes: 3
+      - id: "01-02"
+        title: AI・機械学習・ディープラーニングの関係を整理する
+        estimated_minutes: 4
+      - id: "01-03"
+        title: AIブームの歴史 — 3度の波と冬の時代
+        estimated_minutes: 4
+      - id: "01-04"
+        title: 「強いAI」と「弱いAI」、そしてシンギュラリティ
+        estimated_minutes: 4
+    diagrams:
+      - purpose: AI ⊃ 機械学習 ⊃ ディープラーニング の包含関係
+        type: mermaid
+        section: "01-02"
+      - purpose: 3度のAIブームと冬の時代の年表的な流れ
+        type: mermaid
+        section: "01-03"
+    quiz:
+      count: 5
+      difficulty: easy
+
+  - id: "02"
+    title: 機械学習という考え方
+    estimated_minutes: 16
+    learning_objectives:
+      - 「ルールを書く」発想と「データから学ぶ」発想の違いを説明できる
+      - 教師あり学習・教師なし学習・強化学習の3つを区別できる
+      - 過学習と汎化という言葉が何を指すかをイメージできる
+    sections:
+      - id: "02-01"
+        title: ルールを書く時代から、データから学ぶ時代へ
+        estimated_minutes: 3
+      - id: "02-02"
+        title: 3つの学び方 — 教師あり・教師なし・強化学習
+        estimated_minutes: 5
+      - id: "02-03"
+        title: 「賢くなった」をどう測るか — 訓練・評価・過学習
+        estimated_minutes: 4
+      - id: "02-04"
+        title: 代表的なアルゴリズムをざっくり地図にする
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 教師あり・教師なし・強化学習の使い分けの分岐
+        type: mermaid
+        section: "02-02"
+      - purpose: 訓練データと評価データの分け方・過学習のイメージ
+        type: mermaid
+        section: "02-03"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "03"
+    title: ディープラーニングの正体
+    estimated_minutes: 16
+    learning_objectives:
+      - ニューラルネットワークが層の重なりでできていることを説明できる
+      - ディープラーニングが特徴量を自動で見つける点が強みだと理解する
+      - CNN・RNN・Transformer がそれぞれ何に向くかをざっくり言える
+    sections:
+      - id: "03-01"
+        title: 脳をまねた仕組み — ニューラルネットワーク
+        estimated_minutes: 4
+      - id: "03-02"
+        title: ディープラーニングが急に強くなった理由
+        estimated_minutes: 4
+      - id: "03-03"
+        title: どうやって学ぶのか — 勾配降下法をなんとなく
+        estimated_minutes: 4
+      - id: "03-04"
+        title: 用途で姿を変えるモデルたち(CNN・RNN・Transformer)
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 入力層・隠れ層・出力層が重なるニューラルネットワークの構造
+        type: mermaid
+        section: "03-01"
+      - purpose: 誤差を小さくする方向にパラメータを調整する勾配降下のイメージ
+        type: mermaid
+        section: "03-03"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "04"
+    title: AIに何ができるようになったか
+    estimated_minutes: 16
+    learning_objectives:
+      - 画像認識・自然言語処理など代表的な応用分野を挙げられる
+      - 大規模言語モデル(LLM)が何をしているかをざっくり説明できる
+      - 生成AIがこれまでの AI と何が違うのかをイメージできる
+    sections:
+      - id: "04-01"
+        title: 画像を「見る」AI — 画像認識
+        estimated_minutes: 4
+      - id: "04-02"
+        title: 言葉を「あつかう」AIと大規模言語モデル
+        estimated_minutes: 5
+      - id: "04-03"
+        title: 音声・その他のモダリティ
+        estimated_minutes: 3
+      - id: "04-04"
+        title: 生成AIがもたらした衝撃
+        estimated_minutes: 4
+    diagrams:
+      - purpose: AIが扱う主なモダリティ(画像・言語・音声)の全体像
+        type: mermaid
+        section: "04-01"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "05"
+    title: AIを社会で動かす
+    estimated_minutes: 12
+    learning_objectives:
+      - AIプロジェクトが企画から運用までどう進むかの流れをイメージできる
+      - AI にとってデータがなぜ重要かを説明できる
+      - 産業の現場で AI がどう使われているか例を挙げられる
+    sections:
+      - id: "05-01"
+        title: AIプロジェクトはどう進むのか
+        estimated_minutes: 4
+      - id: "05-02"
+        title: AIの燃料はデータ — 集め方と落とし穴
+        estimated_minutes: 4
+      - id: "05-03"
+        title: 産業の現場での AI 活用例
+        estimated_minutes: 4
+    diagrams:
+      - purpose: AIプロジェクトの流れ(企画→データ→学習→評価→運用)
+        type: mermaid
+        section: "05-01"
+    quiz:
+      count: 5
+      difficulty: easy
+
+  - id: "06"
+    title: AIと社会のこれから — 倫理・法律・ガバナンス
+    estimated_minutes: 12
+    learning_objectives:
+      - AI のバイアスや公平性がなぜ問題になるかを説明できる
+      - AI をめぐる著作権・個人情報・規制の論点を挙げられる
+      - AIガバナンスという考え方が何を目指すかをイメージできる
+    sections:
+      - id: "06-01"
+        title: AIが抱える倫理の問題 — バイアス・公平性・透明性
+        estimated_minutes: 4
+      - id: "06-02"
+        title: AIと法律 — 著作権・個人情報・規制の動き
+        estimated_minutes: 4
+      - id: "06-03"
+        title: みんなで使いこなすための AIガバナンス
+        estimated_minutes: 4
+    diagrams:
+      - purpose: AIをめぐる倫理・法律・ガバナンスの論点マップ
+        type: mermaid
+        section: "06-03"
+    quiz:
+      count: 5
+      difficulty: easy
