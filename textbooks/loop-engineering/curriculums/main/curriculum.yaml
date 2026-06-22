@@ -1,0 +1,17 @@
+id: main
+title: ループエンジニアリングの基礎
+description: AI エージェントに毎回プロンプトする代わりに、エージェントを自律的に駆動する「ループ(システム)」を設計する技術を学ぶ。ループの解剖学、メモリ/状態の永続化、maker-checker による検証分離、多層の停止条件、構成部品と落とし穴までを一通り扱う。
+order: 1
+estimated_hours: 2
+target_audience:
+  level: 中級
+  prerequisites:
+    - プロンプト/コンテキストの基礎を知っている(prompt-engineering 相当)
+    - Claude Code や何らかの AI エージェントを触ったことがある
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"
+  - "06"
