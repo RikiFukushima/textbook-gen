@@ -1,0 +1,175 @@
+title: ループエンジニアリングの基礎
+target_audience:
+  level: 中級
+  prerequisites:
+    - プロンプト/コンテキストの基礎を知っている(prompt-engineering 相当)
+    - Claude Code や何らかの AI エージェントを触ったことがある
+    - エージェントが「ツールを使って動く」イメージを持っている(agent-harness-engineering 相当があると理想)
+  estimated_hours: 2
+style:
+  tone: ですます調・実務寄り
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: プロンプトからループへ — ループエンジニアリングとは何か
+    estimated_minutes: 20
+    learning_objectives:
+      - ループエンジニアリングを「自分でプロンプトする代わりに、エージェントを駆動するループを設計すること」と定義できる
+      - prompt → context → tools → loops という技術の系譜の中にループエンジニアリングを位置づけられる
+      - 「自分の仕事はループを書くこと」という発想がなぜ生産性を変えるかを説明できる
+    sections:
+      - id: "01-01"
+        title: 「もうプロンプトしない」— Boris Cherny の一言が指すもの
+        estimated_minutes: 5
+      - id: "01-02"
+        title: プロンプトエンジニアリングの限界 — 一問一答は人間がボトルネック
+        estimated_minutes: 5
+      - id: "01-03"
+        title: prompt → context → tools → loops の系譜
+        estimated_minutes: 5
+      - id: "01-04"
+        title: ループエンジニアリングの定義 — システムを設計する側に回る
+        estimated_minutes: 5
+    diagrams:
+      - purpose: prompt/context/tools/loops の進化と、人間の関与位置の変化を示す図
+        type: mermaid
+        section: "01-03"
+    quiz:
+      count: 5
+      difficulty: medium
+  - id: "02"
+    title: ループの解剖学 — 発見・委譲・実行・検証・記憶・決定
+    estimated_minutes: 20
+    learning_objectives:
+      - 1 回のループが「発見→委譲→実行→検証→記憶→次アクション決定」で構成されることを説明できる
+      - 各ステップが欠けたときに何が壊れるかを対応づけられる
+      - 良いループと悪いループを構成要素の観点で見分けられる
+    sections:
+      - id: "02-01"
+        title: ループの全体像 — 6 ステップが回り続ける
+        estimated_minutes: 5
+      - id: "02-02"
+        title: 発見とトリアージ — 「次に何をやるか」を機械が見つける
+        estimated_minutes: 5
+      - id: "02-03"
+        title: 委譲と実行 — サブエージェントに仕事を渡す
+        estimated_minutes: 5
+      - id: "02-04"
+        title: 検証・記憶・決定 — ループを閉じる 3 つの仕事
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 発見→委譲→実行→検証→記憶→決定の循環を示すループ図
+        type: mermaid
+        section: "02-01"
+    quiz:
+      count: 5
+      difficulty: medium
+  - id: "03"
+    title: 記憶と状態 — ループが「ゼロから」始めないために
+    estimated_minutes: 20
+    learning_objectives:
+      - モデルが実行間で記憶を持たないため、状態を会話の外に置く必要があることを説明できる
+      - メモリ/状態ファイル(Markdown・課題ボード等)に何を書くべきかを列挙できる
+      - 状態を持たないループが陥る「毎回ゼロから」問題を回避する設計ができる
+    sections:
+      - id: "03-01"
+        title: モデルは忘れる — 会話が切れれば状態も消える
+        estimated_minutes: 5
+      - id: "03-02"
+        title: 状態はディスクに置く — メモリファイルという発想
+        estimated_minutes: 5
+      - id: "03-03"
+        title: 何を記録するか — 完了・残タスク・決定の根拠
+        estimated_minutes: 5
+      - id: "03-04"
+        title: 状態がないループの末路 — 同じ仕事を無限に繰り返す
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 会話コンテキストと外部メモリ(ディスク/ボード)の関係を示す図
+        type: mermaid
+        section: "03-02"
+    quiz:
+      count: 5
+      difficulty: medium
+  - id: "04"
+    title: maker-checker — 作る側と検証する側を分ける
+    estimated_minutes: 20
+    learning_objectives:
+      - 「作るエージェント」と「検証するエージェント」を分離する maker-checker パターンを説明できる
+      - 同じエージェントに自分の成果物を採点させてはいけない理由を説明できる
+      - サブエージェントを別コンテキストに置くことで検証が信頼できる理由を説明できる
+    sections:
+      - id: "04-01"
+        title: 自分の宿題は自分で採点できない — 検証分離の原則
+        estimated_minutes: 5
+      - id: "04-02"
+        title: maker と checker — 役割を分けるサブエージェント設計
+        estimated_minutes: 5
+      - id: "04-03"
+        title: 別コンテキストが効く理由 — 文脈の汚染を避ける
+        estimated_minutes: 5
+      - id: "04-04"
+        title: 敵対的レビュー — checker を厳しくして「完了」を意味あるものに
+        estimated_minutes: 5
+    diagrams:
+      - purpose: maker エージェントと checker エージェントが別コンテキストで往復する関係図
+        type: mermaid
+        section: "04-02"
+    quiz:
+      count: 5
+      difficulty: medium
+  - id: "05"
+    title: 停止条件とゴール設計 — 無限ループで破産しないために
+    estimated_minutes: 20
+    learning_objectives:
+      - 検証可能な終了条件を持つゴールと、持たないゴールを見分けられる
+      - 反復上限・コスト予算・進捗なし検出・ゴール達成チェックを多層で組み合わせられる
+      - 人間へのエスカレーション(Human-in-the-Loop)をどこに置くか判断できる
+    sections:
+      - id: "05-01"
+        title: 「コードを良くして」は悪いゴール — 終了条件が要る
+        estimated_minutes: 5
+      - id: "05-02"
+        title: 多層の停止条件 — 反復上限・コスト予算・進捗なし検出
+        estimated_minutes: 5
+      - id: "05-03"
+        title: ゴール達成チェック — /goal と検証可能な「完了」
+        estimated_minutes: 5
+      - id: "05-04"
+        title: 人間に戻す — エスカレーションの設計
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 多層の停止条件(上限/予算/進捗/ゴール/人間)が重なって暴走を止める図
+        type: mermaid
+        section: "05-02"
+    quiz:
+      count: 6
+      difficulty: medium
+  - id: "06"
+    title: ループを組み立てる — 構成部品と落とし穴
+    estimated_minutes: 20
+    learning_objectives:
+      - スケジュール実行・git worktree・skills・MCP がループのどの役割を担うかを説明できる
+      - メモリなし/分離なし/停止条件なしという 3 大失敗を回避できる
+      - 小さな実例から、自分の仕事に最初のループを設計できる
+    sections:
+      - id: "06-01"
+        title: ループの構成部品 — スケジュール・worktree・skills・MCP
+        estimated_minutes: 5
+      - id: "06-02"
+        title: 3 大失敗 — メモリなし・分離なし・停止条件なし
+        estimated_minutes: 5
+      - id: "06-03"
+        title: 最初のループを書く — 「テストを通す」ループの組み立て
+        estimated_minutes: 5
+      - id: "06-04"
+        title: ループエンジニアとして働く — 設計者へのマインドシフト
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 構成部品(スケジュール/worktree/skills/MCP/サブエージェント/メモリ)が1つのループに組み上がる全体像
+        type: mermaid
+        section: "06-01"
+    quiz:
+      count: 6
+      difficulty: medium
