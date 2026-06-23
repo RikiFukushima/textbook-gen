@@ -33,6 +33,11 @@ export default async function CurriculumPage({
     (n, c) => n + (c.quiz?.questions.length ?? 0),
     0
   );
+  // このカリキュラム内に動画を持つ章があれば、教材の動画フィードへの導線を出す
+  const curVideoCount = cur.chapters.reduce(
+    (n, c) => n + c.sections.filter((s) => s.videoPath).length,
+    0
+  );
 
   return (
     <main className="mx-auto max-w-3xl px-5 py-10">
@@ -49,6 +54,14 @@ export default async function CurriculumPage({
           sectionIds={allSectionIds}
           totalQuiz={totalQuiz}
         />
+        {curVideoCount > 0 && (
+          <Link
+            href={`/textbooks/${slug}/videos`}
+            className="btn-accent mt-4 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold"
+          >
+            ▶ 動画で見る（{curVideoCount} 本）
+          </Link>
+        )}
       </header>
 
       <ol className="space-y-3">

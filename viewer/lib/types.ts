@@ -126,3 +126,16 @@ export interface TextbookSummary {
   sectionCount: number;
   estimatedHours?: number;
 }
+
+/**
+ * 教材横断の動画フィード用に、1 章分の動画付きセクションをまとめたグループ。
+ * カリキュラム/章をまたいだ連続再生と章フィルタの両方に使う。
+ */
+export interface VideoChapterGroup {
+  curriculumId: string;
+  chapterId: string;
+  chapterNumber: number;
+  chapterTitle: string;
+  /** videoPath を持つセクションだけ(order 昇順) */
+  sections: Section[];
+}

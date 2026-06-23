@@ -13,6 +13,7 @@ import type {
   SectionFrontmatter,
   Textbook,
   TextbookSummary,
+  VideoChapterGroup,
 } from "./types";
 
 const TEXTBOOKS_ROOT = path.resolve(process.cwd(), "..", "textbooks");
@@ -166,6 +167,37 @@ export function getTextbook(slug: string): Textbook | null {
     .sort((a, b) => (a.meta.order ?? 0) - (b.meta.order ?? 0));
 
   return { meta, curriculums };
+}
+
+/**
+ * 教材を横断して「動画付きセクションを持つ章」だけを集約する。
+ * 動画フィード(`/textbooks/{slug}/videos`)の章フィルタに使う。
+ * カリキュラム → 章の並び順を保ったまま、動画のない章は除外する。
+ */
+export function getTextbookVideoChapters(slug: string): VideoChapterGroup[] {
+  const tb = getTextbook(slug);
+  if (!tb) return [];
+
+  const groups: VideoChapterGroup[] = [];
+  for (const cur of tb.curriculums) {
+    for (const ch of cur.chapters) {
+      const videoSections = ch.sections.filter((s) => s.videoPath);
+      if (videoSections.length === 0) continue;
+      groups.push({
+        curriculumId: cur.meta.id,
+        chapterId: ch.meta.id,
+        chapterNumber: Number(ch.meta.id),
+        chapterTitle: ch.meta.title,
+        sections: videoSections,
+      });
+    }
+  }
+  return groups;
+}
+
+/** 動画付き教材(動画フィードを生成する対象)の slug 一覧 */
+export function getSlugsWithVideos(): string[] {
+  return getVisibleSlugs().filter((slug) => getTextbookVideoChapters(slug).length > 0);
 }
 
 /** 一覧用サマリ */
