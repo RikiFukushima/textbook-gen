@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getTextbook, getVisibleSlugs } from "@/lib/content";
+import { getTextbook, getVisibleSlugs, getTextbookVideoChapters } from "@/lib/content";
 import BackLink from "@/components/BackLink";
 
 export function generateStaticParams() {
@@ -16,6 +16,9 @@ export default async function TextbookPage({
   const tb = getTextbook(slug);
   if (!tb) notFound();
 
+  const videoChapters = getTextbookVideoChapters(slug);
+  const videoCount = videoChapters.reduce((n, g) => n + g.sections.length, 0);
+
   return (
     <main className="mx-auto max-w-3xl px-5 py-10">
       <BackLink href="/">教材一覧</BackLink>
@@ -24,6 +27,14 @@ export default async function TextbookPage({
         <h1 className="text-grad inline-block text-3xl font-bold">{tb.meta.title}</h1>
         {tb.meta.description && (
           <p className="mt-2 text-sm text-[var(--muted)]">{tb.meta.description}</p>
+        )}
+        {videoCount > 0 && (
+          <Link
+            href={`/textbooks/${slug}/videos`}
+            className="btn-accent mt-4 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold"
+          >
+            ▶ 動画で見る（{videoCount} 本）
+          </Link>
         )}
       </header>
 
