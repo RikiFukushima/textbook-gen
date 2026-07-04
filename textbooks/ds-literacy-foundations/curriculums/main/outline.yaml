@@ -1,0 +1,194 @@
+title: DS検定で見渡す データ分析の地図
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites:
+    - スマホやパソコンで日常的にアプリを使っている
+    - 高校数学以上の知識は不要(四則演算と割合がわかればOK)
+  estimated_hours: 1.5
+style:
+  tone: ですます調・やさしく丁寧
+  code_examples: false
+  diagram_default: mermaid
+# この教材は DS検定★(リテラシーレベル)の「合格対策」ではなく、DS検定が扱うテーマを
+# 広く浅く見渡す「地図」です。統計・前処理・機械学習・ビジネス活用という
+# データ分析の考え方を「なんとなくわかる」まで持っていくことをゴールにします(PHILOSOPHY §1・§2)。
+chapters:
+  - id: "01"
+    title: データ分析への招待 — データサイエンティストって何者?
+    estimated_minutes: 15
+    learning_objectives:
+      - 身のまわりのどこでデータ分析が使われているかを例として挙げられる
+      - データサイエンティストに必要な3つのスキル(DS力・DE力・BIZ力)を説明できる
+      - データ分析プロジェクトが課題設定から始まる流れをイメージできる
+    sections:
+      - id: "01-01"
+        title: 私たちの毎日は、データ分析に囲まれている
+        estimated_minutes: 3
+      - id: "01-02"
+        title: データサイエンティストの3つの力 — DS力・DE力・BIZ力
+        estimated_minutes: 4
+      - id: "01-03"
+        title: データ分析は「課題」から始まる — 分析プロジェクトの流れ
+        estimated_minutes: 4
+      - id: "01-04"
+        title: DS検定という地図 — この教材の歩き方
+        estimated_minutes: 3
+    diagrams:
+      - purpose: DS力・DE力・BIZ力の3つのスキルが重なる全体像
+        type: mermaid
+        section: "01-02"
+      - purpose: データ分析プロジェクトの流れ(課題設定→データ収集→分析→施策→振り返り)
+        type: mermaid
+        section: "01-03"
+    quiz:
+      count: 5
+      difficulty: easy
+
+  - id: "02"
+    title: データを要約する — 統計の第一歩
+    estimated_minutes: 16
+    learning_objectives:
+      - 平均値・中央値・最頻値の違いと使い分けを説明できる
+      - 分散・標準偏差が「ばらつき」を表すことをイメージできる
+      - ヒストグラムでデータの分布のかたちを読み取れる
+    sections:
+      - id: "02-01"
+        title: 「代表値」でデータをひとことで語る — 平均・中央値・最頻値
+        estimated_minutes: 4
+      - id: "02-02"
+        title: 平均だけでは見えないもの — ばらつきと標準偏差
+        estimated_minutes: 4
+      - id: "02-03"
+        title: データの「かたち」を見る — ヒストグラムと分布
+        estimated_minutes: 4
+      - id: "02-04"
+        title: 正規分布と偏差値 — 世界でいちばん有名な分布
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 平均値・中央値・最頻値が分布のどこに位置するかのイメージ
+        type: mermaid
+        section: "02-01"
+      - purpose: 同じ平均でもばらつきが違う2つの分布の比較
+        type: mermaid
+        section: "02-02"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "03"
+    title: データを読み解く — 相関・因果・グラフのリテラシー
+    estimated_minutes: 16
+    learning_objectives:
+      - 相関関係と因果関係の違いを具体例で説明できる
+      - 疑似相関や交絡という落とし穴があることを知る
+      - グラフの種類の使い分けと「誤解を招くグラフ」を見抜くポイントを挙げられる
+    sections:
+      - id: "03-01"
+        title: 2つのデータの関係を見る — 散布図と相関
+        estimated_minutes: 4
+      - id: "03-02"
+        title: 「相関がある」は「原因である」ではない — 因果と疑似相関
+        estimated_minutes: 4
+      - id: "03-03"
+        title: グラフの使い分け — 何を伝えたいかで選ぶ
+        estimated_minutes: 4
+      - id: "03-04"
+        title: だまされないグラフの読み方
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 相関と因果の関係(相関の背後にある第3の変数=交絡のイメージ)
+        type: mermaid
+        section: "03-02"
+      - purpose: 伝えたいこと別のグラフ選択フローチャート(比較・推移・割合・分布)
+        type: mermaid
+        section: "03-03"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "04"
+    title: データを整える — 収集と前処理のリアル
+    estimated_minutes: 16
+    learning_objectives:
+      - データには構造化・非構造化の種類があることを説明できる
+      - 分析の大半は前処理(クレンジング)に費やされる理由をイメージできる
+      - 欠損値・外れ値・表記ゆれなど代表的な「汚れ」と対処の考え方を挙げられる
+    sections:
+      - id: "04-01"
+        title: データはどこから来るのか — 種類と集め方
+        estimated_minutes: 4
+      - id: "04-02"
+        title: 分析の8割は下ごしらえ — 前処理という仕事
+        estimated_minutes: 4
+      - id: "04-03"
+        title: 欠損値と外れ値 — 「ない」データと「変な」データ
+        estimated_minutes: 4
+      - id: "04-04"
+        title: データが集まる場所 — データベースとクラウド
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 構造化データと非構造化データの分類マップ
+        type: mermaid
+        section: "04-01"
+      - purpose: 前処理のステップ(収集→クレンジング→変換→分析可能なデータ)
+        type: mermaid
+        section: "04-02"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "05"
+    title: データから予測する — 機械学習ことはじめ
+    estimated_minutes: 16
+    learning_objectives:
+      - 教師あり学習・教師なし学習の違いを説明できる
+      - 回帰・分類・クラスタリングがそれぞれ何をするかを例で言える
+      - 作ったモデルの「良さ」を評価する必要性をイメージできる
+    sections:
+      - id: "05-01"
+        title: 機械学習とは「データから規則を見つける」こと
+        estimated_minutes: 4
+      - id: "05-02"
+        title: 数値を当てる・種類を当てる — 回帰と分類
+        estimated_minutes: 4
+      - id: "05-03"
+        title: 正解がなくても学べる — クラスタリング
+        estimated_minutes: 4
+      - id: "05-04"
+        title: そのモデル、本当に使える? — 評価と過学習
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 教師あり(回帰・分類)と教師なし(クラスタリング)の分岐マップ
+        type: mermaid
+        section: "05-01"
+      - purpose: 訓練データとテストデータの分割・過学習のイメージ
+        type: mermaid
+        section: "05-04"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "06"
+    title: データをビジネスと社会で活かす
+    estimated_minutes: 14
+    learning_objectives:
+      - 分析結果をビジネスの意思決定につなげる流れ(KPI・PDCA)をイメージできる
+      - 個人情報保護やデータ倫理がなぜ重要かを説明できる
+      - データ分析を学び続けるための次の一歩を描ける
+    sections:
+      - id: "06-01"
+        title: 分析して終わりじゃない — KPIと意思決定
+        estimated_minutes: 4
+      - id: "06-02"
+        title: そのデータ、使っていいの? — 個人情報とデータ倫理
+        estimated_minutes: 4
+      - id: "06-03"
+        title: データ分析人材のこれから — 次の一歩へ
+        estimated_minutes: 3
+    diagrams:
+      - purpose: データドリブンな意思決定のサイクル(KPI設定→計測→分析→施策)
+        type: mermaid
+        section: "06-01"
+    quiz:
+      count: 5
+      difficulty: easy
