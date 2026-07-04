@@ -4,7 +4,7 @@ chapter_id: "01"
 title: LlamaIndex の設計思想 — なぜ Index 中心の抽象なのか
 order: 1
 estimated_minutes: 4
-estimated_chars: 1637
+estimated_chars: 1692
 learning_points:
   - LlamaIndex が「Index」を中心の抽象に置いた理由を説明できる
   - データ取り込み・索引化・検索・生成という 4 段階のパイプラインを把握する

@@ -4,7 +4,7 @@ chapter_id: "06"
 title: データ基盤との接続 — BigQuery を RAG の検索対象にする設計
 order: 1
 estimated_minutes: 4
-estimated_chars: 1602
+estimated_chars: 1613
 learning_points:
   - BigQuery を RAG 対象に組み込む 2 つのアプローチ(ネイティブ検索 / 外部ベクトル DB 同期)を比較できる
   - データ更新頻度・データ規模・既存ワークロードとの分離から選択基準を引ける

@@ -4,7 +4,7 @@ chapter_id: "06"
 title: Supervisor 型 — 親 Agent が子 Agent を指揮する構造
 order: 2
 estimated_minutes: 4
-estimated_chars: 1703
+estimated_chars: 1791
 learning_points:
   - Supervisor 型の基本構造(親が次に動かす子を選ぶ)を図で説明できる
   - Supervisor 型の長所(制御の見通し・デバッグ性)と短所(親がボトルネックになる)を理解できる

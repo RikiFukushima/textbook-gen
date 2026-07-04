@@ -4,7 +4,7 @@ chapter_id: "06"
 title: 認証・認可設計 — マルチテナント環境での Agent 設計
 order: 3
 estimated_minutes: 4
-estimated_chars: 1612
+estimated_chars: 1704
 learning_points:
   - JWT でユーザーとテナントの識別子を Agent 層まで伝搬する設計を組み立てられる
   - Tool 呼び出し時にユーザーコンテキストを明示的に渡す原則を実装に落とせる

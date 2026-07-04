@@ -4,7 +4,7 @@ chapter_id: "08"
 title: 判断フローチャート — どの順に検討すべきか
 order: 3
 estimated_minutes: 4
-estimated_chars: 1652
+estimated_chars: 1723
 learning_points:
   - 「まずプロンプト改善 → 次に RAG → 最後に FT」の検討順序とその理由を説明できる
   - フローチャート上で各分岐の判定基準を意識して使える

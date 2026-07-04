@@ -4,7 +4,7 @@ chapter_id: "07"
 title: データ準備の重要性 — 質と量と多様性のトレードオフ
 order: 4
 estimated_minutes: 4
-estimated_chars: 1480
+estimated_chars: 1520
 learning_points:
   - ファインチューニングにおいて「データの質」が「データの量」より効くケースを説明できる
   - SFT 用データの最小要件と、よくある失敗例を区別できる

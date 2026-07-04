@@ -4,7 +4,7 @@ chapter_id: "02"
 title: Chain-of-Thought (CoT)
 order: 3
 estimated_minutes: 4
-estimated_chars: 1232
+estimated_chars: 1242
 learning_points:
   - CoT が「思考の途中」を出力させて精度を上げる手法であること
   - なぜ途中過程を書かせると正答率が上がるのか(直感的な理由)
