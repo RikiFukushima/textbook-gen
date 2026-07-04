@@ -49,7 +49,7 @@ chapters:
         title: LangSmith の設計思想と機能
         estimated_minutes: 4
       - id: "02-03"
-        title: LangFuse との比較 — OSS とマネージドの選択
+        title: Langfuse との比較 — OSS とマネージドの選択
         estimated_minutes: 4
       - id: "02-04"
         title: トレースから何を読み取るか — レイテンシ・トークン・分岐の分析

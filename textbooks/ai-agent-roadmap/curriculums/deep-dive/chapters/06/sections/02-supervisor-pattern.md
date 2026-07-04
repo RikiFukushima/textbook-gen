@@ -59,7 +59,7 @@ Supervisor 型の最大の魅力は、制御の流れが追いやすいことで
 - **権限管理がしやすい**: 「書き込み Tool は Writer しか持たない」のような分離が自然に書ける
 - **失敗時のフォールバックを集中管理できる**: Worker が失敗したら Supervisor が別の Worker に振り直す、といった判断を 1 箇所に書ける
 
-LangGraph で実装するときは、Supervisor を 1 つのノードにし、その出力(=次に動かす Worker 名)を Conditional Edge で読んで対応する Worker ノードへ遷移させ、Worker が終わったら必ず Supervisor に戻る、というループ構造が定番です。
+LangGraph で実装するときは、Supervisor を 1 つのノードにし、その出力(=次に動かす Worker 名)を Conditional Edge で読んで対応する Worker ノードへ遷移させ、Worker が終わったら必ず Supervisor に戻る、というループ構造が定番です。この「次に動かす Worker を選ぶ」判断は、Worker を関数に見立てた **Tool calling** として実装することが多く、LLM に選択肢を渡して 1 つ選ばせる形になります。
 
 ## 短所: 親がボトルネックになる
 

@@ -1,7 +1,7 @@
 ---
 section_id: "04-04"
 chapter_id: "04"
-title: Function Calling の仕組み — モデルが構造化出力でツールを呼ぶ
+title: Function Calling の仕組み
 order: 4
 estimated_minutes: 4
 estimated_chars: 2054
@@ -25,7 +25,7 @@ key_terms:
     definition: 1 回の応答で複数のツール呼び出しを同時に出す機能。独立した検索や計算をまとめて投げられる
 ---
 
-# Function Calling の仕組み — モデルが構造化出力でツールを呼ぶ
+# Function Calling の仕組み
 
 ## このセクションで学ぶこと
 

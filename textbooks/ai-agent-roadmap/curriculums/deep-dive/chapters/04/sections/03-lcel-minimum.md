@@ -26,8 +26,6 @@ key_terms:
     definition: Runnable に共通する 3 つの呼び出し方。順に「1 件まとめて」「逐次ストリーミング」「複数件まとめて並列」
 ---
 
-# LangChain Expression Language (LCEL) の最小限の理解
-
 ## このセクションで学ぶこと
 
 - LCEL とは何か — pipe で部品を繋ぐ Runnable 合成の表記法

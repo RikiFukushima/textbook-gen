@@ -1,7 +1,7 @@
 ---
 section_id: "04-01"
 chapter_id: "04"
-title: Agent とは何か — Chain との本質的な違い
+title: Agent とは何か
 order: 1
 estimated_minutes: 4
 estimated_chars: 1691
@@ -25,7 +25,7 @@ key_terms:
     definition: 「次のステップを誰が決めるか」のこと。Chain では開発者、Agent では LLM が決める
 ---
 
-# Agent とは何か — Chain との本質的な違い
+# Agent とは何か
 
 ## このセクションで学ぶこと
 

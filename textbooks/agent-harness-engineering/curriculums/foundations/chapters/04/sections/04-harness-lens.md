@@ -22,7 +22,7 @@ related_sections:
 key_terms:
   - term: 観測(Observability)
     definition: エージェントが何をしようとし、何をしたかを外から見えるようにする仕組み。逐次表示やログ・実行履歴など。
-  - term: harness チェックリスト
+  - term: 5 要素チェックリスト
     definition: 任意のエージェントを 5 要素(ツール・コンテキスト・権限・ループ・観測)に当てはめて分解するための観察の枠組み。
 ---
 

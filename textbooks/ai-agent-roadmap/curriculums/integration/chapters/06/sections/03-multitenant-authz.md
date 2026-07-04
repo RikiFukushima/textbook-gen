@@ -74,7 +74,7 @@ def search_documents(
     )
 ```
 
-ポイントは、**`tenant_id` を LLM が触れる位置に置かない**ことです。LangChain や LangGraph の Tool 定義であれば、LLM 入力のスキーマには `query` だけを露出し、`tenant_id` は実行時に runtime context から注入する形を取ります。
+ポイントは、**`tenant_id` を LLM が触れる位置に置かない**ことです。LangChain や LangGraph の Tool 定義であれば、LLM 入力のスキーマには `query` だけを露出し、`tenant_id` は実行時に runtime context から注入する形を取ります。これは **最小権限の原則**(実行に必要な最小限の権限だけを各コンポーネントに与える)を Agent に適用したもので、LLM には業務パラメータの生成権限しか渡さない、という切り分けです。
 
 ## ステップ 3 — RAG 検索にテナントフィルタを必須化する
 

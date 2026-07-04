@@ -43,7 +43,7 @@ key_terms:
 ```bash
 # AWS CLI で 1 台のインスタンスを起動する例
 aws ec2 run-instances \
-  --image-id ami-0abcd1234efgh5678 \
+  --image-id ami-0123456789abcdef0 \
   --instance-type t3.micro \
   --key-name my-key
 ```

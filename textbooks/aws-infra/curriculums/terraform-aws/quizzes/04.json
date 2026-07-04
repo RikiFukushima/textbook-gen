@@ -5,145 +5,314 @@
       "id": "q04-01",
       "question": "Terraform で `aws_vpc` リソースを定義するときの `cidr_block` について、本章の説明に最もよく合う記述はどれですか。",
       "options": [
-        { "id": "a", "text": "VPC が使える IP アドレスの範囲を宣言する値で、`10.0.0.0/16` であれば約 6.5 万個のアドレスを確保できる。" },
-        { "id": "b", "text": "VPC が使える IP アドレスの範囲を宣言する値だが、作成後でも `terraform apply` で広げたり狭めたりできる。" },
-        { "id": "c", "text": "サブネットが使う IP レンジを VPC 側から強制的に決めるための設定で、`/24` 単位でしか指定できない。" },
-        { "id": "d", "text": "VPC 内の EC2 に割り当てられるパブリック IP の範囲を指定するための値である。" }
+        {
+          "id": "a",
+          "text": "VPC が使える IP アドレスの範囲を宣言する値だが、作成後でも `terraform apply` で広げたり狭めたりできる。"
+        },
+        {
+          "id": "b",
+          "text": "VPC が使える IP アドレスの範囲を宣言する値で、`10.0.0.0/16` であれば約 6.5 万個のアドレスを確保できる。"
+        },
+        {
+          "id": "c",
+          "text": "サブネットが使う IP レンジを VPC 側から強制的に決めるための設定で、`/24` 単位でしか指定できない。"
+        },
+        {
+          "id": "d",
+          "text": "VPC 内の EC2 に割り当てられるパブリック IP の範囲を指定するための値である。"
+        }
       ],
-      "answer": "a",
+      "answer": "b",
       "explanation": "本章では VPC の `cidr_block` は VPC が使える IP アドレスの範囲を宣言する値であり、`10.0.0.0/16` で約 6.5 万個確保できると説明しています。さらに CIDR ブロックは作成後に変更できないため、最初に余裕を持って設計する必要があると注意点で明記されています。b は「後から広げられる」が誤りで、d はパブリック IP の話と取り違えた典型的な混同です。",
       "source_refs": [
-        { "section_id": "04-01", "anchor": "CIDR ブロック" },
-        { "section_id": "04-01", "anchor": "10.0.0.0/16" }
+        {
+          "section_id": "04-01",
+          "anchor": "CIDR ブロック"
+        },
+        {
+          "section_id": "04-01",
+          "anchor": "10.0.0.0/16"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["vpc", "cidr"]
+      "tags": [
+        "vpc",
+        "cidr"
+      ]
     },
     {
       "id": "q04-02",
       "question": "`aws_subnet` を定義するときの記述として、本章の内容と整合するものはどれですか。",
       "options": [
-        { "id": "a", "text": "`vpc_id` に親 VPC の ID を渡し、`cidr_block` は VPC の CIDR の内側に収め、`availability_zone` で配置する AZ を指定する。" },
-        { "id": "b", "text": "`vpc_id` を指定すれば `availability_zone` は自動で決まるため、AZ は明示しないのが推奨される。" },
-        { "id": "c", "text": "`cidr_block` は VPC の CIDR とは独立した範囲を指定でき、例えば VPC が `10.0.0.0/16` でもサブネットに `10.1.0.0/24` を割り当てられる。" },
-        { "id": "d", "text": "サブネットの `availability_zone` はどのリージョンでも `us-east-1a` のような同じ名前で指定できる。" }
+        {
+          "id": "a",
+          "text": "`vpc_id` を指定すれば `availability_zone` は自動で決まるため、AZ は明示しないのが推奨される。"
+        },
+        {
+          "id": "b",
+          "text": "`cidr_block` は VPC の CIDR とは独立した範囲を指定でき、例えば VPC が `10.0.0.0/16` でもサブネットに `10.1.0.0/24` を割り当てられる。"
+        },
+        {
+          "id": "c",
+          "text": "`vpc_id` に親 VPC の ID を渡し、`cidr_block` は VPC の CIDR の内側に収め、`availability_zone` で配置する AZ を指定する。"
+        },
+        {
+          "id": "d",
+          "text": "サブネットの `availability_zone` はどのリージョンでも `us-east-1a` のような同じ名前で指定できる。"
+        }
       ],
-      "answer": "a",
+      "answer": "c",
       "explanation": "本章のコード例と注意点で、`aws_subnet` は `vpc_id` / `cidr_block` / `availability_zone` を指定し、CIDR は VPC の内側に収める必要があると説明されています。c は注意点で「VPC の範囲外を指定するとエラーになる」と否定されている誤りで、ほぼ正解に見える b は「AZ を明示しないのが推奨」という本章にない主張のため不適切です。",
       "source_refs": [
-        { "section_id": "04-01", "anchor": "aws_subnet" },
-        { "section_id": "04-01", "anchor": "availability_zone" }
+        {
+          "section_id": "04-01",
+          "anchor": "aws_subnet"
+        },
+        {
+          "section_id": "04-01",
+          "anchor": "availability_zone"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["vpc", "subnet"]
+      "tags": [
+        "vpc",
+        "subnet"
+      ]
     },
     {
       "id": "q04-03",
       "question": "VPC 内のサブネットを「パブリックサブネット」として成立させる構成として、本章の説明に合うものはどれですか。",
       "options": [
-        { "id": "a", "text": "VPC にインターネットゲートウェイをアタッチし、`0.0.0.0/0` 行きを IGW に向けるルートテーブルを作り、そのルートテーブルをサブネットに関連付ける。" },
-        { "id": "b", "text": "サブネット作成時に `public = true` 属性を `true` にすれば、AWS が自動でインターネットゲートウェイとルートを構成してくれる。" },
-        { "id": "c", "text": "サブネット内の EC2 にパブリック IP を割り当てれば、ルートテーブルや IGW がなくてもインターネットに出られる。" },
-        { "id": "d", "text": "VPC を作った時点でデフォルトでインターネットゲートウェイがアタッチされているので、ルートテーブルだけ書けばよい。" }
+        {
+          "id": "a",
+          "text": "サブネット作成時に `public = true` 属性を `true` にすれば、AWS が自動でインターネットゲートウェイとルートを構成してくれる。"
+        },
+        {
+          "id": "b",
+          "text": "サブネット内の EC2 にパブリック IP を割り当てれば、ルートテーブルや IGW がなくてもインターネットに出られる。"
+        },
+        {
+          "id": "c",
+          "text": "VPC を作った時点でデフォルトでインターネットゲートウェイがアタッチされているので、ルートテーブルだけ書けばよい。"
+        },
+        {
+          "id": "d",
+          "text": "VPC にインターネットゲートウェイをアタッチし、`0.0.0.0/0` 行きを IGW に向けるルートテーブルを作り、そのルートテーブルをサブネットに関連付ける。"
+        }
       ],
-      "answer": "a",
+      "answer": "d",
       "explanation": "本章では「IGW を VPC にアタッチし、`0.0.0.0/0 → IGW` のルートを持つルートテーブルをサブネットに関連付ける」3 点セットで初めてパブリックサブネットになると説明しています。d は注意点で「VPC を作っただけでは IGW は付かない」と明示的に否定されており、c はパブリック IP だけでは経路がないため通信できないため誤りです。",
       "source_refs": [
-        { "section_id": "04-02", "anchor": "サブネットだけでは外に出られない" },
-        { "section_id": "04-02", "anchor": "0.0.0.0/0 → IGW" }
+        {
+          "section_id": "04-02",
+          "anchor": "サブネットだけでは外に出られない"
+        },
+        {
+          "section_id": "04-02",
+          "anchor": "0.0.0.0/0 → IGW"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["networking", "internet-gateway", "route-table"]
+      "tags": [
+        "networking",
+        "internet-gateway",
+        "route-table"
+      ]
     },
     {
       "id": "q04-04",
       "question": "Terraform で書いたつもりが「EC2 にどうしても繋がらない」とき、本章の「注意点」で挙げられている定番の原因はどれですか。",
       "options": [
-        { "id": "a", "text": "`aws_route_table_association` でルートテーブルをサブネットに関連付け忘れ、サブネットが VPC のデフォルトルートテーブル(外部経路なし)のままになっている。" },
-        { "id": "b", "text": "`aws_internet_gateway` を VPC に **2 つ以上**アタッチしてしまい、ルートが衝突している。" },
-        { "id": "c", "text": "`aws_route_table` の `route` ブロックで `cidr_block = \"10.0.0.0/16\"` を IGW に向けてしまっている。" },
-        { "id": "d", "text": "`aws_subnet` の `availability_zone` を `ap-northeast-1a` に固定しているため、IGW が別 AZ に作られて経路がつながらない。" }
+        {
+          "id": "a",
+          "text": "`aws_route_table_association` でルートテーブルをサブネットに関連付け忘れ、サブネットが VPC のデフォルトルートテーブル(外部経路なし)のままになっている。"
+        },
+        {
+          "id": "b",
+          "text": "`aws_internet_gateway` を VPC に **2 つ以上**アタッチしてしまい、ルートが衝突している。"
+        },
+        {
+          "id": "c",
+          "text": "`aws_route_table` の `route` ブロックで `cidr_block = \"10.0.0.0/16\"` を IGW に向けてしまっている。"
+        },
+        {
+          "id": "d",
+          "text": "`aws_subnet` の `availability_zone` を `ap-northeast-1a` に固定しているため、IGW が別 AZ に作られて経路がつながらない。"
+        }
       ],
       "answer": "a",
       "explanation": "本章の注意点で「ルートテーブルを関連付け忘れると、サブネットは VPC のデフォルトルートテーブル(外部経路なし)のままになり、EC2 に接続できない」が定番の原因として明記されています。b は同じく注意点で「IGW は VPC に 1 つだけアタッチできる」と書かれており、そもそも 2 つアタッチはできません。d は IGW が AZ に紐づくかのような誤解です。",
       "source_refs": [
-        { "section_id": "04-02", "anchor": "aws_route_table_association" },
-        { "section_id": "04-02", "anchor": "インターネットゲートウェイ(IGW)" }
+        {
+          "section_id": "04-02",
+          "anchor": "aws_route_table_association"
+        },
+        {
+          "section_id": "04-02",
+          "anchor": "インターネットゲートウェイ(IGW)"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["networking", "troubleshooting"]
+      "tags": [
+        "networking",
+        "troubleshooting"
+      ]
     },
     {
       "id": "q04-05",
       "question": "セキュリティグループ(SG)の性質として、本章の説明と整合するのはどれですか。",
       "options": [
-        { "id": "a", "text": "許可ルール(allow)だけを書く仮想ファイアウォールで、明示的に許可していない通信はすべて拒否される。" },
-        { "id": "b", "text": "許可ルールと拒否ルールの両方を書き、上から順に評価される仕組みである。" },
-        { "id": "c", "text": "VPC 単位で 1 つだけ作成でき、その VPC 内のすべての EC2 に自動的に適用される。" },
-        { "id": "d", "text": "ルートテーブルと同じく、サブネットに関連付けて使う経路制御の仕組みである。" }
+        {
+          "id": "a",
+          "text": "許可ルールと拒否ルールの両方を書き、上から順に評価される仕組みである。"
+        },
+        {
+          "id": "b",
+          "text": "許可ルール(allow)だけを書く仮想ファイアウォールで、明示的に許可していない通信はすべて拒否される。"
+        },
+        {
+          "id": "c",
+          "text": "VPC 単位で 1 つだけ作成でき、その VPC 内のすべての EC2 に自動的に適用される。"
+        },
+        {
+          "id": "d",
+          "text": "ルートテーブルと同じく、サブネットに関連付けて使う経路制御の仕組みである。"
+        }
       ],
-      "answer": "a",
+      "answer": "b",
       "explanation": "本章では SG は「許可ルール(allow)だけを書く」仮想ファイアウォールで、明示しない通信は拒否されると説明しています。b は「拒否ルールという概念がない」と本文で否定されており、特定の IP を拒否したい要件は SG では実現できずネットワーク ACL を使うとも書かれています。d はルートテーブルとの役割の取り違えです。",
       "source_refs": [
-        { "section_id": "04-03", "anchor": "セキュリティグループ" },
-        { "section_id": "04-03", "anchor": "許可ルール(allow)だけを書く" }
+        {
+          "section_id": "04-03",
+          "anchor": "セキュリティグループ"
+        },
+        {
+          "section_id": "04-03",
+          "anchor": "許可ルール(allow)だけを書く"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["security-group", "firewall"]
+      "tags": [
+        "security-group",
+        "firewall"
+      ]
     },
     {
       "id": "q04-06",
       "question": "`aws_instance` で EC2 を起動する最小構成について、本章の説明として最も適切なものはどれですか。",
       "options": [
-        { "id": "a", "text": "`ami` / `instance_type` / `subnet_id` / `vpc_security_group_ids` を指定し、外部からアクセスさせたい場合は `associate_public_ip_address = true` を付ける。" },
-        { "id": "b", "text": "`ami` は AWS 全リージョンで共通の ID なので、別リージョンで作成した値をそのまま使い回せる。" },
-        { "id": "c", "text": "`vpc_security_group_ids` を省略しても、デフォルトで SSH ポート 22 が世界中から開かれた SG が自動で当たる。" },
-        { "id": "d", "text": "`subnet_id` を書かなくても、Terraform が VPC のデフォルトサブネットに自動配置する。" }
+        {
+          "id": "a",
+          "text": "`ami` は AWS 全リージョンで共通の ID なので、別リージョンで作成した値をそのまま使い回せる。"
+        },
+        {
+          "id": "b",
+          "text": "`vpc_security_group_ids` を省略しても、デフォルトで SSH ポート 22 が世界中から開かれた SG が自動で当たる。"
+        },
+        {
+          "id": "c",
+          "text": "`ami` / `instance_type` / `subnet_id` / `vpc_security_group_ids` を指定し、外部からアクセスさせたい場合は `associate_public_ip_address = true` を付ける。"
+        },
+        {
+          "id": "d",
+          "text": "`subnet_id` を書かなくても、Terraform が VPC のデフォルトサブネットに自動配置する。"
+        }
       ],
-      "answer": "a",
+      "answer": "c",
       "explanation": "本章のコード例で `aws_instance` の要点は `ami` / `instance_type` / `subnet_id` / `vpc_security_group_ids` であり、外部公開には `associate_public_ip_address = true` を使うと説明されています。b は「`ami` の ID はリージョンごとに異なる」と注意点で明示的に否定されており、c のような自動 SG 付与の挙動は本章には書かれていません。",
       "source_refs": [
-        { "section_id": "04-03", "anchor": "EC2 インスタンスを起動する" },
-        { "section_id": "04-03", "anchor": "vpc_security_group_ids" }
+        {
+          "section_id": "04-03",
+          "anchor": "EC2 インスタンスを起動する"
+        },
+        {
+          "section_id": "04-03",
+          "anchor": "vpc_security_group_ids"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["ec2", "aws_instance"]
+      "tags": [
+        "ec2",
+        "aws_instance"
+      ]
     },
     {
       "id": "q04-07",
       "question": "本章でいう「暗黙の依存関係」を最もよく説明しているのはどれですか。",
       "options": [
-        { "id": "a", "text": "`aws_subnet` の `vpc_id` に `aws_vpc.main.id` のように別リソースの属性を参照することで、Terraform が自動的に作成順序を判断する仕組み。" },
-        { "id": "b", "text": "`depends_on` を使って、参照しないリソース間にも順序を明示的に宣言すること。" },
-        { "id": "c", "text": "AWS の API がリソース間の依存を内部で解決してくれるため、Terraform 側では順序を一切気にしなくてよい仕組み。" },
-        { "id": "d", "text": "`terraform graph` コマンドを実行したときだけ一時的に構築され、`apply` 中は使われない依存関係。" }
+        {
+          "id": "a",
+          "text": "`depends_on` を使って、参照しないリソース間にも順序を明示的に宣言すること。"
+        },
+        {
+          "id": "b",
+          "text": "AWS の API がリソース間の依存を内部で解決してくれるため、Terraform 側では順序を一切気にしなくてよい仕組み。"
+        },
+        {
+          "id": "c",
+          "text": "`terraform graph` コマンドを実行したときだけ一時的に構築され、`apply` 中は使われない依存関係。"
+        },
+        {
+          "id": "d",
+          "text": "`aws_subnet` の `vpc_id` に `aws_vpc.main.id` のように別リソースの属性を参照することで、Terraform が自動的に作成順序を判断する仕組み。"
+        }
       ],
-      "answer": "a",
+      "answer": "d",
       "explanation": "本章では「あるリソースが別のリソースの属性(`.id` など)を参照していると、Terraform は順序を自動判断する。これを暗黙の依存関係と呼ぶ」と定義しています。b は逆に「明示的な依存」=`depends_on` の説明で、本章でも明確に区別されています。「ほぼ正解」に見える b との違いをきちんと取れるかを問う問題です。",
       "source_refs": [
-        { "section_id": "04-04", "anchor": "参照が依存関係を作る" },
-        { "section_id": "04-04", "anchor": "暗黙の依存関係" }
+        {
+          "section_id": "04-04",
+          "anchor": "参照が依存関係を作る"
+        },
+        {
+          "section_id": "04-04",
+          "anchor": "暗黙の依存関係"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["dependency", "reference"]
+      "tags": [
+        "dependency",
+        "reference"
+      ]
     },
     {
       "id": "q04-08",
       "question": "`depends_on` メタ引数の使い方として、本章の方針に最も合うのはどれですか。",
       "options": [
-        { "id": "a", "text": "まずは参照で依存を表すのが基本で、属性を参照しないが順序だけは守ってほしい「隠れた依存」を補うときの最終手段として使う。" },
-        { "id": "b", "text": "依存関係を明示したほうが安全なので、ほぼすべての `resource` ブロックに `depends_on` を書いておくのが望ましい。" },
-        { "id": "c", "text": "`depends_on` を書くと Terraform が並列実行を強化するため、`apply` を速くする目的で積極的に追加する。" },
-        { "id": "d", "text": "`depends_on` は `destroy` 時の順序だけに影響し、`apply`(作成)時の順序には関係しない。" }
+        {
+          "id": "a",
+          "text": "まずは参照で依存を表すのが基本で、属性を参照しないが順序だけは守ってほしい「隠れた依存」を補うときの最終手段として使う。"
+        },
+        {
+          "id": "b",
+          "text": "依存関係を明示したほうが安全なので、ほぼすべての `resource` ブロックに `depends_on` を書いておくのが望ましい。"
+        },
+        {
+          "id": "c",
+          "text": "`depends_on` を書くと Terraform が並列実行を強化するため、`apply` を速くする目的で積極的に追加する。"
+        },
+        {
+          "id": "d",
+          "text": "`depends_on` は `destroy` 時の順序だけに影響し、`apply`(作成)時の順序には関係しない。"
+        }
       ],
       "answer": "a",
       "explanation": "本章では「参照で表せない隠れた依存だけ `depends_on` で明示する」「多用すると依存が見えにくくなり、並列化も効かなくなる」と説明しています。よって最終手段として使うのが正しい姿勢です。c は逆で、`depends_on` の多用は並列化を阻害します。d は本章の「Terraform は依存グラフから作成順を決める」という記述と整合しません。",
       "source_refs": [
-        { "section_id": "04-04", "anchor": "depends_on" },
-        { "section_id": "04-04", "anchor": "依存グラフ" }
+        {
+          "section_id": "04-04",
+          "anchor": "depends_on"
+        },
+        {
+          "section_id": "04-04",
+          "anchor": "依存グラフ"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["dependency", "depends_on"]
+      "tags": [
+        "dependency",
+        "depends_on"
+      ]
     }
   ]
 }

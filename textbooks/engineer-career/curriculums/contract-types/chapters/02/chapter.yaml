@@ -1,6 +1,6 @@
 id: "02"
 title: SESとは — 準委任での客先常駐
-estimated_minutes: 20
+estimated_minutes: 19
 learning_objectives:
   - SES(システムエンジニアリングサービス)の基本的な仕組みを説明できる
   - 客先常駐における指揮命令の所在が誰にあるかを理解する

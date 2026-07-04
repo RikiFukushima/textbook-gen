@@ -1,0 +1,284 @@
+{
+  "chapter_id": "02",
+  "questions": [
+    {
+      "id": "q02-01",
+      "question": "LangGraph の State の役割として、本文の説明に最も合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "個々のノードだけが持つローカル変数で、他のノードからは見えない"
+        },
+        {
+          "id": "b",
+          "text": "エッジが遷移のたびに運ぶ、その場限りのデータパケットである"
+        },
+        {
+          "id": "c",
+          "text": "グラフ全体で共有される「働くメモリ」で、各ノードが読み書きして育てていく"
+        },
+        {
+          "id": "d",
+          "text": "compile 後に自動生成される、変更できない読み取り専用の設定値である"
+        }
+      ],
+      "answer": "c",
+      "explanation": "State はグラフ全体で共有される1つのデータの入れ物であり、各ノードが読み書きして更新していく「働くメモリ」です。データはエッジではなく常に State を通じて受け渡されます。",
+      "source_refs": [
+        {
+          "section_id": "02-01",
+          "anchor": "State はグラフ全体で共有される「働くメモリ」"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "state"
+      ]
+    },
+    {
+      "id": "q02-02",
+      "question": "本文で、State のスキーマを定義する基本的な方法として最初に紹介されているものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pydantic の BaseModel を継承する"
+        },
+        {
+          "id": "b",
+          "text": "dataclass デコレータを付けたクラスを作る"
+        },
+        {
+          "id": "c",
+          "text": "通常の dict をそのまま渡し、型は宣言しない"
+        },
+        {
+          "id": "d",
+          "text": "Python 標準の TypedDict を使う"
+        }
+      ],
+      "answer": "d",
+      "explanation": "本文では、State のスキーマを定義するもっとも基本的な方法として Python 標準の TypedDict を使うやり方が紹介されています。型ヒントとして書くのでエディタの補完や型チェックが効くのが利点です。",
+      "source_refs": [
+        {
+          "section_id": "02-01",
+          "anchor": "TypedDict でスキーマを定義する"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "state",
+        "typeddict"
+      ]
+    },
+    {
+      "id": "q02-03",
+      "question": "TypedDict で State を定義することについて、本文の記述と合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "あくまで型の宣言であり、実行時に厳密な型チェックを強制するものではない"
+        },
+        {
+          "id": "b",
+          "text": "実行時に厳密な型チェックを強制し、型が違うと必ず例外になる"
+        },
+        {
+          "id": "c",
+          "text": "キーの型を宣言できないため、読みやすさの向上には寄与しない"
+        },
+        {
+          "id": "d",
+          "text": "StateGraph には渡せず、compile 時に無視される"
+        }
+      ],
+      "answer": "a",
+      "explanation": "本文では、TypedDict はあくまで型の宣言で、実行時に厳密な型チェックを強制するものではないと述べられています。型はチームでの読みやすさと開発支援のための「約束ごと」と捉えるのがよいとされています。",
+      "source_refs": [
+        {
+          "section_id": "02-01",
+          "anchor": "実行時に厳密な型チェックを強制するものではありません"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "state",
+        "typeddict"
+      ]
+    },
+    {
+      "id": "q02-04",
+      "question": "LangGraph のノード関数が返すべき値として、本文の説明に最も合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "State 全体を丸ごとコピーして返す"
+        },
+        {
+          "id": "b",
+          "text": "更新したいキーだけを含む辞書を返す"
+        },
+        {
+          "id": "c",
+          "text": "何も返さず、引数の State を直接書き換える"
+        },
+        {
+          "id": "d",
+          "text": "次に遷移するノードの名前を文字列で返す"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ノードは State を引数に受け取り、更新したいキーだけを辞書で返す関数です。State 全体を返すのではなく、変更したいキーだけを返すのがポイントで、返さなかったキーは元の値のまま保たれます。次に進むノードを返すのは第4章の conditional edge のルーティング関数です。",
+      "source_refs": [
+        {
+          "section_id": "02-02",
+          "anchor": "State 全体を返すのではなく、更新したいキーだけを返す"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "node",
+        "state"
+      ]
+    },
+    {
+      "id": "q02-05",
+      "question": "ノード関数を「純粋に保つ」ことが実務上の鉄則とされる理由として、本文の説明に最も合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "引数の State を直接書き換えることで、処理速度が向上するから"
+        },
+        {
+          "id": "b",
+          "text": "純粋関数にすると reducer を指定しなくても履歴が追記されるから"
+        },
+        {
+          "id": "c",
+          "text": "引数を直接書き換えないことで、ノード単体をテストしやすく挙動が予測しやすくなるから"
+        },
+        {
+          "id": "d",
+          "text": "純粋関数でないとノードとして add_node に登録できないから"
+        }
+      ],
+      "answer": "c",
+      "explanation": "引数の State を直接書き換えず戻り値の辞書で更新を表すと、ノード単体を「入力 State を渡して戻り値を確認する」だけでテストでき、分岐やループでも挙動が予測しやすくなります。逆に引数を直接変更するとどこで State が変わったか追えなくなります。",
+      "source_refs": [
+        {
+          "section_id": "02-02",
+          "anchor": "ノードは純粋に保つ"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "node",
+        "pure-function"
+      ]
+    },
+    {
+      "id": "q02-06",
+      "question": "第2章で扱う add_edge による固定エッジについて、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "エッジは遷移とともにデータの値も次のノードへ運ぶ"
+        },
+        {
+          "id": "b",
+          "text": "add_edge は State の中身に応じて行き先を切り替える動的な遷移である"
+        },
+        {
+          "id": "c",
+          "text": "add_edge で接続するノードは、名前ではなく関数オブジェクトそのもので指定する"
+        },
+        {
+          "id": "d",
+          "text": "エッジは制御の流れだけを運び、データは State を通じて受け渡される"
+        }
+      ],
+      "answer": "d",
+      "explanation": "エッジが運ぶのは制御の流れだけで、データは常に State を通じて受け渡されます。add_edge は「必ずこの順で進む」固定遷移で、State に応じて行き先を切り替えたい場合は第4章の conditional edge を使います。エッジはノードの名前(文字列)で接続を指定します。",
+      "source_refs": [
+        {
+          "section_id": "02-03",
+          "anchor": "データは常に State を通じて受け渡されるので、エッジ自体は値を持ちません"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "edge",
+        "flow"
+      ]
+    },
+    {
+      "id": "q02-07",
+      "question": "reducer を何も指定しなかった場合、State のキーはどのようにマージされますか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "新しい値で上書きされる"
+        },
+        {
+          "id": "b",
+          "text": "既存の値と新しい値がリストとして結合される"
+        },
+        {
+          "id": "c",
+          "text": "既存の値が保たれ、新しい値は無視される"
+        },
+        {
+          "id": "d",
+          "text": "reducer が必須のため、指定しないと compile エラーになる"
+        }
+      ],
+      "answer": "a",
+      "explanation": "reducer を何も指定しなければ、既定の挙動として新しい値で上書きされます。TypedDict で素直に定義した場合はすべてのキーがこの「上書き」になります。追記したいキーには Annotated で reducer を指定する必要があります。",
+      "source_refs": [
+        {
+          "section_id": "02-04",
+          "anchor": "新しい値で上書き"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "reducer",
+        "state"
+      ]
+    },
+    {
+      "id": "q02-08",
+      "question": "会話履歴を上書きせず追記で蓄積したいとき、本文が定番として紹介している書き方はどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "messages を単なる str 型で宣言する"
+        },
+        {
+          "id": "b",
+          "text": "Annotated を使い messages に add_messages を reducer として結びつける"
+        },
+        {
+          "id": "c",
+          "text": "各ノードで手動で state[\"messages\"] に append する"
+        },
+        {
+          "id": "d",
+          "text": "messages を宣言せず、checkpointer に任せる"
+        }
+      ],
+      "answer": "b",
+      "explanation": "追記したいキーには Annotated を使って reducer を結びつけます。会話履歴には LangGraph 組み込みの add_messages がよく使われ、Annotated[list, add_messages] と書くと既存リストに新しいメッセージが追加されます。ID で重複を解決してくれるため operator.add より安全です。",
+      "source_refs": [
+        {
+          "section_id": "02-04",
+          "anchor": "Annotated[list, add_messages]"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "reducer",
+        "add_messages"
+      ]
+    }
+  ]
+}

@@ -18,7 +18,7 @@ related_sections:
   - "06-01"
   - "06-03"
 key_terms:
-  - term: メモリなしの失敗
+  - term: メモリファイルがない
     definition: 状態を会話の外に置かないため、ループが毎回ゼロから始まってしまう失敗。
   - term: 分離なしの失敗
     definition: maker と checker を分けず、1エージェントが作りも検証もするため、検証が自己採点になってしまう失敗。

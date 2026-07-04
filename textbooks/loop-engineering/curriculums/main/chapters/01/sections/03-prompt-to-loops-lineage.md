@@ -21,7 +21,7 @@ key_terms:
     definition: AI に渡す前提情報(文脈)を設計し、必要な材料が手元に揃った状態をつくる工夫のこと。
   - term: ツール(tools)
     definition: 検索・コード実行・ファイル操作など、AI が外部に働きかけるために使える手段のこと。
-  - term: harness エンジニアリング
+  - term: harness engineering
     definition: エージェントを動かす土台(足回り)を設計する実践。ループエンジニアリングと近い位置にある。
 ---
 

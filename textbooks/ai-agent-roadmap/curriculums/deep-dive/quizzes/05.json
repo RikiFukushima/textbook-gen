@@ -5,140 +5,301 @@
       "id": "q05-01",
       "question": "LangGraph の StateGraph が Agent を表現するために採用している中心的な発想として、最も適切なものはどれですか。",
       "options": [
-        { "id": "a", "text": "Agent をプロンプトのテンプレート集として記述し、テンプレートを LLM に順に流し込む" },
-        { "id": "b", "text": "Agent をステートマシンとして捉え、共有 State を Node が読み書きし、Edge で遷移する構造で表現する" },
-        { "id": "c", "text": "Agent を DAG(非巡回有向グラフ)に限定して記述し、ループは別ライブラリで補う" },
-        { "id": "d", "text": "Agent を関数の合成として記述し、State はグローバル変数として暗黙に共有する" }
+        {
+          "id": "a",
+          "text": "Agent をステートマシンとして捉え、共有 State を Node が読み書きし、Edge で遷移する構造で表現する"
+        },
+        {
+          "id": "b",
+          "text": "Agent をプロンプトのテンプレート集として記述し、テンプレートを LLM に順に流し込む"
+        },
+        {
+          "id": "c",
+          "text": "Agent を DAG(非巡回有向グラフ)に限定して記述し、ループは別ライブラリで補う"
+        },
+        {
+          "id": "d",
+          "text": "Agent を関数の合成として記述し、State はグローバル変数として暗黙に共有する"
+        }
       ],
-      "answer": "b",
+      "answer": "a",
       "explanation": "StateGraph は『State / Node / Edge』のステートマシンとして Agent を書く設計言語です。Chain のような関数合成ではループや分岐が書きづらかった反省から、状態と遷移を一級市民に据えました。",
       "source_refs": [
-        { "section_id": "05-01", "anchor": "Agent は「状態と遷移」で書くと素直になる" }
+        {
+          "section_id": "05-01",
+          "anchor": "Agent は「状態と遷移」で書くと素直になる"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["langgraph", "stategraph", "state-machine"]
+      "tags": [
+        "langgraph",
+        "stategraph",
+        "state-machine"
+      ]
     },
     {
       "id": "q05-02",
       "question": "LangGraph 0.2 系で State を `TypedDict` で定義するとき、`Annotated[list, add_messages]` のように reducer を指定する意図として最も適切なものはどれですか。",
       "options": [
-        { "id": "a", "text": "Node が返した差分を、対象フィールドに対して『上書き』ではなく『追記』するように LangGraph に指示するため" },
-        { "id": "b", "text": "Node 実行時に LangGraph が自動でフィールドの型変換を行うため" },
-        { "id": "c", "text": "そのフィールドだけを Checkpointer の保存対象から除外するため" },
-        { "id": "d", "text": "LLM がそのフィールドを直接書き換えられるよう、reducer 経由でアクセス権を付与するため" }
+        {
+          "id": "a",
+          "text": "Node 実行時に LangGraph が自動でフィールドの型変換を行うため"
+        },
+        {
+          "id": "b",
+          "text": "Node が返した差分を、対象フィールドに対して『上書き』ではなく『追記』するように LangGraph に指示するため"
+        },
+        {
+          "id": "c",
+          "text": "そのフィールドだけを Checkpointer の保存対象から除外するため"
+        },
+        {
+          "id": "d",
+          "text": "LLM がそのフィールドを直接書き換えられるよう、reducer 経由でアクセス権を付与するため"
+        }
       ],
-      "answer": "a",
+      "answer": "b",
       "explanation": "reducer は『State のフィールドをどう更新するか』を宣言するもので、`add_messages` は既存リストに新メッセージを追記する reducer です。reducer を指定しないフィールドは上書きになります。型変換や保存範囲・アクセス権の制御ではありません。",
       "source_refs": [
-        { "section_id": "05-02", "anchor": "State — 共有ボードのスキーマ" }
+        {
+          "section_id": "05-02",
+          "anchor": "State — 共有ボードのスキーマ"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["langgraph", "state", "reducer"]
+      "tags": [
+        "langgraph",
+        "state",
+        "reducer"
+      ]
     },
     {
       "id": "q05-03",
       "question": "LangGraph の Node の書き方として、本章の指針から見て最も望ましいものはどれですか。",
       "options": [
-        { "id": "a", "text": "State を受け取り、State 全体をコピーして必要箇所を書き換えた完全な State を返す" },
-        { "id": "b", "text": "State を受け取り、外部 API への副作用を中心に行い、戻り値は省略して State をグローバルに更新する" },
-        { "id": "c", "text": "State を受け取り、更新差分(部分辞書)だけを返す。一 Node 一責務を守り、進路ロジックは Node 内に書かない" },
-        { "id": "d", "text": "State を受け取り、次に進むべき Node 名を文字列として返す。差分の更新は LangGraph が暗黙に行う" }
+        {
+          "id": "a",
+          "text": "State を受け取り、State 全体をコピーして必要箇所を書き換えた完全な State を返す"
+        },
+        {
+          "id": "b",
+          "text": "State を受け取り、外部 API への副作用を中心に行い、戻り値は省略して State をグローバルに更新する"
+        },
+        {
+          "id": "c",
+          "text": "State を受け取り、更新差分(部分辞書)だけを返す。一 Node 一責務を守り、進路ロジックは Node 内に書かない"
+        },
+        {
+          "id": "d",
+          "text": "State を受け取り、次に進むべき Node 名を文字列として返す。差分の更新は LangGraph が暗黙に行う"
+        }
       ],
       "answer": "c",
       "explanation": "Node は『State を受け取り、State の差分(部分辞書)を返す関数』で、一 Node 一責務・冪等性を意識する設計が推奨されています。進路ロジックは Edge 側に集約します。次ノード名を返すのはルータ関数の役割で、Node 自体の責務ではありません。",
       "source_refs": [
-        { "section_id": "05-02", "anchor": "Node — State を受けて差分を返す関数" }
+        {
+          "section_id": "05-02",
+          "anchor": "Node — State を受けて差分を返す関数"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["langgraph", "node", "design"]
+      "tags": [
+        "langgraph",
+        "node",
+        "design"
+      ]
     },
     {
       "id": "q05-04",
       "question": "LangGraph の Conditional Edge をルータ関数で実装するときに、本章が推奨する書き方はどれですか。",
       "options": [
-        { "id": "a", "text": "Node 内で if 文を書き、結果を State の `next_step` フィールドに格納して、固定エッジで読み取らせる" },
-        { "id": "b", "text": "ルータ関数がノード名を直接 return し、`add_conditional_edges` の第三引数(行き先マップ)は使わない" },
-        { "id": "c", "text": "State を受け取って文字列『キー』を返すルータ関数を作り、`add_conditional_edges` の第三引数でキーから実 Node 名へマップする" },
-        { "id": "d", "text": "ルータ関数の中で LLM を呼び、戻り値として次に進む Node 名を生成させる" }
+        {
+          "id": "a",
+          "text": "Node 内で if 文を書き、結果を State の `next_step` フィールドに格納して、固定エッジで読み取らせる"
+        },
+        {
+          "id": "b",
+          "text": "ルータ関数がノード名を直接 return し、`add_conditional_edges` の第三引数(行き先マップ)は使わない"
+        },
+        {
+          "id": "c",
+          "text": "ルータ関数の中で LLM を呼び、戻り値として次に進む Node 名を生成させる"
+        },
+        {
+          "id": "d",
+          "text": "State を受け取って文字列『キー』を返すルータ関数を作り、`add_conditional_edges` の第三引数でキーから実 Node 名へマップする"
+        }
       ],
-      "answer": "c",
+      "answer": "d",
       "explanation": "Conditional Edge は『State を受けてキーを返す純関数のルータ + 行き先マップ』が基本形です。マップを経由するとノード名の変更に強く、テストも書きやすくなります。a は進路ロジックを Node に埋めるアンチパターン、b は推奨されない直接 return、d はルータの責務を越えています。",
       "source_refs": [
-        { "section_id": "05-03", "anchor": "基本形 — ルータ関数で次の Node を選ぶ" },
-        { "section_id": "05-03", "anchor": "設計上の落とし穴" }
+        {
+          "section_id": "05-03",
+          "anchor": "基本形 — ルータ関数で次の Node を選ぶ"
+        },
+        {
+          "section_id": "05-03",
+          "anchor": "設計上の落とし穴"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["langgraph", "conditional-edge", "router"]
+      "tags": [
+        "langgraph",
+        "conditional-edge",
+        "router"
+      ]
     },
     {
       "id": "q05-05",
       "question": "LangGraph の Checkpointer が State を保存する単位として、本章の説明に最も合致するものはどれですか。",
       "options": [
-        { "id": "a", "text": "Agent ごとに 1 件のみ。最新の State だけが保持され、過去の State は上書きされる" },
-        { "id": "b", "text": "`thread_id` 単位で、各ステップごとに State のスナップショットを履歴として持つ" },
-        { "id": "c", "text": "Node 単位で、Node の入出力のみが保存される(State 全体は保存されない)" },
-        { "id": "d", "text": "LLM のリクエスト単位で、プロンプトとレスポンスのペアだけが保存される" }
+        {
+          "id": "a",
+          "text": "`thread_id` 単位で、各ステップごとに State のスナップショットを履歴として持つ"
+        },
+        {
+          "id": "b",
+          "text": "Agent ごとに 1 件のみ。最新の State だけが保持され、過去の State は上書きされる"
+        },
+        {
+          "id": "c",
+          "text": "Node 単位で、Node の入出力のみが保存される(State 全体は保存されない)"
+        },
+        {
+          "id": "d",
+          "text": "LLM のリクエスト単位で、プロンプトとレスポンスのペアだけが保存される"
+        }
       ],
-      "answer": "b",
+      "answer": "a",
       "explanation": "Checkpointer は `thread_id` ごとに、ステップ単位で State スナップショットを履歴として持ちます。これにより中断・再開やタイムトラベルが成立します。最新だけ保持・Node の入出力だけ・LLM のやり取りだけ、というのはいずれも誤りです。",
       "source_refs": [
-        { "section_id": "05-04", "anchor": "なぜ State を「外」に保存するのか" }
+        {
+          "section_id": "05-04",
+          "anchor": "なぜ State を「外」に保存するのか"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["langgraph", "checkpointing", "thread"]
+      "tags": [
+        "langgraph",
+        "checkpointing",
+        "thread"
+      ]
     },
     {
       "id": "q05-06",
       "question": "LangGraph の『タイムトラベル』機能の説明として、最も適切なものはどれですか。",
       "options": [
-        { "id": "a", "text": "過去のチェックポイントから State を読み戻し、そこから先のステップだけを再実行できる機能" },
-        { "id": "b", "text": "未来のステップを先回りで投機実行し、結果が良ければ採用する機能" },
-        { "id": "c", "text": "実行中のグラフを一時停止し、別の thread_id にコピーして並列実行する機能" },
-        { "id": "d", "text": "過去の全 thread を横断して、最適な State の組み合わせを LLM に選ばせる機能" }
+        {
+          "id": "a",
+          "text": "未来のステップを先回りで投機実行し、結果が良ければ採用する機能"
+        },
+        {
+          "id": "b",
+          "text": "過去のチェックポイントから State を読み戻し、そこから先のステップだけを再実行できる機能"
+        },
+        {
+          "id": "c",
+          "text": "実行中のグラフを一時停止し、別の thread_id にコピーして並列実行する機能"
+        },
+        {
+          "id": "d",
+          "text": "過去の全 thread を横断して、最適な State の組み合わせを LLM に選ばせる機能"
+        }
       ],
-      "answer": "a",
+      "answer": "b",
       "explanation": "タイムトラベルは `get_state_history` で過去のスナップショットを取得し、`checkpoint_id` を指定して `invoke` することで、その時点から先だけを別の条件で再実行できる機能です。投機実行や thread のコピー、自動最適化ではありません。",
       "source_refs": [
-        { "section_id": "05-04", "anchor": "中断・再開とタイムトラベル" }
+        {
+          "section_id": "05-04",
+          "anchor": "中断・再開とタイムトラベル"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["langgraph", "checkpointing", "time-travel"]
+      "tags": [
+        "langgraph",
+        "checkpointing",
+        "time-travel"
+      ]
     },
     {
       "id": "q05-07",
       "question": "LangGraph で Human-in-the-Loop を実装するとき、本章が推奨する設計として最も適切なものはどれですか。",
       "options": [
-        { "id": "a", "text": "『人間ノード』を作り、その Node 内で while ループによって UI からの入力をブロック待ちする" },
-        { "id": "b", "text": "`interrupt_before` で副作用のある Node の手前に停止点を置き、必要なら `update_state` で State を書き換えてから `invoke(None, config)` で再開する" },
-        { "id": "c", "text": "LangGraph の `recursion_limit` を 1 に設定し、毎ステップ Python の例外で停止させて UI からリトライする" },
-        { "id": "d", "text": "Checkpointer を使わずに、Node の戻り値に『承認フラグ』を仕込んで UI から書き換える" }
+        {
+          "id": "a",
+          "text": "『人間ノード』を作り、その Node 内で while ループによって UI からの入力をブロック待ちする"
+        },
+        {
+          "id": "b",
+          "text": "LangGraph の `recursion_limit` を 1 に設定し、毎ステップ Python の例外で停止させて UI からリトライする"
+        },
+        {
+          "id": "c",
+          "text": "`interrupt_before` で副作用のある Node の手前に停止点を置き、必要なら `update_state` で State を書き換えてから `invoke(None, config)` で再開する"
+        },
+        {
+          "id": "d",
+          "text": "Checkpointer を使わずに、Node の戻り値に『承認フラグ』を仕込んで UI から書き換える"
+        }
       ],
-      "answer": "b",
+      "answer": "c",
       "explanation": "HITL は `interrupt_before` / `interrupt_after` で Node の前後に停止点を置き、Checkpointer に保存された State を `update_state` で書き換えてから `invoke(None, config)` で再開する設計が推奨されます。a の自前ブロックや c の例外停止は壊れやすく、d は Checkpointing なしには再開できません。",
       "source_refs": [
-        { "section_id": "05-05", "anchor": "interrupt で止めて、State を編集して再開する" },
-        { "section_id": "05-05", "anchor": "承認 UI と Agent をつなぐときの注意" }
+        {
+          "section_id": "05-05",
+          "anchor": "interrupt で止めて、State を編集して再開する"
+        },
+        {
+          "section_id": "05-05",
+          "anchor": "承認 UI と Agent をつなぐときの注意"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["langgraph", "human-in-the-loop", "interrupt"]
+      "tags": [
+        "langgraph",
+        "human-in-the-loop",
+        "interrupt"
+      ]
     },
     {
       "id": "q05-08",
       "question": "LangGraph の streaming で、UI に『○○中…』のような粗い進捗バーを表示したい場合に最も適した stream モードはどれですか。",
       "options": [
-        { "id": "a", "text": "`stream_mode=\"values\"` — 各ステップ後の State 全体を流す" },
-        { "id": "b", "text": "`stream_mode=\"updates\"` — 各 Node が返した差分だけを流す" },
-        { "id": "c", "text": "`stream_mode=\"messages\"` — LLM が出力するトークンをチャンクで流す" },
-        { "id": "d", "text": "`astream_events(version=\"v2\")` の全イベントをそのまま UI に転送する" }
+        {
+          "id": "a",
+          "text": "`stream_mode=\"values\"` — 各ステップ後の State 全体を流す"
+        },
+        {
+          "id": "b",
+          "text": "`stream_mode=\"messages\"` — LLM が出力するトークンをチャンクで流す"
+        },
+        {
+          "id": "c",
+          "text": "`astream_events(version=\"v2\")` の全イベントをそのまま UI に転送する"
+        },
+        {
+          "id": "d",
+          "text": "`stream_mode=\"updates\"` — 各 Node が返した差分だけを流す"
+        }
       ],
-      "answer": "b",
+      "answer": "d",
       "explanation": "粗い進捗バーには `updates` が向いています。差分だけなので帯域が軽く、Node 単位の状態表示に最適です。`values` はデバッグや内部監視、`messages` は本文の逐次表示、`astream_events` は細粒度なので、そのまま UI へ流すと変更に弱くなります。",
       "source_refs": [
-        { "section_id": "05-06", "anchor": "stream モードの基本" },
-        { "section_id": "05-06", "anchor": "astream_events で細粒度に拾う" }
+        {
+          "section_id": "05-06",
+          "anchor": "stream モードの基本"
+        },
+        {
+          "section_id": "05-06",
+          "anchor": "astream_events で細粒度に拾う"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["langgraph", "streaming", "ux"]
+      "tags": [
+        "langgraph",
+        "streaming",
+        "ux"
+      ]
     }
   ]
 }

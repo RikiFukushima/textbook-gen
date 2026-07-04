@@ -4,7 +4,7 @@ chapter_id: "02"
 title: RAG はコンテキスト設計である — 検索を「詰め込み」として読み直す
 order: 3
 estimated_minutes: 4
-estimated_chars: 1800
+estimated_chars: 1292
 learning_points:
   - RAG の本質が「検索した知識をコンテキストに詰め込む」ことだと理解できる
   - 検索の良し悪しがそのままコンテキストの質になること

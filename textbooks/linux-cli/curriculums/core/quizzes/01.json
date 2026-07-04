@@ -5,87 +5,183 @@
       "id": "q01-01",
       "question": "数百行あるログファイルの中身を確認したいとき、本文の推奨に沿った方法はどれですか?",
       "options": [
-        { "id": "a", "text": "cat で一気に表示する。長いファイルでも画面が自動的に止まるので読み逃しがない" },
-        { "id": "b", "text": "less で開き、Space などでスクロールしながら読む。終了は q を押す" },
-        { "id": "c", "text": "less で開くが、終了する方法がないのでターミナルごと閉じる必要がある" },
-        { "id": "d", "text": "CLI ではファイルの中身は読めないので、GUI のエディタで開くしかない" }
+        {
+          "id": "a",
+          "text": "less で開き、Space などでスクロールしながら読む。終了は q を押す"
+        },
+        {
+          "id": "b",
+          "text": "cat で一気に表示する。長いファイルでも画面が自動的に止まるので読み逃しがない"
+        },
+        {
+          "id": "c",
+          "text": "less で開くが、終了する方法がないのでターミナルごと閉じる必要がある"
+        },
+        {
+          "id": "d",
+          "text": "CLI ではファイルの中身は読めないので、GUI のエディタで開くしかない"
+        }
       ],
-      "answer": "b",
+      "answer": "a",
       "explanation": "長いファイルは less(ページャ)で 1 画面ずつ読むのが定番で、終了は q です。cat は全部を一気に出力するため、長いファイルでは中身が画面を流れて末尾しか読めません。迷ったら less を選んでおけば安全です。",
       "source_refs": [
-        { "section_id": "01-01", "anchor": "less — 1 画面ずつ読む(ページャ)" },
-        { "section_id": "01-01", "anchor": "使い分けの目安" }
+        {
+          "section_id": "01-01",
+          "anchor": "less — 1 画面ずつ読む(ページャ)"
+        },
+        {
+          "section_id": "01-01",
+          "anchor": "使い分けの目安"
+        }
       ],
       "difficulty": "easy",
-      "tags": ["cat", "less", "ファイル閲覧"]
+      "tags": [
+        "cat",
+        "less",
+        "ファイル閲覧"
+      ]
     },
     {
       "id": "q01-02",
       "question": "mkdir src/components/buttons を実行したら、途中の src が存在せずエラーになりました。この深い階層を 1 コマンドで作る方法はどれですか?",
       "options": [
-        { "id": "a", "text": "mkdir -p src/components/buttons と、-p オプションを付けて実行する" },
-        { "id": "b", "text": "mkdir -r src/components/buttons と、-r オプションを付けて実行する" },
-        { "id": "c", "text": "mkdir src components buttons と、3 つの名前を並べて実行する" },
-        { "id": "d", "text": "touch src/components/buttons と、touch コマンドで作成する" }
+        {
+          "id": "a",
+          "text": "mkdir -r src/components/buttons と、-r オプションを付けて実行する"
+        },
+        {
+          "id": "b",
+          "text": "mkdir -p src/components/buttons と、-p オプションを付けて実行する"
+        },
+        {
+          "id": "c",
+          "text": "mkdir src components buttons と、3 つの名前を並べて実行する"
+        },
+        {
+          "id": "d",
+          "text": "touch src/components/buttons と、touch コマンドで作成する"
+        }
       ],
-      "answer": "a",
+      "answer": "b",
       "explanation": "mkdir の -p オプションは、必要な中間ディレクトリをまとめて作ってくれます。-r は cp や rm で使う再帰オプションとの混同です。名前を並べると同じ場所に 3 つのディレクトリが並んで作られるだけで、touch はファイル用のコマンドです。",
       "source_refs": [
-        { "section_id": "01-02", "anchor": "mkdir — ディレクトリを作る" }
+        {
+          "section_id": "01-02",
+          "anchor": "mkdir — ディレクトリを作る"
+        }
       ],
       "difficulty": "easy",
-      "tags": ["mkdir", "ファイル作成"]
+      "tags": [
+        "mkdir",
+        "ファイル作成"
+      ]
     },
     {
       "id": "q01-03",
       "question": "draft.txt を report.txt という名前に改名したいとき、正しいコマンドはどれですか?",
       "options": [
-        { "id": "a", "text": "mv report.txt draft.txt" },
-        { "id": "b", "text": "cp draft.txt report.txt" },
-        { "id": "c", "text": "mv draft.txt report.txt" },
-        { "id": "d", "text": "touch report.txt" }
+        {
+          "id": "a",
+          "text": "mv report.txt draft.txt"
+        },
+        {
+          "id": "b",
+          "text": "cp draft.txt report.txt"
+        },
+        {
+          "id": "c",
+          "text": "mv draft.txt report.txt"
+        },
+        {
+          "id": "d",
+          "text": "touch report.txt"
+        }
       ],
       "answer": "c",
       "explanation": "改名は mv で行います。Linux から見れば移動も改名も「ファイルの場所(パス)を付け替える」同じ操作です。cp では複製されて元の draft.txt が残り、a は「元 → 先」の語順が逆、touch は空ファイルができるだけで中身は引き継がれません。",
       "source_refs": [
-        { "section_id": "01-03", "anchor": "mv — 動かす(改名も同じ)" }
+        {
+          "section_id": "01-03",
+          "anchor": "mv — 動かす(改名も同じ)"
+        }
       ],
       "difficulty": "easy",
-      "tags": ["mv", "cp", "改名"]
+      "tags": [
+        "mv",
+        "cp",
+        "改名"
+      ]
     },
     {
       "id": "q01-04",
       "question": "rm で削除したファイルについて、本文の説明と合っているものはどれですか?",
       "options": [
-        { "id": "a", "text": "ゴミ箱を経由せずその場で消え、「元に戻す」操作も存在しない" },
-        { "id": "b", "text": "GUI と同じくゴミ箱に移動するだけなので、必要なら後から復元できる" },
-        { "id": "c", "text": "削除の前に必ず確認プロンプトが表示されるので、誤って消す心配はない" },
-        { "id": "d", "text": "隠しファイルに変わるだけなので、ls -a を使えばいつでも見つけられる" }
+        {
+          "id": "a",
+          "text": "GUI と同じくゴミ箱に移動するだけなので、必要なら後から復元できる"
+        },
+        {
+          "id": "b",
+          "text": "削除の前に必ず確認プロンプトが表示されるので、誤って消す心配はない"
+        },
+        {
+          "id": "c",
+          "text": "隠しファイルに変わるだけなので、ls -a を使えばいつでも見つけられる"
+        },
+        {
+          "id": "d",
+          "text": "ゴミ箱を経由せずその場で消え、「元に戻す」操作も存在しない"
+        }
       ],
-      "answer": "a",
+      "answer": "d",
       "explanation": "rm はゴミ箱を経由せず、その場でファイルを消します。「元に戻す」操作もありません。確認しながら消したい場合は自分で -i オプションを付ける必要があり、デフォルトでは確認は出ません。削除前に ls で対象を確認する習慣が自衛策になります。",
       "source_refs": [
-        { "section_id": "01-03", "anchor": "注意点 — ゴミ箱はない" }
+        {
+          "section_id": "01-03",
+          "anchor": "注意点 — ゴミ箱はない"
+        }
       ],
       "difficulty": "easy",
-      "tags": ["rm", "削除リスク"]
+      "tags": [
+        "rm",
+        "削除リスク"
+      ]
     },
     {
       "id": "q01-05",
       "question": "Linux の「隠しファイル」について、本文の説明と合っているものはどれですか?",
       "options": [
-        { "id": "a", "text": "名前が . で始まるファイルで、表示するには ls -l オプションを使う" },
-        { "id": "b", "text": "専用の「隠し属性」が設定されたファイルで、属性を外さないと表示できない" },
-        { "id": "c", "text": "中身が保護されたファイルで、見られて困る情報を隠す目的で使われる" },
-        { "id": "d", "text": "名前が . で始まるだけの普通のファイルで、ls -a を使えば表示できる" }
+        {
+          "id": "a",
+          "text": "名前が . で始まるだけの普通のファイルで、ls -a を使えば表示できる"
+        },
+        {
+          "id": "b",
+          "text": "名前が . で始まるファイルで、表示するには ls -l オプションを使う"
+        },
+        {
+          "id": "c",
+          "text": "専用の「隠し属性」が設定されたファイルで、属性を外さないと表示できない"
+        },
+        {
+          "id": "d",
+          "text": "中身が保護されたファイルで、見られて困る情報を隠す目的で使われる"
+        }
       ],
-      "answer": "d",
+      "answer": "a",
       "explanation": "隠しファイルの正体は「名前が . で始まる」という名前のルールだけで、特別な隠し属性はなく中身も普通のファイルと同じです。ls -a で誰でも見えるため秘密を隠す目的には使えません(それは権限の仕事です)。-l は詳細表示のオプションで、隠しファイルを表示するのは -a です。",
       "source_refs": [
-        { "section_id": "01-04", "anchor": "「隠しファイル」の正体は名前のルール" }
+        {
+          "section_id": "01-04",
+          "anchor": "「隠しファイル」の正体は名前のルール"
+        }
       ],
       "difficulty": "easy",
-      "tags": ["dotfiles", "隠しファイル", "ls"]
+      "tags": [
+        "dotfiles",
+        "隠しファイル",
+        "ls"
+      ]
     }
   ]
 }

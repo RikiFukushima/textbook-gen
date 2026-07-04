@@ -26,8 +26,6 @@ key_terms:
     definition: 副作用のある操作の直前に人間の Yes/No を必須にする設計上のチェックポイント
 ---
 
-# Human-in-the-Loop — 人間の介入ポイントを設計する
-
 ## このセクションで学ぶこと
 
 - HITL が必要になる三つの典型シナリオ
@@ -56,7 +54,8 @@ app = graph.compile(
 
 config = {"configurable": {"thread_id": "task-1"}}
 result = app.invoke(initial_state, config=config)
-# ここで止まる。result には次に走る Node が "execute_action" であることが入っている
+# ここで止まる。result は停止時点の State。
+# 次に走る Node は app.get_state(config).next で取得できる(ここでは ("execute_action",))
 
 # 人間が UI で確認して承認したら、State をそのままに再開
 app.invoke(None, config=config)

@@ -37,6 +37,8 @@ checkpointer によってノードごとに State が保存されるようにな
 
 interrupt は checkpointer があって初めて成立します。止めた時点の State がチェックポイントとして保存されているからこそ、後でその地点から再開できるのです。
 
+> 補足: 本セクションで扱う `interrupt_before` + `invoke(None)` は「静的中断」と呼ばれる方式で、以下のコードはそのまま動きます。ただし現行の LangGraph では、ノード関数の中で動的に `interrupt()` を呼び、`Command(resume=...)` で再開する「動的 interrupt」が推奨です。静的中断は主にデバッグ用途(特定ノードの手前で必ず止めて中身を確認する)に位置づけられています。なお `MemorySaver` は現行では `InMemorySaver` に名称が変わっています(旧名も当面は動きます)。
+
 ## 具体例:ノードの前で止めて再開する
 
 中断ポイントは `compile` のときに `interrupt_before`(または `interrupt_after`)で指定します。

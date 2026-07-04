@@ -1,7 +1,7 @@
 ---
 section_id: "04-02"
 chapter_id: "04"
-title: Tool Use の概念 — LLM が外部世界に手を伸ばす仕組み
+title: Tool Use の概念
 order: 2
 estimated_minutes: 4
 estimated_chars: 1991
@@ -25,7 +25,7 @@ key_terms:
     definition: ツール定義を解釈し、LLM の指示に従って実際にコードを走らせる側。アプリケーション本体や Agent フレームワークが担う
 ---
 
-# Tool Use の概念 — LLM が外部世界に手を伸ばす仕組み
+# Tool Use の概念
 
 ## このセクションで学ぶこと
 

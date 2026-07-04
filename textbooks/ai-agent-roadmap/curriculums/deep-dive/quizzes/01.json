@@ -5,137 +5,284 @@
       "id": "q01-01",
       "question": "LlamaIndex が「Index」を中心の抽象に据えた設計思想として、最も適切な説明はどれですか?",
       "options": [
-        { "id": "a", "text": "RAG を「検索 + 生成」ではなく「索引設計 + 問い合わせ」として捉え直し、データをどう整理して問い合わせ可能にするかを前面に出すため" },
-        { "id": "b", "text": "ベクトル DB を内蔵することで外部依存をなくし、ローカルで完結する RAG パイプラインを実現するため" },
-        { "id": "c", "text": "LLM 呼び出しの連鎖を組み立てる Chain を中心に据え、複雑なエージェント処理を表現するため" },
-        { "id": "d", "text": "プロンプトテンプレートを最上位の抽象として、テンプレートの差し替えだけで挙動を変えられるようにするため" }
+        {
+          "id": "a",
+          "text": "RAG を「検索 + 生成」ではなく「索引設計 + 問い合わせ」として捉え直し、データをどう整理して問い合わせ可能にするかを前面に出すため"
+        },
+        {
+          "id": "b",
+          "text": "ベクトル DB を内蔵することで外部依存をなくし、ローカルで完結する RAG パイプラインを実現するため"
+        },
+        {
+          "id": "c",
+          "text": "LLM 呼び出しの連鎖を組み立てる Chain を中心に据え、複雑なエージェント処理を表現するため"
+        },
+        {
+          "id": "d",
+          "text": "プロンプトテンプレートを最上位の抽象として、テンプレートの差し替えだけで挙動を変えられるようにするため"
+        }
       ],
       "answer": "a",
       "explanation": "本文では「LlamaIndex はこの判断を Index という名前で前面に出すことで、RAG が『検索 + 生成』ではなく『索引設計 + 問い合わせ』であると思考の軸を変えてくれます」と説明されています。c は LangChain の設計思想であり、本章では「LangChain は連鎖(Chain)に重きを置く / LlamaIndex はデータを索引として持ち続けることに重きを置く」と対比されています。",
       "source_refs": [
-        { "section_id": "01-01", "anchor": "Index を中心の抽象" }
+        {
+          "section_id": "01-01",
+          "anchor": "Index を中心の抽象"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["llamaindex", "architecture"]
+      "tags": [
+        "llamaindex",
+        "architecture"
+      ]
     },
     {
       "id": "q01-02",
       "question": "LlamaIndex の処理を整理する「4 段階のパイプライン」について、各段階の責務として正しい組み合わせはどれですか?",
       "options": [
-        { "id": "a", "text": "Ingestion(Document の取り込み) → Indexing(Node 分割と埋め込み) → Retrieval(関連 Node の取得) → Synthesis(LLM で回答生成)" },
-        { "id": "b", "text": "Ingestion(Document の取り込み) → Retrieval(関連 Node の取得) → Indexing(Node 分割と埋め込み) → Synthesis(LLM で回答生成)" },
-        { "id": "c", "text": "Indexing(Node 分割と埋め込み) → Ingestion(Document の取り込み) → Synthesis(LLM で回答生成) → Retrieval(関連 Node の取得)" },
-        { "id": "d", "text": "Ingestion(Document の取り込み) → Indexing(Node 分割と埋め込み) → Synthesis(LLM で回答生成) → Retrieval(関連 Node の取得)" }
+        {
+          "id": "a",
+          "text": "Ingestion(Document の取り込み) → Retrieval(関連 Node の取得) → Indexing(Node 分割と埋め込み) → Synthesis(LLM で回答生成)"
+        },
+        {
+          "id": "b",
+          "text": "Ingestion(Document の取り込み) → Indexing(Node 分割と埋め込み) → Retrieval(関連 Node の取得) → Synthesis(LLM で回答生成)"
+        },
+        {
+          "id": "c",
+          "text": "Indexing(Node 分割と埋め込み) → Ingestion(Document の取り込み) → Synthesis(LLM で回答生成) → Retrieval(関連 Node の取得)"
+        },
+        {
+          "id": "d",
+          "text": "Ingestion(Document の取り込み) → Indexing(Node 分割と埋め込み) → Synthesis(LLM で回答生成) → Retrieval(関連 Node の取得)"
+        }
       ],
-      "answer": "a",
+      "answer": "b",
       "explanation": "本文の「4 段階のパイプラインで考える」で示されているとおり、Ingestion → Indexing → Retrieval → Synthesis の順序です。b は Retrieval と Indexing を取り違えており、d は Retrieval と Synthesis の順序が逆になっています。",
       "source_refs": [
-        { "section_id": "01-01", "anchor": "4 段階のパイプラインで考える" }
+        {
+          "section_id": "01-01",
+          "anchor": "4 段階のパイプラインで考える"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["llamaindex", "pipeline"]
+      "tags": [
+        "llamaindex",
+        "pipeline"
+      ]
     },
     {
       "id": "q01-03",
       "question": "LlamaIndex における Document / Node / Index の関係について、最も正しい説明はどれですか?",
       "options": [
-        { "id": "a", "text": "Document は元データ 1 件、Node は Document を分割した検索可能な最小単位、Index は Node 集合を問い合わせ可能にした構造体であり、検索でヒットするのは Node である" },
-        { "id": "b", "text": "Document をそのままベクトル化して Index に格納し、Node は検索結果を保持するためのキャッシュとして機能する" },
-        { "id": "c", "text": "Index は Document を直接保持し、Node はクエリ実行時に動的に生成される一時オブジェクトである" },
-        { "id": "d", "text": "Document・Node・Index はいずれも同じデータを別形式で保持する冗長な表現であり、検索性能のためにすべて同期して保持される" }
+        {
+          "id": "a",
+          "text": "Document をそのままベクトル化して Index に格納し、Node は検索結果を保持するためのキャッシュとして機能する"
+        },
+        {
+          "id": "b",
+          "text": "Index は Document を直接保持し、Node はクエリ実行時に動的に生成される一時オブジェクトである"
+        },
+        {
+          "id": "c",
+          "text": "Document は元データ 1 件、Node は Document を分割した検索可能な最小単位、Index は Node 集合を問い合わせ可能にした構造体であり、検索でヒットするのは Node である"
+        },
+        {
+          "id": "d",
+          "text": "Document・Node・Index はいずれも同じデータを別形式で保持する冗長な表現であり、検索性能のためにすべて同期して保持される"
+        }
       ],
-      "answer": "a",
+      "answer": "c",
       "explanation": "本文では「Document は取り込んだ生データ 1 件、Node は検索可能な最小単位(チャンク)、Index は Node 集合を問い合わせ可能にした構造体」と整理され、「検索でヒットするのは Node であって Document ではありません」と明記されています。b は「Document を直接ベクトル化していると思ってしまう」初学者の誤解として本文でも注意喚起されているパターンです。",
       "source_refs": [
-        { "section_id": "01-02", "anchor": "検索でヒットするのは" }
+        {
+          "section_id": "01-02",
+          "anchor": "検索でヒットするのは"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["llamaindex", "data-model"]
+      "tags": [
+        "llamaindex",
+        "data-model"
+      ]
     },
     {
       "id": "q01-04",
       "question": "Node のメタデータ設計について、本文の指針として最も適切なものはどれですか?",
       "options": [
-        { "id": "a", "text": "メタデータは多いほど検索精度が上がるため、Document に存在する属性は基本的にすべて Node のメタデータとして残す" },
-        { "id": "b", "text": "出典表示や検索フィルタに役立つ一方、盛りすぎはトークン浪費とノイズで精度を下げるため、必要に応じて excluded_llm_metadata_keys などで LLM に渡す情報と検索専用情報を分ける" },
-        { "id": "c", "text": "メタデータは検索時にしか参照されないため、サイズに関係なく自由に詰め込んでよい" },
-        { "id": "d", "text": "メタデータは LlamaIndex 内部でのみ使われるため、LLM に渡されるプロンプトには含まれず影響しない" }
+        {
+          "id": "a",
+          "text": "メタデータは多いほど検索精度が上がるため、Document に存在する属性は基本的にすべて Node のメタデータとして残す"
+        },
+        {
+          "id": "b",
+          "text": "メタデータは検索時にしか参照されないため、サイズに関係なく自由に詰め込んでよい"
+        },
+        {
+          "id": "c",
+          "text": "メタデータは LlamaIndex 内部でのみ使われるため、LLM に渡されるプロンプトには含まれず影響しない"
+        },
+        {
+          "id": "d",
+          "text": "出典表示や検索フィルタに役立つ一方、盛りすぎはトークン浪費とノイズで精度を下げるため、必要に応じて excluded_llm_metadata_keys などで LLM に渡す情報と検索専用情報を分ける"
+        }
       ],
-      "answer": "b",
+      "answer": "d",
       "explanation": "本文では「メタデータを盛りすぎないこと。Node のメタデータは多くの場合 LLM に渡すプロンプトにも入るため、不要な情報まで詰め込むとトークンを浪費し、ノイズで回答精度が下がります」と注意され、`excluded_llm_metadata_keys` / `excluded_embed_metadata_keys` での切り分けが紹介されています。c や d はメタデータが LLM プロンプトに入らないという誤った前提に立っています。",
       "source_refs": [
-        { "section_id": "01-02", "anchor": "メタデータを盛りすぎないこと" }
+        {
+          "section_id": "01-02",
+          "anchor": "メタデータを盛りすぎないこと"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["llamaindex", "metadata"]
+      "tags": [
+        "llamaindex",
+        "metadata"
+      ]
     },
     {
       "id": "q01-05",
       "question": "LlamaIndex の Node Parser の選択について、本文の説明と整合する内容はどれですか?",
       "options": [
-        { "id": "a", "text": "SemanticSplitterNodeParser は埋め込みで意味の切れ目を捉えられるため、取り込みコストを問わず常に最優先で採用すべきである" },
-        { "id": "b", "text": "TokenTextSplitter はトークン数を厳密に守って分割するため、LLM への入力長を厳密に管理したい場面で有効である" },
-        { "id": "c", "text": "SentenceSplitter はトークン境界を完全に無視するため、長文を扱う本番用途では推奨されない" },
-        { "id": "d", "text": "Markdown 文書には専用の Parser はなく、SemanticSplitter を使うのが唯一の現実解である" }
+        {
+          "id": "a",
+          "text": "TokenTextSplitter はトークン数を厳密に守って分割するため、LLM への入力長を厳密に管理したい場面で有効である"
+        },
+        {
+          "id": "b",
+          "text": "SemanticSplitterNodeParser は埋め込みで意味の切れ目を捉えられるため、取り込みコストを問わず常に最優先で採用すべきである"
+        },
+        {
+          "id": "c",
+          "text": "SentenceSplitter はトークン境界を完全に無視するため、長文を扱う本番用途では推奨されない"
+        },
+        {
+          "id": "d",
+          "text": "Markdown 文書には専用の Parser はなく、SemanticSplitter を使うのが唯一の現実解である"
+        }
       ],
-      "answer": "b",
+      "answer": "a",
       "explanation": "本文では TokenTextSplitter を「トークン数を厳密に守って切る。LLM への入力長を厳密に管理したいときに有効」と説明しています。a は「『とりあえず Semantic』は危険」の節で取り込みコストと適性を見極めるよう注意されています。c は逆で、SentenceSplitter は実務での標準的な出発点として推奨されています。d は MarkdownNodeParser など専用 Parser の存在が本文に記載されています。",
       "source_refs": [
-        { "section_id": "01-03", "anchor": "TokenTextSplitter" }
+        {
+          "section_id": "01-03",
+          "anchor": "TokenTextSplitter"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["llamaindex", "chunking", "node-parser"]
+      "tags": [
+        "llamaindex",
+        "chunking",
+        "node-parser"
+      ]
     },
     {
       "id": "q01-06",
       "question": "Vector / Keyword(BM25) / Hybrid の Retriever の使い分けについて、本文の説明として正しいものはどれですか?",
       "options": [
-        { "id": "a", "text": "BM25 は固有名詞や型番・コマンド名のように語そのものの一致が決定的な場面で強く、Vector は言い換えや意味的近さに強い。Hybrid はそれぞれの弱点を補い合うため実務 RAG で既定の選択肢になりつつある" },
-        { "id": "b", "text": "Hybrid Retriever は常に Vector・BM25 単独より精度が高くなることが保証されているため、評価を省略してデフォルトで採用してよい" },
-        { "id": "c", "text": "BM25 Retriever は日本語であってもデフォルトの設定で問題なく動作するため、トークナイザの設定は不要である" },
-        { "id": "d", "text": "Vector Retriever は固有名詞や型番の完全一致検索に最も強く、BM25 は言い換え検索に強い" }
+        {
+          "id": "a",
+          "text": "Hybrid Retriever は常に Vector・BM25 単独より精度が高くなることが保証されているため、評価を省略してデフォルトで採用してよい"
+        },
+        {
+          "id": "b",
+          "text": "BM25 は固有名詞や型番・コマンド名のように語そのものの一致が決定的な場面で強く、Vector は言い換えや意味的近さに強い。Hybrid はそれぞれの弱点を補い合うため実務 RAG で既定の選択肢になりつつある"
+        },
+        {
+          "id": "c",
+          "text": "BM25 Retriever は日本語であってもデフォルトの設定で問題なく動作するため、トークナイザの設定は不要である"
+        },
+        {
+          "id": "d",
+          "text": "Vector Retriever は固有名詞や型番の完全一致検索に最も強く、BM25 は言い換え検索に強い"
+        }
       ],
-      "answer": "a",
+      "answer": "b",
       "explanation": "本文では Vector(言い換え・意味的近さ)、BM25(固有名詞・型番・コマンド名の語そのものの一致)、Hybrid(両者の弱点を補完、実務 RAG で既定の選択肢になりつつある)と整理されています。b は「Hybrid が無難」と書きつつ「万能ではない。評価して比較するのが本道」と明確に否定されています。c は「BM25 が日本語で素直に動かない」点が注意点として挙げられています。d は Vector と BM25 の役割が逆です。",
       "source_refs": [
-        { "section_id": "01-04", "anchor": "Hybrid" }
+        {
+          "section_id": "01-04",
+          "anchor": "Hybrid"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["llamaindex", "retriever", "hybrid-search"]
+      "tags": [
+        "llamaindex",
+        "retriever",
+        "hybrid-search"
+      ]
     },
     {
       "id": "q01-07",
       "question": "Query Engine の Retriever 段と Postprocessor 段の設計について、本文で示されている「定石」として最も適切なものはどれですか?",
       "options": [
-        { "id": "a", "text": "最初から top_k を小さく絞り(例: top_k=3)、Postprocessor を挟まずに LLM に渡すことで余計な処理コストを抑える" },
-        { "id": "b", "text": "Retriever 段では広めに(例: top_k=10)拾い、Postprocessor 段で SimilarityPostprocessor などにより閾値で絞る、いわゆる「広く拾って厳しく絞る」流れを取る" },
-        { "id": "c", "text": "Retriever 段で広く拾い、Postprocessor では順序や件数を変えず、LLM 側のプロンプトで取捨選択させるのが定石である" },
-        { "id": "d", "text": "Retriever 段で top_k=1 まで絞り込み、Postprocessor で類似度を緩く設定して候補を増やすのが望ましい" }
+        {
+          "id": "a",
+          "text": "最初から top_k を小さく絞り(例: top_k=3)、Postprocessor を挟まずに LLM に渡すことで余計な処理コストを抑える"
+        },
+        {
+          "id": "b",
+          "text": "Retriever 段で広く拾い、Postprocessor では順序や件数を変えず、LLM 側のプロンプトで取捨選択させるのが定石である"
+        },
+        {
+          "id": "c",
+          "text": "Retriever 段では広めに(例: top_k=10)拾い、Postprocessor 段で SimilarityPostprocessor などにより閾値で絞る、いわゆる「広く拾って厳しく絞る」流れを取る"
+        },
+        {
+          "id": "d",
+          "text": "Retriever 段で top_k=1 まで絞り込み、Postprocessor で類似度を緩く設定して候補を増やすのが望ましい"
+        }
       ],
-      "answer": "b",
+      "answer": "c",
       "explanation": "本文では「top_k=10 で広めに拾ってから Postprocessor で絞る」「拾う段は緩く、絞る段は厳しく」と明示されており、SimilarityPostprocessor で類似度 0.7 未満をカットする例が示されています。a は逆方向で、本文でも「最初から top_k=3 にすると取りこぼしが起こりやすい」と否定されています。c は Postprocessor の役割を放棄しており、本文の方針と矛盾します。",
       "source_refs": [
-        { "section_id": "01-05", "anchor": "広めに拾って" }
+        {
+          "section_id": "01-05",
+          "anchor": "広めに拾って"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["llamaindex", "query-engine", "postprocessor"]
+      "tags": [
+        "llamaindex",
+        "query-engine",
+        "postprocessor"
+      ]
     },
     {
       "id": "q01-08",
       "question": "Response Synthesizer の Response Mode の選択について、本文の整理として最も正しいものはどれですか?",
       "options": [
-        { "id": "a", "text": "compact は Node を 1 つのプロンプトに詰めて 1 回で回答する既定モードで、FAQ 的な単発質問では十分。一方 refine と tree_summarize は LLM 呼び出し回数が増えるため、まず compact で評価してから切り替えるのが安全" },
-        { "id": "b", "text": "refine は常に compact より精度が高く、コストも変わらないため、最初から refine を選ぶのが望ましい" },
-        { "id": "c", "text": "tree_summarize は 1 回の LLM 呼び出しで完結するため、数十〜数百 Node を扱う場合でもレイテンシが最小で済む" },
-        { "id": "d", "text": "compact は Node を 1 つずつ順に LLM に渡して回答を磨いていく方式で、Node 数だけ呼び出しが走る" }
+        {
+          "id": "a",
+          "text": "refine は常に compact より精度が高く、コストも変わらないため、最初から refine を選ぶのが望ましい"
+        },
+        {
+          "id": "b",
+          "text": "tree_summarize は 1 回の LLM 呼び出しで完結するため、数十〜数百 Node を扱う場合でもレイテンシが最小で済む"
+        },
+        {
+          "id": "c",
+          "text": "compact は Node を 1 つずつ順に LLM に渡して回答を磨いていく方式で、Node 数だけ呼び出しが走る"
+        },
+        {
+          "id": "d",
+          "text": "compact は Node を 1 つのプロンプトに詰めて 1 回で回答する既定モードで、FAQ 的な単発質問では十分。一方 refine と tree_summarize は LLM 呼び出し回数が増えるため、まず compact で評価してから切り替えるのが安全"
+        }
       ],
-      "answer": "a",
+      "answer": "d",
       "explanation": "本文では compact が既定で「コンテキストに収まる範囲なら最も速く安い」、refine と tree_summarize は「LLM 呼び出し回数が増える」「まず compact で十分かを評価してから切り替えるのが安全」と整理されています。b は「精度のために refine」と短絡しないよう注意されている内容に反します。c は tree_summarize が木構造で複数回の要約を行う点と矛盾します。d は refine の説明であり、compact の説明ではありません。",
       "source_refs": [
-        { "section_id": "01-06", "anchor": "呼び出し回数が増える" }
+        {
+          "section_id": "01-06",
+          "anchor": "呼び出し回数が増える"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["llamaindex", "response-synthesizer"]
+      "tags": [
+        "llamaindex",
+        "response-synthesizer"
+      ]
     }
   ]
 }

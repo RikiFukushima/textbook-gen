@@ -1,0 +1,285 @@
+{
+  "chapter_id": "05",
+  "questions": [
+    {
+      "id": "q05-01",
+      "question": "checkpointer が State を保存するタイミングとして、本文の説明に最も合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "グラフが END に到達したときに一度だけ保存する"
+        },
+        {
+          "id": "b",
+          "text": "invoke の呼び出し前に入力だけを保存する"
+        },
+        {
+          "id": "c",
+          "text": "ノードを1つ実行するたびに、その時点の State 全体をスナップショットとして保存する"
+        },
+        {
+          "id": "d",
+          "text": "recursion_limit に達したときにだけ保存する"
+        }
+      ],
+      "answer": "c",
+      "explanation": "checkpointer は、グラフがノードを1つ実行するたびに、その時点の State 全体をスナップショット(チェックポイント)として保存する仕組みです。チェックポイントには State に加えて実行位置の情報も含まれるため、保存地点から後で正確に再開できます。",
+      "source_refs": [
+        {
+          "section_id": "05-01",
+          "anchor": "ノードを 1 つ実行するたびに、その時点の State 全体をスナップショット"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "checkpointer",
+        "persistence"
+      ]
+    },
+    {
+      "id": "q05-02",
+      "question": "永続化を有効にするために checkpointer を渡すのはどのタイミングですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "StateGraph をインスタンス化するとき"
+        },
+        {
+          "id": "b",
+          "text": "add_node でノードを登録するとき"
+        },
+        {
+          "id": "c",
+          "text": "invoke のたびに引数として渡す"
+        },
+        {
+          "id": "d",
+          "text": "compile のとき(compile(checkpointer=...))"
+        }
+      ],
+      "answer": "d",
+      "explanation": "永続化を有効にするのは、compile のときに checkpointer を渡すだけです(app = graph.compile(checkpointer=checkpointer))。最も手軽なのはメモリ上に保持する MemorySaver で、本番では SqliteSaver や PostgresSaver に差し替えられます。",
+      "source_refs": [
+        {
+          "section_id": "05-01",
+          "anchor": "`compile` のときに checkpointer を渡すだけ"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "checkpointer",
+        "compile"
+      ]
+    },
+    {
+      "id": "q05-03",
+      "question": "MemorySaver と SqliteSaver / PostgresSaver の使い分けについて、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "MemorySaver はメモリ上に持つだけで再起動すると消えるため、本番は永続ストアを使う"
+        },
+        {
+          "id": "b",
+          "text": "MemorySaver はプロセスをまたいで状態を残せるので本番向きである"
+        },
+        {
+          "id": "c",
+          "text": "SqliteSaver は開発専用で、本番では必ず MemorySaver を使う"
+        },
+        {
+          "id": "d",
+          "text": "3つは互換性がなく、途中で差し替えることはできない"
+        }
+      ],
+      "answer": "a",
+      "explanation": "MemorySaver はプロセスのメモリ上に持つだけなので、アプリを再起動すると消えます。デモやテストには十分ですが、本番の会話履歴を残したいなら SQLite や PostgreSQL のような永続ストアを選びます。インターフェースは共通なので差し替えるだけで移行できます。",
+      "source_refs": [
+        {
+          "section_id": "05-01",
+          "anchor": "アプリを再起動すると消えます"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "checkpointer",
+        "memorysaver"
+      ]
+    },
+    {
+      "id": "q05-04",
+      "question": "thread_id の役割として、本文の説明に最も合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "並行実行するノードのスレッド数を指定する値である"
+        },
+        {
+          "id": "b",
+          "text": "一連のチェックポイントを束ねる会話・セッションの識別子である"
+        },
+        {
+          "id": "c",
+          "text": "recursion_limit と同じく実行ステップ数の上限を表す値である"
+        },
+        {
+          "id": "d",
+          "text": "checkpointer の保存先ファイルのパスを表す値である"
+        }
+      ],
+      "answer": "b",
+      "explanation": "thread_id は一連のチェックポイントを束ねる「会話の住所」のような識別子です。同じ thread_id を指定して実行すると、その最新チェックポイントを読み出して前回の続きから State を引き継ぎます。違う thread_id を渡すとまっさらな State で始まります。",
+      "source_refs": [
+        {
+          "section_id": "05-02",
+          "anchor": "thread_id は会話の住所"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "thread-id",
+        "persistence"
+      ]
+    },
+    {
+      "id": "q05-05",
+      "question": "thread_id を実行時に渡す場所として、本文のコード例で示されているものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "compile の引数に thread_id を直接渡す"
+        },
+        {
+          "id": "b",
+          "text": "入力 State の中に thread_id キーを追加する"
+        },
+        {
+          "id": "c",
+          "text": "config の configurable に入れて渡す({\"configurable\": {\"thread_id\": ...}})"
+        },
+        {
+          "id": "d",
+          "text": "StateGraph のコンストラクタに渡す"
+        }
+      ],
+      "answer": "c",
+      "explanation": "thread_id は実行時の config の configurable に入れて渡します(config = {\"configurable\": {\"thread_id\": \"user-42-chat-1\"}})。同じ thread_id で再 invoke すると checkpointer がその State を復元してから新しい入力を足すため、過去のやり取りを踏まえて応答できます。",
+      "source_refs": [
+        {
+          "section_id": "05-02",
+          "anchor": "config = {\"configurable\": {\"thread_id\": \"user-42-chat-1\"}}"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "thread-id",
+        "config"
+      ]
+    },
+    {
+      "id": "q05-06",
+      "question": "中断したグラフを「中断地点から再開」するには、本文によればどうしますか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "新しい入力辞書を通常どおり渡して同じ config で再 invoke する"
+        },
+        {
+          "id": "b",
+          "text": "compile をやり直してから最初から invoke する"
+        },
+        {
+          "id": "c",
+          "text": "recursion_limit をリセットしてから invoke する"
+        },
+        {
+          "id": "d",
+          "text": "入力に None を渡して同じ config で再 invoke する"
+        }
+      ],
+      "answer": "d",
+      "explanation": "再開は入力に None を渡して同じ config(thread_id)で再 invoke します。None は「続きを実行せよ」の意味になり、中断地点から再開します。通常の入力辞書を渡すと「中断地点からの再開」ではなく新しい入力の追加として扱われ、意図せず State が増えることがあります。",
+      "source_refs": [
+        {
+          "section_id": "05-03",
+          "anchor": "入力に `None` を渡して同じ config で再 invoke"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "interrupt",
+        "resume"
+      ]
+    },
+    {
+      "id": "q05-07",
+      "question": "interrupt_before で中断した後、再開前に State の内容を修正したいときに使うメソッドはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "update_state で State を書き換える"
+        },
+        {
+          "id": "b",
+          "text": "get_state で State を上書きする"
+        },
+        {
+          "id": "c",
+          "text": "add_node で新しいノードを追加する"
+        },
+        {
+          "id": "d",
+          "text": "compile を再実行して State を初期化する"
+        }
+      ],
+      "answer": "a",
+      "explanation": "中断中は get_state で現在の State を確認し、内容を直したいなら update_state で State を書き換えてから再開します。get_state はあくまで状態を「取得・確認」するメソッドで、書き換えは update_state の役割です。",
+      "source_refs": [
+        {
+          "section_id": "05-03",
+          "anchor": "`update_state` で State を書き換えてから再開"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "interrupt",
+        "update_state"
+      ]
+    },
+    {
+      "id": "q05-08",
+      "question": "human-in-the-loop(HITL)における「承認」「修正」「差し戻し(却下)」の対応として、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "承認は compile し直すこと、修正は add_node、差し戻しは thread_id を変えること"
+        },
+        {
+          "id": "b",
+          "text": "承認は invoke(None) を呼ぶこと、修正は再開前に update_state を挟むこと、差し戻しは再開を呼ばず止めたままにすること"
+        },
+        {
+          "id": "c",
+          "text": "3つの操作はいずれも recursion_limit の値を変えることで表現する"
+        },
+        {
+          "id": "d",
+          "text": "承認・修正・差し戻しはすべて get_state だけで完結する"
+        }
+      ],
+      "answer": "b",
+      "explanation": "HITL では「承認」は単に invoke(None) を呼ぶこと、「修正」は再開前に update_state を挟むこと、「差し戻し(却下)」は再開を呼ばずに止めたままにすること、と素直に対応します。3つの操作がすべて同じ部品の組み合わせで表現できるのが LangGraph の HITL の利点です。",
+      "source_refs": [
+        {
+          "section_id": "05-04",
+          "anchor": "「承認」は単に `invoke(None)` を呼ぶこと"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "human-in-the-loop",
+        "approval"
+      ]
+    }
+  ]
+}

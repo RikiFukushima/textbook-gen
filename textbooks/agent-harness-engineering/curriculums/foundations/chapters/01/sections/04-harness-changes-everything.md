@@ -16,7 +16,7 @@ tags:
 related_sections:
   - "01-03"
 key_terms:
-  - term: harness 設計
+  - term: harness の設計
     definition: モデルに与える記憶・行動・継続・制約をどう組むかを決める設計作業。同じモデルでも harness の設計次第で挙動が大きく変わる。
   - term: 能力の差
     definition: エージェント同士の振る舞いの違い。モデルの性能だけでなく、周辺の harness の作り方から生まれる差を含む。

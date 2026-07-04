@@ -61,7 +61,7 @@ def app(inputs: dict) -> dict:
 results = evaluate(
     app,
     data="support-summaries",          # データセット名
-    evaluators=[exact_match, llm_judge],  # 03-03 で作った評価器
+    evaluators=[exact_match, llm_judge],  # ともに 03-03 で用意した評価器
     experiment_prefix="baseline",      # 実験名の接頭辞
 )
 ```

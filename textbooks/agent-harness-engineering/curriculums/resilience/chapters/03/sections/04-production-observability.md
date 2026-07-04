@@ -10,9 +10,9 @@ learning_points:
   - 平均値だけでなく分布と外れ値を見ないと事故を見落とす
   - しきい値を決めてアラートにつなぎ、悪化に気づける状態をつくる
 tags:
-  - 観測
-  - 本番運用
-  - コスト
+  - observability
+  - production
+  - cost
 related_sections:
   - "03-01"
   - "03-05"

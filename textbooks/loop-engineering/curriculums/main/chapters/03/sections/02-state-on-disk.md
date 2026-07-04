@@ -9,11 +9,16 @@ learning_points:
   - 状態を「会話の外で生き残る場所」に置くという発想を理解する
   - メモリの置き場としてMarkdown・課題ボード・外部DBがあることを知る
   - 永続メモリは「全部詰める」ではなく「必要な分だけ読み込む」点を区別できる
-tags: [loop-engineering, memory, state, markdown, persistence]
+tags:
+  - ループエンジニアリング
+  - メモリ
+  - 状態
+  - Markdown
+  - 永続化
 related_sections: ["03-01", "03-03"]
 key_terms:
-  - term: メモリファイル
-    definition: 作業の状態を会話の外に書き出しておくファイル。Markdown でループの進行状況を記録するのが代表的。
+  - term: Markdown ファイル
+    definition: 作業の状態を会話の外に書き出しておくファイル。リポジトリに置いた Markdown でループの進行状況を記録するのが代表的。
   - term: 永続メモリ
     definition: 1回の会話の外で生き残り、各周回から読み書きされる状態の置き場。ディスクや外部システムに置く。
   - term: 課題管理ボード

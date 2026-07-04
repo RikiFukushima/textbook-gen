@@ -4,7 +4,7 @@ target_audience:
   prerequisites:
     - Python の基本文法(関数・クラス・パッケージのインストール)を理解している
     - LLM と API(リクエスト/レスポンス、APIキー)の基本概念を理解している
-  estimated_hours: 5
+  estimated_hours: 2
 style:
   tone: ですます調・実務寄り
   code_examples: true

@@ -18,8 +18,8 @@ related_sections:
 key_terms:
   - term: Claude Code
     definition: 自分のパソコン上で、言葉で頼んだ作業を手伝ってくれる AI の相棒。ファイルの読み書きなど実際の作業まで行える。
-  - term: AI アシスタント
-    definition: 人の代わりに考えたり調べたりして作業を助けてくれる、人工知能を使った道具のこと。
+  - term: アシスタント
+    definition: 人の代わりに考えたり調べたりして作業を助けてくれる存在。Claude Code はこれをパソコンの中で担ってくれる。
 ---
 
 ## このセクションで学ぶこと

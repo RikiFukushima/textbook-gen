@@ -54,7 +54,7 @@ messages = prompt.invoke({"language": "日本語", "text": "Hello, world."})
 print(messages.to_messages())
 ```
 
-`prompt.invoke({...})` に **入力変数** を辞書で渡すと、`{language}` や `{text}` が実際の値に置き換わり、SystemMessage と HumanMessage のリストが生成されます。これをそのまま ChatModel に渡せば応答が得られます。文字列だけの単純なプロンプトなら `PromptTemplate.from_template("...{x}...")` を使い、`format` で文字列を得ることもできます。
+`prompt.invoke({...})` に **入力変数** を辞書で渡すと、`{language}` や `{text}` が実際の値に置き換わり、`ChatPromptValue` が返ります。これに `.to_messages()` を呼ぶと SystemMessage と HumanMessage のリストになります(上のコードの `print` がその例です)。`ChatPromptValue` はそのまま ChatModel に渡しても応答が得られます。文字列だけの単純なプロンプトなら `PromptTemplate.from_template("...{x}...")` を使い、`format` で文字列を得ることもできます。
 
 ## 注意点
 

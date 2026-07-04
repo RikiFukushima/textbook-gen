@@ -21,7 +21,7 @@ key_terms:
     definition: 検索で取得した複数の Node を LLM に渡し、最終的な回答テキストを組み立てるコンポーネント。
   - term: response_mode
     definition: Response Synthesizer の合成戦略を選ぶパラメータ。refine / compact / tree_summarize などがある。
-  - term: context window
+  - term: コンテキスト長
     definition: LLM が 1 回の呼び出しで読み込めるトークン数の上限。これを超える Node 群はまとめ方の工夫が必要。
 ---
 

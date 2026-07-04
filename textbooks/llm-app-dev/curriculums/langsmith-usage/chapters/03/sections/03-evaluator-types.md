@@ -57,7 +57,19 @@ def exact_match(run, example):
 
 LLM-as-judge は、採点用のプロンプトを与えた LLM に出力の品質を判定させる手法です。「この要約は元の問い合わせの要点を正しく捉えているか、1〜5 で採点してください」のように指示します。意味的な正しさ・トーン・有用性といった、ルールでは書ききれない柔らかい基準を評価できるのが最大の強みです。参照出力がないタスクでも、入力と出力だけ見て採点させられます。
 
-ただし注意点もあります。判定にもコストとレイテンシがかかり、LLM 特有のばらつきで同じ入出力でもスコアが揺れることがあります。採点基準を明確に書く、評価モデルを固定する、temperature を下げる、採点理由も出力させて検証するといった工夫で安定させます。LangSmith には汎用の LLM-as-judge 評価器が用意されており、基準(criteria)を指定して使えます。
+LangSmith には汎用の LLM-as-judge 評価器を組み立てるヘルパ(`langsmith.evaluation` の `LangChainStringEvaluator` など)が用意されており、基準(criteria)を指定するだけで評価器を作れます。次のセクションで使えるよう、ここでは `llm_judge` という名前で 1 つ用意しておきます。
+
+```python
+from langsmith.evaluation import LangChainStringEvaluator
+
+# 「要約が問い合わせの要点を捉えているか」を判定する LLM-as-judge
+llm_judge = LangChainStringEvaluator(
+    "criteria",
+    config={"criteria": {"faithful": "要約は元の問い合わせの要点を正しく捉えているか"}},
+)
+```
+
+ただし注意点もあります。判定にもコストとレイテンシがかかり、LLM 特有のばらつきで同じ入出力でもスコアが揺れることがあります。採点基準を明確に書く、評価モデルを固定する、temperature を下げる、採点理由も出力させて検証するといった工夫で安定させます。
 
 ## 選び方のトレードオフ
 

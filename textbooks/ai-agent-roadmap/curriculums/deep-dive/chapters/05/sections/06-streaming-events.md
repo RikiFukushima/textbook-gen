@@ -27,8 +27,6 @@ key_terms:
     definition: バックエンドのどの瞬間を UI のどの表示要素に対応させるかを定義する設計作業
 ---
 
-# Streaming とイベント設計 — UI に進捗を返す
-
 ## このセクションで学ぶこと
 
 - LangGraph の stream モード三種(values / updates / messages)の違い

@@ -1,0 +1,216 @@
+{
+  "chapter_id": "01",
+  "questions": [
+    {
+      "id": "q01-01",
+      "question": "Go の代表的な特徴の三本柱として本文で挙げられている組み合わせはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "インタプリタ実行・動的型付け・オブジェクト指向"
+        },
+        {
+          "id": "b",
+          "text": "コンパイル・静的型付け・並行処理"
+        },
+        {
+          "id": "c",
+          "text": "コンパイル・動的型付け・ガベージコレクション"
+        },
+        {
+          "id": "d",
+          "text": "インタプリタ実行・静的型付け・並行処理"
+        }
+      ],
+      "answer": "b",
+      "explanation": "Go はソースを実行前に機械語へ変換するコンパイル言語で、型をコンパイル時に確定させる静的型付けを採用し、goroutine による並行処理を言語に組み込んでいます。これがコンパイル・静的型付け・並行処理の三本柱です。インタプリタ実行や動的型付けは Go の特徴ではありません。",
+      "source_refs": [
+        {
+          "section_id": "01-01",
+          "anchor": "Go の主な特徴"
+        }
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "go",
+        "言語特性"
+      ]
+    },
+    {
+      "id": "q01-02",
+      "question": "Go が第一候補になりにくい領域として本文が挙げているのはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "Web サーバー・API バックエンド"
+        },
+        {
+          "id": "b",
+          "text": "CLI ツール"
+        },
+        {
+          "id": "c",
+          "text": "機械学習などライブラリが他言語に集中している分野"
+        },
+        {
+          "id": "d",
+          "text": "クラウド基盤・インフラ系ツール"
+        }
+      ],
+      "answer": "c",
+      "explanation": "本文では、機械学習のように既存ライブラリが Python など他言語に集中している分野や、ブラウザ上のフロントエンドは Go の第一候補になりにくいと説明されています。Web サーバー・CLI ツール・クラウド基盤はいずれも Go が得意とする領域です。",
+      "source_refs": [
+        {
+          "section_id": "01-01",
+          "anchor": "どんな場面で使われるか"
+        }
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "go",
+        "使いどころ"
+      ]
+    },
+    {
+      "id": "q01-03",
+      "question": "Go を導入した後、インストールが成功したかどうかを確認するために実行するコマンドはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "go check"
+        },
+        {
+          "id": "b",
+          "text": "go status"
+        },
+        {
+          "id": "c",
+          "text": "go --installed"
+        },
+        {
+          "id": "d",
+          "text": "go version"
+        }
+      ],
+      "answer": "d",
+      "explanation": "`go version` を実行し、バージョン番号と OS・CPU 種別が表示されればインストールは成功です。`command not found` と出る場合は go が PATH に登録されていない可能性が高いとされています。",
+      "source_refs": [
+        {
+          "section_id": "01-02",
+          "anchor": "go version"
+        }
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "go",
+        "環境構築"
+      ]
+    },
+    {
+      "id": "q01-04",
+      "question": "最小の Go プログラムにおいて、プログラムを実行したときに最初に呼び出される関数はどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "func main"
+        },
+        {
+          "id": "b",
+          "text": "func start"
+        },
+        {
+          "id": "c",
+          "text": "func init"
+        },
+        {
+          "id": "d",
+          "text": "func run"
+        }
+      ],
+      "answer": "a",
+      "explanation": "プログラムを実行すると Go は `func main` を最初に呼び出します。ここがプログラムの開始地点です。start や run といった名前の関数が自動的に呼ばれるわけではありません。",
+      "source_refs": [
+        {
+          "section_id": "01-03",
+          "anchor": "func main() { ... }"
+        }
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "go",
+        "hello-world"
+      ]
+    },
+    {
+      "id": "q01-05",
+      "question": "`import \"fmt\"` の役割として本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "プログラムを機械語にコンパイルする"
+        },
+        {
+          "id": "b",
+          "text": "画面への出力機能を持つ標準ライブラリのパッケージを取り込む"
+        },
+        {
+          "id": "c",
+          "text": "ファイルが属するパッケージを宣言する"
+        },
+        {
+          "id": "d",
+          "text": "実行の開始地点となる関数を定義する"
+        }
+      ],
+      "answer": "b",
+      "explanation": "`import \"fmt\"` は、画面への出力機能を持つ標準ライブラリ fmt を取り込む宣言です。パッケージの宣言は `package main`、開始地点の定義は `func main` が担います。",
+      "source_refs": [
+        {
+          "section_id": "01-03",
+          "anchor": "は、`fmt`(format の略)という標準ライブラリのパッケージを"
+        }
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "go",
+        "import"
+      ]
+    },
+    {
+      "id": "q01-06",
+      "question": "`go run` と `go build` の違いとして正しいものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "go run は実行ファイルを生成して残し、go build はその場で実行して残さない"
+        },
+        {
+          "id": "b",
+          "text": "どちらもコンパイル結果の実行ファイルをカレントフォルダに残す"
+        },
+        {
+          "id": "c",
+          "text": "go run は即実行して結果を残さず、go build は配布できる実行ファイルを生成する"
+        },
+        {
+          "id": "d",
+          "text": "go run はコンパイルせず、go build のみがコンパイルする"
+        }
+      ],
+      "answer": "c",
+      "explanation": "`go run` は内部で一時的にコンパイルして実行し、終わると実行ファイルを捨てます。`go build` はコンパイル結果の実行ファイルをカレントフォルダに残し、Go がない環境でも動かせます。どちらもコンパイルは行う点に注意しましょう。",
+      "source_refs": [
+        {
+          "section_id": "01-04",
+          "anchor": "go run と go build の違い"
+        }
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "go",
+        "go-run",
+        "go-build"
+      ]
+    }
+  ]
+}

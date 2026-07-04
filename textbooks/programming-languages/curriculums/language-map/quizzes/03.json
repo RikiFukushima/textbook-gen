@@ -1,0 +1,286 @@
+{
+  "chapter_id": "03",
+  "questions": [
+    {
+      "id": "q03-01",
+      "question": "JavaScript が Web で広く使われ続けている最大の理由として、本文が挙げているのはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "ブラウザの中で直接動かせる事実上唯一の言語という立場だったため"
+        },
+        {
+          "id": "b",
+          "text": "他のどの言語よりも実行速度が速いため"
+        },
+        {
+          "id": "c",
+          "text": "静的型付けでミスを実行前に見つけられるため"
+        },
+        {
+          "id": "d",
+          "text": "コンパイル型でメモリを細かく制御できるため"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ブラウザが直接実行できるのは長らく JavaScript だけで、Web ページに動きをつけたいなら JavaScript を使うのが事実上の前提でした。この「ブラウザの標準言語」という立場が広く使われ続けている最大の理由です。速度や静的型は理由として挙げられていません。",
+      "source_refs": [
+        {
+          "section_id": "03-01",
+          "anchor": "ブラウザの中で直接動かせるプログラミング言語は、長らく JavaScript だけだった"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "javascript",
+        "web"
+      ]
+    },
+    {
+      "id": "q03-02",
+      "question": "Node.js の登場によって生まれた状況として、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "JavaScript がコンパイル型の言語へと作り変えられた"
+        },
+        {
+          "id": "b",
+          "text": "フロントエンドもサーバ側も同じ JavaScript で書けるようになった"
+        },
+        {
+          "id": "c",
+          "text": "ブラウザが JavaScript を実行できなくなった"
+        },
+        {
+          "id": "d",
+          "text": "JavaScript が動的型から静的型の言語に変わった"
+        }
+      ],
+      "answer": "b",
+      "explanation": "Node.js はブラウザの外でも JavaScript を実行できるようにした仕組みで、これによりフロントエンドもサーバ側(バックエンド)も同じ JavaScript で書けるようになりました。言語の型システムや実行方式そのものが変わったわけではありません。",
+      "source_refs": [
+        {
+          "section_id": "03-01",
+          "anchor": "Node.js でサーバ側にも広がった"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "javascript",
+        "nodejs"
+      ]
+    },
+    {
+      "id": "q03-03",
+      "question": "TypeScript が JavaScript に対して果たす役割として、本文の説明にもっとも近いものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "JavaScript を置き換える、まったく別系統の新しい言語である"
+        },
+        {
+          "id": "b",
+          "text": "JavaScript から型の仕組みを取り除いて手軽にしたものである"
+        },
+        {
+          "id": "c",
+          "text": "JavaScript に型を後付けし、取り違えを実行前に見つけやすくする"
+        },
+        {
+          "id": "d",
+          "text": "JavaScript をブラウザなしで動かすための実行環境である"
+        }
+      ],
+      "answer": "c",
+      "explanation": "TypeScript は JavaScript に型を後付けした言語で、型の取り違えを書いている途中(実行前)にエディタ上で見つけられるようにします。JavaScript の文法をほぼそのまま受け継ぐ「上乗せ」であり、置き換えでも実行環境でもありません。",
+      "source_refs": [
+        {
+          "section_id": "03-02",
+          "anchor": "TypeScript は、その JavaScript に「型」を後付けした言語"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "type-system"
+      ]
+    },
+    {
+      "id": "q03-04",
+      "question": "TypeScript で書いたコードが実際に動くまでの流れとして、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "ブラウザや Node.js が TypeScript を直接そのまま実行する"
+        },
+        {
+          "id": "b",
+          "text": "TypeScript は機械語にコンパイルされ、CPU が直接実行する"
+        },
+        {
+          "id": "c",
+          "text": "TypeScript はインタプリタが型を無視しながら逐次実行する"
+        },
+        {
+          "id": "d",
+          "text": "TypeScript はコンパイルで JavaScript に変換され、その JavaScript が動く"
+        }
+      ],
+      "answer": "d",
+      "explanation": "ブラウザや Node.js は TypeScript を直接実行できません。TypeScript はコンパイル(変換)というステップで JavaScript に直され、その JavaScript が動きます。土台はあくまで JavaScript のままです。",
+      "source_refs": [
+        {
+          "section_id": "03-02",
+          "anchor": "最終的には JavaScript として動く"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "javascript"
+      ]
+    },
+    {
+      "id": "q03-05",
+      "question": "Java の性格について、本文の説明として正しいものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "静的型・コンパイル型で、堅実さと長期保守を重視した定番言語"
+        },
+        {
+          "id": "b",
+          "text": "動的型・インタプリタ型で、手早く書ける手軽さを重視した言語"
+        },
+        {
+          "id": "c",
+          "text": "ブラウザの中で直接動くことを主目的に作られた言語"
+        },
+        {
+          "id": "d",
+          "text": "型を後付けで加え、最終的に別の言語へ変換されて動く言語"
+        }
+      ],
+      "answer": "a",
+      "explanation": "Java は静的型・コンパイル型の言語で、変数の型をあらかじめ決めて実行前にチェックを通します。手早く書くより、間違いを早く見つけて大人数で長く保守できる堅実さを重視した設計です。ブラウザの中では動かず、JVM の上で動くのが基本です。",
+      "source_refs": [
+        {
+          "section_id": "03-03",
+          "anchor": "堅実さを重視した言語"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "java",
+        "enterprise"
+      ]
+    },
+    {
+      "id": "q03-06",
+      "question": "本文が説明する JVM(Java Virtual Machine)の役割はどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "Java のソースコードをブラウザ上でそのまま解釈して動かす仕組み"
+        },
+        {
+          "id": "b",
+          "text": "OS の違いを吸収し、一度作れば環境を選ばず同じように動かしやすくする土台"
+        },
+        {
+          "id": "c",
+          "text": "Java を動的型付けに切り替えるための実行時オプション"
+        },
+        {
+          "id": "d",
+          "text": "Java のコードを TypeScript へ変換するための変換器"
+        }
+      ],
+      "answer": "b",
+      "explanation": "JVM は Java のプログラムを動かす土台で、Windows・macOS・Linux といった OS の違いを吸収してくれます。そのため一度作れば環境を選ばず同じように動かしやすいのが特徴です。ブラウザ実行や型の切り替え、TypeScript への変換とは関係ありません。",
+      "source_refs": [
+        {
+          "section_id": "03-03",
+          "anchor": "一度作れば環境を選ばず同じように動かしやすい"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "java",
+        "jvm"
+      ]
+    },
+    {
+      "id": "q03-07",
+      "question": "本文の整理に従うと、規模が大きくチームで長く保守する Web アプリのブラウザ側開発に有力なのはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "JVM 上で動く Java"
+        },
+        {
+          "id": "b",
+          "text": "低レイヤに強い言語"
+        },
+        {
+          "id": "c",
+          "text": "型を足した TypeScript"
+        },
+        {
+          "id": "d",
+          "text": "型のない専用の実行環境"
+        }
+      ],
+      "answer": "c",
+      "explanation": "本文は、小さく素早く始めるなら JavaScript、規模が育って安全に保守したいなら TypeScript、大規模で長く動かす業務システムなら Java、という流れで整理しています。ブラウザ側でチーム保守が必要な規模なら TypeScript が有力です。Java はブラウザの中では動きません。",
+      "source_refs": [
+        {
+          "section_id": "03-04",
+          "anchor": "規模が育って安全に保守したいなら TypeScript"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "comparison"
+      ]
+    },
+    {
+      "id": "q03-08",
+      "question": "3 言語を「どこで動くか(実行環境)」で並べたとき、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "Java はブラウザの中でもサーバ側でも動き、フロントエンドを担当する"
+        },
+        {
+          "id": "b",
+          "text": "TypeScript だけがブラウザで動き、JavaScript はサーバ側専用である"
+        },
+        {
+          "id": "c",
+          "text": "3 言語とも JVM の上でのみ動き、実行環境に違いはない"
+        },
+        {
+          "id": "d",
+          "text": "JavaScript / TypeScript はブラウザとサーバの両方で動き、Java は JVM 上のサーバや Android が主な居場所"
+        }
+      ],
+      "answer": "d",
+      "explanation": "JavaScript と TypeScript はブラウザの中でもサーバ側(Node.js)でも動き、フロントエンドはこの系統が担当します。Java はブラウザの中では動かず、JVM 上のサーバ(バックエンド)や Android アプリが主な居場所です。",
+      "source_refs": [
+        {
+          "section_id": "03-04",
+          "anchor": "3 言語を「どこで動くか」で並べる"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "comparison",
+        "javascript",
+        "java"
+      ]
+    }
+  ]
+}

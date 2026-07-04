@@ -102,9 +102,9 @@ chapters:
 
   - id: "04"
     title: 使ううえで知っておくこと
-    estimated_minutes: 9
+    estimated_minutes: 8
     learning_objectives:
-      - 日本での商用利用と、アップロード素材がAI学習に使われ得る点の最低限を押さえられる
+      - 商用利用で気をつける観点と、アップロード素材がAI学習に使われ得る点の最低限を押さえられる
       - クレジット制・無料枠の制限(透かし・尺・解像度)を理解し、有料化の判断ができる
     sections:
       - id: "04-01"
