@@ -26,8 +26,6 @@ key_terms:
     definition: 状態と、状態間の遷移ルールの集合として処理を表現するモデル
 ---
 
-# StateGraph の設計思想 — Agent をステートマシンとして見る
-
 ## このセクションで学ぶこと
 
 - StateGraph がどんな発想で Agent を表現しているか

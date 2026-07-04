@@ -65,7 +65,7 @@ chapters:
     estimated_minutes: 17
     learning_objectives:
       - ファイルシステムをルートからの木構造として描ける
-      - 絶対パスと相対パス(.・..・~)を使い分けられる
+      - 絶対パスと相対パス、および補助記号(.・..・~)を使い分けられる
       - ルート直下の主要ディレクトリ(/etc・/home・/var・/usr)の役割を言える
     sections:
       - id: "03-01"

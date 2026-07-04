@@ -68,7 +68,7 @@ stateDiagram-v2
 recent = deque(maxlen=5)
 def should_abort(action):
     key = hash((action.tool, json.dumps(action.args, sort_keys=True)))
-    repeated = recent.count(key) >= 2   # 直近5周で同一行動が3回以上
+    repeated = recent.count(key) >= 2   # 直近5周の履歴に同一行動が2回以上(今回で3回目以上)なら中断
     recent.append(key)
     return repeated
 ```

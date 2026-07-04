@@ -5,121 +5,282 @@
       "id": "q03-01",
       "question": "RAG(検索拡張生成)が解決しようとする LLM 単体の課題として、本文で挙げられているものはどれですか。",
       "options": [
-        { "id": "a", "text": "学習時点以降の知識不足と、根拠のないもっともらしい誤答が混ざる問題" },
-        { "id": "b", "text": "推論速度の遅さと API レスポンスのレイテンシ問題" },
-        { "id": "c", "text": "モデルパラメータ数の増加によるメモリ不足の問題" },
-        { "id": "d", "text": "プロンプトのトークン数が長くなり料金が増える問題" }
+        {
+          "id": "a",
+          "text": "推論速度の遅さと API レスポンスのレイテンシ問題"
+        },
+        {
+          "id": "b",
+          "text": "モデルパラメータ数の増加によるメモリ不足の問題"
+        },
+        {
+          "id": "c",
+          "text": "学習時点以降の知識不足と、根拠のないもっともらしい誤答が混ざる問題"
+        },
+        {
+          "id": "d",
+          "text": "プロンプトのトークン数が長くなり料金が増える問題"
+        }
       ],
-      "answer": "a",
+      "answer": "c",
       "explanation": "本文では LLM 単体の課題として「知識の鮮度」と「ハルシネーション」の二つを挙げ、これらを解決する手法として RAG を導入しています。レイテンシやメモリは扱っていません。",
-      "source_refs": [{ "section_id": "03-01", "anchor": "LLM 単体では答えられないこと" }],
+      "source_refs": [
+        {
+          "section_id": "03-01",
+          "anchor": "LLM 単体では答えられないこと"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["RAG", "ハルシネーション"]
+      "tags": [
+        "RAG",
+        "ハルシネーション"
+      ]
     },
     {
       "id": "q03-02",
       "question": "本文の説明にもとづく「ファインチューニングではなく RAG を選ぶ理由」として最も適切なものはどれですか。",
       "options": [
-        { "id": "a", "text": "ファインチューニングは推論精度が必ず RAG より低くなるから" },
-        { "id": "b", "text": "ファインチューニングは計算コストが高く、文書更新のたびに学習をやり直すことになり運用負荷が大きいから" },
-        { "id": "c", "text": "ファインチューニングではメタデータを扱えないが、RAG なら扱えるから" },
-        { "id": "d", "text": "ファインチューニングは OSS モデルにしか適用できないから" }
+        {
+          "id": "a",
+          "text": "ファインチューニングは推論精度が必ず RAG より低くなるから"
+        },
+        {
+          "id": "b",
+          "text": "ファインチューニングではメタデータを扱えないが、RAG なら扱えるから"
+        },
+        {
+          "id": "c",
+          "text": "ファインチューニングは OSS モデルにしか適用できないから"
+        },
+        {
+          "id": "d",
+          "text": "ファインチューニングは計算コストが高く、文書更新のたびに学習をやり直すことになり運用負荷が大きいから"
+        }
       ],
-      "answer": "b",
+      "answer": "d",
       "explanation": "本文では「ファインチューニングは計算コストが高く、文書が更新されるたびに学習をやり直す必要があり、運用負荷が大きくなりがち」と述べ、日々更新される社内ドキュメントへの追従が現実的でないとしています。精度の高低や OSS 限定といった主張はしていません。",
-      "source_refs": [{ "section_id": "03-01", "anchor": "ファインチューニングは計算コストが高く" }],
+      "source_refs": [
+        {
+          "section_id": "03-01",
+          "anchor": "ファインチューニングは計算コストが高く"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["RAG", "ファインチューニング"]
+      "tags": [
+        "RAG",
+        "ファインチューニング"
+      ]
     },
     {
       "id": "q03-03",
       "question": "RAG のパイプラインに関する説明として、本文に照らして正しいものはどれですか。",
       "options": [
-        { "id": "a", "text": "ユーザーの質問が来た時点で初めて文書を Embedding するため、事前準備は不要である" },
-        { "id": "b", "text": "事前にインデックスを作るフェーズと、質問時に検索して回答を生成するフェーズの二段構成である" },
-        { "id": "c", "text": "検索結果をモデルの重みに追加学習させ、その重みで回答を生成する" },
-        { "id": "d", "text": "VectorStore は不要で、LLM が直接ファイルシステムを検索する" }
+        {
+          "id": "a",
+          "text": "事前にインデックスを作るフェーズと、質問時に検索して回答を生成するフェーズの二段構成である"
+        },
+        {
+          "id": "b",
+          "text": "ユーザーの質問が来た時点で初めて文書を Embedding するため、事前準備は不要である"
+        },
+        {
+          "id": "c",
+          "text": "検索結果をモデルの重みに追加学習させ、その重みで回答を生成する"
+        },
+        {
+          "id": "d",
+          "text": "VectorStore は不要で、LLM が直接ファイルシステムを検索する"
+        }
       ],
-      "answer": "b",
+      "answer": "a",
       "explanation": "本文では RAG を「インデックス作成(事前準備)」と「検索・回答生成(実行時)」の二フェーズに分けて説明しています。a は事前準備が必要な点を見落とした「ほぼ正解だが部分的に違う」選択肢です。",
-      "source_refs": [{ "section_id": "03-01", "anchor": "RAG は大きく二つのフェーズに分かれます" }],
+      "source_refs": [
+        {
+          "section_id": "03-01",
+          "anchor": "RAG は大きく二つのフェーズに分かれます"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["RAG", "パイプライン"]
+      "tags": [
+        "RAG",
+        "パイプライン"
+      ]
     },
     {
       "id": "q03-04",
       "question": "Document Loader と Document オブジェクトに関する説明として、本文に照らして最も正確なものはどれですか。",
       "options": [
-        { "id": "a", "text": "Document Loader は文書を読み込み、本文だけを文字列のリストとして返す" },
-        { "id": "b", "text": "Document は page_content(本文)と metadata(出典など)を持ち、Document Loader はそのリストを返す" },
-        { "id": "c", "text": "Document Loader は文書を読み込んだ時点で自動的にチャンク分割まで行う" },
-        { "id": "d", "text": "Document Loader は PDF 専用で、Web ページや Notion には別の仕組みが必要である" }
+        {
+          "id": "a",
+          "text": "Document Loader は文書を読み込み、本文だけを文字列のリストとして返す"
+        },
+        {
+          "id": "b",
+          "text": "Document は page_content(本文)と metadata(出典など)を持ち、Document Loader はそのリストを返す"
+        },
+        {
+          "id": "c",
+          "text": "Document Loader は文書を読み込んだ時点で自動的にチャンク分割まで行う"
+        },
+        {
+          "id": "d",
+          "text": "Document Loader は PDF 専用で、Web ページや Notion には別の仕組みが必要である"
+        }
       ],
       "answer": "b",
       "explanation": "本文では Document が page_content と metadata を持ち、Loader はその Document のリストを返すと説明しています。a は metadata を捨ててしまう不正確な説明、c は分割は Text Splitter の役割、d はソースごとに専用ローダーがあると本文で述べられています。",
-      "source_refs": [{ "section_id": "03-02", "anchor": "ローダーが返すのは **Document** オブジェクトのリストです" }],
+      "source_refs": [
+        {
+          "section_id": "03-02",
+          "anchor": "ローダーが返すのは **Document** オブジェクトのリストです"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["Document Loader", "Document"]
+      "tags": [
+        "Document Loader",
+        "Document"
+      ]
     },
     {
       "id": "q03-05",
       "question": "RecursiveCharacterTextSplitter の chunk_overlap を設定する目的として、本文の説明に最も合うものはどれですか。",
       "options": [
-        { "id": "a", "text": "ベクトル化のコストを下げるためにチャンク総数を減らす" },
-        { "id": "b", "text": "隣り合うチャンクで文章を一部重複させ、境界で文脈が断絶することを防ぐ" },
-        { "id": "c", "text": "チャンクの順序を入れ替えてランダム性を持たせ、検索の多様性を高める" },
-        { "id": "d", "text": "段落や文の区切りを優先して分割するためのルールを指定する" }
+        {
+          "id": "a",
+          "text": "ベクトル化のコストを下げるためにチャンク総数を減らす"
+        },
+        {
+          "id": "b",
+          "text": "チャンクの順序を入れ替えてランダム性を持たせ、検索の多様性を高める"
+        },
+        {
+          "id": "c",
+          "text": "隣り合うチャンクで文章を一部重複させ、境界で文脈が断絶することを防ぐ"
+        },
+        {
+          "id": "d",
+          "text": "段落や文の区切りを優先して分割するためのルールを指定する"
+        }
       ],
-      "answer": "b",
+      "answer": "c",
       "explanation": "本文では chunk_overlap を「隣り合うチャンクを少し重複させる設定で、文の途中で切れて文脈が断絶するのを防ぐ」と説明しています。d は RecursiveCharacterTextSplitter 全体の挙動の説明であり、chunk_overlap そのものの目的ではない「ほぼ正解」の選択肢です。",
-      "source_refs": [{ "section_id": "03-02", "anchor": "`chunk_overlap` は隣り合うチャンクを少し重複させる設定" }],
+      "source_refs": [
+        {
+          "section_id": "03-02",
+          "anchor": "`chunk_overlap` は隣り合うチャンクを少し重複させる設定"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["Text Splitter", "チャンクオーバーラップ"]
+      "tags": [
+        "Text Splitter",
+        "チャンクオーバーラップ"
+      ]
     },
     {
       "id": "q03-06",
       "question": "Embedding と類似度検索に関する説明として、本文に照らして正しいものはどれですか。",
       "options": [
-        { "id": "a", "text": "Embedding はテキストを 1 つの整数 ID に変換し、ID の一致で検索する" },
-        { "id": "b", "text": "意味の近いテキストほどベクトルが近くなる性質を使い、キーワードが一致しなくても意味で探せる" },
-        { "id": "c", "text": "類似度検索は完全一致検索の上位互換であり、固有名詞や型番の検索でも常にキーワード検索より優れる" },
-        { "id": "d", "text": "検索時とインデックス作成時で異なる Embedding モデルを使うほうが多様性が出て精度が上がる" }
+        {
+          "id": "a",
+          "text": "Embedding はテキストを 1 つの整数 ID に変換し、ID の一致で検索する"
+        },
+        {
+          "id": "b",
+          "text": "類似度検索は完全一致検索の上位互換であり、固有名詞や型番の検索でも常にキーワード検索より優れる"
+        },
+        {
+          "id": "c",
+          "text": "検索時とインデックス作成時で異なる Embedding モデルを使うほうが多様性が出て精度が上がる"
+        },
+        {
+          "id": "d",
+          "text": "意味の近いテキストほどベクトルが近くなる性質を使い、キーワードが一致しなくても意味で探せる"
+        }
       ],
-      "answer": "b",
+      "answer": "d",
       "explanation": "本文では「意味の近いテキストほどベクトル同士が近くなる」性質により言い換えにも強い意味検索が可能になると説明しています。c は本文が「固有名詞や型番のように完全一致が重要な検索はキーワード検索の方が得意な場合もある」と明示しているため誤り。d も「検索時に使う Embedding モデルは、インデックス作成時と必ず同じものを使う必要がある」と明記されています。",
-      "source_refs": [{ "section_id": "03-03", "anchor": "意味の近いテキストほどベクトル同士が近くなる" }],
+      "source_refs": [
+        {
+          "section_id": "03-03",
+          "anchor": "意味の近いテキストほどベクトル同士が近くなる"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["Embedding", "類似度検索"]
+      "tags": [
+        "Embedding",
+        "類似度検索"
+      ]
     },
     {
       "id": "q03-07",
       "question": "vectorstore.as_retriever() で得た Retriever の性質として、本文の説明に最も合うものはどれですか。",
       "options": [
-        { "id": "a", "text": "クエリ文字列を受け取り関連 Document のリストを返す共通インターフェースで、Runnable として LCEL にそのままつなげる" },
-        { "id": "b", "text": "Document のリストを受け取り、LLM への最終回答文字列を返す高レベル API である" },
-        { "id": "c", "text": "VectorStore とは独立した別データベースを内部で構築し、検索を高速化する" },
-        { "id": "d", "text": "Runnable ではないため LCEL のパイプには接続できず、別途呼び出す必要がある" }
+        {
+          "id": "a",
+          "text": "クエリ文字列を受け取り関連 Document のリストを返す共通インターフェースで、Runnable として LCEL にそのままつなげる"
+        },
+        {
+          "id": "b",
+          "text": "Document のリストを受け取り、LLM への最終回答文字列を返す高レベル API である"
+        },
+        {
+          "id": "c",
+          "text": "VectorStore とは独立した別データベースを内部で構築し、検索を高速化する"
+        },
+        {
+          "id": "d",
+          "text": "Runnable ではないため LCEL のパイプには接続できず、別途呼び出す必要がある"
+        }
       ],
       "answer": "a",
       "explanation": "本文では Retriever を「クエリ文字列を受け取り、関連 Document のリストを返す共通インターフェース」と説明し、Runnable の一種として LCEL に組み込めると述べています。b は回答生成までやる別物、d は本文と真逆の説明です。",
-      "source_refs": [{ "section_id": "03-04", "anchor": "`as_retriever()` を呼ぶと **Retriever** が得られます" }],
+      "source_refs": [
+        {
+          "section_id": "03-04",
+          "anchor": "`as_retriever()` を呼ぶと **Retriever** が得られます"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["Retriever", "LCEL"]
+      "tags": [
+        "Retriever",
+        "LCEL"
+      ]
     },
     {
       "id": "q03-08",
       "question": "本文で示された RAG チェーン `{\"context\": retriever | format_docs, \"question\": RunnablePassthrough()} | prompt | model | StrOutputParser()` における RunnablePassthrough() の役割として正しいものはどれですか。",
       "options": [
-        { "id": "a", "text": "入力の質問文字列をそのまま下流に流し、prompt の question 変数に渡す" },
-        { "id": "b", "text": "Retriever から返ってきた Document リストをそのまま素通しでプロンプトに渡す" },
-        { "id": "c", "text": "model の出力を加工せずに次の Runnable へ渡し、後段のパーサを省略する" },
-        { "id": "d", "text": "並列実行された両方の Runnable の結果を結合して 1 つの文字列にまとめる" }
+        {
+          "id": "a",
+          "text": "Retriever から返ってきた Document リストをそのまま素通しでプロンプトに渡す"
+        },
+        {
+          "id": "b",
+          "text": "入力の質問文字列をそのまま下流に流し、prompt の question 変数に渡す"
+        },
+        {
+          "id": "c",
+          "text": "model の出力を加工せずに次の Runnable へ渡し、後段のパーサを省略する"
+        },
+        {
+          "id": "d",
+          "text": "並列実行された両方の Runnable の結果を結合して 1 つの文字列にまとめる"
+        }
       ],
-      "answer": "a",
+      "answer": "b",
       "explanation": "本文では「もう片方は RunnablePassthrough でそのまま question に渡す」と説明されており、入力の質問文字列を保持して prompt の question 変数に渡す役割です。b は context 側(retriever | format_docs)の話、d は RunnableParallel(辞書記法)が担う役割であり、似ているが別物の「ほぼ正解」選択肢になっています。",
-      "source_refs": [{ "section_id": "03-04", "anchor": "もう片方は **RunnablePassthrough** でそのまま `question` に渡します" }],
+      "source_refs": [
+        {
+          "section_id": "03-04",
+          "anchor": "もう片方は **RunnablePassthrough** でそのまま `question` に渡します"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["RAGチェーン", "RunnablePassthrough", "LCEL"]
+      "tags": [
+        "RAGチェーン",
+        "RunnablePassthrough",
+        "LCEL"
+      ]
     }
   ]
 }

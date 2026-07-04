@@ -55,12 +55,12 @@ flowchart TD
 
 終了条件はシンプルです。**LLM がもうツールを呼ばず、最終的な回答だけを返したとき**にループは終わります。たとえば「東京と大阪、どちらが暖かい?」という依頼なら、Agent は天気ツールを 2 回呼んで両方の気温を観測し、それらを比較した回答を生成してループを抜けます。
 
-## LangChain での基本形
+## LangGraph での基本形
 
-LangChain には Agent ループを内部で回してくれる仕組みが用意されています。ツール群と LLM を渡すと、上の図のループを自動で実行します。
+この Agent ループを内部で回してくれる仕組みは、LangChain 単体ではなく **LangGraph** が提供します。LangGraph の prebuilt(あらかじめ用意された実装)である `create_react_agent` にツール群と LLM を渡すと、上の図のループを自動で実行します。以下のコードで `langgraph.prebuilt` から import している点に注目してください。実体は LangGraph 由来です。
 
 ```python
-from langgraph.prebuilt import create_react_agent
+from langgraph.prebuilt import create_react_agent  # ループの実体は LangGraph が提供する
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(model="gpt-4o-mini")

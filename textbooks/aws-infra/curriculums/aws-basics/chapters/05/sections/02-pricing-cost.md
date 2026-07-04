@@ -19,8 +19,8 @@ related_sections:
 key_terms:
   - term: 従量課金
     definition: 使ったリソースの量や時間に応じて料金が決まる課金方式。使わなければ費用も発生しない
-  - term: データ転送料金(アウトバウンド)
-    definition: AWS からインターネットなど外部へ出ていく通信に対してかかる料金
+  - term: データ転送料金
+    definition: AWS からインターネットなど外部へ出ていく通信(アウトバウンド)に対してかかる料金
   - term: AWS Budgets
     definition: 予算額を設定し、超過しそうになったときに通知してくれるコスト管理サービス
 ---

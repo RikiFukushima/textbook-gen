@@ -1,0 +1,286 @@
+{
+  "chapter_id": "04",
+  "questions": [
+    {
+      "id": "q04-01",
+      "question": "本文における「並行(concurrency)」と「並列(parallelism)」の違いの説明として正しいものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "並行は必ず複数コアを使い、並列は 1 コアで動く"
+        },
+        {
+          "id": "b",
+          "text": "並行は「構造の話(どう設計するか)」、並列は「実行の話(実際にどう動くか)」"
+        },
+        {
+          "id": "c",
+          "text": "並行と並列は同じ意味で、呼び方が違うだけ"
+        },
+        {
+          "id": "d",
+          "text": "並行は同じ瞬間に実行すること、並列は切り替えて進めること"
+        }
+      ],
+      "answer": "b",
+      "explanation": "並行は複数の処理を同時に進行しているように見せる設計の考え方(構造の話)で、コアが 1 つでも成立します。並列は複数の処理を本当に同じ瞬間に実行すること(実行の話)で、複数の CPU コアが必要です。",
+      "source_refs": [
+        {
+          "section_id": "04-01",
+          "anchor": "並行と並列はよく混同される"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "go",
+        "並行処理"
+      ]
+    },
+    {
+      "id": "q04-02",
+      "question": "goroutine が OS スレッドに比べて軽量である理由として、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "goroutine はメモリをまったく消費しないから"
+        },
+        {
+          "id": "b",
+          "text": "goroutine は 1 本あたり数 MB の固定スタックを持つから"
+        },
+        {
+          "id": "c",
+          "text": "初期スタックが数 KB ほどで、必要に応じて伸縮するから"
+        },
+        {
+          "id": "d",
+          "text": "1 つの goroutine が 1 つの OS スレッドに固定で対応するから"
+        }
+      ],
+      "answer": "c",
+      "explanation": "OS スレッドは 1 本あたり数 MB のメモリを使いますが、goroutine の初期スタックは数 KB ほどで必要に応じて伸縮します。そのため数万・数十万の goroutine を起動できます。Go ランタイムは少数の OS スレッド上で大量の goroutine を切り替えて実行します。",
+      "source_refs": [
+        {
+          "section_id": "04-01",
+          "anchor": "goroutine ― Go の軽量な実行単位"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "go",
+        "goroutine"
+      ]
+    },
+    {
+      "id": "q04-03",
+      "question": "関数を新しい goroutine として並行に実行するには、どうしますか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "関数呼び出しの前に async キーワードを付ける"
+        },
+        {
+          "id": "b",
+          "text": "関数定義に goroutine キーワードを付ける"
+        },
+        {
+          "id": "c",
+          "text": "関数を go.Run() でラップして呼ぶ"
+        },
+        {
+          "id": "d",
+          "text": "関数呼び出しの前に go キーワードを付ける"
+        }
+      ],
+      "answer": "d",
+      "explanation": "実行したい関数呼び出しの前に `go` キーワードを置くだけで、その呼び出しは新しい goroutine として並行に実行されます。go を付けた呼び出しは終了を待たずに次の行へ進みます。async のようなキーワードは Go にはありません。",
+      "source_refs": [
+        {
+          "section_id": "04-02",
+          "anchor": "go を付けるだけで並行実行"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "go",
+        "goroutine"
+      ]
+    },
+    {
+      "id": "q04-04",
+      "question": "起動した goroutine の処理が終わる前に main 関数が終了すると、どうなりますか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "まだ動いている goroutine があってもプログラム全体が即座に終了する"
+        },
+        {
+          "id": "b",
+          "text": "main は goroutine の完了を自動で待ってから終了する"
+        },
+        {
+          "id": "c",
+          "text": "goroutine だけが動き続け、main は再起動される"
+        },
+        {
+          "id": "d",
+          "text": "コンパイルエラーになる"
+        }
+      ],
+      "answer": "a",
+      "explanation": "main 関数が終了すると、まだ動いている goroutine があってもプログラム全体が即座に終了します。そのため goroutine の処理が実行される前に終わってしまうことがあります。確実に待つには sync.WaitGroup を使います。",
+      "source_refs": [
+        {
+          "section_id": "04-02",
+          "anchor": "main が終わると goroutine も道連れになる"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "go",
+        "goroutine"
+      ]
+    },
+    {
+      "id": "q04-05",
+      "question": "goroutine の終了を確実に待つために、本文が推奨している方法はどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "time.Sleep で十分な時間だけ待つ"
+        },
+        {
+          "id": "b",
+          "text": "sync.WaitGroup で終了を待ち合わせる"
+        },
+        {
+          "id": "c",
+          "text": "無限ループで完了フラグを監視し続ける"
+        },
+        {
+          "id": "d",
+          "text": "main の末尾に panic を書く"
+        }
+      ],
+      "answer": "b",
+      "explanation": "終了を確実に待つには sync.WaitGroup を使い、Add で待つ数を登録し、各 goroutine の終了時に Done を呼び、Wait で全員の完了を待ちます。time.Sleep で適当に待つ方法は、待ち時間が足りなければ取りこぼし、長すぎれば無駄になるため実務では使いません。",
+      "source_refs": [
+        {
+          "section_id": "04-02",
+          "anchor": "終了を待つには WaitGroup を使う"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "go",
+        "goroutine",
+        "sync"
+      ]
+    },
+    {
+      "id": "q04-06",
+      "question": "バッファのない channel に対して、送信 `ch <- 42` と受信 `v := <-ch` を同じ 1 つの goroutine でそのまま順に実行するとどうなりますか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "送信した値が失われるだけで実行は続く"
+        },
+        {
+          "id": "b",
+          "text": "バッファに値が貯まり、あとから取り出せる"
+        },
+        {
+          "id": "c",
+          "text": "送信が受信側の準備を待ってブロックし、デッドロックする"
+        },
+        {
+          "id": "d",
+          "text": "自動的に別の goroutine が生成されて受信される"
+        }
+      ],
+      "answer": "c",
+      "explanation": "バッファのない channel では送信が受信側の準備を待ってブロックするため、送信と受信を同じ 1 つの goroutine で順に実行するとデッドロックします。実際には送信と受信を別々の goroutine に分けるのが基本です。バッファに貯められるのは容量を指定したバッファ付き channel の性質です。",
+      "source_refs": [
+        {
+          "section_id": "04-03",
+          "anchor": "そのまま順に実行するとデッドロックします"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "go",
+        "channel"
+      ]
+    },
+    {
+      "id": "q04-07",
+      "question": "channel の close について、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "受信側が close し、送信側は range で受け取る"
+        },
+        {
+          "id": "b",
+          "text": "閉じた channel に送信すると、その値は無視される"
+        },
+        {
+          "id": "c",
+          "text": "close は送受信のどちらから呼んでもよい"
+        },
+        {
+          "id": "d",
+          "text": "送信側が close し、閉じた channel に送信するとパニックになる"
+        }
+      ],
+      "answer": "d",
+      "explanation": "close するのは必ず送信側で、受信側は for v := range ch で閉じられるまで受け取ります。閉じた channel に送信するとパニック(panic)になる点にも注意が必要です。受信側が close してはいけないという役割分担も覚えておきましょう。",
+      "source_refs": [
+        {
+          "section_id": "04-03",
+          "anchor": "閉じた channel に送信するとパニック(panic)になる"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "go",
+        "channel"
+      ]
+    },
+    {
+      "id": "q04-08",
+      "question": "select 文に default を書いた場合の挙動として正しいものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "どの channel も準備できていないときはブロックせず即座に default へ進む"
+        },
+        {
+          "id": "b",
+          "text": "いずれかの case が準備できるまで default で待ち続ける"
+        },
+        {
+          "id": "c",
+          "text": "default は必ず最初に実行される"
+        },
+        {
+          "id": "d",
+          "text": "default があると他の case は選ばれなくなる"
+        }
+      ],
+      "answer": "a",
+      "explanation": "select に default を書くと、どの channel も準備できていないときにブロックせず即座に default へ進みます。default を省くと、いずれかの case が準備できるまで待ちます。準備できた case があればそちらが優先して選ばれます。",
+      "source_refs": [
+        {
+          "section_id": "04-04",
+          "anchor": "select で複数の channel を待ち受ける"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "go",
+        "select"
+      ]
+    }
+  ]
+}

@@ -7,6 +7,7 @@ target_audience:
   level: 中級
   prerequisites:
     - foundations カリキュラム(harness の 5 要素とエージェントループ)を理解している
+    - ai-agent-roadmap 教材(コンテキストウィンドウ・RAG などの基礎語彙)を学び終えている
     - 何らかのエージェントや LLM API を触ったことがある
     - JSON / スキーマの基本がわかる
 chapter_order:

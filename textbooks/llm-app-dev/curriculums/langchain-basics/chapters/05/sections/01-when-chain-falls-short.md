@@ -7,7 +7,7 @@ estimated_minutes: 5
 estimated_chars: 1369
 learning_points:
   - LCEL の Chain が「一方向に流れる」前提で設計されていることを理解する
-  - AgentExecutor のループが「自由すぎて制御しにくい」という課題を押さえる
+  - Agent の実行ループが「自由すぎて制御しにくい」という課題を押さえる
   - 状態・分岐・ループ・人間の介在が必要になると Chain/Agent では苦しくなることを把握する
 tags:
   - LangChain
@@ -23,7 +23,7 @@ key_terms:
   - term: Chain(チェーン)
     definition: prompt | model | parser のようにコンポーネントを一方向に連結し、入力から出力まで一直線に流す LangChain の構成単位。
   - term: AgentExecutor
-    definition: LLM の判断でツール呼び出しと観測を繰り返す、LangChain の標準的な Agent 実行ループ。
+    definition: LLM の判断でツール呼び出しと観測を繰り返す、初期の LangChain における Agent 実行ループ。現在は legacy 扱いで、後継は create_react_agent(LangGraph)。
   - term: 状態(state)
     definition: 処理の途中経過(履歴・中間結果・残りタスクなど)を保持しておく必要のあるデータ。
 ---
@@ -31,7 +31,7 @@ key_terms:
 ## このセクションで学ぶこと
 
 - LCEL の Chain が「一方向に流れる」前提で設計されていることを理解する
-- AgentExecutor のループが「自由すぎて制御しにくい」という課題を押さえる
+- Agent の実行ループが「自由すぎて制御しにくい」という課題を押さえる
 - 状態・分岐・ループ・人間の介在が必要になると Chain/Agent では苦しくなることを把握する
 
 ## Chain は「一直線」が前提
@@ -49,7 +49,7 @@ LCEL でも `RunnableBranch` で簡単な分岐は書けますが、「条件に
 
 ## Agent は「自由すぎて」制御しにくい
 
-では第 4 章の **Agent** ならどうでしょうか。AgentExecutor は「思考 → ツール実行 → 観測」を LLM の判断で繰り返すので、ループも分岐も LLM がやってくれます。柔軟ではありますが、今度は逆の問題が起きます。
+では第 4 章の **Agent** ならどうでしょうか。第 4 章で使った `create_react_agent` に代表される Agent の実行ループは、「思考 → ツール実行 → 観測」を LLM の判断で繰り返すので、ループも分岐も LLM がやってくれます(なお、初期の LangChain ではこの実行ループを **AgentExecutor** が担っていました。現在は legacy 扱いで、後継が `create_react_agent`/LangGraph です)。柔軟ではありますが、今度は逆の問題が起きます。
 
 ```text
 ユーザー: 注文をキャンセルして返金して

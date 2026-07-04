@@ -20,7 +20,7 @@ key_terms:
   - term: スキーマ
     definition: 出力データの構造を定義したもの。どんなキーがあり、それぞれの値が何の型(文字列・数値など)かを規定する。
   - term: 構造化出力モード
-    definition: 一部の LLM API が備える、出力を指定スキーマに必ず従わせる機能。JSON mode や Structured Outputs などと呼ばれる。
+    definition: 一部の LLM API が備える、出力を指定スキーマに必ず従わせる機能。Structured Outputs などと呼ばれる(単に有効な JSON を保証する JSON mode とは別物で、スキーマ準拠まで保証するのは Structured Outputs)。
   - term: パース
     definition: 出力文字列をプログラムが解釈してデータ構造に変換すること。JSON.parse など。
 ---
@@ -57,7 +57,7 @@ key_terms:
 
 ## API の構造化出力モードという強力な手段
 
-主要な LLM API には、**構造化出力モード**(JSON mode / Structured Outputs などと呼ばれる)が用意されています。これは API 呼び出し時にスキーマを渡すと、モデルの出力が**そのスキーマに必ず従う**ことを仕組みとして保証する機能です。
+主要な LLM API には、**構造化出力モード**(Structured Outputs などと呼ばれる)が用意されています。これは API 呼び出し時にスキーマを渡すと、モデルの出力が**そのスキーマに必ず従う**ことを仕組みとして保証する機能です。なお、よく似た名前の JSON mode は「出力が有効な JSON になること」を保証するだけで、こちらが指定したスキーマへの準拠までは保証しません。スキーマまで縛りたいなら Structured Outputs を使います。
 
 ```mermaid
 flowchart LR

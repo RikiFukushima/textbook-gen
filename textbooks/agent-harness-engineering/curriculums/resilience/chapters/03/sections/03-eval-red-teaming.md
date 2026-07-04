@@ -10,9 +10,9 @@ learning_points:
   - レッドチーミングは観測・評価の視点で弱点を洗い出す営みだと捉える
   - 回帰を防ぐため、見つけた失敗を評価ケースとして残す
 tags:
-  - 観測
-  - 評価
-  - レッドチーミング
+  - observability
+  - evaluation
+  - red-teaming
 related_sections:
   - "03-02"
   - "03-04"

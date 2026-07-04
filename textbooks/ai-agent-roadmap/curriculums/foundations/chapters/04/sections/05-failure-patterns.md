@@ -1,7 +1,7 @@
 ---
 section_id: "04-05"
 chapter_id: "04"
-title: Agent が失敗するパターン — 無限ループ、誤ったツール選択、計画破綻
+title: Agent が失敗するパターン
 order: 5
 estimated_minutes: 4
 estimated_chars: 2382
@@ -28,7 +28,7 @@ key_terms:
     definition: 多段の手順が必要なタスクで、途中の前提を見失ったり、戻ってこなくなったりする失敗
 ---
 
-# Agent が失敗するパターン — 無限ループ、誤ったツール選択、計画破綻
+# Agent が失敗するパターン
 
 ## このセクションで学ぶこと
 

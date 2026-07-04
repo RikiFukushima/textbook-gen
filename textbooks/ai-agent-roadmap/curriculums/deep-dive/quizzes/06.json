@@ -5,103 +5,213 @@
       "id": "q06-01",
       "question": "新しいタスクで Multi-Agent 構成を検討するとき、本章が推奨する最初の問いはどれですか。",
       "options": [
-        { "id": "a", "text": "Supervisor 型と Swarm 型のどちらが向くか、まず構成図を描いて比較する" },
-        { "id": "b", "text": "単一 Agent + Tool で足りないかを先に問い、足りない理由を言語化する" },
-        { "id": "c", "text": "Multi-Agent は一般に賢くなるので、まず分割してから減らせるかを検討する" },
-        { "id": "d", "text": "想定トークン消費を見積もり、予算内に収まる Agent 数を最初に決める" }
+        {
+          "id": "a",
+          "text": "単一 Agent + Tool で足りないかを先に問い、足りない理由を言語化する"
+        },
+        {
+          "id": "b",
+          "text": "Supervisor 型と Swarm 型のどちらが向くか、まず構成図を描いて比較する"
+        },
+        {
+          "id": "c",
+          "text": "Multi-Agent は一般に賢くなるので、まず分割してから減らせるかを検討する"
+        },
+        {
+          "id": "d",
+          "text": "想定トークン消費を見積もり、予算内に収まる Agent 数を最初に決める"
+        }
       ],
-      "answer": "b",
-      "explanation": "本章は冒頭から「まず単一 Agent + Tool で十分か疑う」姿勢を一貫して推奨しています。Supervisor / Swarm の比較(a)は分割を決めた後の話で、構成図を先に描くと畳むのが難しくなります。Multi-Agent にすれば賢くなるという思い込み(c)は本章が distractor として明示的に戒めている誤解です。",
+      "answer": "a",
+      "explanation": "本章は冒頭から「まず単一 Agent + Tool で十分か疑う」姿勢を一貫して推奨しています。Supervisor / Swarm の比較(a)は分割を決めた後の話で、構成図を先に描くと畳むのが難しくなります。Multi-Agent にすれば賢くなるという思い込み(c)は本章が明示的に戒めている誤解です。",
       "source_refs": [
-        { "section_id": "06-01", "anchor": "まずは「単一 Agent + Tool」で十分か疑う" }
+        {
+          "section_id": "06-01",
+          "anchor": "まずは「単一 Agent + Tool」で十分か疑う"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["multi-agent", "design-decision"]
+      "tags": [
+        "multi-agent",
+        "design-decision"
+      ]
     },
     {
       "id": "q06-02",
       "question": "本章が挙げる「Multi-Agent にしたほうがよい典型条件」に当てはまらないものはどれですか。",
       "options": [
-        { "id": "a", "text": "生成と批評で評価基準が本質的に異なり、同じ Agent だと自己評価が甘くなる" },
-        { "id": "b", "text": "参照すべき知識・ツールセットが役割ごとに大きく異なり、1 つの system prompt に収めると指示が薄まる" },
-        { "id": "c", "text": "本質的に並列で走らせると速くなる作業が含まれている" },
-        { "id": "d", "text": "1 体の Agent でも処理できるが、構成図が華やかで技術的に派手に見える" }
+        {
+          "id": "a",
+          "text": "生成と批評で評価基準が本質的に異なり、同じ Agent だと自己評価が甘くなる"
+        },
+        {
+          "id": "b",
+          "text": "1 体の Agent でも処理できるが、構成図が華やかで技術的に派手に見える"
+        },
+        {
+          "id": "c",
+          "text": "参照すべき知識・ツールセットが役割ごとに大きく異なり、1 つの system prompt に収めると指示が薄まる"
+        },
+        {
+          "id": "d",
+          "text": "本質的に並列で走らせると速くなる作業が含まれている"
+        }
       ],
-      "answer": "d",
+      "answer": "b",
       "explanation": "本章は「役割の独立性」「コンテキスト分離」「並列性」「権限の分離」を典型条件として挙げる一方、「すごそうだから」で分けることを明確に戒めています。a/b/c はそれぞれ条件 1・2・3 に対応する正当な動機です。d は華やかさで判断する典型的なアンチパターンです。",
       "source_refs": [
-        { "section_id": "06-01", "anchor": "Multi-Agent にしたほうがよい典型条件" }
+        {
+          "section_id": "06-01",
+          "anchor": "Multi-Agent にしたほうがよい典型条件"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["multi-agent", "design-decision"]
+      "tags": [
+        "multi-agent",
+        "design-decision"
+      ]
     },
     {
       "id": "q06-03",
       "question": "Supervisor 型の構造について、本章の説明と一致する記述はどれですか。",
       "options": [
-        { "id": "a", "text": "Worker 同士が直接 handoff し合い、Supervisor は最初の窓口だけを担当する" },
-        { "id": "b", "text": "Supervisor が次に動かす Worker を選び、Worker の出力はすべて Supervisor を経由して統合される" },
-        { "id": "c", "text": "Supervisor は最終応答の整形だけを担当し、ルーティング判断は各 Worker が自律的に行う" },
-        { "id": "d", "text": "Supervisor は権限管理専用で、Worker の起動順は固定的に事前定義しておく" }
+        {
+          "id": "a",
+          "text": "Worker 同士が直接 handoff し合い、Supervisor は最初の窓口だけを担当する"
+        },
+        {
+          "id": "b",
+          "text": "Supervisor は最終応答の整形だけを担当し、ルーティング判断は各 Worker が自律的に行う"
+        },
+        {
+          "id": "c",
+          "text": "Supervisor が次に動かす Worker を選び、Worker の出力はすべて Supervisor を経由して統合される"
+        },
+        {
+          "id": "d",
+          "text": "Supervisor は権限管理専用で、Worker の起動順は固定的に事前定義しておく"
+        }
       ],
-      "answer": "b",
+      "answer": "c",
       "explanation": "Supervisor 型は親 Agent が次の担当を選び、Worker 同士は直接話さず、すべての出力が一度 Supervisor を経由する中央集権構造です。a は Swarm 型(Triage Agent は最初の窓口役で handoff 後は主導権が移る)の説明、c は責務が逆転しています。d はルールベースのワークフローに近く、Supervisor が動的にルーティング判断を担う前提と異なります。",
       "source_refs": [
-        { "section_id": "06-02", "anchor": "構造: 親 Agent が司令塔になる" }
+        {
+          "section_id": "06-02",
+          "anchor": "構造: 親 Agent が司令塔になる"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["multi-agent", "supervisor"]
+      "tags": [
+        "multi-agent",
+        "supervisor"
+      ]
     },
     {
       "id": "q06-04",
       "question": "Supervisor 型の弱点として本章が指摘していないものはどれですか。",
       "options": [
-        { "id": "a", "text": "Supervisor 自身の判断ミスが全体の品質を破綻させやすい" },
-        { "id": "b", "text": "基本がシーケンシャル進行になり、並列性を出しにくい" },
-        { "id": "c", "text": "Worker の数が増えると Supervisor の system prompt が肥大化しやすい" },
-        { "id": "d", "text": "Supervisor が存在するため、Worker の system prompt が必ず肥大化する" }
+        {
+          "id": "a",
+          "text": "Supervisor 自身の判断ミスが全体の品質を破綻させやすい"
+        },
+        {
+          "id": "b",
+          "text": "基本がシーケンシャル進行になり、並列性を出しにくい"
+        },
+        {
+          "id": "c",
+          "text": "Worker の数が増えると Supervisor の system prompt が肥大化しやすい"
+        },
+        {
+          "id": "d",
+          "text": "Supervisor が存在するため、Worker の system prompt が必ず肥大化する"
+        }
       ],
       "answer": "d",
       "explanation": "本章は逆に「Worker は単純な専門役で済むため system prompt をシンプルに保てる」ことを Supervisor 型の長所として挙げています。一方で a・b・c はいずれも「短所: 親がボトルネックになる」節で明示された弱点です。Supervisor 側の肥大化と Worker 側の肥大化を入れ替えた d が誤りです。",
       "source_refs": [
-        { "section_id": "06-02", "anchor": "短所: 親がボトルネックになる" }
+        {
+          "section_id": "06-02",
+          "anchor": "短所: 親がボトルネックになる"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["multi-agent", "supervisor"]
+      "tags": [
+        "multi-agent",
+        "supervisor"
+      ]
     },
     {
       "id": "q06-05",
       "question": "本章の判断軸に照らして、Swarm 型ではなく Supervisor 型を選ぶべきタスクはどれですか。",
       "options": [
-        { "id": "a", "text": "ユーザーの発話に応じて、請求担当と技術担当の間で会話の主導権が動的に切り替わるカスタマーサポート" },
-        { "id": "b", "text": "事前に「調査 → 執筆 → レビュー」と流れがほぼ決まっており、各ステップを 1 体の専門 Worker に任せたい記事生成" },
-        { "id": "c", "text": "ユーザーの要求がその場で頻繁に変わり、専門分野が多岐に渡るチャット型アプリケーション" },
-        { "id": "d", "text": "事前に呼び出し順を書き切れず、各 Agent に「手に余ったら誰に渡すか」を持たせたい構成" }
+        {
+          "id": "a",
+          "text": "事前に「調査 → 執筆 → レビュー」と流れがほぼ決まっており、各ステップを 1 体の専門 Worker に任せたい記事生成"
+        },
+        {
+          "id": "b",
+          "text": "ユーザーの発話に応じて、請求担当と技術担当の間で会話の主導権が動的に切り替わるカスタマーサポート"
+        },
+        {
+          "id": "c",
+          "text": "ユーザーの要求がその場で頻繁に変わり、専門分野が多岐に渡るチャット型アプリケーション"
+        },
+        {
+          "id": "d",
+          "text": "事前に呼び出し順を書き切れず、各 Agent に「手に余ったら誰に渡すか」を持たせたい構成"
+        }
       ],
-      "answer": "b",
+      "answer": "a",
       "explanation": "本章は「ワークフローの形が事前に描けるか」が分岐点だと整理しています。描けるなら Supervisor、描けないなら Swarm、です。b は流れが事前に決まっており Supervisor 型が素直に当てはまります。a・c・d は会話の主導権が動的に切り替わる典型例で、いずれも Swarm 型が向きます。",
       "source_refs": [
-        { "section_id": "06-03", "anchor": "ワークフローの形が事前に描けるか" }
+        {
+          "section_id": "06-03",
+          "anchor": "ワークフローの形が事前に描けるか"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["multi-agent", "swarm", "supervisor"]
+      "tags": [
+        "multi-agent",
+        "swarm",
+        "supervisor"
+      ]
     },
     {
       "id": "q06-06",
       "question": "Multi-Agent のアンチパターンと、本章が示す対処の組み合わせとして最も適切なものはどれですか。",
       "options": [
-        { "id": "a", "text": "責務の曖昧化 → 各 Agent の prompt に「やること」だけを丁寧に書き、否定形の指示は避ける" },
-        { "id": "b", "text": "メッセージング無限ループ → 最大ターン数の上限を設け、Reviewer 系には「N 回不合格なら現状の出力で確定する」撤退条件を入れる" },
-        { "id": "c", "text": "過剰分割 → 役割が似ていても、Agent ごとにラベルを変えて分割を維持し、ログで識別できるようにする" },
-        { "id": "d", "text": "統合役の不在 → Swarm 型では各 Agent が自律的に答えるため、まとめ役は置かないほうが応答が速い" }
+        {
+          "id": "a",
+          "text": "責務の曖昧化 → 各 Agent の prompt に「やること」だけを丁寧に書き、否定形の指示は避ける"
+        },
+        {
+          "id": "b",
+          "text": "メッセージング無限ループ → 最大ターン数の上限を設け、Reviewer 系には「N 回不合格なら現状の出力で確定する」撤退条件を入れる"
+        },
+        {
+          "id": "c",
+          "text": "過剰分割 → 役割が似ていても、Agent ごとにラベルを変えて分割を維持し、ログで識別できるようにする"
+        },
+        {
+          "id": "d",
+          "text": "統合役の不在 → Swarm 型では各 Agent が自律的に答えるため、まとめ役は置かないほうが応答が速い"
+        }
       ],
       "answer": "b",
       "explanation": "本章は「アンチパターン 3: メッセージング無限ループ」の対処として、最大ターン数の上限と Reviewer 系の撤退条件、同一 Agent への連続 handoff 検知を挙げています。a は逆で、責務曖昧化への対処は「やること」と同じ重みで「やらないこと」を否定形で書くことです。c は過剰分割の温存で、本章は「役割を 2 行で書けない Agent は統合する」よう推奨しています。d は統合役不在の対処と矛盾し、本章は軽量な Aggregator Agent を置くよう勧めています。",
       "source_refs": [
-        { "section_id": "06-04", "anchor": "アンチパターン 3: メッセージング無限ループ" }
+        {
+          "section_id": "06-04",
+          "anchor": "アンチパターン 3: メッセージング無限ループ"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["multi-agent", "anti-pattern", "operations"]
+      "tags": [
+        "multi-agent",
+        "anti-pattern",
+        "operations"
+      ]
     }
   ]
 }

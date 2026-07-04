@@ -1,6 +1,6 @@
 id: "01"
 title: LLM の仕組みを言語化する
-estimated_minutes: 20
+estimated_minutes: 21
 learning_objectives:
   - LLM が入力をどう表現し次トークンを選ぶかを説明できる
   - 推論パラメータが出力に与える影響を説明できる

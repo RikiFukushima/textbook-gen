@@ -1,0 +1,286 @@
+{
+  "chapter_id": "04",
+  "questions": [
+    {
+      "id": "q04-01",
+      "question": "conditional edge(条件分岐エッジ)の中心にある「ルーティング関数」の役割として正しいものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "State を更新し、更新分の辞書を返す"
+        },
+        {
+          "id": "b",
+          "text": "複数のノードを並行起動するためにリストを返す"
+        },
+        {
+          "id": "c",
+          "text": "現在の State を受け取り、次に進むべきノードを表す文字列を返す"
+        },
+        {
+          "id": "d",
+          "text": "グラフ全体を compile して実行可能にする"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ルーティング関数は現在の State を受け取り、「次にどのノードへ行くべきか」を表す文字列を返すだけの関数です。判断ロジックをこの関数に閉じ込めることで、分岐条件を変えたいときはルーティング関数だけを直せばよくなります。State を更新して辞書を返すのは通常のノード関数の役割です。",
+      "source_refs": [
+        {
+          "section_id": "04-01",
+          "anchor": "ルーティング関数"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "conditional-edge",
+        "routing"
+      ]
+    },
+    {
+      "id": "q04-02",
+      "question": "本文が推奨する、add_conditional_edges でマッピングを使う書き方の利点はどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "ルーティング関数を書かずに済むようになる"
+        },
+        {
+          "id": "b",
+          "text": "1回の判断で複数の遷移先を同時に返せるようになる"
+        },
+        {
+          "id": "c",
+          "text": "recursion_limit を指定しなくてもループが止まるようになる"
+        },
+        {
+          "id": "d",
+          "text": "分岐キーと実ノード名を分けられ、後でノードを差し替えても関数を変えずに済む"
+        }
+      ],
+      "answer": "d",
+      "explanation": "マッピングを使うと分岐キーと実ノード名を分けられるため、後でノードを差し替えても関数を変えずに済み、実務では推奨とされています。マッピングを省略してルーティング関数がノード名そのものを返す書き方もできますが、分離しておくほうが柔軟です。",
+      "source_refs": [
+        {
+          "section_id": "04-01",
+          "anchor": "分岐キーと実ノード名を分けておくほうが"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "conditional-edge",
+        "add_conditional_edges"
+      ]
+    },
+    {
+      "id": "q04-03",
+      "question": "ルーティング関数の書き方について、本文の注意点として正しいものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "State を読むだけにして副作用を入れず、想定外の値はデフォルト分岐へ寄せる"
+        },
+        {
+          "id": "b",
+          "text": "1つの分岐元から複数のキーを同時に返して並行遷移させるべきである"
+        },
+        {
+          "id": "c",
+          "text": "State を書き換えたり API を呼んだりして、判断と更新をまとめるとよい"
+        },
+        {
+          "id": "d",
+          "text": "マッピングに存在しないキーを返しても自動的に無視されるので安全である"
+        }
+      ],
+      "answer": "a",
+      "explanation": "ルーティング関数は State を読むだけにして副作用(API 呼び出しや State の書き換え)を入れないのが原則です。マッピングに存在しないキーを返すと実行時エラーになるため、戻り値は有限の集合に限定し、想定外の値はデフォルト分岐へ寄せるのが安全です。1回の判断で返せる遷移先は1つだけです。",
+      "source_refs": [
+        {
+          "section_id": "04-01",
+          "anchor": "State を読むだけ"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "conditional-edge",
+        "routing"
+      ]
+    },
+    {
+      "id": "q04-04",
+      "question": "LangGraph でループ(再試行・反復)を作る方法として、本文の説明に最も合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "add_node を同じノードに対して2回呼ぶことで繰り返しが成立する"
+        },
+        {
+          "id": "b",
+          "text": "過去に通ったノードへ戻るエッジを張り、継続・終了を conditional edge で判定する"
+        },
+        {
+          "id": "c",
+          "text": "stream で実行すると自動的に同じノードが繰り返される"
+        },
+        {
+          "id": "d",
+          "text": "recursion_limit を大きくすればループ構造がなくても反復する"
+        }
+      ],
+      "answer": "b",
+      "explanation": "ループは過去に通ったノードへ戻るエッジを張って作ります。反復の本体ノードの後に conditional edge を置き、ルーティング関数が「もう一度ループする」か「抜ける」かを State から判定します。継続なら本体ノードへ戻し、終了なら END や次工程へのキーを返します。",
+      "source_refs": [
+        {
+          "section_id": "04-02",
+          "anchor": "過去に通ったノードへ戻るエッジ"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "loop",
+        "conditional-edge"
+      ]
+    },
+    {
+      "id": "q04-05",
+      "question": "ループの終了条件と recursion_limit の関係について、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "recursion_limit があれば終了条件は書かなくてよい"
+        },
+        {
+          "id": "b",
+          "text": "終了条件があれば recursion_limit は無効になる"
+        },
+        {
+          "id": "c",
+          "text": "recursion_limit は暴走を止める保険であり、終了条件の代替ではない"
+        },
+        {
+          "id": "d",
+          "text": "終了条件と recursion_limit はどちらか一方しか設定できない"
+        }
+      ],
+      "answer": "c",
+      "explanation": "ループには有限で抜ける終了条件を必ず用意する必要があります。recursion_limit は終了条件があっても、バグや想定外の入力で抜けられない場合に備えた保険であり、終了条件の代わりではありません。",
+      "source_refs": [
+        {
+          "section_id": "04-02",
+          "anchor": "`recursion_limit` は暴走を止める保険であり、終了条件の代替ではない"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "loop",
+        "recursion-limit"
+      ]
+    },
+    {
+      "id": "q04-06",
+      "question": "複数の分岐を1つのノードへ「合流」させたいとき、本文が説明する方法はどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "add_merge という専用の API を呼ぶ必要がある"
+        },
+        {
+          "id": "b",
+          "text": "合流専用の reducer を必ず設定しないと compile できない"
+        },
+        {
+          "id": "c",
+          "text": "conditional edge のマッピングで全経路を同時に指定する"
+        },
+        {
+          "id": "d",
+          "text": "複数のノードから同じ後続ノードへ add_edge を張るだけで成立する"
+        }
+      ],
+      "answer": "d",
+      "explanation": "合流は特別な API ではなく、複数のノードから同じ後続ノードへ add_edge を張るだけで成立します。branch_a・branch_b・branch_c から同じ merge ノードへつなげば、どの経路を通っても merge に集まります。",
+      "source_refs": [
+        {
+          "section_id": "04-03",
+          "anchor": "複数のノードから同じ後続ノードへ `add_edge` を張るだけ"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "fan-in",
+        "merge"
+      ]
+    },
+    {
+      "id": "q04-07",
+      "question": "fan-in で複数の並行ノードが同じキーを更新するのに reducer を指定しなかった場合、本文によれば何が起きますか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "InvalidUpdateError が送出されて実行が止まる"
+        },
+        {
+          "id": "b",
+          "text": "最後に実行されたノードの値で静かに上書きされる"
+        },
+        {
+          "id": "c",
+          "text": "先に実行されたノードの値が保持され、後の更新は破棄される"
+        },
+        {
+          "id": "d",
+          "text": "並行実行が自動的に直列化され、順番にマージされる"
+        }
+      ],
+      "answer": "a",
+      "explanation": "reducer を指定しないと、同じスーパーステップ内で複数ノードが同じキーを更新した時点で LangGraph は InvalidUpdateError を送出します。黙って上書きされるのではなくエラーで止まるので、fan-in では operator.add などの reducer で「どうまとめるか」を必ず宣言する必要があります。",
+      "source_refs": [
+        {
+          "section_id": "04-03",
+          "anchor": "`InvalidUpdateError`"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "fan-in",
+        "reducer",
+        "error"
+      ]
+    },
+    {
+      "id": "q04-08",
+      "question": "recursion_limit の指定方法とデフォルト値について、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "StateGraph のコンストラクタで指定し、デフォルトは 100 である"
+        },
+        {
+          "id": "b",
+          "text": "実行時の config で指定し、デフォルトは 25 である"
+        },
+        {
+          "id": "c",
+          "text": "compile の引数で指定し、デフォルトは無制限である"
+        },
+        {
+          "id": "d",
+          "text": "add_conditional_edges の引数で指定し、デフォルトは 10 である"
+        }
+      ],
+      "answer": "b",
+      "explanation": "recursion_limit は実行時の config で指定します(例: invoke の config={\"recursion_limit\": 50})。デフォルトは 25 で、放置しても 25 スーパーステップで必ず止まり、無限ループによるコスト暴走を防ぎます。超えると GraphRecursionError が送出されます。",
+      "source_refs": [
+        {
+          "section_id": "04-04",
+          "anchor": "デフォルトは 25 です"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "recursion-limit",
+        "config"
+      ]
+    }
+  ]
+}

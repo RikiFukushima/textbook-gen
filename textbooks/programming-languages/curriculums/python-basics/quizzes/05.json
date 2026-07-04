@@ -1,0 +1,217 @@
+{
+  "chapter_id": "05",
+  "questions": [
+    {
+      "id": "q05-01",
+      "question": "標準ライブラリと外部ライブラリの違いとして、正しい説明はどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "標準ライブラリは PyPI から別途インストールが必要で、外部ライブラリは最初から付属する"
+        },
+        {
+          "id": "b",
+          "text": "標準ライブラリは最初から付属し追加導入なしで import でき、外部ライブラリは別途インストールが必要"
+        },
+        {
+          "id": "c",
+          "text": "標準ライブラリも外部ライブラリも、どちらも使う前に必ず pip でインストールする"
+        },
+        {
+          "id": "d",
+          "text": "標準ライブラリは import できず、外部ライブラリだけが import で使える"
+        }
+      ],
+      "answer": "b",
+      "explanation": "標準ライブラリは Python に最初から付属し、追加導入なしで import できます。外部ライブラリは本体に含まれず、PyPI から別途インストールが必要です。aは両者が入れ替わっています。cは標準ライブラリはインストール不要なので誤り。dは標準ライブラリも import で使えるため誤りです。",
+      "source_refs": [
+        {
+          "section_id": "05-01",
+          "anchor": "標準ライブラリ:最初から入っている"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "ライブラリ",
+        "標準ライブラリ",
+        "外部ライブラリ"
+      ]
+    },
+    {
+      "id": "q05-02",
+      "question": "インストールしていない外部ライブラリを import requests のように読み込もうとしたときに出る典型的なエラーと、その原因はどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "SyntaxError が出る。原因は import の書き方の文法ミス"
+        },
+        {
+          "id": "b",
+          "text": "KeyError が出る。原因は辞書のキーの指定ミス"
+        },
+        {
+          "id": "c",
+          "text": "ModuleNotFoundError が出る。原因は多くの場合、外部ライブラリの導入忘れ"
+        },
+        {
+          "id": "d",
+          "text": "PermissionError が出る。原因はファイルへのアクセス権限の不足"
+        }
+      ],
+      "answer": "c",
+      "explanation": "導入していない外部ライブラリを import しようとすると ModuleNotFoundError が出ます。「そんなモジュールは見つからない」という意味で、多くの場合の原因は外部ライブラリの導入忘れです。a・b・dはいずれも別の原因のエラーで、この状況には当てはまりません。",
+      "source_refs": [
+        {
+          "section_id": "05-01",
+          "anchor": "ModuleNotFoundError"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "外部ライブラリ",
+        "エラー"
+      ]
+    },
+    {
+      "id": "q05-03",
+      "question": "pip の役割と実行場所について、正しい説明はどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "pip は Python のコードの中に書いて実行する、標準ライブラリの一部の関数である"
+        },
+        {
+          "id": "b",
+          "text": "pip は仮想環境を作成するためのツールで、パッケージのインストールはできない"
+        },
+        {
+          "id": "c",
+          "text": "pip はソースコードをコンパイルして実行ファイルに変換するツールである"
+        },
+        {
+          "id": "d",
+          "text": "pip は PyPI からパッケージを導入・更新・削除する管理ツールで、ターミナルで実行する"
+        }
+      ],
+      "answer": "d",
+      "explanation": "pip は PyPI からパッケージを導入・更新・削除する標準的なパッケージ管理ツールで、コマンドはターミナル(コマンドプロンプト)で実行します。aはコード内で使うとする誤り。cは仮想環境作成は venv の役目で、pip はインストールを担うため誤り。dはコンパイルツールではありません。",
+      "source_refs": [
+        {
+          "section_id": "05-02",
+          "anchor": "pip は外部ライブラリの管理係"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "pip",
+        "パッケージ"
+      ]
+    },
+    {
+      "id": "q05-04",
+      "question": "特定のバージョンの requests(例: 2.31.0)を pip で導入したいとき、正しいコマンドはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "pip install requests==2.31.0"
+        },
+        {
+          "id": "b",
+          "text": "pip freeze requests==2.31.0"
+        },
+        {
+          "id": "c",
+          "text": "pip install --upgrade requests"
+        },
+        {
+          "id": "d",
+          "text": "pip show requests==2.31.0"
+        }
+      ],
+      "answer": "a",
+      "explanation": "バージョンを固定して導入するには pip install に == でバージョンをつなぎ、pip install requests==2.31.0 と書きます。aの pip freeze は依存を書き出すコマンドです。bの --upgrade は最新へ更新するため特定バージョンにはなりません。cの pip show は詳細表示用で導入はしません。",
+      "source_refs": [
+        {
+          "section_id": "05-02",
+          "anchor": "バージョンを指定したいときは"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "pip",
+        "バージョン指定"
+      ]
+    },
+    {
+      "id": "q05-05",
+      "question": "仮想環境(venv)が必要とされる理由として、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "外部ライブラリを PyPI にアップロードして公開するため"
+        },
+        {
+          "id": "b",
+          "text": "プロジェクトごとに依存を分離し、ライブラリのバージョン衝突を防ぐため"
+        },
+        {
+          "id": "c",
+          "text": "Python 本体のインストールを不要にし、ブラウザ上で実行できるようにするため"
+        },
+        {
+          "id": "d",
+          "text": "標準ライブラリを外部ライブラリより高速に動かすため"
+        }
+      ],
+      "answer": "b",
+      "explanation": "仮想環境は、プロジェクトごとに独立した Python とパッケージのセットを持てる隔離された箱で、依存を分離してバージョン衝突を防ぐために使います。b・c・dはいずれも仮想環境の目的ではなく、本文の説明とは無関係です。",
+      "source_refs": [
+        {
+          "section_id": "05-03",
+          "anchor": "なぜ仮想環境が必要か"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "仮想環境",
+        "venv"
+      ]
+    },
+    {
+      "id": "q05-06",
+      "question": "requirements.txt と pip freeze / pip install -r の使い方について、正しい説明はどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "requirements.txt は .venv フォルダと同じく Git で共有しない対象である"
+        },
+        {
+          "id": "b",
+          "text": "pip install -r requirements.txt で依存を書き出し、pip freeze で再現する"
+        },
+        {
+          "id": "c",
+          "text": "pip freeze > requirements.txt で依存を書き出し、pip install -r requirements.txt で環境を再現する"
+        },
+        {
+          "id": "d",
+          "text": "pip freeze も pip install -r も、仮想環境を有効化していなくても対象が変わらず安全である"
+        }
+      ],
+      "answer": "c",
+      "explanation": "pip freeze > requirements.txt で今の環境の依存を書き出し、pip install -r requirements.txt でそのとおりに環境を再現します。aは requirements.txt は Git で共有する対象なので誤り。bは freeze と install -r の役割が逆です。dは対象が今アクティブな環境になるため、有効化の確認が必要で誤りです。",
+      "source_refs": [
+        {
+          "section_id": "05-04",
+          "anchor": "pip freeze で書き出す"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "requirements",
+        "依存管理",
+        "再現性"
+      ]
+    }
+  ]
+}

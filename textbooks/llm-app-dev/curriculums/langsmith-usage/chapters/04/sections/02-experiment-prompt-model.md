@@ -75,7 +75,7 @@ def make_target(prompt_name, model_name):
 evaluate(
     make_target("support-bot:v1", "openai:gpt-4o-mini"),
     data="support-eval-set",
-    evaluators=[correctness],
+    evaluators=[llm_judge],  # 第 3 章で用意した LLM-as-judge 評価器
     experiment_prefix="v1-mini",
 )
 
@@ -83,7 +83,7 @@ evaluate(
 evaluate(
     make_target("support-bot:v2", "openai:gpt-4o"),
     data="support-eval-set",
-    evaluators=[correctness],
+    evaluators=[llm_judge],  # 第 3 章で用意した LLM-as-judge 評価器
     experiment_prefix="v2-4o",
 )
 ```

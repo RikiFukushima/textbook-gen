@@ -5,76 +5,177 @@
       "id": "q01-01",
       "question": "ls /etc/hosts /nonexistent を実行すると、正常な結果とエラーメッセージが同じ画面に並んで表示されます。このときの内部の仕組みとして正しい説明はどれですか?",
       "options": [
-        { "id": "a", "text": "正常な結果もエラーも同じ 1 本の流れを通っており、リダイレクトしたときに初めて 2 つに分かれる" },
-        { "id": "b", "text": "正常な結果は stdout(1 番)、エラーは stderr(2 番)という別々の流れを通って、同じ画面に届いている" },
-        { "id": "c", "text": "正常な結果は stderr(2 番)、エラーは stdout(1 番)という別々の流れを通って画面に届いている" },
-        { "id": "d", "text": "エラーメッセージは画面専用の流れを通るため、ファイルなど別の場所へ付け替えることはできない" }
+        {
+          "id": "a",
+          "text": "正常な結果もエラーも同じ 1 本の流れを通っており、リダイレクトしたときに初めて 2 つに分かれる"
+        },
+        {
+          "id": "b",
+          "text": "正常な結果は stderr(2 番)、エラーは stdout(1 番)という別々の流れを通って画面に届いている"
+        },
+        {
+          "id": "c",
+          "text": "正常な結果は stdout(1 番)、エラーは stderr(2 番)という別々の流れを通って、同じ画面に届いている"
+        },
+        {
+          "id": "d",
+          "text": "エラーメッセージは画面専用の流れを通るため、ファイルなど別の場所へ付け替えることはできない"
+        }
       ],
-      "answer": "b",
+      "answer": "c",
       "explanation": "画面上では同じに見えても、正常な結果は stdout(1 番)、エラーは stderr(2 番)という別々のパイプを通って届いています。最初から別の流れであり(a が誤り)、番号は stdout = 1・stderr = 2(c が誤り)、どちらの流れもリダイレクトで付け替えられます(d が誤り)。",
-      "source_refs": [{ "section_id": "01-01", "anchor": "別々のパイプ" }],
+      "source_refs": [
+        {
+          "section_id": "01-01",
+          "anchor": "別々のパイプ"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["stdin", "stdout", "stderr"]
+      "tags": [
+        "stdin",
+        "stdout",
+        "stderr"
+      ]
     },
     {
       "id": "q01-02",
       "question": "作業のたびに実行記録を 1 行ずつ work.log にためていき、過去の記録も残したいとします。最も適切なコマンドはどれですか?",
       "options": [
-        { "id": "a", "text": "echo \"backup done\" >> work.log" },
-        { "id": "b", "text": "echo \"backup done\" > work.log" },
-        { "id": "c", "text": "echo \"backup done\" < work.log" },
-        { "id": "d", "text": "echo \"backup done\" 2> work.log" }
+        {
+          "id": "a",
+          "text": "echo \"backup done\" > work.log"
+        },
+        {
+          "id": "b",
+          "text": "echo \"backup done\" < work.log"
+        },
+        {
+          "id": "c",
+          "text": "echo \"backup done\" 2> work.log"
+        },
+        {
+          "id": "d",
+          "text": "echo \"backup done\" >> work.log"
+        }
       ],
-      "answer": "a",
+      "answer": "d",
       "explanation": ">> は既存の中身を残して末尾に追記するため、記録を積み重ねる用途に適しています。> は実行のたびに中身を消して上書きするので過去の記録が消えます(b)。< は入力の付け替えで向きが逆(c)、2> は stderr の付け替えなので echo の正常な出力はファイルに入りません(d)。",
-      "source_refs": [{ "section_id": "01-02", "anchor": "記録を積み重ねる" }],
+      "source_refs": [
+        {
+          "section_id": "01-02",
+          "anchor": "記録を積み重ねる"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["redirect", "append"]
+      "tags": [
+        "redirect",
+        "append"
+      ]
     },
     {
       "id": "q01-03",
       "question": "wc -l access.log は「1024 access.log」とファイル名付きで表示し、wc -l < access.log は「1024」と数値だけを表示します。この違いの理由として正しいものはどれですか?",
       "options": [
-        { "id": "a", "text": "wc は tr と同じく stdin 専用のコマンドで、引数で渡したときはファイル名をエラーとして表示しているため" },
-        { "id": "b", "text": "< で渡しても wc はファイル名を受け取っているが、表示を省略するモードに自動で切り替わるため" },
-        { "id": "c", "text": "< は stdin ではなく stdout を付け替える記号なので、ファイル名の部分が画面ではなくファイル側に書き出されるため" },
-        { "id": "d", "text": "< で渡すと wc には流れ込んでくるデータしか見えず、どのファイルから来たのかを知らないため" }
+        {
+          "id": "a",
+          "text": "< で渡すと wc には流れ込んでくるデータしか見えず、どのファイルから来たのかを知らないため"
+        },
+        {
+          "id": "b",
+          "text": "wc は tr と同じく stdin 専用のコマンドで、引数で渡したときはファイル名をエラーとして表示しているため"
+        },
+        {
+          "id": "c",
+          "text": "< で渡しても wc はファイル名を受け取っているが、表示を省略するモードに自動で切り替わるため"
+        },
+        {
+          "id": "d",
+          "text": "< は stdin ではなく stdout を付け替える記号なので、ファイル名の部分が画面ではなくファイル側に書き出されるため"
+        }
       ],
-      "answer": "d",
+      "answer": "a",
       "explanation": "引数で渡すと wc 自身がファイルを開くのでファイル名を知っていますが、< のときは stdin にデータが流し込まれるだけで、wc には流れ込んでくるデータしか見えていません。ファイル名を受け取った上で省略しているわけではなく(b)、< は stdin の付け替えで(c)、wc は引数でもファイルを受け取れます(a は tr の性質との混同)。",
-      "source_refs": [{ "section_id": "01-03", "anchor": "流れ込んでくるデータしか見えていません" }],
+      "source_refs": [
+        {
+          "section_id": "01-03",
+          "anchor": "流れ込んでくるデータしか見えていません"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["redirect", "stdin"]
+      "tags": [
+        "redirect",
+        "stdin"
+      ]
     },
     {
       "id": "q01-04",
       "question": "find / -name \"*.conf\" 2> /dev/null というコマンドの動作として正しい説明はどれですか?",
       "options": [
-        { "id": "a", "text": "stderr に出る Permission denied などのエラーを /dev/null に流して捨て、正常な結果だけを画面に表示する" },
-        { "id": "b", "text": "権限エラーの原因そのものを解消した上で、正常な結果だけを画面に表示する" },
-        { "id": "c", "text": "正常な結果を /dev/null に保存し、エラーメッセージだけを画面に表示する" },
-        { "id": "d", "text": "stdout と stderr の両方を /dev/null に捨てるため、画面には何も表示されない" }
+        {
+          "id": "a",
+          "text": "権限エラーの原因そのものを解消した上で、正常な結果だけを画面に表示する"
+        },
+        {
+          "id": "b",
+          "text": "stderr に出る Permission denied などのエラーを /dev/null に流して捨て、正常な結果だけを画面に表示する"
+        },
+        {
+          "id": "c",
+          "text": "正常な結果を /dev/null に保存し、エラーメッセージだけを画面に表示する"
+        },
+        {
+          "id": "d",
+          "text": "stdout と stderr の両方を /dev/null に捨てるため、画面には何も表示されない"
+        }
       ],
-      "answer": "a",
+      "answer": "b",
       "explanation": "/dev/null は書き込まれたものをすべて捨てる特別なファイルで、2> /dev/null は stderr だけをそこへ流す定番イディオムです。エラーは「解決」されるのではなく「見えなくなる」だけです(b)。2 番は stderr なので正常な結果が捨てられるわけではなく(c)、stdout は画面につながったままです(d)。",
-      "source_refs": [{ "section_id": "01-04", "anchor": "書き込まれたものをすべて捨てる特別なファイル" }],
+      "source_refs": [
+        {
+          "section_id": "01-04",
+          "anchor": "書き込まれたものをすべて捨てる特別なファイル"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["stderr", "dev-null"]
+      "tags": [
+        "stderr",
+        "dev-null"
+      ]
     },
     {
       "id": "q01-05",
       "question": "深夜の自動実行で ./backup.sh > result.log 2> error.log と書いたとき、出力の流れとして正しいものはどれですか?",
       "options": [
-        { "id": "a", "text": "正常な結果は error.log へ、エラーメッセージは result.log へ保存される" },
-        { "id": "b", "text": "正常な結果とエラーの両方が result.log に合流し、error.log は常に空のまま残る" },
-        { "id": "c", "text": "正常な結果は result.log へ、エラーメッセージは error.log へ、別々のファイルに分かれて保存される" },
-        { "id": "d", "text": "> がすでに stdout を付け替えているため後ろの 2> は無効になり、エラーは画面に表示される" }
+        {
+          "id": "a",
+          "text": "正常な結果は error.log へ、エラーメッセージは result.log へ保存される"
+        },
+        {
+          "id": "b",
+          "text": "正常な結果とエラーの両方が result.log に合流し、error.log は常に空のまま残る"
+        },
+        {
+          "id": "c",
+          "text": "正常な結果は result.log へ、エラーメッセージは error.log へ、別々のファイルに分かれて保存される"
+        },
+        {
+          "id": "d",
+          "text": "> がすでに stdout を付け替えているため後ろの 2> は無効になり、エラーは画面に表示される"
+        }
       ],
       "answer": "c",
       "explanation": "> は 1>(stdout)の省略形なので結果は result.log へ、2> は stderr の付け替えなのでエラーは error.log へ流れます。両方を 1 つに合流させるのは 2>&1 を使った書き方です(b)。1 番が結果・2 番がエラーなので向きが逆ではなく(a)、> と 2> は別の口の付け替えなので同時に有効です(d)。",
-      "source_refs": [{ "section_id": "01-04", "anchor": "> result.log 2> error.log" }],
+      "source_refs": [
+        {
+          "section_id": "01-04",
+          "anchor": "> result.log 2> error.log"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["stderr", "redirect"]
+      "tags": [
+        "stderr",
+        "redirect"
+      ]
     }
   ]
 }

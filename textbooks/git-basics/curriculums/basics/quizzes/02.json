@@ -5,121 +5,282 @@
       "id": "q02-01",
       "question": "新しいディレクトリを Git リポジトリにするコマンドはどれですか?",
       "options": [
-        { "id": "a", "text": "git init" },
-        { "id": "b", "text": "git start" },
-        { "id": "c", "text": "git new" },
-        { "id": "d", "text": "git create" }
+        {
+          "id": "a",
+          "text": "git start"
+        },
+        {
+          "id": "b",
+          "text": "git new"
+        },
+        {
+          "id": "c",
+          "text": "git create"
+        },
+        {
+          "id": "d",
+          "text": "git init"
+        }
       ],
-      "answer": "a",
+      "answer": "d",
       "explanation": "git init を実行すると、カレントディレクトリに .git が作られ、そこが 1 つのリポジトリになります。git start / new / create というコマンドは存在しません。",
-      "source_refs": [{ "section_id": "02-01", "anchor": "リポジトリを作る" }],
-      "difficulty": "easy",
-      "tags": ["git", "init"]
+      "source_refs": [
+        {
+          "section_id": "02-01",
+          "anchor": "リポジトリを作る"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "git",
+        "init"
+      ]
     },
     {
       "id": "q02-02",
       "question": "一度も git add されていないファイルの状態を何と呼びますか?",
       "options": [
-        { "id": "a", "text": "未追跡(untracked)" },
-        { "id": "b", "text": "コミット済み(committed)" },
-        { "id": "c", "text": "ステージ済み(staged)" },
-        { "id": "d", "text": "追跡対象(tracked)" }
+        {
+          "id": "a",
+          "text": "未追跡(untracked)"
+        },
+        {
+          "id": "b",
+          "text": "コミット済み(committed)"
+        },
+        {
+          "id": "c",
+          "text": "ステージ済み(staged)"
+        },
+        {
+          "id": "d",
+          "text": "追跡対象(tracked)"
+        }
       ],
       "answer": "a",
       "explanation": "一度も git add していないファイルは未追跡(untracked)で、Git は変更を監視しません。一度 git add すると追跡対象(tracked)になります。c・dは add 後の状態なので誤りです。",
-      "source_refs": [{ "section_id": "02-01", "anchor": "追跡対象と未追跡" }],
-      "difficulty": "easy",
-      "tags": ["git", "add"]
+      "source_refs": [
+        {
+          "section_id": "02-01",
+          "anchor": "追跡対象と未追跡"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "git",
+        "add"
+      ]
     },
     {
       "id": "q02-03",
       "question": "ファイルを編集しただけで git add していないとき、その変更は次の git commit に含まれますか?",
       "options": [
-        { "id": "a", "text": "含まれない。コミットに入れるには先に git add が必要" },
-        { "id": "b", "text": "含まれる。編集した時点で自動的にコミット対象になる" },
-        { "id": "c", "text": "含まれる。ただし追跡対象のファイルに限る" },
-        { "id": "d", "text": "含まれない。git commit 自体ができなくなる" }
+        {
+          "id": "a",
+          "text": "含まれる。編集した時点で自動的にコミット対象になる"
+        },
+        {
+          "id": "b",
+          "text": "含まれない。コミットに入れるには先に git add が必要"
+        },
+        {
+          "id": "c",
+          "text": "含まれる。ただし追跡対象のファイルに限る"
+        },
+        {
+          "id": "d",
+          "text": "含まれない。git commit 自体ができなくなる"
+        }
       ],
-      "answer": "a",
+      "answer": "b",
       "explanation": "コミットに含まれるのはステージに乗った変更だけです。編集してもステージしていない変更はコミットに入りません。cは「追跡対象なら自動で入る」という誤解で、追跡対象でも add していなければ入りません。",
-      "source_refs": [{ "section_id": "02-01", "anchor": "変更をステージに乗せる" }],
+      "source_refs": [
+        {
+          "section_id": "02-01",
+          "anchor": "変更をステージに乗せる"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["git", "add", "commit"]
+      "tags": [
+        "git",
+        "add",
+        "commit"
+      ]
     },
     {
       "id": "q02-04",
       "question": "git commit の役割として最も適切なものはどれですか?",
       "options": [
-        { "id": "a", "text": "ステージに乗った変更をスナップショットとして履歴に確定する" },
-        { "id": "b", "text": "ワークツリーのすべての変更を無条件に履歴へ記録する" },
-        { "id": "c", "text": "リモートサーバーへ変更を送信する" },
-        { "id": "d", "text": "ファイルの変更をすべて取り消す" }
+        {
+          "id": "a",
+          "text": "ワークツリーのすべての変更を無条件に履歴へ記録する"
+        },
+        {
+          "id": "b",
+          "text": "リモートサーバーへ変更を送信する"
+        },
+        {
+          "id": "c",
+          "text": "ステージに乗った変更をスナップショットとして履歴に確定する"
+        },
+        {
+          "id": "d",
+          "text": "ファイルの変更をすべて取り消す"
+        }
       ],
-      "answer": "a",
+      "answer": "c",
       "explanation": "git commit はステージ済みの変更をスナップショットとして履歴に確定します。bは「ステージに乗った分だけ」という点が抜けており誤り。リモートへの送信(c)は git push の役割です。",
-      "source_refs": [{ "section_id": "02-02", "anchor": "コミットする" }],
+      "source_refs": [
+        {
+          "section_id": "02-02",
+          "anchor": "コミットする"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["git", "commit"]
+      "tags": [
+        "git",
+        "commit"
+      ]
     },
     {
       "id": "q02-05",
       "question": "よいコミットメッセージの説明として最も適切なものはどれですか?",
       "options": [
-        { "id": "a", "text": "何を・なぜ変えたのかが後から読んで分かるように書く" },
-        { "id": "b", "text": "できるだけ短く「修正」「更新」とだけ書く" },
-        { "id": "c", "text": "変更したファイル名だけを列挙する" },
-        { "id": "d", "text": "日付と時刻を正確に記録する" }
+        {
+          "id": "a",
+          "text": "できるだけ短く「修正」「更新」とだけ書く"
+        },
+        {
+          "id": "b",
+          "text": "変更したファイル名だけを列挙する"
+        },
+        {
+          "id": "c",
+          "text": "日付と時刻を正確に記録する"
+        },
+        {
+          "id": "d",
+          "text": "何を・なぜ変えたのかが後から読んで分かるように書く"
+        }
       ],
-      "answer": "a",
+      "answer": "d",
       "explanation": "コミットメッセージは未来の自分やチームへの説明であり、何を・なぜ変えたのかが伝わることが重要です。「修正」だけ(b)では意図が分かりません。日時(d)は Git が自動記録するため書く必要はありません。",
-      "source_refs": [{ "section_id": "02-02", "anchor": "よいコミットメッセージ" }],
-      "difficulty": "easy",
-      "tags": ["git", "commit"]
+      "source_refs": [
+        {
+          "section_id": "02-02",
+          "anchor": "よいコミットメッセージ"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "git",
+        "commit"
+      ]
     },
     {
       "id": "q02-06",
       "question": "コミット履歴を 1 コミット 1 行の要約で素早く確認するコマンドはどれですか?",
       "options": [
-        { "id": "a", "text": "git log --oneline" },
-        { "id": "b", "text": "git status" },
-        { "id": "c", "text": "git diff" },
-        { "id": "d", "text": "git commit --list" }
+        {
+          "id": "a",
+          "text": "git log --oneline"
+        },
+        {
+          "id": "b",
+          "text": "git status"
+        },
+        {
+          "id": "c",
+          "text": "git diff"
+        },
+        {
+          "id": "d",
+          "text": "git commit --list"
+        }
       ],
       "answer": "a",
       "explanation": "git log --oneline はコミットハッシュの先頭とメッセージ 1 行を並べて表示し、全体像を素早くつかめます。git status は作業状態、git diff は変更の中身を見るコマンドです。",
-      "source_refs": [{ "section_id": "02-02", "anchor": "履歴を読む" }],
-      "difficulty": "easy",
-      "tags": ["git", "log"]
+      "source_refs": [
+        {
+          "section_id": "02-02",
+          "anchor": "履歴を読む"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "git",
+        "log"
+      ]
     },
     {
       "id": "q02-07",
       "question": "git status が答えてくれる情報として最も適切なものはどれですか?",
       "options": [
-        { "id": "a", "text": "どのファイルが未追跡・変更済み・ステージ済みかという一覧" },
-        { "id": "b", "text": "各行がどのように変更されたかの具体的な差分" },
-        { "id": "c", "text": "過去のすべてのコミットメッセージ" },
-        { "id": "d", "text": "リモートリポジトリの URL" }
+        {
+          "id": "a",
+          "text": "各行がどのように変更されたかの具体的な差分"
+        },
+        {
+          "id": "b",
+          "text": "どのファイルが未追跡・変更済み・ステージ済みかという一覧"
+        },
+        {
+          "id": "c",
+          "text": "過去のすべてのコミットメッセージ"
+        },
+        {
+          "id": "d",
+          "text": "リモートリポジトリの URL"
+        }
       ],
-      "answer": "a",
+      "answer": "b",
       "explanation": "git status は「どのファイル」が未追跡・変更済み・ステージ済みかを一覧します。行単位の「どう変わったか」(b)は git diff、過去のメッセージ(c)は git log の役割です。status と diff の役割分担を押さえましょう。",
-      "source_refs": [{ "section_id": "02-03", "anchor": "いまどうなっているかを見る" }],
+      "source_refs": [
+        {
+          "section_id": "02-03",
+          "anchor": "いまどうなっているかを見る"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["git", "status"]
+      "tags": [
+        "git",
+        "status"
+      ]
     },
     {
       "id": "q02-08",
       "question": "すでに git add 済みで、次のコミットに含まれる予定の変更内容を確認するコマンドはどれですか?",
       "options": [
-        { "id": "a", "text": "git diff --staged" },
-        { "id": "b", "text": "git diff" },
-        { "id": "c", "text": "git status --staged" },
-        { "id": "d", "text": "git log --staged" }
+        {
+          "id": "a",
+          "text": "git diff"
+        },
+        {
+          "id": "b",
+          "text": "git status --staged"
+        },
+        {
+          "id": "c",
+          "text": "git diff --staged"
+        },
+        {
+          "id": "d",
+          "text": "git log --staged"
+        }
       ],
-      "answer": "a",
+      "answer": "c",
       "explanation": "git diff --staged はステージ済み(コミット予定)の変更を表示します。オプションなしの git diff(b)は逆に「まだステージしていない」変更を表示するため、ここでは誤りです。この使い分けが重要です。",
-      "source_refs": [{ "section_id": "02-03", "anchor": "変更の中身を見る" }],
+      "source_refs": [
+        {
+          "section_id": "02-03",
+          "anchor": "変更の中身を見る"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["git", "diff"]
+      "tags": [
+        "git",
+        "diff"
+      ]
     }
   ]
 }

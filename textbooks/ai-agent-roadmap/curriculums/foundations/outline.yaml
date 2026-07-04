@@ -12,7 +12,7 @@ style:
 chapters:
   - id: "01"
     title: LLM の仕組みを言語化する
-    estimated_minutes: 20
+    estimated_minutes: 21
     learning_objectives:
       - LLM が入力をどう表現し次トークンを選ぶかを説明できる
       - 推論パラメータが出力に与える影響を説明できる
@@ -108,19 +108,19 @@ chapters:
       - Agent が失敗する典型パターンを挙げられる
     sections:
       - id: "04-01"
-        title: Agent とは何か — Chain との本質的な違い
+        title: Agent とは何か
         estimated_minutes: 4
       - id: "04-02"
-        title: Tool Use の概念 — LLM が外部世界に手を伸ばす仕組み
+        title: Tool Use の概念
         estimated_minutes: 4
       - id: "04-03"
-        title: ReAct ループの実体 — Thought / Action / Observation の循環
+        title: ReAct ループの実体
         estimated_minutes: 4
       - id: "04-04"
-        title: Function Calling の仕組み — モデルが構造化出力でツールを呼ぶ
+        title: Function Calling の仕組み
         estimated_minutes: 4
       - id: "04-05"
-        title: Agent が失敗するパターン — 無限ループ、誤ったツール選択、計画破綻
+        title: Agent が失敗するパターン
         estimated_minutes: 4
     diagrams:
       - purpose: Thought → Action → Observation の ReAct ループ

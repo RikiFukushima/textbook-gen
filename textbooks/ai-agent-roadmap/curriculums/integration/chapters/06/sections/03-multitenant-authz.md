@@ -4,7 +4,7 @@ chapter_id: "06"
 title: 認証・認可設計 — マルチテナント環境での Agent 設計
 order: 3
 estimated_minutes: 4
-estimated_chars: 1612
+estimated_chars: 1704
 learning_points:
   - JWT でユーザーとテナントの識別子を Agent 層まで伝搬する設計を組み立てられる
   - Tool 呼び出し時にユーザーコンテキストを明示的に渡す原則を実装に落とせる
@@ -74,7 +74,7 @@ def search_documents(
     )
 ```
 
-ポイントは、**`tenant_id` を LLM が触れる位置に置かない**ことです。LangChain や LangGraph の Tool 定義であれば、LLM 入力のスキーマには `query` だけを露出し、`tenant_id` は実行時に runtime context から注入する形を取ります。
+ポイントは、**`tenant_id` を LLM が触れる位置に置かない**ことです。LangChain や LangGraph の Tool 定義であれば、LLM 入力のスキーマには `query` だけを露出し、`tenant_id` は実行時に runtime context から注入する形を取ります。これは **最小権限の原則**(実行に必要な最小限の権限だけを各コンポーネントに与える)を Agent に適用したもので、LLM には業務パラメータの生成権限しか渡さない、という切り分けです。
 
 ## ステップ 3 — RAG 検索にテナントフィルタを必須化する
 

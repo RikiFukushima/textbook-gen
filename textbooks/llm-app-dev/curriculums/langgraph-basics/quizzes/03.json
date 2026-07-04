@@ -1,0 +1,284 @@
+{
+  "chapter_id": "03",
+  "questions": [
+    {
+      "id": "q03-01",
+      "question": "StateGraph をインスタンス化するとき、コンストラクタに渡すものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "実行済みの compile 結果オブジェクト"
+        },
+        {
+          "id": "b",
+          "text": "エントリポイントとなるノードの名前"
+        },
+        {
+          "id": "c",
+          "text": "グラフ全体で受け渡される State の型"
+        },
+        {
+          "id": "d",
+          "text": "使用する checkpointer のインスタンス"
+        }
+      ],
+      "answer": "c",
+      "explanation": "StateGraph は State の型を受け取ってインスタンスを作ります。StateGraph(State) のように渡した型が、グラフ全体で受け渡される状態の構造を決めます。checkpointer は compile 時に渡すもので、コンストラクタの引数ではありません。",
+      "source_refs": [
+        {
+          "section_id": "03-01",
+          "anchor": "State の型を渡してインスタンスを作ります"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "stategraph",
+        "graph-construction"
+      ]
+    },
+    {
+      "id": "q03-02",
+      "question": "add_node の第1引数と第2引数の組み合わせとして正しいものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "第1引数に遷移先ノード名、第2引数に遷移元ノード名"
+        },
+        {
+          "id": "b",
+          "text": "第1引数に State の型、第2引数に reducer"
+        },
+        {
+          "id": "c",
+          "text": "第1引数に関数、第2引数にその関数の説明文"
+        },
+        {
+          "id": "d",
+          "text": "第1引数にグラフ内での名前、第2引数に実体の関数"
+        }
+      ],
+      "answer": "d",
+      "explanation": "ノードは「名前」と「関数」のペアで登録します。add_node の第1引数がグラフ内での名前で、第2引数が実体の関数です。ノード関数は State を受け取り、更新したい部分だけを辞書で返します。",
+      "source_refs": [
+        {
+          "section_id": "03-01",
+          "anchor": "第 1 引数がグラフ内での名前で、第 2 引数が実体の関数"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "add_node",
+        "graph-construction"
+      ]
+    },
+    {
+      "id": "q03-03",
+      "question": "同じ名前で add_node を2回呼んだとき、本文によれば何が起きますか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "登録時点で ValueError が送出される"
+        },
+        {
+          "id": "b",
+          "text": "後から登録した関数で静かに上書きされる"
+        },
+        {
+          "id": "c",
+          "text": "compile するまでエラーにならず、実行時に落ちる"
+        },
+        {
+          "id": "d",
+          "text": "2つのノードが並行に実行されるようになる"
+        }
+      ],
+      "answer": "a",
+      "explanation": "本文では、同じ名前で add_node を2回呼ぶと、上書きされるのではなく登録時点で ValueError が送出されると説明されています。ノード名はグラフ内で一意である必要があります。",
+      "source_refs": [
+        {
+          "section_id": "03-01",
+          "anchor": "登録時点で `ValueError` が送出されます"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "add_node",
+        "error"
+      ]
+    },
+    {
+      "id": "q03-04",
+      "question": "グラフのエントリポイント(開始ノード)を指定する方法として、本文で等価とされている2つの書き方はどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "compile(entry=\"ノード名\") と invoke の config 指定"
+        },
+        {
+          "id": "b",
+          "text": "set_entry_point(\"ノード名\") と START からのエッジ add_edge(START, \"ノード名\")"
+        },
+        {
+          "id": "c",
+          "text": "add_node(START, ...) と set_finish_point(...)"
+        },
+        {
+          "id": "d",
+          "text": "add_conditional_edges の第1引数指定と END へのエッジ"
+        }
+      ],
+      "answer": "b",
+      "explanation": "エントリポイントは set_entry_point で指定でき、同じことを特別なノード START からのエッジ add_edge(START, \"retrieve\") として書くこともできます。本文ではこの2行が等価だと説明されています。",
+      "source_refs": [
+        {
+          "section_id": "03-02",
+          "anchor": "エントリポイントは `set_entry_point` で指定します"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "entry-point",
+        "start"
+      ]
+    },
+    {
+      "id": "q03-05",
+      "question": "本文における START / END の性質として正しいものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "自分で add_node して実体の関数を登録する必要があるノードである"
+        },
+        {
+          "id": "b",
+          "text": "reducer を必ず持つ特殊なノードである"
+        },
+        {
+          "id": "c",
+          "text": "langgraph.graph からインポートして使う、関数を持たない目印である"
+        },
+        {
+          "id": "d",
+          "text": "invoke の戻り値としてのみ現れる文字列定数である"
+        }
+      ],
+      "answer": "c",
+      "explanation": "START / END は langgraph.graph からインポートして使う定数で、関数を持たない目印です。普通のノードと違い実体の関数を持たないため、自分で add_node する対象ではありません。",
+      "source_refs": [
+        {
+          "section_id": "03-02",
+          "anchor": "関数を持たない目印である点が普通のノードと異なります"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "start",
+        "end"
+      ]
+    },
+    {
+      "id": "q03-06",
+      "question": "エントリポイントを指定し忘れたグラフは、本文によればどうなりますか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "先頭に add_node したノードが自動的に開始ノードになる"
+        },
+        {
+          "id": "b",
+          "text": "invoke するまではエラーにならず、実行時にランダムなノードから始まる"
+        },
+        {
+          "id": "c",
+          "text": "START への逆向きエッジが自動生成されて解決される"
+        },
+        {
+          "id": "d",
+          "text": "どこから始めればよいか決まらず compile 時にエラーになる"
+        }
+      ],
+      "answer": "d",
+      "explanation": "本文では、エントリポイントを指定し忘れると「どこから始めればよいか」が決まらず compile 時にエラーになると説明されています。compile の時点で入口の有無やエッジの接続先などの整合性が検証されます。",
+      "source_refs": [
+        {
+          "section_id": "03-02",
+          "anchor": "compile 時にエラーになります"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "entry-point",
+        "error"
+      ]
+    },
+    {
+      "id": "q03-07",
+      "question": "compile() の役割として、本文の説明に最も合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "設計図(builder)を実行可能なグラフオブジェクトへ変換する"
+        },
+        {
+          "id": "b",
+          "text": "グラフを1回実行して最終 State を返す"
+        },
+        {
+          "id": "c",
+          "text": "State のスキーマを TypedDict から自動生成する"
+        },
+        {
+          "id": "d",
+          "text": "checkpointer を初期化して thread_id を割り当てる"
+        }
+      ],
+      "answer": "a",
+      "explanation": "compile() は登録済みのノード・エッジ・入口・出口から実行可能なグラフオブジェクトを生成するメソッドです。compile の時点で整合性が検証され、返ってきた graph に入力 State を渡すと設計図どおりに実行されます。実行そのものは invoke / stream の役割です。",
+      "source_refs": [
+        {
+          "section_id": "03-03",
+          "anchor": "実行可能なグラフオブジェクトへ変換します"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "compile"
+      ]
+    },
+    {
+      "id": "q03-08",
+      "question": "invoke と stream の違いについて、本文の説明に最も合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "invoke は途中経過を逐次返し、stream は最終状態だけを返す"
+        },
+        {
+          "id": "b",
+          "text": "invoke は最終状態をまとめて返し、stream はノード実行ごとに更新を逐次返す"
+        },
+        {
+          "id": "c",
+          "text": "invoke と stream では最終的に返る State そのものが異なる"
+        },
+        {
+          "id": "d",
+          "text": "stream は checkpointer がないと使えないが invoke は不要である"
+        }
+      ],
+      "answer": "b",
+      "explanation": "invoke は END まで一気に走らせ最終的な State だけを返します。stream はノードが1つ実行されるたびに更新を逐次返し、途中経過の観測やデバッグに向きます。両者の違いは観測の粒度だけで、返る最終状態は同じです。",
+      "source_refs": [
+        {
+          "section_id": "03-03",
+          "anchor": "invoke と stream の使い分け"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "invoke",
+        "stream"
+      ]
+    }
+  ]
+}

@@ -9,7 +9,12 @@ learning_points:
   - 状態を持たないループが「毎回ゼロから」陥る具体的な症状を説明できる
   - 同じ仕事のやり直し・失敗の反復・進捗の積み上がらなさが起きる理由を結びつけられる
   - メモリがループ設計で最初の必須要素とされる理由を説明できる
-tags: [loop-engineering, memory, state, stateless, anti-pattern]
+tags:
+  - ループエンジニアリング
+  - メモリ
+  - 状態
+  - ステートレス
+  - アンチパターン
 related_sections: ["03-01", "03-03"]
 key_terms:
   - term: 毎回ゼロから問題

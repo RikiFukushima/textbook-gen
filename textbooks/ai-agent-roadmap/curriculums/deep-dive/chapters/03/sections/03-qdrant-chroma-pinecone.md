@@ -29,8 +29,6 @@ key_terms:
     definition: ベクトルに紐づく任意のメタデータ。Qdrant では検索時のフィルタに使える
 ---
 
-# Qdrant / Chroma / Pinecone の比較 — 設計思想と運用性
-
 ## このセクションで学ぶこと
 
 - Qdrant・Chroma・Pinecone それぞれの「設計思想」と立ち位置の違い

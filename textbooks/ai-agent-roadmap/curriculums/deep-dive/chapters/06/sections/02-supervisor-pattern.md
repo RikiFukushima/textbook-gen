@@ -4,7 +4,7 @@ chapter_id: "06"
 title: Supervisor 型 — 親 Agent が子 Agent を指揮する構造
 order: 2
 estimated_minutes: 4
-estimated_chars: 1703
+estimated_chars: 1791
 learning_points:
   - Supervisor 型の基本構造(親が次に動かす子を選ぶ)を図で説明できる
   - Supervisor 型の長所(制御の見通し・デバッグ性)と短所(親がボトルネックになる)を理解できる
@@ -59,7 +59,7 @@ Supervisor 型の最大の魅力は、制御の流れが追いやすいことで
 - **権限管理がしやすい**: 「書き込み Tool は Writer しか持たない」のような分離が自然に書ける
 - **失敗時のフォールバックを集中管理できる**: Worker が失敗したら Supervisor が別の Worker に振り直す、といった判断を 1 箇所に書ける
 
-LangGraph で実装するときは、Supervisor を 1 つのノードにし、その出力(=次に動かす Worker 名)を Conditional Edge で読んで対応する Worker ノードへ遷移させ、Worker が終わったら必ず Supervisor に戻る、というループ構造が定番です。
+LangGraph で実装するときは、Supervisor を 1 つのノードにし、その出力(=次に動かす Worker 名)を Conditional Edge で読んで対応する Worker ノードへ遷移させ、Worker が終わったら必ず Supervisor に戻る、というループ構造が定番です。この「次に動かす Worker を選ぶ」判断は、Worker を関数に見立てた **Tool calling** として実装することが多く、LLM に選択肢を渡して 1 つ選ばせる形になります。
 
 ## 短所: 親がボトルネックになる
 

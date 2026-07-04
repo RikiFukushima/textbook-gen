@@ -9,7 +9,12 @@ learning_points:
   - メモリに記録すべき項目(完了・残タスク・現方針・決定の根拠・制約と失敗履歴)を列挙できる
   - なぜ「決定の根拠」や「失敗履歴」まで残すのかを説明できる
   - Markdown のメモリファイルの簡単な構造を 1 つ書ける
-tags: [loop-engineering, memory, state, markdown, decision-log]
+tags:
+  - ループエンジニアリング
+  - メモリ
+  - 状態
+  - Markdown
+  - 決定ログ
 related_sections: ["03-02", "03-04"]
 key_terms:
   - term: 決定の根拠

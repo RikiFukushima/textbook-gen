@@ -29,8 +29,6 @@ key_terms:
     definition: Node 間の遷移を表す矢印。常に同じ次ノードへ進む固定エッジと、関数の戻り値で行き先を決める条件付きエッジがある
 ---
 
-# State / Node / Edge の役割分担
-
 ## このセクションで学ぶこと
 
 - State はなぜ TypedDict と reducer で定義するのか

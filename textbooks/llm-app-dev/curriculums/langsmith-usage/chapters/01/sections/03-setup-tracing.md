@@ -46,8 +46,10 @@ export LANGSMITH_PROJECT="my-first-app"   # 省略時は default プロジェク
 `LANGSMITH_PROJECT` は**プロジェクト**名で、トレースをまとめる入れ物です。アプリごと、あるいは開発・本番の環境ごとに分けておくと後で整理しやすくなります。SDK をまだ入れていなければ次でインストールします。
 
 ```bash
-pip install -U langsmith langchain
+pip install -U langsmith langchain langchain-openai
 ```
+
+`ChatOpenAI` は `langchain-openai` という別パッケージで提供されるため、あわせてインストールしておきます。
 
 ## 既存の LangChain アプリはこれだけで動く
 

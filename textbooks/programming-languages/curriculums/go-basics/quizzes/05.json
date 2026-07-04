@@ -1,0 +1,218 @@
+{
+  "chapter_id": "05",
+  "questions": [
+    {
+      "id": "q05-01",
+      "question": "Go のパッケージとディレクトリの関係について、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "1 つのファイルが 1 つのパッケージに対応する"
+        },
+        {
+          "id": "b",
+          "text": "同じディレクトリの Go ファイルはすべて同じパッケージ名でなければならない"
+        },
+        {
+          "id": "c",
+          "text": "同じディレクトリのファイルは別々のパッケージ名にできる"
+        },
+        {
+          "id": "d",
+          "text": "パッケージ宣言のないファイルもコンパイルできる"
+        }
+      ],
+      "answer": "b",
+      "explanation": "同じディレクトリに置かれた Go ファイルはすべて同じパッケージ名でなければならず、1 ディレクトリ = 1 パッケージが鉄則です。ファイルを複数に分けても同じディレクトリなら 1 つのパッケージとして扱われます。package 宣言のないファイルはコンパイルできません。",
+      "source_refs": [
+        {
+          "section_id": "05-01",
+          "anchor": "パッケージはコードをまとめる単位"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "go",
+        "package"
+      ]
+    },
+    {
+      "id": "q05-02",
+      "question": "`package main` について、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "他のパッケージから import されて使われる部品になる"
+        },
+        {
+          "id": "b",
+          "text": "単体では実行できないライブラリパッケージの一種である"
+        },
+        {
+          "id": "c",
+          "text": "func main() を持ち、実行可能なプログラムの入り口になる"
+        },
+        {
+          "id": "d",
+          "text": "標準ライブラリだけに存在する特別なパッケージである"
+        }
+      ],
+      "answer": "c",
+      "explanation": "package main は実行可能なプログラムの入り口になる特別なパッケージで、その中の func main() からプログラムが始まります。import されて使われる部品になるのは main 以外の名前を持つライブラリパッケージです。",
+      "source_refs": [
+        {
+          "section_id": "05-01",
+          "anchor": "main パッケージとライブラリパッケージ"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "go",
+        "package"
+      ]
+    },
+    {
+      "id": "q05-03",
+      "question": "モジュールと go.mod について、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "モジュールはパッケージより小さい単位で、1 ファイルごとに作られる"
+        },
+        {
+          "id": "b",
+          "text": "go.mod はダウンロードした依存のハッシュ値を記録する検証用ファイル"
+        },
+        {
+          "id": "c",
+          "text": "モジュールを作るには go build init を実行する"
+        },
+        {
+          "id": "d",
+          "text": "モジュールは 1 つ以上のパッケージをまとめ、go mod init で go.mod を作る"
+        }
+      ],
+      "answer": "d",
+      "explanation": "モジュールは 1 つ以上のパッケージをまとめてバージョンと依存関係を管理する配布の単位で、`go mod init モジュール名` で go.mod を作って初期化します。ハッシュ値を記録して改ざんを検証するのは go.sum の役割です。",
+      "source_refs": [
+        {
+          "section_id": "05-02",
+          "anchor": "go mod init でモジュールを作る"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "go",
+        "module",
+        "go-mod"
+      ]
+    },
+    {
+      "id": "q05-04",
+      "question": "go.mod と go.sum の役割の違いとして正しいものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "go.mod は依存の宣言、go.sum は改ざん検証用のハッシュを記録する"
+        },
+        {
+          "id": "b",
+          "text": "go.mod はハッシュ値、go.sum はモジュール名を記録する"
+        },
+        {
+          "id": "c",
+          "text": "どちらも同じ内容で、片方はバックアップにすぎない"
+        },
+        {
+          "id": "d",
+          "text": "go.sum は手で編集して依存を宣言するファイル"
+        }
+      ],
+      "answer": "a",
+      "explanation": "go.mod はどのモジュールのどのバージョンに依存するかを宣言し、人が読んで分かります。go.sum はダウンロードした依存のハッシュ値を記録して改ざんを検証する機械的な照合用です。go.sum は手で編集せず go コマンドが自動更新し、どちらもコミットします。",
+      "source_refs": [
+        {
+          "section_id": "05-02",
+          "anchor": "go.mod と go.sum の役割"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "go",
+        "go-mod"
+      ]
+    },
+    {
+      "id": "q05-05",
+      "question": "外部パッケージを使う手順として、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "import で読み込むだけで、取得コマンドは不要"
+        },
+        {
+          "id": "b",
+          "text": "go get で取得して依存に追加し、import で読み込む"
+        },
+        {
+          "id": "c",
+          "text": "go install でグローバルに入れてから import する"
+        },
+        {
+          "id": "d",
+          "text": "go.sum を手で編集して依存を追加する"
+        }
+      ],
+      "answer": "b",
+      "explanation": "外部パッケージを使う手順は、go get で取得して go.mod の require に追加し、import で読み込む 2 ステップです。import パスはモジュール名(取得時のパス)と一致します。使わなくなった依存は go mod tidy で整理できます。",
+      "source_refs": [
+        {
+          "section_id": "05-03",
+          "anchor": "外部パッケージを取り込む"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "go",
+        "import",
+        "dependency"
+      ]
+    },
+    {
+      "id": "q05-06",
+      "question": "net/http を使った HTTP サーバについて、本文のコード例の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "外部フレームワークを入れないと HTTP サーバは書けない"
+        },
+        {
+          "id": "b",
+          "text": "net/http は追加インストールが必要な外部パッケージである"
+        },
+        {
+          "id": "c",
+          "text": "HandleFunc でパスに処理を登録し、ListenAndServe で待ち受ける"
+        },
+        {
+          "id": "d",
+          "text": "サーバの起動には必ず encoding/json が必要になる"
+        }
+      ],
+      "answer": "c",
+      "explanation": "net/http では HandleFunc でパス(例: /)に対する処理を登録し、ListenAndServe でポートを指定して待ち受けます。標準ライブラリなので追加インストールは不要で、フレームワークがなくても数行でサーバが書けます。JSON 変換は encoding/json の役割で、サーバ起動に必須ではありません。",
+      "source_refs": [
+        {
+          "section_id": "05-04",
+          "anchor": "net/http で HTTP サーバを書く"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "go",
+        "net-http",
+        "standard-library"
+      ]
+    }
+  ]
+}

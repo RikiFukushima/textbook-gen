@@ -1,7 +1,7 @@
 ---
 section_id: "04-03"
 chapter_id: "04"
-title: ReAct ループの実体 — Thought / Action / Observation の循環
+title: ReAct ループの実体
 order: 3
 estimated_minutes: 4
 estimated_chars: 1828
@@ -22,11 +22,11 @@ key_terms:
     definition: これまでの Thought / Action / Observation を時系列に積み上げたテキスト。次の LLM 呼び出しに毎回渡される
   - term: 終了条件
     definition: ループを止める判断基準。最終回答が出た / 最大反復回数に達した / エラーが許容回数を超えた、など
-  - term: ループのターン
+  - term: ターン
     definition: ReAct ループの 1 周(Thought → Action → Observation)を指す単位
 ---
 
-# ReAct ループの実体 — Thought / Action / Observation の循環
+# ReAct ループの実体
 
 ## このセクションで学ぶこと
 
@@ -44,7 +44,7 @@ ReAct ループの 1 周(以下「ターン」と呼びます)では、次の流
 
 ```mermaid
 flowchart TB
-  Start([開始]) --> Init[履歴(スクラッチパッド)= 空]
+  Start([開始]) --> Init["履歴(スクラッチパッド)= 空"]
   Init --> Call[ホストが LLM を呼ぶ:<br/>ユーザー入力 + ツール一覧 + 履歴]
   Call --> Out{LLM の出力は?}
   Out -->|Thought + Action| Exec[ホストが Action を実行]

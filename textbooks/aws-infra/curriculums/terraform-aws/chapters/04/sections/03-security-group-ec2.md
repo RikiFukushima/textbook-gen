@@ -80,7 +80,7 @@ resource "aws_instance" "web" {
 }
 ```
 
-`ami` は起動元のイメージ、`instance_type` はスペック、`subnet_id` でどのサブネットに置くか、`vpc_security_group_ids` で適用する SG を指定します。`associate_public_ip_address = true` で外部からアクセスできるパブリック IP が割り当てられます。これで「VPC → サブネット → 経路 → SG → EC2」がすべてつながり、SSH で接続できる Web サーバが起動します。
+`ami` は起動元のイメージ、`instance_type` はスペック、`subnet_id` でどのサブネットに置くか、`vpc_security_group_ids` で適用する SG を指定します。`associate_public_ip_address = true` で外部からアクセスできるパブリック IP が割り当てられます。これで「VPC → サブネット → 経路 → SG → EC2」がすべてつながり、SSH で接続できるインスタンスが起動します。
 
 ## 注意点
 

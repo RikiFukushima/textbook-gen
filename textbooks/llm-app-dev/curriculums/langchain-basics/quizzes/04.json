@@ -5,142 +5,305 @@
       "id": "q04-01",
       "question": "LangChain における Tool の説明として、最も適切なものはどれですか?",
       "options": [
-        { "id": "a", "text": "LLM から呼び出せるよう、名前・説明・引数スキーマを付与した関数で、LLM 自身ができない処理を外部に委譲する仕組み。" },
-        { "id": "b", "text": "LLM の応答を後段で整形・検証するための出力パーサで、JSON などの構造化データに変換する役割を担う。" },
-        { "id": "c", "text": "Prompt テンプレートに対して入力変数を差し込むためのヘルパ関数で、メッセージの組み立てを担う。" },
-        { "id": "d", "text": "ChatModel が学習時に取得した知識を更新するために、最新のドキュメントを再学習させる仕組み。" }
+        {
+          "id": "a",
+          "text": "LLM の応答を後段で整形・検証するための出力パーサで、JSON などの構造化データに変換する役割を担う。"
+        },
+        {
+          "id": "b",
+          "text": "Prompt テンプレートに対して入力変数を差し込むためのヘルパ関数で、メッセージの組み立てを担う。"
+        },
+        {
+          "id": "c",
+          "text": "LLM から呼び出せるよう、名前・説明・引数スキーマを付与した関数で、LLM 自身ができない処理を外部に委譲する仕組み。"
+        },
+        {
+          "id": "d",
+          "text": "ChatModel が学習時に取得した知識を更新するために、最新のドキュメントを再学習させる仕組み。"
+        }
       ],
-      "answer": "a",
+      "answer": "c",
       "explanation": "Tool は「LLM から呼び出せる関数」で、名前・説明・引数スキーマの 3 要素を持ち、検索・計算・API 呼び出しなど LLM が単体ではできない処理を外部に委譲します。b は OutputParser、c は PromptTemplate の話で、d は事前学習の更新であって Tool ではありません。",
       "source_refs": [
-        { "section_id": "04-01", "anchor": "LLM は「閉じた箱」である" },
-        { "section_id": "04-01", "anchor": "Tool を構成する 3 つの要素" }
+        {
+          "section_id": "04-01",
+          "anchor": "LLM は「閉じた箱」である"
+        },
+        {
+          "section_id": "04-01",
+          "anchor": "Tool を構成する 3 つの要素"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["tool", "concept"]
+      "tags": [
+        "tool",
+        "concept"
+      ]
     },
     {
       "id": "q04-02",
       "question": "`@tool` デコレータで関数を Tool 化したとき、ツールの「説明文(description)」に相当するものとして本文で示されているのはどれですか?",
       "options": [
-        { "id": "a", "text": "関数の docstring(関数内冒頭に書かれた文字列)。" },
-        { "id": "b", "text": "関数名そのもの。動詞句で書くと自動的に説明文として扱われる。" },
-        { "id": "c", "text": "関数の引数に付けた型ヒント。型情報がそのまま説明として渡される。" },
-        { "id": "d", "text": "ファイル先頭のモジュールコメント。`@tool` がモジュール単位で description を収集する。" }
+        {
+          "id": "a",
+          "text": "関数名そのもの。動詞句で書くと自動的に説明文として扱われる。"
+        },
+        {
+          "id": "b",
+          "text": "関数の引数に付けた型ヒント。型情報がそのまま説明として渡される。"
+        },
+        {
+          "id": "c",
+          "text": "ファイル先頭のモジュールコメント。`@tool` がモジュール単位で description を収集する。"
+        },
+        {
+          "id": "d",
+          "text": "関数の docstring(関数内冒頭に書かれた文字列)。"
+        }
       ],
-      "answer": "a",
+      "answer": "d",
       "explanation": "本文では `@tool` を使うと「関数名がツール名に、docstring が説明文に、型ヒントが引数スキーマに、それぞれ自動でマッピングされる」と説明されています。説明文は LLM がツールを選ぶための仕様書であり、品質が呼び出し精度を左右します。b は関数名→ name、c は型ヒント→ args schema にマッピングされる点を取り違えた誤答です。",
       "source_refs": [
-        { "section_id": "04-01", "anchor": "Tool を構成する 3 つの要素" },
-        { "section_id": "04-01", "anchor": "注意点: 説明文は LLM への「仕様書」" }
+        {
+          "section_id": "04-01",
+          "anchor": "Tool を構成する 3 つの要素"
+        },
+        {
+          "section_id": "04-01",
+          "anchor": "注意点: 説明文は LLM への「仕様書」"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["tool", "decorator", "docstring"]
+      "tags": [
+        "tool",
+        "decorator",
+        "docstring"
+      ]
     },
     {
       "id": "q04-03",
       "question": "Tool calling の仕組みについて、LLM とアプリ側の役割分担を最も正しく説明しているものはどれですか?",
       "options": [
-        { "id": "a", "text": "LLM 自身がツール関数を実行し、結果をそのまま `content` として返すので、アプリ側は受け取った文章を表示するだけでよい。" },
-        { "id": "b", "text": "LLM は「どのツールを・どんな引数で呼びたいか」を tool_calls として返すだけで、実際の関数実行はアプリ側のコードが行う。" },
-        { "id": "c", "text": "LLM はツール呼び出しの要求も実行も行わず、アプリ側がプロンプトを解析してツールを選び、実行する。" },
-        { "id": "d", "text": "LLM はツール関数のコードを動的に生成して返すので、アプリ側はそのコードを `exec` で実行する必要がある。" }
+        {
+          "id": "a",
+          "text": "LLM は「どのツールを・どんな引数で呼びたいか」を tool_calls として返すだけで、実際の関数実行はアプリ側のコードが行う。"
+        },
+        {
+          "id": "b",
+          "text": "LLM 自身がツール関数を実行し、結果をそのまま `content` として返すので、アプリ側は受け取った文章を表示するだけでよい。"
+        },
+        {
+          "id": "c",
+          "text": "LLM はツール呼び出しの要求も実行も行わず、アプリ側がプロンプトを解析してツールを選び、実行する。"
+        },
+        {
+          "id": "d",
+          "text": "LLM はツール関数のコードを動的に生成して返すので、アプリ側はそのコードを `exec` で実行する必要がある。"
+        }
       ],
-      "answer": "b",
+      "answer": "a",
       "explanation": "Tool calling のポイントは「LLM 自身はツールを実行しない」ことです。LLM は呼び出し要求(tool_calls)を構造化データとして返すだけで、実際に関数を動かすのはアプリ側のコードです。この役割分担は安全面でも重要で、a のように LLM が勝手にコードを実行することはありません。",
       "source_refs": [
-        { "section_id": "04-02", "anchor": "LLM はツールを「実行しない」、呼び出しを「要求する」" }
+        {
+          "section_id": "04-02",
+          "anchor": "LLM はツールを「実行しない」、呼び出しを「要求する」"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["tool-calling", "bind_tools"]
+      "tags": [
+        "tool-calling",
+        "bind_tools"
+      ]
     },
     {
       "id": "q04-04",
       "question": "`bind_tools` でツールを渡したモデルを使い、自然な最終回答を得るまでの正しい流れはどれですか?",
       "options": [
-        { "id": "a", "text": "ツール実行結果を `HumanMessage` として履歴に追加し、再度 invoke して回答を得る。" },
-        { "id": "b", "text": "モデルが返した `tool_calls` をアプリ側で実行し、結果を `ToolMessage` として履歴に追加してから再度 invoke する。" },
-        { "id": "c", "text": "`bind_tools` 済みのモデルは一度の invoke で常にツール実行結果を踏まえた `content` を返すので、追加の往復は不要。" },
-        { "id": "d", "text": "ツール実行結果を `SystemMessage` で再注入し、新しい会話としてゼロから invoke し直す。" }
+        {
+          "id": "a",
+          "text": "ツール実行結果を `HumanMessage` として履歴に追加し、再度 invoke して回答を得る。"
+        },
+        {
+          "id": "b",
+          "text": "モデルが返した `tool_calls` をアプリ側で実行し、結果を `ToolMessage` として履歴に追加してから再度 invoke する。"
+        },
+        {
+          "id": "c",
+          "text": "`bind_tools` 済みのモデルは一度の invoke で常にツール実行結果を踏まえた `content` を返すので、追加の往復は不要。"
+        },
+        {
+          "id": "d",
+          "text": "ツール実行結果を `SystemMessage` で再注入し、新しい会話としてゼロから invoke し直す。"
+        }
       ],
       "answer": "b",
       "explanation": "本文の例どおり、流れは「要求 → 実行 → 結果を `ToolMessage` で返す → 再度 invoke」です。a は近い形ですが、ツール結果は `HumanMessage` ではなく `ToolMessage` で、tool_call_id と対応付けて返す必要があります。c は誤りで、最初の invoke の content は空のことが多く往復が必要です。",
       "source_refs": [
-        { "section_id": "04-02", "anchor": "bind_tools で渡し、tool_calls を受け取る" },
-        { "section_id": "04-02", "anchor": "結果をモデルに戻す「往復」" }
+        {
+          "section_id": "04-02",
+          "anchor": "bind_tools で渡し、tool_calls を受け取る"
+        },
+        {
+          "section_id": "04-02",
+          "anchor": "結果をモデルに戻す「往復」"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["tool-calling", "ToolMessage"]
+      "tags": [
+        "tool-calling",
+        "ToolMessage"
+      ]
     },
     {
       "id": "q04-05",
       "question": "本文で説明されている Agent のループ(思考 → ツール実行 → 観測)について、最も正しい説明はどれですか?",
       "options": [
-        { "id": "a", "text": "ツール呼び出し回数と順序はユーザーが事前に指定する必要があり、Agent はその通りにループを回す。" },
-        { "id": "b", "text": "LLM が tool_calls を出す限りループを繰り返し、LLM がツールを呼ばず最終回答だけを返した時点で終了する。" },
-        { "id": "c", "text": "ループの終了はツール側が返す特別な「終了シグナル」によって決まり、LLM 自身は終了判断を行わない。" },
-        { "id": "d", "text": "Agent は必ず固定回数(例: 3 回)ツールを呼び、その結果を要約して回答するという決まった構造を持つ。" }
+        {
+          "id": "a",
+          "text": "ツール呼び出し回数と順序はユーザーが事前に指定する必要があり、Agent はその通りにループを回す。"
+        },
+        {
+          "id": "b",
+          "text": "ループの終了はツール側が返す特別な「終了シグナル」によって決まり、LLM 自身は終了判断を行わない。"
+        },
+        {
+          "id": "c",
+          "text": "LLM が tool_calls を出す限りループを繰り返し、LLM がツールを呼ばず最終回答だけを返した時点で終了する。"
+        },
+        {
+          "id": "d",
+          "text": "Agent は必ず固定回数(例: 3 回)ツールを呼び、その結果を要約して回答するという決まった構造を持つ。"
+        }
       ],
-      "answer": "b",
+      "answer": "c",
       "explanation": "Agent ループの終了条件は「LLM がもうツールを呼ばず、最終的な回答だけを返したとき」です。何回ツールを呼ぶか・どの順で呼ぶかは事前に決めず、状況に応じて LLM が決めます。a は Chain の発想に近い誤答で、Agent の本質である「経路を自分で決める」点と矛盾します。",
       "source_refs": [
-        { "section_id": "04-03", "anchor": "Agent は往復を「自分で」回し続ける" },
-        { "section_id": "04-03", "anchor": "LLM がもうツールを呼ばず" }
+        {
+          "section_id": "04-03",
+          "anchor": "Agent は往復を「自分で」回し続ける"
+        },
+        {
+          "section_id": "04-03",
+          "anchor": "LLM がもうツールを呼ばず"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["agent", "agent-loop"]
+      "tags": [
+        "agent",
+        "agent-loop"
+      ]
     },
     {
       "id": "q04-06",
       "question": "本文の説明にもとづく Chain と Agent の違いとして、最も適切なものはどれですか?",
       "options": [
-        { "id": "a", "text": "Chain は LLM を呼ばずに済むが、Agent は必ず LLM を 1 回以上呼ぶ点が違う。" },
-        { "id": "b", "text": "Chain はあらかじめ決めた順序でデータを流す固定的な処理で、Agent は状況に応じて経路を自分で決める。" },
-        { "id": "c", "text": "Chain は内部で Tool を使えないが、Agent は Tool を使える点が本質的な違いである。" },
-        { "id": "d", "text": "Chain は同期実行のみ、Agent は非同期実行のみがサポートされるという実行モードの違いがある。" }
+        {
+          "id": "a",
+          "text": "Chain は LLM を呼ばずに済むが、Agent は必ず LLM を 1 回以上呼ぶ点が違う。"
+        },
+        {
+          "id": "b",
+          "text": "Chain は内部で Tool を使えないが、Agent は Tool を使える点が本質的な違いである。"
+        },
+        {
+          "id": "c",
+          "text": "Chain は同期実行のみ、Agent は非同期実行のみがサポートされるという実行モードの違いがある。"
+        },
+        {
+          "id": "d",
+          "text": "Chain はあらかじめ決めた順序でデータを流す固定的な処理で、Agent は状況に応じて経路を自分で決める。"
+        }
       ],
-      "answer": "b",
+      "answer": "d",
       "explanation": "本文では「Chain があらかじめ決めた順序でデータを流す固定的な処理だったのに対し、Agent は状況に応じて経路を自分で決める」点が Agent の本質と説明されています。c は紛らわしいですが、本文での違いは「経路の決め方」であって Tool の使用可否ではありません(Chain でもツールを組み込むことは可能)。",
       "source_refs": [
-        { "section_id": "04-03", "anchor": "状況に応じて経路を自分で決める" }
+        {
+          "section_id": "04-03",
+          "anchor": "状況に応じて経路を自分で決める"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["agent", "chain", "comparison"]
+      "tags": [
+        "agent",
+        "chain",
+        "comparison"
+      ]
     },
     {
       "id": "q04-07",
       "question": "Agent のデバッグが Chain などの普通のプログラムより難しい理由として、本文の説明に最も合致するものはどれですか?",
       "options": [
-        { "id": "a", "text": "失敗の原因が LLM の確率的な思考そのものにあり、同じ依頼でも成功したり失敗したりするため再現性が低いから。" },
-        { "id": "b", "text": "Agent のコードは Python ではなく専用 DSL で書かれており、通常のデバッガが使えないから。" },
-        { "id": "c", "text": "Agent では LLM の出力が常に決定論的で、結果が固定されてしまい原因を切り分けにくいから。" },
-        { "id": "d", "text": "Agent はクラウド上でしか実行できず、ローカルでログを取得できないから。" }
+        {
+          "id": "a",
+          "text": "失敗の原因が LLM の確率的な思考そのものにあり、同じ依頼でも成功したり失敗したりするため再現性が低いから。"
+        },
+        {
+          "id": "b",
+          "text": "Agent のコードは Python ではなく専用 DSL で書かれており、通常のデバッガが使えないから。"
+        },
+        {
+          "id": "c",
+          "text": "Agent では LLM の出力が常に決定論的で、結果が固定されてしまい原因を切り分けにくいから。"
+        },
+        {
+          "id": "d",
+          "text": "Agent はクラウド上でしか実行できず、ローカルでログを取得できないから。"
+        }
       ],
       "answer": "a",
       "explanation": "本文では「失敗の原因が LLM の思考そのものにあり、なぜそのツールを選んだのかがコードを読んでも分からない」「LLM の出力は確率的なので、同じ依頼でも成功したり失敗したりする」と説明されています。c は a と逆の主張で誤り、b・d は本文に記載のない事実誤認です。だからこそ可観測性(トレース)が重要になります。",
       "source_refs": [
-        { "section_id": "04-04", "anchor": "デバッグが難しい理由" }
+        {
+          "section_id": "04-04",
+          "anchor": "デバッグが難しい理由"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["agent", "debugging", "observability"]
+      "tags": [
+        "agent",
+        "debugging",
+        "observability"
+      ]
     },
     {
       "id": "q04-08",
       "question": "本文で「実務で Agent に手綱を付ける」基本的な防御策として挙げられている 3 つに当てはまらないものはどれですか?",
       "options": [
-        { "id": "a", "text": "ループ回数に上限(recursion_limit)を設けて暴走を物理的に止める。" },
-        { "id": "b", "text": "思考・ツール呼び出し・観測を記録するトレースを取り、失敗時に原因を追えるようにする。" },
-        { "id": "c", "text": "副作用のあるツールは確認を挟むか読み取り専用から始め、権限を絞る。" },
-        { "id": "d", "text": "LLM の温度(temperature)を 0 に固定すれば出力が完全に決定論的になるので、それだけで本番運用上は十分である。" }
+        {
+          "id": "a",
+          "text": "ループ回数に上限(recursion_limit)を設けて暴走を物理的に止める。"
+        },
+        {
+          "id": "b",
+          "text": "LLM の温度(temperature)を 0 に固定すれば出力が完全に決定論的になるので、それだけで本番運用上は十分である。"
+        },
+        {
+          "id": "c",
+          "text": "思考・ツール呼び出し・観測を記録するトレースを取り、失敗時に原因を追えるようにする。"
+        },
+        {
+          "id": "d",
+          "text": "副作用のあるツールは確認を挟むか読み取り専用から始め、権限を絞る。"
+        }
       ],
-      "answer": "d",
+      "answer": "b",
       "explanation": "本文が挙げる基本的な防御策は「反復上限を設ける」「トレースを取る」「権限を絞る」の 3 つで、a・b・c はそのままこれに対応します。d はもっともらしい誤答ですが、本文ではこのような記述はなく、また LLM の思考が確率的であることを完全には消せないため「それだけで十分」とは言えません。",
       "source_refs": [
-        { "section_id": "04-04", "anchor": "実務での基本的な防御策" },
-        { "section_id": "04-04", "anchor": "recursion_limit" }
+        {
+          "section_id": "04-04",
+          "anchor": "実務での基本的な防御策"
+        },
+        {
+          "section_id": "04-04",
+          "anchor": "反復上限を設ける"
+        }
       ],
       "difficulty": "medium",
-      "tags": ["agent", "reliability", "guardrails"]
+      "tags": [
+        "agent",
+        "reliability",
+        "guardrails"
+      ]
     }
   ]
 }

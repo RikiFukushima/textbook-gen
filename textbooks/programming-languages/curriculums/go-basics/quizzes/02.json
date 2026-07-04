@@ -1,0 +1,289 @@
+{
+  "chapter_id": "02",
+  "questions": [
+    {
+      "id": "q02-01",
+      "question": "初期値を書かずに宣言した変数について、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "未初期化で中身が不定になり、使う前に代入が必須"
+        },
+        {
+          "id": "b",
+          "text": "型ごとに決まったゼロ値(int なら 0、string なら空文字)が入る"
+        },
+        {
+          "id": "c",
+          "text": "コンパイルエラーになり宣言そのものができない"
+        },
+        {
+          "id": "d",
+          "text": "すべての型で共通して nil が入る"
+        }
+      ],
+      "answer": "b",
+      "explanation": "初期値を書かずに宣言した変数には型ごとに決まったゼロ値が入ります。int なら 0、string なら空文字、bool なら false です。Go には「未初期化で中身が不定」という状態がなく、宣言した変数は必ず意味のある初期値を持ちます。",
+      "source_refs": [
+        {
+          "section_id": "02-01",
+          "anchor": "ゼロ値"
+        }
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "go",
+        "variables"
+      ]
+    },
+    {
+      "id": "q02-02",
+      "question": "短縮変数宣言 `:=` について本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "パッケージレベル(関数の外)でも自由に使える"
+        },
+        {
+          "id": "b",
+          "text": "型を必ず明示して書く必要がある"
+        },
+        {
+          "id": "c",
+          "text": "関数の中でのみ使え、宣言と初期化を一度に書ける"
+        },
+        {
+          "id": "d",
+          "text": "初期値なしでも変数を宣言できる"
+        }
+      ],
+      "answer": "c",
+      "explanation": "`:=` は関数の中だけで使える短縮宣言で、var と型指定を省略して宣言と初期化を一度に書けます。関数の外(パッケージレベル)では使えず、そこは var で宣言します。右辺の値から型を決めるため型は書きません。",
+      "source_refs": [
+        {
+          "section_id": "02-01",
+          "anchor": ":= はもっと手軽な短縮宣言"
+        }
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "go",
+        "variables"
+      ]
+    },
+    {
+      "id": "q02-03",
+      "question": "宣言したのに一度も使わない変数があると、Go ではどうなりますか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "自動的にゼロ値のまま無視される"
+        },
+        {
+          "id": "b",
+          "text": "警告は出るがコンパイルは通る"
+        },
+        {
+          "id": "c",
+          "text": "実行時にエラーになる"
+        },
+        {
+          "id": "d",
+          "text": "コンパイルエラーになる"
+        }
+      ],
+      "answer": "d",
+      "explanation": "Go では宣言したのに使わない変数はコンパイルエラー(declared and not used)になります。使わない変数を書き間違いやコードの残骸とみなす方針によるもので、コードを常に整理された状態に保ちます。",
+      "source_refs": [
+        {
+          "section_id": "02-01",
+          "anchor": "宣言したのに使わない変数はコンパイルエラー"
+        }
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "go",
+        "variables"
+      ]
+    },
+    {
+      "id": "q02-04",
+      "question": "Go における型変換について、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "型が違うと計算できず、型名(値) の形で明示的に変換する"
+        },
+        {
+          "id": "b",
+          "text": "int と float64 は暗黙に変換されるので混ぜて計算できる"
+        },
+        {
+          "id": "c",
+          "text": "型が違う値は自動でそろえられ、明示的な変換は不要"
+        },
+        {
+          "id": "d",
+          "text": "型変換は strconv でしか行えない"
+        }
+      ],
+      "answer": "a",
+      "explanation": "Go は暗黙の型変換をしないため、int と float64 のように型が違う値はそのまま計算できません。`型名(値)` の形で明示的に型をそろえる必要があります。strconv は文字列と数値の相互変換に使うもので、型変換全般の唯一の手段ではありません。",
+      "source_refs": [
+        {
+          "section_id": "02-02",
+          "anchor": "Go は暗黙の型変換をしない"
+        }
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "go",
+        "conversion"
+      ]
+    },
+    {
+      "id": "q02-05",
+      "question": "文字列 \"42\" を数値に変換したいとき、本文で使うとされている関数はどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "strconv.Itoa"
+        },
+        {
+          "id": "b",
+          "text": "strconv.Atoi"
+        },
+        {
+          "id": "c",
+          "text": "string(42)"
+        },
+        {
+          "id": "d",
+          "text": "int(\"42\")"
+        }
+      ],
+      "answer": "b",
+      "explanation": "文字列を数値に変換するには strconv.Atoi(ASCII to integer)を使います。逆に数値を文字列にするのが Itoa です。int を string() で変換しても数字の文字列にはならず、文字コードとして解釈される点にも注意します。",
+      "source_refs": [
+        {
+          "section_id": "02-02",
+          "anchor": "文字列と数値の変換は strconv で"
+        }
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "go",
+        "conversion",
+        "strconv"
+      ]
+    },
+    {
+      "id": "q02-06",
+      "question": "Go の if 文の書き方について、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "条件に丸括弧を付け、1 行なら波括弧を省略できる"
+        },
+        {
+          "id": "b",
+          "text": "条件に丸括弧を付ける必要があり、波括弧は省略できない"
+        },
+        {
+          "id": "c",
+          "text": "条件に丸括弧を付けず、波括弧は省略できない"
+        },
+        {
+          "id": "d",
+          "text": "条件に丸括弧を付けず、波括弧も省略できる"
+        }
+      ],
+      "answer": "c",
+      "explanation": "Go の if は条件に丸括弧を付けず、たとえ 1 行であっても波括弧は必ず必要です。これにより波括弧の付け忘れによるバグが構造的に起きません。",
+      "source_refs": [
+        {
+          "section_id": "02-03",
+          "anchor": "if は丸括弧なし・波括弧必須"
+        }
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "go",
+        "if",
+        "control-flow"
+      ]
+    },
+    {
+      "id": "q02-07",
+      "question": "Go の switch 文の case の挙動として正しいものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "break を書かないと必ず次の case へ流れ込む"
+        },
+        {
+          "id": "b",
+          "text": "case を複数書くと必ず上から順にすべて実行される"
+        },
+        {
+          "id": "c",
+          "text": "default は必ず先頭に書かなければならない"
+        },
+        {
+          "id": "d",
+          "text": "各 case の最後で自動的に処理を抜け、続けたいときだけ fallthrough を書く"
+        }
+      ],
+      "answer": "d",
+      "explanation": "Go の switch は他言語と違い、各 case の最後で自動的に処理を抜けます。break を書く必要はなく、意図的に次の case へ続けたいときだけ fallthrough を明示します。break 忘れによるフォールスルーが起きない設計です。",
+      "source_refs": [
+        {
+          "section_id": "02-03",
+          "anchor": "各 case の最後で自動的に処理を抜けます"
+        }
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "go",
+        "switch",
+        "control-flow"
+      ]
+    },
+    {
+      "id": "q02-08",
+      "question": "Go の繰り返し構文について、本文の説明に合うものはどれですか。",
+      "options": [
+        {
+          "id": "a",
+          "text": "for 1 つだけで、3 要素の省略で while や無限ループも表現できる"
+        },
+        {
+          "id": "b",
+          "text": "for と while の 2 つがある"
+        },
+        {
+          "id": "c",
+          "text": "while と foreach の 2 つがある"
+        },
+        {
+          "id": "d",
+          "text": "for のみだが無限ループは書けない"
+        }
+      ],
+      "answer": "a",
+      "explanation": "Go の繰り返しは for 1 つだけです。`初期化; 条件; 後処理` の 3 要素を省略でき、条件だけ残せば while 相当、3 つすべて省けば無限ループになります。while や foreach という構文は Go にありません。",
+      "source_refs": [
+        {
+          "section_id": "02-04",
+          "anchor": "Go の繰り返しは for だけ"
+        }
+      ],
+      "difficulty": "easy",
+      "tags": [
+        "go",
+        "for",
+        "loop"
+      ]
+    }
+  ]
+}

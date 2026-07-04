@@ -58,8 +58,8 @@ quadrantChart
     y-axis インパクト 低 --> インパクト 高
     quadrant-1 検討 (高インパクト・高難度)
     quadrant-2 最優先 (高インパクト・低難度)
-    quadrant-3 後回し
-    quadrant-4 Quick Win 候補
+    quadrant-3 Quick Win 候補
+    quadrant-4 後回し
     質問応答 Bot: [0.25, 0.75]
     提出物フィードバック: [0.4, 0.85]
     コーチ一次対応支援: [0.35, 0.7]

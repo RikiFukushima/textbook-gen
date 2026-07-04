@@ -3,6 +3,7 @@ target_audience:
   level: 中級
   prerequisites:
     - foundations カリキュラム(harness の 5 要素とエージェントループ)を理解している
+    - ai-agent-roadmap 教材(コンテキストウィンドウ・RAG などの基礎語彙)を学び終えている
     - 何らかのエージェントや LLM API を触ったことがある
     - JSON / スキーマの基本がわかる
   estimated_hours: 1.5
@@ -59,7 +60,7 @@ chapters:
         title: RAG はコンテキスト設計である — 検索を「詰め込み」として読み直す
         estimated_minutes: 4
       - id: "02-04"
-        title: 溢れる前に畳む — 圧縮・要約・打ち切り
+        title: 溢れる前に畳む — 打ち切り・要約・選別
         estimated_minutes: 4
       - id: "02-05"
         title: セッションを越えて覚える — メモリの設計

@@ -38,7 +38,7 @@ chapters:
 
   - id: "02"
     title: SESとは — 準委任での客先常駐
-    estimated_minutes: 20
+    estimated_minutes: 19
     learning_objectives:
       - SES(システムエンジニアリングサービス)の基本的な仕組みを説明できる
       - 客先常駐における指揮命令の所在が誰にあるかを理解する
@@ -66,7 +66,7 @@ chapters:
 
   - id: "03"
     title: 受託開発(請負)の流れとリスク
-    estimated_minutes: 18
+    estimated_minutes: 15
     learning_objectives:
       - 受託開発(請負)の一般的な進め方の流れを説明できる
       - 成果物責任・検収・契約不適合責任といったリスクの所在を理解する
@@ -91,7 +91,7 @@ chapters:
 
   - id: "04"
     title: 「業務委託」という呼び方の実態
-    estimated_minutes: 15
+    estimated_minutes: 13
     learning_objectives:
       - 「業務委託」という言葉が法律用語ではなく俗称であることを説明できる
       - 業務委託の実体が請負か準委任かで条件が変わることを理解する
@@ -116,7 +116,7 @@ chapters:
 
   - id: "05"
     title: 偽装請負と注意点・契約形態の選び方
-    estimated_minutes: 18
+    estimated_minutes: 15
     learning_objectives:
       - 偽装請負がどのような状態を指すかを説明できる
       - 指揮命令と契約形態のズレがなぜ問題になるかを理解する

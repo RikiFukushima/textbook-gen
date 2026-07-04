@@ -5,121 +5,283 @@
       "id": "q03-01",
       "question": "ブランチを使う主な目的として最も適切なものはどれですか?",
       "options": [
-        { "id": "a", "text": "本流に影響を与えずに並行して作業を進めるため" },
-        { "id": "b", "text": "ファイルを圧縮して容量を節約するため" },
-        { "id": "c", "text": "コミットメッセージを自動生成するため" },
-        { "id": "d", "text": "リモートサーバーを増やすため" }
+        {
+          "id": "a",
+          "text": "ファイルを圧縮して容量を節約するため"
+        },
+        {
+          "id": "b",
+          "text": "コミットメッセージを自動生成するため"
+        },
+        {
+          "id": "c",
+          "text": "リモートサーバーを増やすため"
+        },
+        {
+          "id": "d",
+          "text": "本流に影響を与えずに並行して作業を進めるため"
+        }
       ],
-      "answer": "a",
+      "answer": "d",
       "explanation": "ブランチは履歴を枝分かれさせ、本流(main)を守りながら並行作業を進めるための仕組みです。失敗したら枝ごと捨てられるため本流を安定に保てます。b・c・dはブランチの役割ではありません。",
-      "source_refs": [{ "section_id": "03-01", "anchor": "なぜブランチが必要か" }],
-      "difficulty": "easy",
-      "tags": ["git", "branch"]
+      "source_refs": [
+        {
+          "section_id": "03-01",
+          "anchor": "なぜブランチが必要か"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "git",
+        "branch"
+      ]
     },
     {
       "id": "q03-02",
       "question": "feature ブランチを作成し、同時にそのブランチへ切り替えるコマンドはどれですか?",
       "options": [
-        { "id": "a", "text": "git switch -c feature" },
-        { "id": "b", "text": "git branch feature" },
-        { "id": "c", "text": "git merge feature" },
-        { "id": "d", "text": "git switch feature" }
+        {
+          "id": "a",
+          "text": "git switch -c feature"
+        },
+        {
+          "id": "b",
+          "text": "git branch feature"
+        },
+        {
+          "id": "c",
+          "text": "git merge feature"
+        },
+        {
+          "id": "d",
+          "text": "git switch feature"
+        }
       ],
       "answer": "a",
       "explanation": "git switch -c feature は作成と切り替えを同時に行います。git branch feature(b)は作成のみ、git switch feature(d)は既存ブランチへの切り替えのみで作成はしません。これらの違いに注意しましょう。",
-      "source_refs": [{ "section_id": "03-01", "anchor": "作成と切り替え" }],
+      "source_refs": [
+        {
+          "section_id": "03-01",
+          "anchor": "作成と切り替え"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["git", "branch"]
+      "tags": [
+        "git",
+        "branch"
+      ]
     },
     {
       "id": "q03-03",
       "question": "Git のブランチが「気軽に作ってよい」とされる理由として最も適切なものはどれですか?",
       "options": [
-        { "id": "a", "text": "コミットを指す軽い目印にすぎず、作成も切り替えも一瞬でディスクをほとんど使わないから" },
-        { "id": "b", "text": "ブランチを作るとファイルが自動でバックアップされるから" },
-        { "id": "c", "text": "ブランチ数が多いほどコミットが速くなるから" },
-        { "id": "d", "text": "ブランチは作っても履歴には一切影響しないから" }
+        {
+          "id": "a",
+          "text": "ブランチを作るとファイルが自動でバックアップされるから"
+        },
+        {
+          "id": "b",
+          "text": "コミットを指す軽い目印にすぎず、作成も切り替えも一瞬でディスクをほとんど使わないから"
+        },
+        {
+          "id": "c",
+          "text": "ブランチ数が多いほどコミットが速くなるから"
+        },
+        {
+          "id": "d",
+          "text": "ブランチは作っても履歴には一切影響しないから"
+        }
       ],
-      "answer": "a",
+      "answer": "b",
       "explanation": "Git のブランチは内部的には「あるコミットを指す軽い目印」で、作成・切り替えが一瞬かつ低コストです。だからこそ実験や作業ごとに気軽に切れます。b・cは事実ではありません。",
-      "source_refs": [{ "section_id": "03-01", "anchor": "軽量だからこそ気軽に使う" }],
+      "source_refs": [
+        {
+          "section_id": "03-01",
+          "anchor": "軽量だからこそ気軽に使う"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["git", "branch"]
+      "tags": [
+        "git",
+        "branch"
+      ]
     },
     {
       "id": "q03-04",
       "question": "feature ブランチの変更を main に取り込みたいとき、正しい操作はどれですか?",
       "options": [
-        { "id": "a", "text": "main に切り替えてから git merge feature を実行する" },
-        { "id": "b", "text": "feature に切り替えてから git merge main を実行する" },
-        { "id": "c", "text": "main に切り替えてから git merge main を実行する" },
-        { "id": "d", "text": "どちらのブランチにいても git push feature を実行する" }
+        {
+          "id": "a",
+          "text": "feature に切り替えてから git merge main を実行する"
+        },
+        {
+          "id": "b",
+          "text": "main に切り替えてから git merge main を実行する"
+        },
+        {
+          "id": "c",
+          "text": "main に切り替えてから git merge feature を実行する"
+        },
+        {
+          "id": "d",
+          "text": "どちらのブランチにいても git push feature を実行する"
+        }
       ],
-      "answer": "a",
+      "answer": "c",
       "explanation": "マージは「取り込み先に移動してから、取り込みたいブランチを指定する」のが基本です。main に feature を取り込むなら、main に切り替えて git merge feature とします。bは向きが逆で、main の変更を feature に取り込んでしまいます。",
-      "source_refs": [{ "section_id": "03-02", "anchor": "ブランチを合流させる" }],
+      "source_refs": [
+        {
+          "section_id": "03-02",
+          "anchor": "ブランチを合流させる"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["git", "merge"]
+      "tags": [
+        "git",
+        "merge"
+      ]
     },
     {
       "id": "q03-05",
       "question": "マージ時にコンフリクトが発生するのはどのような場合ですか?",
       "options": [
-        { "id": "a", "text": "2 つのブランチが同じファイルの同じ箇所を別々に変更していた場合" },
-        { "id": "b", "text": "2 つのブランチが別々のファイルを変更していた場合" },
-        { "id": "c", "text": "ブランチを作成しただけで一度もコミットしていない場合" },
-        { "id": "d", "text": "コミットメッセージが空だった場合" }
+        {
+          "id": "a",
+          "text": "2 つのブランチが別々のファイルを変更していた場合"
+        },
+        {
+          "id": "b",
+          "text": "ブランチを作成しただけで一度もコミットしていない場合"
+        },
+        {
+          "id": "c",
+          "text": "コミットメッセージが空だった場合"
+        },
+        {
+          "id": "d",
+          "text": "2 つのブランチが同じファイルの同じ箇所を別々に変更していた場合"
+        }
       ],
-      "answer": "a",
+      "answer": "d",
       "explanation": "コンフリクトは同じファイルの同じ箇所を異なる内容で変更したブランチを合流させたときに起きます。Git がどちらを採用すべきか判断できないためです。別々のファイル(b)なら自動で合流できコンフリクトは起きません。",
-      "source_refs": [{ "section_id": "03-02", "anchor": "コンフリクトはなぜ起きるか" }],
+      "source_refs": [
+        {
+          "section_id": "03-02",
+          "anchor": "コンフリクトはなぜ起きるか"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["git", "conflict"]
+      "tags": [
+        "git",
+        "conflict"
+      ]
     },
     {
       "id": "q03-06",
       "question": "コンフリクトを解消する流れとして正しいものはどれですか?",
       "options": [
-        { "id": "a", "text": "マーカーを参考に手で正しい形に書き直す → git add → git commit" },
-        { "id": "b", "text": "git push でリモートに送れば自動的に解消される" },
-        { "id": "c", "text": "コンフリクトしたファイルを削除して作り直す以外に方法はない" },
-        { "id": "d", "text": "git log を実行すると自動で解消される" }
+        {
+          "id": "a",
+          "text": "マーカーを参考に手で正しい形に書き直す → git add → git commit"
+        },
+        {
+          "id": "b",
+          "text": "git push でリモートに送れば自動的に解消される"
+        },
+        {
+          "id": "c",
+          "text": "コンフリクトしたファイルを削除して作り直す以外に方法はない"
+        },
+        {
+          "id": "d",
+          "text": "git log を実行すると自動で解消される"
+        }
       ],
       "answer": "a",
       "explanation": "コンフリクトは、ファイル内のマーカー(<<<<<<< ======= >>>>>>>)を参考に正しい最終形へ手で書き直し、マーカーを消してから git add で解消済みにし、git commit でマージを完了します。push や log で自動解消されることはありません。",
-      "source_refs": [{ "section_id": "03-02", "anchor": "コンフリクトを解消する" }],
+      "source_refs": [
+        {
+          "section_id": "03-02",
+          "anchor": "コンフリクトを解消する"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["git", "conflict"]
+      "tags": [
+        "git",
+        "conflict"
+      ]
     },
     {
       "id": "q03-07",
       "question": "git clone でリモートを複製したとき、複製元のリモートに自動で付く既定の名前はどれですか?",
       "options": [
-        { "id": "a", "text": "origin" },
-        { "id": "b", "text": "main" },
-        { "id": "c", "text": "remote" },
-        { "id": "d", "text": "source" }
+        {
+          "id": "a",
+          "text": "main"
+        },
+        {
+          "id": "b",
+          "text": "origin"
+        },
+        {
+          "id": "c",
+          "text": "remote"
+        },
+        {
+          "id": "d",
+          "text": "source"
+        }
       ],
-      "answer": "a",
+      "answer": "b",
       "explanation": "git clone するとクローン元のリモートには自動で origin という名前が付きます。main(b)はブランチの既定名であり、リモート名ではない点に注意しましょう。",
-      "source_refs": [{ "section_id": "03-03", "anchor": "リモートはもう 1 つの複製" }],
-      "difficulty": "easy",
-      "tags": ["git", "remote", "clone"]
+      "source_refs": [
+        {
+          "section_id": "03-03",
+          "anchor": "リモートはもう 1 つの複製"
+        }
+      ],
+      "difficulty": "medium",
+      "tags": [
+        "git",
+        "remote",
+        "clone"
+      ]
     },
     {
       "id": "q03-08",
       "question": "複数人で 1 つのリモートを使うときに「作業を始める前」に行うとよい操作はどれですか?",
       "options": [
-        { "id": "a", "text": "git pull で最新の変更を取り込む" },
-        { "id": "b", "text": "git push で自分の変更を送る" },
-        { "id": "c", "text": "git init でリポジトリを作り直す" },
-        { "id": "d", "text": "git branch ですべてのブランチを削除する" }
+        {
+          "id": "a",
+          "text": "git push で自分の変更を送る"
+        },
+        {
+          "id": "b",
+          "text": "git init でリポジトリを作り直す"
+        },
+        {
+          "id": "c",
+          "text": "git pull で最新の変更を取り込む"
+        },
+        {
+          "id": "d",
+          "text": "git branch ですべてのブランチを削除する"
+        }
       ],
-      "answer": "a",
+      "answer": "c",
       "explanation": "作業前に git pull で最新を取り込むのが基本です。古い状態のまま作業して push しようとすると、リモートが先に進んでいて弾かれることがあります。push(b)は作業後に行う操作で、作業前ではありません。",
-      "source_refs": [{ "section_id": "03-03", "anchor": "共有作業の基本リズム" }],
+      "source_refs": [
+        {
+          "section_id": "03-03",
+          "anchor": "共有作業の基本リズム"
+        }
+      ],
       "difficulty": "medium",
-      "tags": ["git", "pull", "push"]
+      "tags": [
+        "git",
+        "pull",
+        "push"
+      ]
     }
   ]
 }

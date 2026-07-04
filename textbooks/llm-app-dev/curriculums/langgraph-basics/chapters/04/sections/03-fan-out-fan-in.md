@@ -71,7 +71,7 @@ class State(TypedDict):
     results: Annotated[list, operator.add]
 ```
 
-`operator.add` を reducer に指定すると、並行ノードがそれぞれ `{"results": [...]}` を返したとき、上書きではなく結合されて全結果が `results` に集まります。reducer を指定しないと**最後に書いた値で上書きされ、他の結果が失われる**ため、fan-in では reducer がほぼ必須になります。
+`operator.add` を reducer に指定すると、並行ノードがそれぞれ `{"results": [...]}` を返したとき、上書きではなく結合されて全結果が `results` に集まります。逆に reducer を指定しないと、同じスーパーステップ内で複数ノードが同じキーを更新した時点で LangGraph は **`InvalidUpdateError`(1 ステップにつき値は 1 つしか受け取れない、という趣旨のエラー)を送出** します。黙って上書きされるのではなくエラーで止まるので、fan-in では「どうまとめるか」を reducer で必ず宣言する必要があります。
 
 ## 注意点
 

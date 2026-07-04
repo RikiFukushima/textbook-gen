@@ -61,7 +61,7 @@ graph LR
 ```bash
 history | grep "ssh"     # 過去に打った ssh 関連のコマンドだけ表示
 ps aux | grep "nginx"    # 実行中のプロセスから nginx だけ表示
-ls -l /etc | grep ".conf" # 一覧から .conf を含む行だけ表示
+ls -l /etc | grep "\.conf" # 一覧から .conf を含む行だけ表示
 ```
 
 「全部出す → 必要な行だけ通す」という流れは、このあと何度も登場する基本パターンです。パイプは 2 段に限らず、`コマンド | コマンド | コマンド` と何段でもつなげます。

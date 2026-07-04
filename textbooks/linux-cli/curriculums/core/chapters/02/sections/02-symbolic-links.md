@@ -13,7 +13,7 @@ tags: [linux, symlink, ln, filesystem]
 related_sections: ["02-01", "01-03"]
 key_terms:
   - term: シンボリックリンク
-    definition: 別のファイルやディレクトリへのパスを保持し、その実体を指し示す特殊なファイル。シンボリックリンクへの操作は指し先に転送される
+    definition: 別のファイルやディレクトリへのパスを保持し、その実体を指し示す特殊なファイル。読み書きなど多くの操作は指し先に転送されるが、rm や ls -l はリンク自体に作用する
   - term: ln -s
     definition: シンボリックリンクを作成するコマンド。「ln -s 実体 リンク名」の順で指定する
   - term: リンク切れ

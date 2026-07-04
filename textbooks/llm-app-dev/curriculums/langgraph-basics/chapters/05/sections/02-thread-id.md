@@ -51,7 +51,7 @@ app.invoke({"messages": [("user", "私の名前はリキです")]}, config)
 app.invoke({"messages": [("user", "私の名前は何でしたか?")]}, config)
 ```
 
-2 回目の呼び出しでは、checkpointer が `user-42-chat-1` の State を復元してから新しい入力を足すため、モデルは過去のやり取りを踏まえて応答できます。`messages` の reducer が追記マージ(第 4 章で扱った `add_messages` など)になっていれば、履歴は自然に積み上がっていきます。
+2 回目の呼び出しでは、checkpointer が `user-42-chat-1` の State を復元してから新しい入力を足すため、モデルは過去のやり取りを踏まえて応答できます。`messages` の reducer が追記マージ(第 2 章で扱った `add_messages` など)になっていれば、履歴は自然に積み上がっていきます。
 
 現在の State を覗きたいときは `get_state` を使います。
 
