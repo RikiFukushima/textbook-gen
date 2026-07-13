@@ -5,7 +5,7 @@ target_audience:
     - AI・機械学習・ディープラーニングのおおまかな関係を知っている(g-test-ai-overview 程度)
     - ChatGPT などの生成 AI を触ったことがある
     - 数式やプログラミングの知識は不要
-  estimated_hours: 2
+  estimated_hours: 2.5
 style:
   tone: ですます調・やさしく丁寧
   code_examples: false
@@ -122,11 +122,10 @@ chapters:
 
   - id: "05"
     title: いつ使う? どう頼む?
-    estimated_minutes: 17
+    estimated_minutes: 14
     learning_objectives:
       - 目の前のタスクで通常モデルと推論モデルのどちらを選ぶか判断できる
       - 推論モデルへの頼み方が従来のプロンプトとどう違うかを説明できる
-      - 推論モデルがエージェントなど今後の AI とどうつながるかをイメージできる
     sections:
       - id: "05-01"
         title: どちらを選ぶ? — 通常モデルと推論モデルの使い分け
@@ -135,12 +134,37 @@ chapters:
         title: 頼み方の勘所 — 推論モデルには「考え方」を指図しすぎない
         estimated_minutes: 5
       - id: "05-03"
-        title: これからの推論モデル — エージェントと「自分で考えるAI」
+        title: 推論の「量」を選ぶ時代 — 軽く考える / じっくり考えるの指定
         estimated_minutes: 4
     diagrams:
       - purpose: タスクを受け取ってから通常/推論モデルを選ぶ判断フロー
         type: mermaid
         section: "05-01"
+    quiz:
+      count: 5
+      difficulty: easy
+
+  - id: "06"
+    title: いまの最前線と、この先 (2026)
+    estimated_minutes: 16
+    learning_objectives:
+      - 「もっと長く考える」最新形(extended thinking・ディープリサーチ)が何かをイメージできる
+      - 推論モデルが自律エージェント(ループ)を実用化させた関係を説明できる
+      - 次に学ぶと良いテーマ(ループエンジニアリング等)への地図を持てる
+    sections:
+      - id: "06-01"
+        title: もっと長く考えるAI — extended thinking とディープリサーチ
+        estimated_minutes: 5
+      - id: "06-02"
+        title: なぜ「自分で動くAI」が急に実用化したのか — 推論とエージェント
+        estimated_minutes: 5
+      - id: "06-03"
+        title: ここから先の地図 — ループエンジニアリングへの橋渡し
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 「賢い一発回答(推論モデル)」→「自分で回すループ(エージェント)」への発展の流れ
+        type: mermaid
+        section: "06-02"
     quiz:
       count: 5
       difficulty: easy
