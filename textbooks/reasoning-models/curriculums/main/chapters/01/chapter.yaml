@@ -1,6 +1,6 @@
 id: "01"
 title: 「考えるAI」の登場
-estimated_minutes: 18
+estimated_minutes: 14
 learning_objectives:
   - 従来の生成 AI と推論モデルの「答え方」の違いを説明できる
   - 推論モデルが o1・DeepSeek-R1 を経て広まった大まかな流れをイメージできる

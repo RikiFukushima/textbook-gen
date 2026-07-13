@@ -5,7 +5,7 @@ target_audience:
     - AI・機械学習・ディープラーニングのおおまかな関係を知っている(g-test-ai-overview 程度)
     - ChatGPT などの生成 AI を触ったことがある
     - 数式やプログラミングの知識は不要
-  estimated_hours: 2.5
+  estimated_hours: 2
 style:
   tone: ですます調・やさしく丁寧
   code_examples: false
@@ -16,7 +16,7 @@ style:
 chapters:
   - id: "01"
     title: 「考えるAI」の登場
-    estimated_minutes: 18
+    estimated_minutes: 14
     learning_objectives:
       - 従来の生成 AI と推論モデルの「答え方」の違いを説明できる
       - 推論モデルが o1・DeepSeek-R1 を経て広まった大まかな流れをイメージできる
@@ -44,7 +44,7 @@ chapters:
 
   - id: "02"
     title: 頭の中で何が起きているか
-    estimated_minutes: 18
+    estimated_minutes: 14
     learning_objectives:
       - チェーンオブソート(考えを段階に分けて進めること)が何かを説明できる
       - 「思考トークン」に見える思考と隠れた思考があることを区別できる
@@ -72,7 +72,7 @@ chapters:
 
   - id: "03"
     title: なぜ考えると賢くなるのか
-    estimated_minutes: 18
+    estimated_minutes: 14
     learning_objectives:
       - 一発回答が苦手な問題の種類(多段の推論が要る問題)を挙げられる
       - 段階を踏むと誤りが減るしくみを直感的に説明できる
@@ -97,7 +97,7 @@ chapters:
 
   - id: "04"
     title: 得意・不得意と、かかるコスト
-    estimated_minutes: 17
+    estimated_minutes: 13
     learning_objectives:
       - 推論モデルが力を発揮する場面を具体例で挙げられる
       - 推論モデルが向かない場面(速度・コスト・単純作業)を説明できる
@@ -122,7 +122,7 @@ chapters:
 
   - id: "05"
     title: いつ使う? どう頼む?
-    estimated_minutes: 14
+    estimated_minutes: 13
     learning_objectives:
       - 目の前のタスクで通常モデルと推論モデルのどちらを選ぶか判断できる
       - 推論モデルへの頼み方が従来のプロンプトとどう違うかを説明できる
@@ -146,7 +146,7 @@ chapters:
 
   - id: "06"
     title: いまの最前線と、この先 (2026)
-    estimated_minutes: 16
+    estimated_minutes: 14
     learning_objectives:
       - 「もっと長く考える」最新形(extended thinking・ディープリサーチ)が何かをイメージできる
       - 推論モデルが自律エージェント(ループ)を実用化させた関係を説明できる

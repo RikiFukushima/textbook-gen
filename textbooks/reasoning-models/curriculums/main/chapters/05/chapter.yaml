@@ -1,6 +1,6 @@
 id: "05"
 title: いつ使う? どう頼む?
-estimated_minutes: 14
+estimated_minutes: 13
 learning_objectives:
   - 目の前のタスクで通常モデルと推論モデルのどちらを選ぶか判断できる
   - 推論モデルへの頼み方が従来のプロンプトとどう違うかを説明できる

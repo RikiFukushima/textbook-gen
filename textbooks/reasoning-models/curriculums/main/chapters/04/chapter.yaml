@@ -1,6 +1,6 @@
 id: "04"
 title: 得意・不得意と、かかるコスト
-estimated_minutes: 17
+estimated_minutes: 13
 learning_objectives:
   - 推論モデルが力を発揮する場面を具体例で挙げられる
   - 推論モデルが向かない場面(速度・コスト・単純作業)を説明できる
