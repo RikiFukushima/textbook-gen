@@ -1,0 +1,17 @@
+id: main
+title: 推論モデル入門
+description: o1・DeepSeek-R1・Claude・Gemini などの「推論モデル(Reasoning Models)」を、なぜ「考えてから答える」と急に強くなるのかという原理から広く浅く見渡す入門。test-time compute(推論時計算)の直感、得意・不得意、通常モデルとの使い分けに加え、2026 年時点の最前線(extended thinking・ディープリサーチ)と、推論モデルが自律エージェント(ループ)を実用化させた関係までを、数式に深入りせず案内する。
+order: 1
+estimated_hours: 2
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites:
+    - AI・機械学習・ディープラーニングのおおまかな関係を知っている(g-test-ai-overview 程度)
+    - ChatGPT などの生成 AI を触ったことがある
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"
+  - "06"

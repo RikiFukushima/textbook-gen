@@ -1,0 +1,21 @@
+slug: reasoning-models
+title: 推論するAI — 考えてから答えるモデルの正体
+description: o1・DeepSeek-R1・Claude・Gemini などの「推論モデル」を、なぜ「考えてから答える」と急に強くなるのかという原理から広く浅く見渡す入門。test-time compute の直感・得意不得意・使い分け・2026年の最前線までを数式なしで案内する。
+version: 0.1.0
+created_at: 2026-07-13
+updated_at: 2026-07-13
+authors: []
+visibility: public # private | shared | unlisted | public
+shared_with: []
+unlisted_token: null
+search_indexable: true
+allow_fork: false
+tags:
+  - AI
+  - 推論モデル
+  - test-time compute
+  - LLM
+  - 入門
+contains_local_sources: false
+curriculum_order:
+  - main

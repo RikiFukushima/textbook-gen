@@ -1,0 +1,170 @@
+title: 推論モデル入門
+target_audience:
+  level: 初級 # 初級 | 中級 | 上級
+  prerequisites:
+    - AI・機械学習・ディープラーニングのおおまかな関係を知っている(g-test-ai-overview 程度)
+    - ChatGPT などの生成 AI を触ったことがある
+    - 数式やプログラミングの知識は不要
+  estimated_hours: 2
+style:
+  tone: ですます調・やさしく丁寧
+  code_examples: false
+  diagram_default: mermaid
+# この教材は「推論モデル(Reasoning Models)」を合格対策ではなく「なぜ強いのか」という原理から
+# 広く浅く見渡す入門です。数式には深入りせず、全体像と勘所だけを押さえます(PHILOSOPHY §1・§2)。
+# g-test-ai-overview(AI の全体地図)を学んだ人が「次に一歩踏み込む」動線を想定しています。
+chapters:
+  - id: "01"
+    title: 「考えるAI」の登場
+    estimated_minutes: 14
+    learning_objectives:
+      - 従来の生成 AI と推論モデルの「答え方」の違いを説明できる
+      - 推論モデルが o1・DeepSeek-R1 を経て広まった大まかな流れをイメージできる
+      - なぜ今この手法が注目されているのかを自分の言葉で言える
+    sections:
+      - id: "01-01"
+        title: いつものAIとの違い — 即答から「考えてから答える」へ
+        estimated_minutes: 4
+      - id: "01-02"
+        title: 推論モデルはいつ生まれたか — o1 から DeepSeek-R1 までの物語
+        estimated_minutes: 5
+      - id: "01-03"
+        title: なぜ今この手法が注目されるのか — 新しい「賢くする軸」
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 通常モデル(即答)と推論モデル(思考→回答)の処理の流れの対比
+        type: mermaid
+        section: "01-01"
+      - purpose: 2023 研究 → 2024/9 o1 → 2025/1 DeepSeek-R1 の年表
+        type: mermaid
+        section: "01-02"
+    quiz:
+      count: 5
+      difficulty: easy
+
+  - id: "02"
+    title: 頭の中で何が起きているか
+    estimated_minutes: 14
+    learning_objectives:
+      - チェーンオブソート(考えを段階に分けて進めること)が何かを説明できる
+      - 「思考トークン」に見える思考と隠れた思考があることを区別できる
+      - 「考える時間を計算で買う(test-time compute)」という考え方をイメージできる
+    sections:
+      - id: "02-01"
+        title: チェーンオブソート — 手順を声に出して考える
+        estimated_minutes: 4
+      - id: "02-02"
+        title: 思考トークン — 見える思考と隠れた思考
+        estimated_minutes: 5
+      - id: "02-03"
+        title: 「考える時間」を計算で買う — test-time compute の直感
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 問題→思考の連鎖(中間ステップ)→最終回答 の流れ
+        type: mermaid
+        section: "02-01"
+      - purpose: 学習時の計算と推論時の計算(test-time compute)を分けて示す図
+        type: mermaid
+        section: "02-03"
+    quiz:
+      count: 5
+      difficulty: easy
+
+  - id: "03"
+    title: なぜ考えると賢くなるのか
+    estimated_minutes: 14
+    learning_objectives:
+      - 一発回答が苦手な問題の種類(多段の推論が要る問題)を挙げられる
+      - 段階を踏むと誤りが減るしくみを直感的に説明できる
+      - 推論モデルが「上手な考え方」を身につけた大まかな仕組み(強化学習)をイメージできる
+    sections:
+      - id: "03-01"
+        title: 一発回答が苦手な問題 — 数学・パズル・計画
+        estimated_minutes: 4
+      - id: "03-02"
+        title: 段階を踏むと間違いが減る — 分けて考える効果
+        estimated_minutes: 5
+      - id: "03-03"
+        title: どうやって上手な考え方を覚えたか — ごほうびで学ぶ(強化学習)
+        estimated_minutes: 5
+    diagrams:
+      - purpose: 一発回答で誤る例と、段階を踏んで正解に至る例の対比
+        type: mermaid
+        section: "03-02"
+    quiz:
+      count: 5
+      difficulty: easy
+
+  - id: "04"
+    title: 得意・不得意と、かかるコスト
+    estimated_minutes: 13
+    learning_objectives:
+      - 推論モデルが力を発揮する場面を具体例で挙げられる
+      - 推論モデルが向かない場面(速度・コスト・単純作業)を説明できる
+      - 「深く考える量」を状況で調整するという発想を理解する
+    sections:
+      - id: "04-01"
+        title: 推論モデルが輝く場面 — 数学・コード・計画
+        estimated_minutes: 4
+      - id: "04-02"
+        title: 苦手・向かない場面 — 速い・安い・単純が要るとき
+        estimated_minutes: 5
+      - id: "04-03"
+        title: 速い思考と遅い思考 — 考える量を調整する
+        estimated_minutes: 4
+    diagrams:
+      - purpose: タスクの難しさ × 求める速度/コスト で通常/推論モデルを配置した4象限
+        type: mermaid
+        section: "04-02"
+    quiz:
+      count: 5
+      difficulty: easy
+
+  - id: "05"
+    title: いつ使う? どう頼む?
+    estimated_minutes: 13
+    learning_objectives:
+      - 目の前のタスクで通常モデルと推論モデルのどちらを選ぶか判断できる
+      - 推論モデルへの頼み方が従来のプロンプトとどう違うかを説明できる
+    sections:
+      - id: "05-01"
+        title: どちらを選ぶ? — 通常モデルと推論モデルの使い分け
+        estimated_minutes: 4
+      - id: "05-02"
+        title: 頼み方の勘所 — 推論モデルには「考え方」を指図しすぎない
+        estimated_minutes: 5
+      - id: "05-03"
+        title: 推論の「量」を選ぶ時代 — 軽く考える / じっくり考えるの指定
+        estimated_minutes: 4
+    diagrams:
+      - purpose: タスクを受け取ってから通常/推論モデルを選ぶ判断フロー
+        type: mermaid
+        section: "05-01"
+    quiz:
+      count: 5
+      difficulty: easy
+
+  - id: "06"
+    title: いまの最前線と、この先 (2026)
+    estimated_minutes: 14
+    learning_objectives:
+      - 「もっと長く考える」最新形(extended thinking・ディープリサーチ)が何かをイメージできる
+      - 推論モデルが自律エージェント(ループ)を実用化させた関係を説明できる
+      - 次に学ぶと良いテーマ(ループエンジニアリング等)への地図を持てる
+    sections:
+      - id: "06-01"
+        title: もっと長く考えるAI — extended thinking とディープリサーチ
+        estimated_minutes: 5
+      - id: "06-02"
+        title: なぜ「自分で動くAI」が急に実用化したのか — 推論とエージェント
+        estimated_minutes: 5
+      - id: "06-03"
+        title: ここから先の地図 — ループエンジニアリングへの橋渡し
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 「賢い一発回答(推論モデル)」→「自分で回すループ(エージェント)」への発展の流れ
+        type: mermaid
+        section: "06-02"
+    quiz:
+      count: 5
+      difficulty: easy
