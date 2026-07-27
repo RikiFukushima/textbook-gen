@@ -1,6 +1,6 @@
 id: "05"
 title: 最小構成インフラ — 触る4つの surface だけ
-estimated_minutes: 20
+estimated_minutes: 19
 learning_objectives:
   - Webhook 受け口の公開方法(serverless vs container)と、長時間処理で serverless が辛い理由を説明できる
   - シークレット管理(環境変数 vs Secret Manager)の違いを説明できる
