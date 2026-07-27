@@ -1,0 +1,125 @@
+{
+  "chapter_id": "03",
+  "questions": [
+    {
+      "id": "q03-01",
+      "question": "LangGraph の checkpointer は何をする仕組みですか。",
+      "options": [
+        { "id": "a", "text": "グラフの State を各ステップの後で保存し、中断・再開を可能にする" },
+        { "id": "b", "text": "グラフの State を最終ノードに到達したときだけ保存し、結果をログに残す" },
+        { "id": "c", "text": "LLM の生成結果をキャッシュし、同じ入力への再呼び出しを高速化する" },
+        { "id": "d", "text": "ノードの実行時間を計測してボトルネックを可視化する" }
+      ],
+      "answer": "a",
+      "explanation": "checkpointer は State をステップごとに保存する「セーブデータ」の仕組みで、これがあるから途中で止めて後から再開できます。最後だけ保存するのでは途中で止めて待つことができないため b は不十分です。c のキャッシュや d の計測は checkpointer の役割ではありません。",
+      "source_refs": [{ "section_id": "03-01", "anchor": "checkpointer" }],
+      "difficulty": "medium",
+      "tags": ["langgraph", "checkpoint", "永続化"]
+    },
+    {
+      "id": "q03-02",
+      "question": "Zendesk 案件で checkpointer を使うとき、thread_id はどう割り当てるのが適切ですか。",
+      "options": [
+        { "id": "a", "text": "サーバーのプロセスごとに1つ割り当て、全チケットで共有する" },
+        { "id": "b", "text": "チケット1件ごとなど処理単位で一意な ID を割り当てる" },
+        { "id": "c", "text": "LLM のモデル名ごとに割り当て、モデルを変えたら振り直す" },
+        { "id": "d", "text": "1日ごとに割り当て、その日のチケットをまとめて1つの状態にする" }
+      ],
+      "answer": "b",
+      "explanation": "thread_id は「どの処理の続きか」を区別するキーなので、チケット1件ごとなど処理単位で一意に振ります。プロセス共有(a)や日単位でまとめる(d)と別の処理の状態を上書き・混線させます。モデル名(c)は状態の単位とは無関係です。",
+      "source_refs": [{ "section_id": "03-01", "anchor": "thread_id" }],
+      "difficulty": "medium",
+      "tags": ["langgraph", "thread_id", "state"]
+    },
+    {
+      "id": "q03-03",
+      "question": "開発時に使う InMemorySaver を本番でそのまま使うと何が問題になりますか。",
+      "options": [
+        { "id": "a", "text": "保存できる State のサイズに厳しい上限があり、大きなドラフトを保存できない" },
+        { "id": "b", "text": "暗号化されないため保存した State が平文で外部に漏れる" },
+        { "id": "c", "text": "プロセスが死ぬと状態が消えるため、再起動やスケールアウトで待機中の状態が失われる" },
+        { "id": "d", "text": "1つの thread_id しか扱えず、複数チケットを同時に処理できない" }
+      ],
+      "answer": "c",
+      "explanation": "InMemorySaver はインメモリ実装なのでプロセスが死ぬと状態が消え、再起動やスケールアウトで待機中の状態が失われます。だから本番は Postgres などの永続 DB に差し替えます。サイズ上限(a)・暗号化(b)・thread_id 数の制限(d)は本文が指摘している問題ではありません。",
+      "source_refs": [{ "section_id": "03-01", "anchor": "InMemorySaver" }],
+      "difficulty": "medium",
+      "tags": ["langgraph", "checkpoint", "永続化"]
+    },
+    {
+      "id": "q03-04",
+      "question": "ノードの中で interrupt(...) を呼ぶと何が起きますか。",
+      "options": [
+        { "id": "a", "text": "そのノードだけを飛ばして次のノードから実行を続ける" },
+        { "id": "b", "text": "その時点でグラフの実行が停止し、渡した情報が呼び出し元に返る" },
+        { "id": "c", "text": "グラフ全体を最初のノードからやり直す" },
+        { "id": "d", "text": "State を破棄してエラーを送出し、処理を中止する" }
+      ],
+      "answer": "b",
+      "explanation": "interrupt は「ここで人間を待つ」の宣言で、呼ばれた時点で実行が止まり、渡した情報(ドラフトなど)が呼び出し元に返ります。ノードを飛ばす(a)・最初からやり直す(c)・State を破棄して中止する(d)のではなく、State は checkpointer に保存されたまま待機します。",
+      "source_refs": [{ "section_id": "03-02", "anchor": "interrupt" }],
+      "difficulty": "medium",
+      "tags": ["langgraph", "interrupt", "human-in-the-loop"]
+    },
+    {
+      "id": "q03-05",
+      "question": "Command(resume=...) でグラフを再開したとき、実行はどこから続きますか。",
+      "options": [
+        { "id": "a", "text": "中断したノードの先頭から、そのノード全体を再実行する" },
+        { "id": "b", "text": "グラフの START ノードから、新しい入力で流し直す" },
+        { "id": "c", "text": "中断したノードの次のノードの先頭から実行する" },
+        { "id": "d", "text": "止まった interrupt の地点から、渡した値を interrupt の返り値として続行する" }
+      ],
+      "answer": "d",
+      "explanation": "resume ではノードの頭からではなく interrupt の地点から再開され、渡した値が interrupt の返り値になって続行します。ノード先頭から再実行(a)・START からやり直し(b)・次ノードへスキップ(c)ではありません。",
+      "source_refs": [{ "section_id": "03-02", "anchor": "interrupt の地点から" }],
+      "difficulty": "medium",
+      "tags": ["langgraph", "resume", "command"]
+    },
+    {
+      "id": "q03-06",
+      "question": "「propose → 人間トリアージ → AI実行」のグラフで、Zendesk への書き戻し(副作用)はどのノードに置くべきですか。",
+      "options": [
+        { "id": "a", "text": "承認後にだけ通る execute ノードに閉じ込める" },
+        { "id": "b", "text": "generate ノードに置き、ドラフト生成と同時に書き戻す" },
+        { "id": "c", "text": "human_review ノードに置き、承認待ちと同時に書き戻す" },
+        { "id": "d", "text": "各ノードに分散して置き、どこで止まっても部分的に反映されるようにする" }
+      ],
+      "answer": "a",
+      "explanation": "書き戻しは承認後にだけ通る execute ノードに閉じ込めます。generate(b)は再生成ループで、human_review(c)は resume の再実行で二重投稿を招きます。分散配置(d)も再実行で誤送信の原因になります。",
+      "source_refs": [{ "section_id": "03-03", "anchor": "二重投稿" }],
+      "difficulty": "medium",
+      "tags": ["langgraph", "zendesk", "グラフ設計"]
+    },
+    {
+      "id": "q03-07",
+      "question": "RAG でユーザーの質問に1回だけ答える単発 Q&A には、どの構成が適切とされていますか。",
+      "options": [
+        { "id": "a", "text": "checkpointer 付きの LangGraph で、将来の分岐追加に備えておく" },
+        { "id": "b", "text": "入力から出力へ一直線に流れる chain で十分" },
+        { "id": "c", "text": "interrupt を挟んで必ず人間承認を入れる LangGraph" },
+        { "id": "d", "text": "条件分岐を複数持つ LangGraph で回答の質を段階的に上げる" }
+      ],
+      "answer": "b",
+      "explanation": "単発 Q&A は State の保存も中断も要らないので一直線の chain で十分です。将来に備えた checkpointer 付き LangGraph(a)は過剰適用、承認を必ず挟む(c)や複数分岐(d)も不要な複雑さを持ち込むことになります。",
+      "source_refs": [{ "section_id": "03-04", "anchor": "単発 Q&A" }],
+      "difficulty": "medium",
+      "tags": ["langgraph", "chain", "設計判断"]
+    },
+    {
+      "id": "q03-08",
+      "question": "LangGraph を採用するかどうかの分かれ目は、本文ではどこに集約されると説明されていますか。",
+      "options": [
+        { "id": "a", "text": "扱うノードや分岐など機能の数が一定以上に多いかどうか" },
+        { "id": "b", "text": "使う LLM がツール呼び出しに対応しているかどうか" },
+        { "id": "c", "text": "状態を保存して途中で止めて待つ必要があるかどうか" },
+        { "id": "d", "text": "将来的に分岐や外部連携が増える見込みがあるかどうか" }
+      ],
+      "answer": "c",
+      "explanation": "判断は機能の多さではなく「状態を保存して途中で止めて待つ必要があるか」の一点に集約されます。機能の数(a)や LLM の対応(b)は基準ではなく、将来の見込み(d)で先回りして入れるのは過剰適用になりがちだと戒められています。",
+      "source_refs": [{ "section_id": "03-04", "anchor": "止めて待つ必要があるか" }],
+      "difficulty": "medium",
+      "tags": ["langgraph", "設計判断", "過剰適用"]
+    }
+  ]
+}
