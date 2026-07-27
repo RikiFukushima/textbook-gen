@@ -13,7 +13,7 @@ style:
 chapters:
   - id: "01"
     title: 案件の全体像とミニ・プロトタイプ設計
-    estimated_minutes: 18
+    estimated_minutes: 14
     learning_objectives:
       - Zendesk AIエージェント受託の「タイプ3(外部に自前エージェント基盤を持つ)」の位置づけを説明できる
       - 「広く浅く」ではなく「ミニ・プロトタイプ1本」を学習の軸に置く理由を説明できる

@@ -4,7 +4,7 @@ chapter_id: "04"
 title: マクロ・トリガー・ビジネスルールとAIの立ち位置
 order: 4
 estimated_minutes: 5
-estimated_chars: 1481
+estimated_chars: 1482
 learning_points:
   - マクロ / トリガー / ビジネスルールという既存自動化の違いを区別できる
   - AI がこれらを「置換・補完」する立ち位置だと説明できる

@@ -63,16 +63,16 @@
     },
     {
       "id": "q03-05",
-      "question": "Command(resume=...) でグラフを再開したとき、実行はどこから続きますか。",
+      "question": "Command(resume=...) でグラフを再開したとき、止まっていたノードはどう実行されますか。",
       "options": [
-        { "id": "a", "text": "中断したノードの先頭から、そのノード全体を再実行する" },
+        { "id": "a", "text": "ノードを先頭から再実行するが、今度は interrupt が resume で渡した値を返すため、その先へ進む" },
         { "id": "b", "text": "グラフの START ノードから、新しい入力で流し直す" },
-        { "id": "c", "text": "中断したノードの次のノードの先頭から実行する" },
-        { "id": "d", "text": "止まった interrupt の地点から、渡した値を interrupt の返り値として続行する" }
+        { "id": "c", "text": "中断したノードの次のノードの先頭から、前段はスキップして実行する" },
+        { "id": "d", "text": "ノードは一切再実行されず、interrupt の次の行だけがピンポイントで実行される" }
       ],
-      "answer": "d",
-      "explanation": "resume ではノードの頭からではなく interrupt の地点から再開され、渡した値が interrupt の返り値になって続行します。ノード先頭から再実行(a)・START からやり直し(b)・次ノードへスキップ(c)ではありません。",
-      "source_refs": [{ "section_id": "03-02", "anchor": "interrupt の地点から" }],
+      "answer": "a",
+      "explanation": "resume ではノードが先頭から再実行され、今度は interrupt が渡した値を返り値として返すので実行が先へ進みます。だからこそ interrupt より前の副作用は再び走り得ます。START からやり直し(b)・次ノードへスキップ(c)ではなく、d の『地点からピンポイント再開』も誤りで、ノード自体は頭から走り直します。",
+      "source_refs": [{ "section_id": "03-02", "anchor": "先頭から再実行" }],
       "difficulty": "medium",
       "tags": ["langgraph", "resume", "command"]
     },

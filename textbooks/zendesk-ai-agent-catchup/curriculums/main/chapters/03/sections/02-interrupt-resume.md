@@ -4,7 +4,7 @@ chapter_id: "03"
 title: interrupt / resume で人間承認を挟む
 order: 2
 estimated_minutes: 5
-estimated_chars: 1197
+estimated_chars: 1329
 learning_points:
   - interrupt でグラフの実行を途中停止し、人間に判断を委ねる仕組みを理解する
   - Command(resume=...) で人間の入力を渡してグラフを続きから再開する流れをつかむ
@@ -47,7 +47,7 @@ def human_review(state):
 
 ## resume は「人間の答えを渡して続きを動かす」
 
-担当者が判断を返してきたら、`Command` の `resume` に値を入れてグラフを呼び直します。すると `interrupt(...)` が **その値を返り値として** 続きを実行します。ポイントは、止まった `human_review` ノードの **頭からではなく、interrupt の地点から** 再開される点です。
+担当者が判断を返してきたら、`Command` の `resume` に値を入れてグラフを呼び直します。ここで押さえておきたいのは、LangGraph は止まった `human_review` ノードを **先頭から再実行** するという点です。ただし今度は `interrupt(...)` が停止せず、**resume で渡した値を返り値として** 返すため、実行はそのまま interrupt の先へ進みます。「地点から続き」ではなく「ノードごと再実行だが interrupt が値を返して素通りする」と理解しておくと、次の注意点(前段の副作用が再び走る)とも整合します。
 
 ```python
 from langgraph.types import Command
@@ -77,5 +77,5 @@ graph.invoke(
 ## まとめ
 
 - interrupt はノード内で実行を止め、人間に見せたい情報を返す「待ち」の宣言
-- Command(resume=値) で人間の答えを渡すと、interrupt の地点から続きが動く
+- Command(resume=値) で人間の答えを渡すと、ノードは先頭から再実行され、interrupt が値を返して先へ進む
 - resume の値に修正済みドラフトを載せれば「人間が上書きして確定」が表現できる
