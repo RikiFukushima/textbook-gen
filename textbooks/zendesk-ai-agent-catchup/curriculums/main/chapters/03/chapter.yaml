@@ -1,0 +1,13 @@
+id: "03"
+title: LangGraphで人間承認フローを組む
+estimated_minutes: 20
+learning_objectives:
+  - checkpoint による状態の永続化がなぜ人間承認フローの前提になるかを説明できる
+  - interrupt / resume で人間承認を挟んで再開する仕組みを説明できる
+  - 「propose → 人間トリアージ → AI実行」を自分のグラフとして表現できる
+  - LangGraph を過剰適用しないための判断軸を言語化できる
+section_order:
+  - "03-01"
+  - "03-02"
+  - "03-03"
+  - "03-04"
