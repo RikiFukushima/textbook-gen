@@ -1,0 +1,15 @@
+id: "02"
+title: Zendeskプラットフォームを「外から叩く箱」として理解する
+estimated_minutes: 24
+learning_objectives:
+  - Ticket / Comment / User / Organization / custom fields の関係を説明できる
+  - チケットの status 遷移(new → open → pending → solved など)を説明できる
+  - Webhook とトリガーが「何をきっかけに外部へ飛ぶか」を説明できる
+  - Ticketing API での書き戻し(コメント・内部メモ・タグ・カスタムフィールド)を理解する
+  - Conversations API との使い分けと純正AIのサンセット動向を把握する
+section_order:
+  - "02-01"
+  - "02-02"
+  - "02-03"
+  - "02-04"
+  - "02-05"
