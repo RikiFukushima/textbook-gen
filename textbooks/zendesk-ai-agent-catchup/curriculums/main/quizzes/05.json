@@ -1,0 +1,110 @@
+{
+  "chapter_id": "05",
+  "questions": [
+    {
+      "id": "q05-01",
+      "question": "この案件で最小構成インフラとして扱う「4つの surface」に含まれないもの(=今回は捨ててよいと割り切るもの)はどれですか。",
+      "options": [
+        { "id": "a", "text": "Webhook の受け口" },
+        { "id": "b", "text": "シークレット管理" },
+        { "id": "c", "text": "コンテナオーケストレーション(k8s)やスケーリング設計" },
+        { "id": "d", "text": "ログ / オブザーバビリティ" }
+      ],
+      "answer": "c",
+      "explanation": "触るのは Webhook 受け口・シークレット管理・ベクトルストア・ログの4面だけで、VPC / k8s / CI-CD / スケーリング設計は今回は知らなくてよいと明言されています。よって k8s やスケーリング設計は捨てる側です。a・b・d はいずれも4 surface に含まれます。",
+      "source_refs": [{ "section_id": "05-01", "anchor": "触るのは4つの surface だけ" }],
+      "difficulty": "medium",
+      "tags": ["インフラ", "surface", "スコープ"]
+    },
+    {
+      "id": "q05-02",
+      "question": "Webhook の受け口を serverless で公開するか container で公開するかを考えるとき、本文の説明として最も適切なのはどれですか。",
+      "options": [
+        { "id": "a", "text": "serverless は常駐サーバーを持ちどんなに長い処理でも走り切れるので、agent 処理には serverless が第一候補になる" },
+        { "id": "b", "text": "小さな Webhook を受けて即レスするだけなら serverless で十分だが、agent 系の長い処理では container(Cloud Run 等)が素直になる" },
+        { "id": "c", "text": "container はデプロイが速くアイドル時ほぼ無料なので、短い処理でも container を選ぶべきである" },
+        { "id": "d", "text": "serverless と container はコストも実行時間上限も同じで、選択に実質的な違いはない" }
+      ],
+      "answer": "b",
+      "explanation": "小さな即レスなら serverless で十分ですが、agent は LLM+RAG+承認待ちで長くなりがちなので container が素直、というのが本文の結論です。a は serverless と container の性質を逆にしています。c の「デプロイが速くアイドル時ほぼ無料」は serverless の特徴です。d は両者に違いがないとする点が誤りです。",
+      "source_refs": [{ "section_id": "05-01", "anchor": "serverless と container の違い" }],
+      "difficulty": "medium",
+      "tags": ["webhook", "serverless", "container"]
+    },
+    {
+      "id": "q05-03",
+      "question": "agent 系の長時間処理を serverless で受けると辛くなる理由として、本文が挙げていない項目はどれですか。",
+      "options": [
+        { "id": "a", "text": "1リクエストの実行時間に上限があり、長い処理が途中で打ち切られる" },
+        { "id": "b", "text": "しばらく呼ばれていないとコールドスタートで起動に待ちが入り、応答が不安定になる" },
+        { "id": "c", "text": "実行時間に対して課金されるため、待ち時間の長い処理はコスト効率が悪くなる" },
+        { "id": "d", "text": "リクエストごとに保存されるベクトルの件数上限が低く、RAG 検索ができなくなる" }
+      ],
+      "answer": "d",
+      "explanation": "serverless が辛い理由として本文が挙げるのは、タイムアウト上限・コールドスタート・実行時間課金の3点です(a・b・c)。d のベクトル件数上限は serverless の制約として本文に登場せず、ベクトルの話は別 surface(pgvector)の論点です。",
+      "source_refs": [{ "section_id": "05-01", "anchor": "なぜ長時間処理だと serverless が辛いのか" }],
+      "difficulty": "medium",
+      "tags": ["serverless", "タイムアウト", "コールドスタート"]
+    },
+    {
+      "id": "q05-04",
+      "question": "API キーの置き場所として環境変数を使う場合の弱点として、本文が指摘しているのはどれですか。",
+      "options": [
+        { "id": "a", "text": "キー差し替え(ローテーション)が手作業になりやすく、誰がいつ見たか/変えたかの監査記録が残らない" },
+        { "id": "b", "text": "暗号化されないため通信経路上で誰でも平文で読めてしまう" },
+        { "id": "c", "text": "Vercel では使えるが Cloud Run では利用できない" },
+        { "id": "d", "text": "設定画面から値を入れられず、必ずコードに直書きするしかない" }
+      ],
+      "answer": "a",
+      "explanation": "環境変数は手軽な一方、ローテーションが弱く(手作業で漏れやすい)、監査(誰がいつ見たか/変えたか)も残らない、というのが本文の指摘です。d は環境変数が設定画面から入れられるという本文と矛盾します。b の平文で誰でも読めるという記述、c の Cloud Run で使えないという記述は本文にありません。",
+      "source_refs": [{ "section_id": "05-02", "anchor": "ローテーションが弱い" }],
+      "difficulty": "medium",
+      "tags": ["secret-management", "環境変数", "監査"]
+    },
+    {
+      "id": "q05-05",
+      "question": "受託案件で Secret Manager に寄せると効いてくる理由として、本文の説明に最も合うのはどれですか。",
+      "options": [
+        { "id": "a", "text": "API キーそのものが不要になり、キーを持たずに Zendesk / LLM を呼べるようになる" },
+        { "id": "b", "text": "集中管理・バージョン管理・権限管理ができ、キーの管理状況を顧客に説明でき信頼につながる" },
+        { "id": "c", "text": "環境変数より実行速度が速くなり、agent の応答時間が短縮される" },
+        { "id": "d", "text": "プロトタイプの最初期から Secret Manager を作り込まないと agent が動かせない" }
+      ],
+      "answer": "b",
+      "explanation": "Secret Manager は集中管理・バージョン管理・権限管理ができ、「誰が読めるか」「いつ差し替えたか」を示せることが受託の安心材料になる、というのが本文の主旨です。a はキーが不要になるとする点が誤りで、キーは持ちます。c の実行速度の話は本文にありません。d は「プロトタイプは環境変数で始めてよい」という本文と矛盾します。",
+      "source_refs": [{ "section_id": "05-02", "anchor": "Secret Manager — 集中管理・バージョン・権限" }],
+      "difficulty": "medium",
+      "tags": ["secret-management", "受託", "権限管理"]
+    },
+    {
+      "id": "q05-06",
+      "question": "ベクトルストアを Supabase + pgvector に置く構成の利点として、本文の説明に最も合うのはどれですか。",
+      "options": [
+        { "id": "a", "text": "専用のベクトルDBを別立てせず、ticket_id やメタデータと同じ Postgres の中にベクトルを同居させられ、構成がシンプルになる" },
+        { "id": "b", "text": "ベクトル件数がどれだけ増えてもインデックス設計を見直す必要が一切なくなる" },
+        { "id": "c", "text": "Postgres とは別に専用ベクトルDBを立てることで、検索性能を最初から最大化できる" },
+        { "id": "d", "text": "埋め込みベクトルを作らなくても、チケット本文をそのまま類似検索できる" }
+      ],
+      "answer": "a",
+      "explanation": "pgvector で Postgres にベクトルを同居させ、通常のカラムと同じDBで扱える点が利点で、別サービスを増やさない分シンプルになります。b は大規模化時にインデックス設計を見直す場面が出ると本文が述べており誤りです。c は「別立てしない」という本文の主旨と逆です。d は埋め込みベクトルにして保存する前提を無視しています。",
+      "source_refs": [{ "section_id": "05-03", "anchor": "Supabase + pgvector に同居させる" }],
+      "difficulty": "medium",
+      "tags": ["pgvector", "supabase", "rag"]
+    },
+    {
+      "id": "q05-07",
+      "question": "ログを構造化して BigQuery に流しておくことが「評価基盤ごと売る」につながるのはなぜですか。本文の説明に最も合うものを選んでください。",
+      "options": [
+        { "id": "a", "text": "BigQuery に流すと Zendesk への返信が自動送信され、人間承認の工程を省けるから" },
+        { "id": "b", "text": "構造化ログを流すだけで LLM のハルシネーションが自動的に検出・修正されるから" },
+        { "id": "c", "text": "凝った収集基盤を新たに構築でき、オブザーバビリティ専門チームを併売できるから" },
+        { "id": "d", "text": "参照ナレッジID・生成ドラフト・承認結果を貯めるだけで、後の評価データセットの素材が自動的に育つから" }
+      ],
+      "answer": "d",
+      "explanation": "generated_draft と approval_result、referenced_knowledge_ids を貯めておけば、ドラフトが人間にどれだけ通ったか・参照根拠が妥当かを後から測れ、そのまま評価データセットの素材になる、というのが本文の説明です。a の自動送信、b のハルシネーション自動修正は本文にありません。c は「凝った収集基盤は要らない」という本文と矛盾します。",
+      "source_refs": [{ "section_id": "05-04", "anchor": "評価基盤ごと売る" }],
+      "difficulty": "medium",
+      "tags": ["bigquery", "ログ", "評価"]
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "chapter_id": "02",
+  "questions": [
+    {
+      "id": "q02-01",
+      "question": "Zendesk のデータモデルを見通しよく捉えるとき、中心に据えるオブジェクトと周辺の関係として正しいのはどれですか。",
+      "options": [
+        { "id": "a", "text": "Organization を中心に、Ticket や User がその属性としてぶら下がる構造" },
+        { "id": "b", "text": "User を中心に、Ticket と Comment がその属性としてぶら下がる構造" },
+        { "id": "c", "text": "Ticket を中心に、Comment / User / Organization / custom fields がぶら下がる構造" },
+        { "id": "d", "text": "Comment を中心に、Ticket と custom fields がぶら下がる構造" }
+      ],
+      "answer": "c",
+      "explanation": "Zendesk は「顧客からの1件の問い合わせ」を表す Ticket を中心に据えると見通しがよくなります。返信(Comment)・関係者(User)・会社単位(Organization)・追加属性(custom fields)はすべて Ticket にぶら下がる形で関連づきます。Organization や User を中心に置く見方は、実際には User が Organization に所属し、その User が Ticket を作成するという順で下位にチケットが位置づくため、外から叩くときの起点としては合いません。",
+      "source_refs": [{ "section_id": "02-01", "anchor": "Ticket が中心、あとはそこにぶら下がる" }],
+      "difficulty": "medium",
+      "tags": ["zendesk", "データモデル", "ticket"]
+    },
+    {
+      "id": "q02-02",
+      "question": "タイプ3の構成で、AI が生成した返信ドラフトの書き戻し先として基本の安全設計はどれですか。",
+      "options": [
+        { "id": "a", "text": "まず internal note として書き戻し、人間が確認・編集してから public として送る" },
+        { "id": "b", "text": "最初から public comment として書き戻し、顧客がすぐ読めるようにする" },
+        { "id": "c", "text": "Organization のメモ欄に保存し、担当者が後で参照する" },
+        { "id": "d", "text": "custom field に返信本文をそのまま格納し、顧客画面に表示する" }
+      ],
+      "answer": "a",
+      "explanation": "AI の生成物は未検証なので、まず顧客に見えない internal note にドラフトとして置き、人間が確認してから public comment として送るのが基本の安全設計です。いきなり public comment にすると未検証の AI 出力が顧客へ直送されてしまいます。custom field は追加属性の記録用で返信本文の表示先ではなく、Organization は会社単位をまとめる箱でドラフトの置き場ではありません。",
+      "source_refs": [{ "section_id": "02-01", "anchor": "まず internal note として書き戻す" }],
+      "difficulty": "medium",
+      "tags": ["zendesk", "comment", "internal-note"]
+    },
+    {
+      "id": "q02-03",
+      "question": "チケットの status のうち pending が表す状態として正しいのはどれですか。",
+      "options": [
+        { "id": "a", "text": "解決したとみなす状態で、顧客の再返信で再オープンされうる" },
+        { "id": "b", "text": "社内の別部署待ちなど、第三者要因で一時保留している状態" },
+        { "id": "c", "text": "作成直後で、まだ誰も着手していない状態" },
+        { "id": "d", "text": "顧客からの返信待ちで、ボールが顧客側に移っている状態" }
+      ],
+      "answer": "d",
+      "explanation": "pending は「顧客の返信待ち」で、ボールが顧客側にある状態です。解決とみなす状態は solved、第三者要因の一時保留は on-hold、作成直後で未着手は new であり、それぞれ「誰のボールか」が異なります。特に on-hold は同じ『待ち』でも顧客待ちの pending とは区別されます。",
+      "source_refs": [{ "section_id": "02-02", "anchor": "pending は「顧客の返信待ち」" }],
+      "difficulty": "medium",
+      "tags": ["zendesk", "status", "ワークフロー"]
+    },
+    {
+      "id": "q02-04",
+      "question": "status が closed のチケットについて正しいのはどれですか。",
+      "options": [
+        { "id": "a", "text": "解決とみなす状態だが、顧客の再返信でまだ open に戻る余地がある" },
+        { "id": "b", "text": "完全に確定した状態で、編集・再オープンができず API でコメント追記もできない" },
+        { "id": "c", "text": "顧客の返信待ちで、返信が来れば open に戻る" },
+        { "id": "d", "text": "第三者待ちの一時保留で、要因が解ければ open に戻る" }
+      ],
+      "answer": "b",
+      "explanation": "closed は完全に確定した状態で、編集も再オープンもできず、closed になったチケットには API でコメントを追記できません。蒸し返す場合は新規チケットで対応します。再オープンの余地があるのは solved、返信待ちは pending、第三者待ちの保留は on-hold です。書き戻しは closed になる前(solved まで)に終える意識が要ります。",
+      "source_refs": [{ "section_id": "02-02", "anchor": "closed になったチケットには API でコメントを追記できない" }],
+      "difficulty": "medium",
+      "tags": ["zendesk", "status", "書き戻し"]
+    },
+    {
+      "id": "q02-05",
+      "question": "トリガーと Webhook の関係を正しく説明しているのはどれですか。",
+      "options": [
+        { "id": "a", "text": "Webhook が条件を判定し、合致するとトリガーというアクションを外部へ送る" },
+        { "id": "b", "text": "トリガーが外部からの POST を受け取り、Webhook がチケットの status を更新する" },
+        { "id": "c", "text": "トリガーと Webhook はどちらも外部からの POST を受ける受け口である" },
+        { "id": "d", "text": "トリガーは「条件を満たすとアクションを実行する」ルールで、Webhook はそのアクションの一つとして外部 HTTPS へ POST する" }
+      ],
+      "answer": "d",
+      "explanation": "トリガーは「この条件を満たしたら、このアクションを実行する」という Zendesk 側の自動化ルールで、Webhook はそのアクションの一つとして、登録した外部 HTTPS エンドポイントへ HTTP POST を送る仕組みです。条件を判定するのはトリガー側で、Webhook はあくまで送信アクションです。どちらも「外部から受ける受け口」ではなく、Zendesk 内から外部へ飛ばす出口である点に注意します。",
+      "source_refs": [{ "section_id": "02-03", "anchor": "この条件を満たしたら、このアクションを実行する" }],
+      "difficulty": "medium",
+      "tags": ["zendesk", "webhook", "トリガー"]
+    },
+    {
+      "id": "q02-06",
+      "question": "Ticketing API で AI ドラフトを書き戻すとき、安全設計の要になる指定はどれですか。",
+      "options": [
+        { "id": "a", "text": "タグだけを更新し、コメントは書かずに人間へ通知する" },
+        { "id": "b", "text": "コメントで public: false を指定して internal note として書き戻す" },
+        { "id": "c", "text": "コメントで public: true を指定し、顧客がすぐ確認できるようにする" },
+        { "id": "d", "text": "custom field に返信本文を格納して書き戻す" }
+      ],
+      "answer": "b",
+      "explanation": "チケット更新リクエストのコメント部分で public: false を明示すると、顧客に見えない internal note になります。これを忘れて public: true にすると未検証の AI 出力が顧客へ直送されるため、必ず public: false を明示するのが安全設計の要です。タグや custom field は処理の痕跡を残す用途で、ドラフト本文の置き場ではありません。",
+      "source_refs": [{ "section_id": "02-04", "anchor": "public: false" }],
+      "difficulty": "medium",
+      "tags": ["zendesk", "ticketing-api", "internal-note"]
+    },
+    {
+      "id": "q02-07",
+      "question": "書き戻しでタグと custom field を使い分けるときの整理として正しいのはどれですか。",
+      "options": [
+        { "id": "a", "text": "タグは構造化した値を記録し、custom field は「付いた/付いてない」の目印になる" },
+        { "id": "b", "text": "タグも custom field も、どちらも参照ナレッジ ID の値を保存する用途である" },
+        { "id": "c", "text": "タグは「付いた/付いてない」の目印、custom field は「どの値か」を持てる" },
+        { "id": "d", "text": "タグは1回の更新で送れないため、custom field とは別リクエストにする必要がある" }
+      ],
+      "answer": "c",
+      "explanation": "タグは「AI 処理済み」のような軽い印付け(付いた/付いてない)に向き、custom field は参照ナレッジ ID のように「どの値か」を構造化して持てます。役割は逆ではなく、選択肢 a は説明が入れ替わっています。またコメント・タグ・custom field は同じ更新リクエストにまとめて原子的に送れるため、別リクエストにする必要はありません。",
+      "source_refs": [{ "section_id": "02-04", "anchor": "タグが「付いた/付いてない」の目印なのに対し、custom field は「どの値か」を持てる" }],
+      "difficulty": "medium",
+      "tags": ["zendesk", "ticketing-api", "custom-fields"]
+    },
+    {
+      "id": "q02-08",
+      "question": "Ticketing API と Conversations API の使い分けと、今回のタイプ3案件の位置づけとして正しいのはどれですか。",
+      "options": [
+        { "id": "a", "text": "Ticketing API は非同期チケット、Conversations API はリアルタイムメッセージングを扱い、今回は基本 Ticketing API 側" },
+        { "id": "b", "text": "Ticketing API はリアルタイムチャット、Conversations API は非同期チケットを扱い、今回は前者が中心" },
+        { "id": "c", "text": "今回はチャットの即時応答が中心になるため、基本 Conversations API 側で組む" },
+        { "id": "d", "text": "Ticketing API と Conversations API を最初から同時に使うのが推奨される" }
+      ],
+      "answer": "a",
+      "explanation": "Ticketing API はメール的な非同期チケットを、Conversations API は Web/アプリのチャットウィジェットで行うリアルタイムのメッセージングを扱います。今回の案件は Webhook でチケットを受け取り internal note にドラフトを書き戻す流れが中心なので、基本は Ticketing API 側です。選択肢 b は両 API の役割が入れ替わっており、両者を最初から一緒に触ると学習コストが跳ねるため同時利用は推奨されません。",
+      "source_refs": [{ "section_id": "02-05", "anchor": "基本は Ticketing API 側" }],
+      "difficulty": "medium",
+      "tags": ["zendesk", "conversations-api", "ticketing-api"]
+    }
+  ]
+}
