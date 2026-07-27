@@ -1,0 +1,18 @@
+id: main
+title: Zendesk AIエージェント受託 事前キャッチアップ
+description: Zendesk 上ではなく外部に自前エージェント基盤を持つ「タイプ3」の受託案件に向けた事前キャッチアップ教材。チケット受信 → RAG検索 → 返信ドラフト生成 の end-to-end ミニ・プロトタイプを軸に、Zendeskプラットフォーム・LangGraphの人間承認フロー・CS指標・最小構成インフラ・受託の地雷回避までを最短で押さえる。
+order: 1
+estimated_hours: 2
+target_audience:
+  level: 中級
+  prerequisites:
+    - RAG(検索拡張生成)とベクトル検索の基礎を理解している
+    - LangGraph の概念(State / Node / Edge)を知っている(実装経験は問わない)
+    - BigQuery / Supabase(pgvector) / Vercel を触ったことがある
+chapter_order:
+  - "01"
+  - "02"
+  - "03"
+  - "04"
+  - "05"
+  - "06"

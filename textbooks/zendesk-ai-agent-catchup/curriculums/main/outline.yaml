@@ -1,0 +1,181 @@
+title: Zendesk AIエージェント受託 事前キャッチアップ
+target_audience:
+  level: 中級
+  prerequisites:
+    - RAG(検索拡張生成)とベクトル検索の基礎を理解している
+    - LangGraph の概念(State / Node / Edge)を知っている(実装経験は問わない)
+    - BigQuery / Supabase(pgvector) / Vercel を触ったことがある
+  estimated_hours: 2
+style:
+  tone: ですます調・実務寄り
+  code_examples: true
+  diagram_default: mermaid
+chapters:
+  - id: "01"
+    title: 案件の全体像とミニ・プロトタイプ設計
+    estimated_minutes: 18
+    learning_objectives:
+      - Zendesk AIエージェント受託の「タイプ3(外部に自前エージェント基盤を持つ)」の位置づけを説明できる
+      - 「広く浅く」ではなく「ミニ・プロトタイプ1本」を学習の軸に置く理由を説明できる
+      - チケット受信 → RAG検索 → 返信ドラフト生成 の end-to-end 6ステップ像を描ける
+    sections:
+      - id: "01-01"
+        title: この案件は何をするのか(タイプ3の位置づけ)
+        estimated_minutes: 5
+      - id: "01-02"
+        title: なぜ「ミニ・プロトタイプ1本」を軸にするのか
+        estimated_minutes: 4
+      - id: "01-03"
+        title: end-to-end の6ステップ設計図
+        estimated_minutes: 5
+    diagrams:
+      - purpose: チケット受信 → Webhook → LLM+RAG → ドラフト生成 → 人間承認 → ログ の一連の流れ
+        type: mermaid
+        section: "01-03"
+    quiz:
+      count: 6
+      difficulty: easy
+
+  - id: "02"
+    title: Zendeskプラットフォームを「外から叩く箱」として理解する
+    estimated_minutes: 24
+    learning_objectives:
+      - Ticket / Comment / User / Organization / custom fields の関係を説明できる
+      - チケットの status 遷移(new → open → pending → solved など)を説明できる
+      - Webhook とトリガーが「何をきっかけに外部へ飛ぶか」を説明できる
+      - Ticketing API での書き戻し(コメント・内部メモ・タグ・カスタムフィールド)を理解する
+      - Conversations API との使い分けと純正AIのサンセット動向を把握する
+    sections:
+      - id: "02-01"
+        title: データモデル — Ticket / Comment / User / Organization / custom fields
+        estimated_minutes: 6
+      - id: "02-02"
+        title: チケットの status 遷移
+        estimated_minutes: 4
+      - id: "02-03"
+        title: Webhook + トリガー — 何をきっかけに外部へ飛ぶか
+        estimated_minutes: 5
+      - id: "02-04"
+        title: Ticketing API で書き戻す(コメント・内部メモ・タグ・カスタムフィールド)
+        estimated_minutes: 5
+      - id: "02-05"
+        title: Conversations API の使い分けと純正AIのサンセット動向
+        estimated_minutes: 4
+    diagrams:
+      - purpose: Ticket を中心に Comment / User / Organization / custom fields がつながる関係図
+        type: mermaid
+        section: "02-01"
+      - purpose: new → open → pending → on-hold → solved → closed の status 遷移
+        type: mermaid
+        section: "02-02"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "03"
+    title: LangGraphで人間承認フローを組む
+    estimated_minutes: 20
+    learning_objectives:
+      - checkpoint による状態の永続化がなぜ人間承認フローの前提になるかを説明できる
+      - interrupt / resume で人間承認を挟んで再開する仕組みを説明できる
+      - 「propose → 人間トリアージ → AI実行」を自分のグラフとして表現できる
+      - LangGraph を過剰適用しないための判断軸を言語化できる
+    sections:
+      - id: "03-01"
+        title: checkpoint で状態を永続化する
+        estimated_minutes: 5
+      - id: "03-02"
+        title: interrupt / resume で人間承認を挟む
+        estimated_minutes: 5
+      - id: "03-03"
+        title: 「propose → 人間トリアージ → AI実行」をグラフにする
+        estimated_minutes: 6
+      - id: "03-04"
+        title: LangGraph を使うべきか — 過剰適用の判断軸
+        estimated_minutes: 4
+    diagrams:
+      - purpose: 生成 → 十分か判定 → 人間承認(interrupt) → 再開(resume) の分岐グラフ
+        type: mermaid
+        section: "03-03"
+    quiz:
+      count: 8
+      difficulty: medium
+
+  - id: "04"
+    title: CSドメインの指標と自動化の語彙
+    estimated_minutes: 18
+    learning_objectives:
+      - 一次応答時間 / 解決時間 / 一次解決率(FCR) / CSAT の意味を説明できる
+      - チケットデフレクションとエスカレーション・ティア構造(L1/L2/L3)を説明できる
+      - マクロ / トリガー / ビジネスルールと、AIがそれを置換・補完する立ち位置を理解する
+      - 「AIで◯◯を自動化すると△△指標に効く」を1文で言えるようになる
+    sections:
+      - id: "04-01"
+        title: 応答時間・解決時間と一次解決率(FCR)
+        estimated_minutes: 5
+      - id: "04-02"
+        title: CSAT とチケットデフレクション
+        estimated_minutes: 4
+      - id: "04-03"
+        title: エスカレーションとティア構造(L1 / L2 / L3)
+        estimated_minutes: 4
+      - id: "04-04"
+        title: マクロ・トリガー・ビジネスルールとAIの立ち位置
+        estimated_minutes: 5
+    quiz:
+      count: 7
+      difficulty: medium
+
+  - id: "05"
+    title: 最小構成インフラ — 触る4つの surface だけ
+    estimated_minutes: 20
+    learning_objectives:
+      - Webhook 受け口の公開方法(serverless vs container)と、長時間処理で serverless が辛い理由を説明できる
+      - シークレット管理(環境変数 vs Secret Manager)の違いを説明できる
+      - ベクトルストアを Supabase + pgvector に置く構成を説明できる
+      - ログ/オブザーバビリティを BigQuery に流し「評価基盤ごと売る」につなげる発想を持つ
+    sections:
+      - id: "05-01"
+        title: Webhook の受け口 — serverless vs container
+        estimated_minutes: 6
+      - id: "05-02"
+        title: シークレット管理 — 環境変数 vs Secret Manager
+        estimated_minutes: 4
+      - id: "05-03"
+        title: ベクトルストアの置き場所 — Supabase + pgvector
+        estimated_minutes: 4
+      - id: "05-04"
+        title: ログ/オブザーバビリティ → BigQuery で評価基盤の種を蒔く
+        estimated_minutes: 5
+    diagrams:
+      - purpose: Webhook受け口 / シークレット / pgvector / ログ の4 surface と外部サービスの接続図
+        type: mermaid
+        section: "05-01"
+    quiz:
+      count: 7
+      difficulty: medium
+
+  - id: "06"
+    title: 提案力と受託の地雷回避
+    estimated_minutes: 20
+    learning_objectives:
+      - ハルシネーション対策と回答の根拠提示(どのナレッジを参照したか)を説明できる
+      - 評価データセットの作り方と段階リリース(シャドウ運用 / A-B)を説明できる
+      - 「自動送信」より「ドラフト提案」から入る安全設計の理由を説明できる
+      - DoD(完了定義)を契約前に握る重要性と、コアの共通基盤化・顧客差分の外出しを説明できる
+    sections:
+      - id: "06-01"
+        title: ハルシネーション対策と根拠提示
+        estimated_minutes: 5
+      - id: "06-02"
+        title: 評価データセットと段階リリース(シャドウ / A-B)
+        estimated_minutes: 5
+      - id: "06-03"
+        title: 「ドラフト提案」から入る安全設計
+        estimated_minutes: 4
+      - id: "06-04"
+        title: DoD と自動化スコープの線引き / 共通基盤化で保守地獄を避ける
+        estimated_minutes: 6
+    quiz:
+      count: 7
+      difficulty: medium
