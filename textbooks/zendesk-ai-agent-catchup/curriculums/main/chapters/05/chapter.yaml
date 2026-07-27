@@ -1,0 +1,13 @@
+id: "05"
+title: 最小構成インフラ — 触る4つの surface だけ
+estimated_minutes: 20
+learning_objectives:
+  - Webhook 受け口の公開方法(serverless vs container)と、長時間処理で serverless が辛い理由を説明できる
+  - シークレット管理(環境変数 vs Secret Manager)の違いを説明できる
+  - ベクトルストアを Supabase + pgvector に置く構成を説明できる
+  - ログ/オブザーバビリティを BigQuery に流し「評価基盤ごと売る」につなげる発想を持つ
+section_order:
+  - "05-01"
+  - "05-02"
+  - "05-03"
+  - "05-04"
